@@ -59,7 +59,7 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        kruppenfield = nixpkgs.lib.nixosSystem {
+        abel = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
             nixos-hardware.nixosModules.lenovo-thinkpad-t480s
@@ -72,7 +72,7 @@
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        "kruppenfield@kruppenfield" = home-manager.lib.homeManagerConfiguration {
+        "kruppenfield@abel" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [

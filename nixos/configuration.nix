@@ -73,7 +73,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "abel"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -101,11 +101,7 @@
     LC_TIME = "pl_PL.UTF-8";
   };
   programs.dconf.enable = true;
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-  };
-
+  programs.zsh.enable = true;
   hardware.opengl = {
     enable = true;  
     driSupport = true;
@@ -113,9 +109,33 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.displayManager.startx.enable = true;
-  services.xserver.videoDrivers = [ "modeset" "nvidia" ];
-  #services.xserver.displayManager.gdm.wayland = true;
+  #services.xserver.displayManager.startx.enable = true;
+  services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = true;
+    videoDrivers = [ "modeset" "nvidia" ];
+    layout = "pl";
+    xkbVariant = "";
+    libinput = {
+      enable = true;
+      touchpad = {
+        scrollMethod = "twofinger";
+      };
+    };
+  };
+
+ programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    xwayland.enable = true;
+    xwayland.hidpi = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+  };
+ 
   hardware.nvidia = {
     powerManagement.enable = true;
     modesetting.enable = true;
@@ -136,24 +156,13 @@
       };
   };
   services.blueman.enable = true;
-  # Enable the X11 windowing system.
-  #services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  #services.xserver.displayManager.gdm.enable = true;
-  #services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
- # services.xserver = {
- #   layout = "pl";
- #   xkbVariant = "";
- # };
 
   # Configure console keymap
   console.keyMap = "pl2";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.gvfs.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -178,18 +187,13 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-  services.xserver.libinput.enable = false;
-  services.xserver.synaptics.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kruppenfield = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     description = "kruppenfield";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      vim 
       home-manager
     ];
   };
@@ -198,9 +202,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     nvidia-offload
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    vim
+    wget
+    usbutils
   ];
+  security.pam.services.swaylock = {
+    text = ''
+      auth include login
+    '';
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

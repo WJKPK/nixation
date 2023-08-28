@@ -1,76 +1,34 @@
-{ config, lib, pkgs, ... }:
-
-{
-  imports = [ 
-    ./hyprland-environment.nix
-  ];
-
-  home.packages = with pkgs; [ 
-    waybar
-    swww
-  ];
-  
-  #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+{ config, lib, pkgs, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
     systemdIntegration = true;
     xwayland.enable = true;
     xwayland.hidpi = true;
-#    nvidiaPatches = true;
+    #nvidiaPatches = true;
     extraConfig = ''
-
     # Monitor
-    monitor=eDP-1,2560x1440@60,auto,1.25
-
-    # Fix slow startup
-    exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-    exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+    monitor=eDP-1,2560x1440@60,auto,1.35
 
     # Autostart
-
-    exec-once = hyprctl setcursor Bibata-Modern-Classic 24
+    exec-once = hyprctl setcursor Bibata-Modern-Classic 18
     exec-once = dunst
 
-    source = /home/kruppenfield/.config/hypr/colors
     exec = pkill waybar & sleep 0.5 && waybar
-    exec-once = swww init
-    exec = swww img /home/kruppenfield/wallpapers/1.jpg
 
     # Set en layout at startup
 
-    # Input config
-    input {
-        kb_layout = us,br
-        kb_variant =
-        kb_model =
-        kb_options =
-        kb_rules =
-
-        follow_mouse = 1
-
-        touchpad {
-            natural_scroll = false
-        }
-
-        sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-    }
-
     general {
-        gaps_in = 5
-        gaps_out = 20
+        gaps_in = 3
+        gaps_out = 3
         border_size = 2
-        col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-        col.inactive_border = rgba(595959aa)
-
         layout = dwindle
     }
 
     decoration {
-        rounding = 10
+        rounding = 5
         drop_shadow = true
-        shadow_range = 4
-        shadow_render_power = 3
-        col.shadow = rgba(1a1a1aee)
+        shadow_range = 3
+        shadow_render_power = 2
     }
 
     animations {
@@ -98,38 +56,27 @@
         workspace_swipe = false
     }
 
+    misc {
+      disable_hyprland_logo = yes
+      animate_manual_resizes = yes
+      animate_mouse_windowdragging = yes
+    }
+
     # Example windowrule v1
     # windowrule = float, ^(kitty)$
     # Example windowrule v2
     # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 
-    #windowrule=float,^(kitty)$
-    #windowrule=float,^(pavucontrol)$
-    #windowrule=center,^(kitty)$
-    #windowrule=float,^(blueman-manager)$
-    #windowrule=size 1040 670,^(kitty)$
-    #windowrule=size 934 525,^(mpv)$
-    #windowrule=float,^(mpv)$
-    #windowrule=center,^(mpv)$
-    #windowrule=pin,^(firefox)$
-
     $mainMod = SUPER
     bind = $mainMod, G, fullscreen,
 
-
-    bind = $mainMod, RETURN, exec, cool-retro-term-zsh
-    bind = $mainMod, B, exec, opera --no-sandbox
     bind = $mainMod, Q, killactive,
     bind = $mainMod, M, exit,
-    bind = $mainMod, F, exec, nautilus
+    bind = $mainMod, F, exec, thunar
     bind = $mainMod, V, togglefloating,
     bind = $mainMod, w, exec, wofi --show drun
-    bind = $mainMod, R, exec, rofi1
-    bind = $mainMod, P, pseudo, # dwindle
+    bind = $mainMod, L, exec, swaylock -f 
     bind = $mainMod, J, togglesplit, # dwindle
-
-    # Switch Keyboard Layouts
-    bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
 
     bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
     bind = SHIFT, Print, exec, grim -g "$(slurp)"
@@ -184,28 +131,7 @@
     bindm = $mainMod, mouse:272, movewindow
     bindm = $mainMod, mouse:273, resizewindow
     bindm = ALT, mouse:272, resizewindow
-        '';
-  };
-
-      home.file.".config/hypr/colors".text = ''
-$background = rgba(1d192bee)
-$foreground = rgba(c3dde7ee)
-
-$color0 = rgba(1d192bee)
-$color1 = rgba(465EA7ee)
-$color2 = rgba(5A89B6ee)
-$color3 = rgba(6296CAee)
-$color4 = rgba(73B3D4ee)
-$color5 = rgba(7BC7DDee)
-$color6 = rgba(9CB4E3ee)
-$color7 = rgba(c3dde7ee)
-$color8 = rgba(889aa1ee)
-$color9 = rgba(465EA7ee)
-$color10 = rgba(5A89B6ee)
-$color11 = rgba(6296CAee)
-$color12 = rgba(73B3D4ee)
-$color13 = rgba(7BC7DDee)
-$color14 = rgba(9CB4E3ee)
-$color15 = rgba(c3dde7ee)
     '';
+  };
 }
+

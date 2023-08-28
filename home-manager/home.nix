@@ -17,6 +17,7 @@
     inputs.hyprland.homeManagerModules.default
     ./programs
     ./themes
+    ./wallpapers
   ] ++ (builtins.attrValues outputs.homeManagerModules);
   nixpkgs = {
     # You can add overlays here
@@ -59,7 +60,6 @@
   programs.git.userName = "WJKPK";
 
   home.packages = with pkgs; [
-    wofi
     kitty
     mako
     firefox
@@ -74,6 +74,14 @@
     cura
     stm32cubemx
     saleae-logic-2
+    gcc
+    rustup
+    unzip
+    ripgrep
+    wireguard-tools
+    xfce.thunar
+    grim
+    slurp
   ];
 
   # Nicely reload system units when changing configs

@@ -1,20 +1,21 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ 
-    ./cava
-  ];
-  
   gtk = {
     enable = true;
     iconTheme = {
-      name = "Yaru-magenta-dark";
-      package = pkgs.yaru-theme;
+      name = "Catppuccin-Mocha-Compact-Blue-Dark";
+      package = pkgs.catppuccin-gtk;
     };
 
     theme = {
-      name = "Tokyonight-Dark-B-LB";
-      package = pkgs.tokyo-night-gtk;
+      #name = "Dracula";
+      name = "Catppuccin-Mocha-Compact-Blue-Dark";
+      #package = pkgs.dracula-theme;
+      package = pkgs.catppuccin-gtk.override {
+        size = "compact";
+        variant = "mocha";
+      };
     };
 
     cursorTheme = {
