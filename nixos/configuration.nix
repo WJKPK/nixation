@@ -205,6 +205,7 @@
     vim
     wget
     usbutils
+    man
   ];
   security.pam.services.swaylock = {
     text = ''
