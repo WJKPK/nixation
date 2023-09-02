@@ -20,7 +20,7 @@
   };
 
   xdg.configFile."kitty/theme.conf".source = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/dexpota/kitty-themes/c4bee86c/themes/Monokai.conf";
-    hash = "sha256-zR7f4Nl3pUGZh+CsrEqceN56fD7Jk5uVFk8yYkuTjOA=";
+    url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/frappe.conf";
+    hash = "sha256-QVIxEu76Wuc3iAOr84dTVCgfV/88dOJ2ylo8yQZ7N6Y=";
   };
 }

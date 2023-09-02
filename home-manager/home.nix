@@ -82,8 +82,6 @@
     xfce.thunar
     grim
     slurp
-    clang-tools_16
-    lua-language-server
   ];
 
   # Nicely reload system units when changing configs

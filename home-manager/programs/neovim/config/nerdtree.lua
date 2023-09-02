@@ -11,11 +11,15 @@ local function my_on_attach(bufnr)
   -- custom mappings
   vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
   vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
-  -- Use <leader>e to toggle NvimTree
-  vim.keymap.set('n', '<Leader>e', api.tree.toggle,                 opts('Toggle'))
 end
 
 -- pass to setup along with your other options
 require("nvim-tree").setup {
+   update_focused_file = {
+     enable = true,
+     update_root = true,
+     ignore_list = {},
+   },
   on_attach = my_on_attach,
 }
+

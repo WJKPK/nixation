@@ -27,8 +27,7 @@
       nvim-ts-rainbow
       (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
       plenary-nvim
-      telescope-fzy-native-nvim
-      telescope-nvim
+      telescope-fzy-native-nvim telescope-nvim
       vim-floaterm
       vim-sneak
       vim-vsnip
@@ -36,9 +35,20 @@
       dashboard-nvim
       nvim-web-devicons
       nerdtree
+      leap-nvim
     ];
 
-    extraPackages = with pkgs; [gcc ripgrep fd nil rust-analyzer cmake-language-server];
+    extraPackages = with pkgs; [
+      gcc
+      ripgrep
+      fd
+      nil
+      rust-analyzer
+      wl-clipboard
+      clang-tools_16
+      lua-language-server
+      cmake-language-server
+    ];
 
     extraConfig = let
       luaRequire = module:
