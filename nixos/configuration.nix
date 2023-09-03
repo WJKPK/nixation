@@ -207,7 +207,8 @@
     usbutils
     man
   ];
-  security.pam.services.swaylock = {
+
+  security.pam.services.gtklock = {
     text = ''
       auth include login
     '';

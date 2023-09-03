@@ -23,6 +23,7 @@ vim.api.nvim_set_keymap( 'n', '<Leader>y', ':%+y<CR>', {noremap = true})
 
 -- paste from system clipboard
 vim.api.nvim_set_keymap( 'n', '<Leader>p', '"+p', {noremap = true})
+vim.api.nvim_set_keymap( 'n', '<C-s>', ':vs<CR>', {noremap = true})
 vim.api.nvim_set_keymap( 'n', '<Leader>e', ':NvimTreeToggle<CR>', {noremap = true})
 vim.api.nvim_set_keymap( 'n', '<Leader>-', ':NvimTreeResize -10<CR>', {noremap = true})
 vim.api.nvim_set_keymap( 'n', '<Leader>+', ':NvimTreeResize +10<CR>', {noremap = true})

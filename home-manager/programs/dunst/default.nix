@@ -1,6 +1,4 @@
-{ config, lib, pkgs, ... }:
-
-{
+{ ... }: {
     home.file.".config/dunst/dunstrc".text = ''
 [global]
     rounded = yes
