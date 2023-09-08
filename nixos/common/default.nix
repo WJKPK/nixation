@@ -1,32 +1,4 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-
-{ inputs, outputs, lib, config, pkgs, ... }:
-  let
-    nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-      export __NV_PRIME_RENDER_OFFLOAD=1
-      export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-      export __GLX_VENDOR_LIBRARY_NAME=nvidia
-      export __VK_LAYER_NV_optimus=NVIDIA_only
-      exec -a "$0" "$@"
-    '';
-  in
-  {
-  # You can import other NixOS modules here
-  imports = [
-    # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
-
-    # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
-  ];
+{pkgs, inputs, outputs, lib, config, ...} : {
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -34,16 +6,6 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -73,13 +35,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "abel"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -101,7 +56,7 @@
     LC_TIME = "pl_PL.UTF-8";
   };
   programs.dconf.enable = true;
-  programs.zsh.enable = true;
+
   hardware.opengl = {
     enable = true;  
     driSupport = true;
@@ -114,17 +69,10 @@
     enable = true;
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = true;
-    videoDrivers = [ "modeset" "nvidia" ];
     layout = "pl";
     xkbVariant = "";
-    libinput = {
-      enable = true;
-      touchpad = {
-        scrollMethod = "twofinger";
-      };
-    };
   };
-
+ programs.zsh.enable = true;
  programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -134,16 +82,6 @@
 
   xdg.portal = {
     enable = true;
-  };
- 
-  hardware.nvidia = {
-    powerManagement.enable = true;
-    modesetting.enable = true;
-    prime = {
-      offload.enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
   };
 
   # Bluetooth
@@ -173,6 +111,7 @@
       load-module module-switch-on-connect
     ";
   };
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -201,7 +140,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    nvidia-offload
     vim
     wget
     usbutils

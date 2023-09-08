@@ -1,15 +1,26 @@
-{ lib, ... }: {
+{ lib, config, ... }:
+let
+  monitor = lib.concatStrings (map (m: let
+      resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+      position = "${toString m.x}x${toString m.y}";
+    in
+      "monitor = ${m.name},${if m.enabled then "${resolution},${position},1.35" else "disable"}"
+    ) (config.monitors));
+
+    workspace = lib.concatStrings (map (m:
+      "workspace = ${m.name},${m.workspace}"
+    ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors));
+    gpu = lib.elemAt config.gpus 0;
+in {
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
   wayland.windowManager.hyprland = {
     enable = true;
     systemdIntegration = true;
     xwayland.enable = true;
-    xwayland.hidpi = true;
-    #nvidiaPatches = true;
+    enableNvidiaPatches = gpu.nvidia.enable && !gpu.nvidia.prime;
     extraConfig = ''
-    # Monitor
-    monitor=eDP-1,2560x1440@60,auto,1.35
-
+    ${monitor}
+    ${workspace}
     # Autostart
     exec-once = hyprctl setcursor Bibata-Modern-Classic 18
     exec-once = dunst
@@ -76,7 +87,7 @@
     bind = $mainMod, F, exec, thunar
     bind = $mainMod, V, togglefloating,
     bind = $mainMod, w, exec, wofi --show drun
-    bind = $mainMod, L, exec, swaylock -f 
+    bind = $mainMod, L, exec, gtklock -d 
     bind = $mainMod, J, togglesplit, # dwindle
 
     bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
