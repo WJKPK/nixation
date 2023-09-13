@@ -16,6 +16,7 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ../common
+    ../common/docker.nix
     ./hardware-configuration.nix
   ];
 
@@ -25,10 +26,32 @@
   services.xserver = {
     videoDrivers = [ "modeset" "nvidia" ];
   };
- 
+
+   users.users.kruppenfield = {
+    extraGroups = [ "docker" "networkmanager" "wheel" ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    docker-compose  
+  ];
+
   hardware.nvidia = {
-    enable = true;
     powerManagement.enable = true;
     modesetting.enable = true;
   };
+
+  environment = {
+    sessionVariables = {
+      WLR_NO_HARDWARE_CURSORS = "1";
+      WLR_RENDER_ALLOW_SOFTWARE = "1";
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia";
+
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+      XDG_CURRENT_TYPE = "Hyprland";
+    };
+  };
+
 }

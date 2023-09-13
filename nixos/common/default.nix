@@ -1,4 +1,8 @@
-{pkgs, inputs, outputs, lib, config, ...} : {
+{pkgs, inputs, outputs, lib, config, ...} :
+let
+  udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
+in {
+  services.udev.packages = [ udevRules ];
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -131,7 +135,7 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "kruppenfield";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout"];
     packages = with pkgs; [
       home-manager
     ];
