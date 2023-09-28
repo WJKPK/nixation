@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./common.nix
+    ./programs/steam
   ];
   monitors = [
     {
@@ -17,6 +18,7 @@
     {
       nvidia = {
         enable = true;
+        prime = false;
       };
     }
   ];

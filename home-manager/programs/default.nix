@@ -9,6 +9,5 @@
     ./git
     ./wofi
     ./gtklock
-#    ./swaylock
   ];
 }

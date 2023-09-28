@@ -52,7 +52,6 @@
     mako
     firefox
     pavucontrol
-    mpd
     mpc-cli
     brightnessctl
     pamixer

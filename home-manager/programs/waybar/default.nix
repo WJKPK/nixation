@@ -72,7 +72,7 @@
                  padding-right: 6px;
                  color: #7ebae4;
                }
-         #mode, #clock, #memory, #temperature,#cpu,#mpd, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava-internal {
+         #mode, #clock, #memory, #temperature,#cpu, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu {
                  padding-left: 10px;
                  padding-right: 10px;
                }
@@ -119,20 +119,6 @@
                  padding-right: 8px;
                  padding-left: 10px;
                }
-         #mpd.paused {
-                 color: #414868;
-                 font-style: italic;
-               }
-         #mpd.stopped {
-                 background: transparent;
-               }
-         #mpd {
-                 color: #c0caf5;
-               }
-         #custom-cava-internal{
-                 font-family: "Hack Nerd Font" ;
-                 color: #33ccff;
-               }
       '';
       settings = [{
         "layer" = "top";
@@ -140,8 +126,6 @@
         modules-left = [
           "custom/launcher"
           "temperature"
-          "mpd"
-          "custom/cava-internal"
         ];
         modules-center = [
           "clock"
@@ -160,10 +144,6 @@
           "format" = " ";
           "tooltip" = false;
         };
-        "custom/cava-internal" = {
-          "exec" = "sleep 1s && cava-internal";
-          "tooltip" = false;
-        };
         "pulseaudio" = {
           "scroll-step" = 1;
           "format" = "{icon} {volume}%";
@@ -175,10 +155,8 @@
           "tooltip" = false;
         };
         "clock" = {
-          "interval" = 1;
-          "format" = "{:%I:%M %p  %A %b %d}";
-          "tooltip" = true;
-          "tooltip-format"= "{=%A; %d %B %Y}\n<tt>{calendar}</tt>";
+          "format-alt" = "{:%Y-%m-%d}";
+          "tooltip-format" = "{:%Y-%m-%d | %H:%M}";
         };
         "memory" = {
           "interval" = 1;
@@ -190,20 +168,6 @@
         "cpu" = {
           "interval" = 1;
           "format" = "󰍛 {usage}%";
-        };
-        "mpd" = {
-          "max-length" = 25;
-          "format" = "<span foreground='#bb9af7'></span> {title}";
-          "format-paused" = " {title}";
-          "format-stopped" = "<span foreground='#bb9af7'></span>";
-          "format-disconnected" = "";
-          "on-click" = "mpc --quiet toggle";
-          "on-click-right" = "mpc update; mpc ls | mpc add";
-          "on-click-middle" = "kitty --class='ncmpcpp' ncmpcpp ";
-          "on-scroll-up" = "mpc --quiet prev";
-          "on-scroll-down" = "mpc --quiet next";
-          "smooth-scrolling-threshold" = 5;
-          "tooltip-format" = "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})";
         };
         "network" = {
           "format-disconnected" = "󰯡 Disconnected";

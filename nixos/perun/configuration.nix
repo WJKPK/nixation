@@ -1,7 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -24,7 +24,7 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   services.xserver = {
-    videoDrivers = [ "modeset" "nvidia" ];
+    videoDrivers = [ "nvidia" ];
   };
 
    users.users.kruppenfield = {
@@ -38,6 +38,9 @@
   hardware.nvidia = {
     powerManagement.enable = true;
     modesetting.enable = true;
+    #open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   environment = {

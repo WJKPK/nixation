@@ -110,10 +110,6 @@ in {
   sound.enable = true;
   hardware.pulseaudio = {
     enable = false;
-    package = pkgs.pulseaudioFull;
-    extraConfig = "
-      load-module module-switch-on-connect
-    ";
   };
 
   security.rtkit.enable = true;
@@ -122,8 +118,7 @@ in {
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -135,7 +130,7 @@ in {
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "kruppenfield";
-    extraGroups = [ "networkmanager" "wheel" "dialout"];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" ];
     packages = with pkgs; [
       home-manager
     ];
