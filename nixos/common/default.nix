@@ -60,7 +60,6 @@ in {
     LC_TIME = "pl_PL.UTF-8";
   };
   programs.dconf.enable = true;
-
   hardware.opengl = {
     enable = true;  
     driSupport = true;
@@ -69,6 +68,7 @@ in {
 
   # Enable the X11 windowing system.
   #services.xserver.displayManager.startx.enable = true;
+  services.flatpak.enable = true;
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
@@ -112,7 +112,15 @@ in {
     enable = false;
   };
 
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+    pam.services.gtklock = {
+      text = ''
+        auth include login
+      '';
+  };
+
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -143,13 +151,8 @@ in {
     wget
     usbutils
     man
+    lxqt.lxqt-policykit
   ];
-
-  security.pam.services.gtklock = {
-    text = ''
-      auth include login
-    '';
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

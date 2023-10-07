@@ -43,7 +43,6 @@
   };
  
   hardware.nvidia = {
-    enable = true;
     powerManagement.enable = true;
     modesetting.enable = true;
     prime = {

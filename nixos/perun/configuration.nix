@@ -35,6 +35,8 @@
     docker-compose  
   ];
 
+  programs.steam.enable = true;
+
   hardware.nvidia = {
     powerManagement.enable = true;
     modesetting.enable = true;

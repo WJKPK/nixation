@@ -1,7 +1,6 @@
 {...}: {
   imports = [
     ./common.nix
-    ./programs/steam
   ];
   monitors = [
     {

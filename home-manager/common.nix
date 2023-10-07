@@ -67,11 +67,16 @@
     ripgrep
     wireguard-tools
     xfce.thunar
+    xfce.xfce4-appfinder
+    xfce.xfce4-settings
+    xfce.ristretto
+    xfce.tumbler
     grim
     slurp
     gnumake
     zathura
     cmake
+    gparted
   ];
 
   # Nicely reload system units when changing configs
