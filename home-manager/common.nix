@@ -7,7 +7,6 @@
     ./monitors.nix
     ./gpu.nix
   ];
-
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -34,7 +33,6 @@
       allowUnfreePredicate = (_: true);
     };
   };
-
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
@@ -74,9 +72,9 @@
     grim
     slurp
     gnumake
-    zathura
     cmake
     gparted
+    transmission-gtk
   ];
 
   # Nicely reload system units when changing configs

@@ -150,6 +150,7 @@ in {
     vim
     wget
     usbutils
+    pciutils
     man
     lxqt.lxqt-policykit
   ];

@@ -1,15 +1,15 @@
 { lib, config, ... }:
 let
   monitor = lib.concatStrings (map (m: let
-      resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
-      position = "${toString m.x}x${toString m.y}";
-    in
-      "monitor = ${m.name},${if m.enabled then "${resolution},${position},1.35" else "disable"}"
-    ) (config.monitors));
+        resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+        position = "${toString m.x}x${toString m.y}";
+      in
+        "monitor = ${m.name},${if m.enabled then "${resolution},${position},1" else "disable"}\n"
+      ) (config.monitors));
 
-    workspace = lib.concatStrings (map (m:
-      "workspace = ${m.name},${m.workspace}"
-    ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors));
+    workspace = lib.concatStrings ( map (m:
+        "\nworkspace = ${m.name},${m.workspace}"
+      ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors));
     gpu = lib.elemAt config.gpus 0;
 in {
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
@@ -35,6 +35,10 @@ in {
         gaps_out = 3
         border_size = 2
         layout = dwindle
+    }
+
+    input {
+        kb_layout=pl
     }
 
     decoration {
@@ -90,6 +94,11 @@ in {
     bind = $mainMod, w, exec, wofi --show drun
     bind = $mainMod, L, exec, gtklock -d 
     bind = $mainMod, J, togglesplit, # dwindle
+
+    bind = SUPER SHIFT, H, movewindow, l
+    bind = SUPER SHIFT, L, movewindow, r
+    bind = SUPER SHIFT, K, movewindow, u
+    bind = SUPER SHIFT, J, movewindow, d 
 
     bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
     bind = SHIFT, Print, exec, grim -g "$(slurp)"

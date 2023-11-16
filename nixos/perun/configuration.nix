@@ -1,7 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }: {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -17,10 +17,15 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ../common
     ../common/docker.nix
+    ../common/virt-manager.nix
     ./hardware-configuration.nix
+    ./gpu_isolate.nix
   ];
 
-  networking.hostName = "perun"; # Define your hostname.
+  networking = {
+    hostName = "perun"; # Define your hostname.
+    dhcpcd.denyInterfaces = [ "macvtap*" ];
+  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   services.xserver = {
@@ -28,7 +33,7 @@
   };
 
    users.users.kruppenfield = {
-    extraGroups = [ "docker" "networkmanager" "wheel" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -56,7 +61,13 @@
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_DESKTOP = "Hyprland";
       XDG_CURRENT_TYPE = "Hyprland";
+
+      NIXOS_OZONE_WL = "1";
     };
   };
 
+  specialisation."VFIO".configuration = {
+    system.nixos.tags = [ "with-vfio" ];
+    vfio.enable = true;
+  };
 }
