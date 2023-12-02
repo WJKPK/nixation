@@ -45,6 +45,7 @@
     userName = "WJKPK";
   };
 
+  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     kitty
     mako
@@ -67,14 +68,18 @@
     xfce.thunar
     xfce.xfce4-appfinder
     xfce.xfce4-settings
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
     xfce.ristretto
     xfce.tumbler
+    gnome.file-roller
     grim
     slurp
     gnumake
     cmake
     gparted
     transmission-gtk
+    nerdfonts
   ];
 
   # Nicely reload system units when changing configs

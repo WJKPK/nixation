@@ -176,7 +176,7 @@
           "format-wifi" = "󰖩 {essid}";
           "interval" = 1;
           "tooltip" = false;
-	  "on-click" = "kitty --class nmwui sudo nmtui";
+	  "on-click" = "kitty --class nmwui nmtui";
         };
         "battery" = {
             "format" = "{capacity}% {icon}";
@@ -190,7 +190,7 @@
         };
         "custom/powermenu" = {
           "format" = "";
-          "on-click" = "pkill wofi";
+          "on-click" = "bash ~/.config/wofi/power.sh";
           "tooltip" = false;
         };
         "tray" = {

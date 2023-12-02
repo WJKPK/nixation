@@ -27,7 +27,7 @@
     dhcpcd.denyInterfaces = [ "macvtap*" ];
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
+  powerManagement.enable = false;
   services.xserver = {
     videoDrivers = [ "nvidia" ];
   };
@@ -43,7 +43,7 @@
   programs.steam.enable = true;
 
   hardware.nvidia = {
-    powerManagement.enable = true;
+    powerManagement.enable = false;
     modesetting.enable = true;
     #open = true;
     nvidiaSettings = true;

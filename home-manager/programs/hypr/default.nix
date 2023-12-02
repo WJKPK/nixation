@@ -17,7 +17,6 @@ in {
     enable = true;
     systemdIntegration = true;
     xwayland.enable = true;
-    enableNvidiaPatches = gpu.nvidia.enable && !gpu.nvidia.prime;
     extraConfig = ''
     ${monitor}
     ${workspace}
@@ -53,9 +52,8 @@ in {
 
         bezier = ease,0.4,0.02,0.21,1
 
-        animation = windows, 1, 3.5, ease, slide
+#        animation = windows, 1, 3.5, ease, slide
         animation = windowsOut, 1, 3.5, ease, slide
-        animation = border, 1, 6, default
         animation = fade, 1, 3, ease
         animation = workspaces, 1, 3.5, ease
     }

@@ -28,6 +28,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/home/kruppenfield/VMs" =
+    { device = "/dev/disk/by-uuid/9e7d7537-26e4-472c-b0a7-c5c1afef0388";
+      fsType = "ext4";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/aeb310fe-0e02-4c59-ba1c-6036aa5a2be6"; }
     ];

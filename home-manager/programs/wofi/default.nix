@@ -71,7 +71,7 @@ in
         }
       '';
     };
-    ".config/wofi/power.sh" = with colors.scheme.doom; {
+    ".config/wofi/power.sh" = {
       executable = true;
       text = ''
         #!/bin/sh

@@ -81,7 +81,6 @@ in {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     xwayland.enable = true;
-    xwayland.hidpi = true;
   };
 
   xdg.portal = {
@@ -153,6 +152,7 @@ in {
     pciutils
     man
     lxqt.lxqt-policykit
+    gawk
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
