@@ -8,6 +8,6 @@
     ./zsh
     ./git
     ./wofi
-    ./gtklock
+    ./swaylock
   ];
 }

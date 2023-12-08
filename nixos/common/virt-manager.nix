@@ -54,6 +54,14 @@ let
  {
   virtualisation.libvirtd = {
       enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        swtpm.enable = true;
+        ovmf = {
+          enable = true;
+          packages = with pkgs; [ OVMFFull.fd ];
+        };
+      };
       hooks.qemu = {
         hugepages_handler = "${hugepage_handler}";
       };
@@ -65,8 +73,9 @@ let
     virt-manager
     spice-gtk
     spice-vdagent
-    swtpm
     libhugetlbfs
+    swtpm
+    OVMFFull.fd
   ];
   virtualisation.spiceUSBRedirection.enable = true;
   # after 23.11

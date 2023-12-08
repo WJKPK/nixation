@@ -10,7 +10,6 @@ let
     workspace = lib.concatStrings ( map (m:
         "\nworkspace = ${m.name},${m.workspace}"
       ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors));
-    gpu = lib.elemAt config.gpus 0;
 in {
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
   wayland.windowManager.hyprland = {
@@ -90,7 +89,7 @@ in {
     bind = $mainMod, F, exec, thunar
     bind = $mainMod, V, togglefloating,
     bind = $mainMod, w, exec, wofi --show drun
-    bind = $mainMod, L, exec, gtklock -d 
+    bind = $mainMod, L, exec, swaylock -f 
     bind = $mainMod, J, togglesplit, # dwindle
 
     bind = SUPER SHIFT, H, movewindow, l

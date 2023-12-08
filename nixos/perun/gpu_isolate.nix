@@ -5,8 +5,11 @@ let
     "10de:10f0" # Audio
   ];
 in { pkgs, lib, config, ... }: {
-  options.vfio.enable = with lib;
-    mkEnableOption "Configure the machine for VFIO";
+  options.vfio.enable = with lib; mkOption {
+      description = "Whether to enable VFIO";
+      type = types.bool;
+      default = true;
+    };
 
   config = let cfg = config.vfio;
   in {

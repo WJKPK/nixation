@@ -113,10 +113,8 @@ in {
 
   security = {
     rtkit.enable = true;
-    pam.services.gtklock = {
-      text = ''
-        auth include login
-      '';
+    pam.services = {
+    swaylock = { };
   };
 
   };

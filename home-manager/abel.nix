@@ -13,12 +13,4 @@
       primary = true;
     }
   ];
-  gpus = [
-    {
-      nvidia = {
-        enable = true;
-        prime = true;
-      };
-    }
-  ];
 }

@@ -43,7 +43,7 @@
   programs.steam.enable = true;
 
   hardware.nvidia = {
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     modesetting.enable = true;
     #open = true;
     nvidiaSettings = true;
@@ -66,8 +66,8 @@
     };
   };
 
-  specialisation."VFIO".configuration = {
-    system.nixos.tags = [ "with-vfio" ];
-    vfio.enable = true;
+  specialisation."ML-spec".configuration = {
+    system.nixos.tags = [ "ML-spec" ];
+    vfio.enable = false;
   };
 }

@@ -1,16 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ pkgs, ... }:
-  let
-    nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-      export __NV_PRIME_RENDER_OFFLOAD=1
-      export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-      export __GLX_VENDOR_LIBRARY_NAME=nvidia
-      export __VK_LAYER_NV_optimus=NVIDIA_only
-      exec -a "$0" "$@"
-    '';
-  in
+{ pkgs, lib, config, ... }:
   {
   # You can import other NixOS modules here
   imports = [
@@ -26,14 +17,18 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ../common
+    ./gpu.nix
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "abel"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "abel";
+
+  specialisation."GPU-enable".configuration = {
+    system.nixos.tags = [ "GPU-enable" ];
+    gpu.enable = true;
+  };
 
   services.xserver = {
-    videoDrivers = [ "modeset" "nvidia" ];
     libinput = {
       enable = true;
       touchpad = {
@@ -41,28 +36,35 @@
       };
     };
   };
- 
-  hardware.nvidia = {
-    powerManagement.enable = true;
-    modesetting.enable = true;
-    prime = {
-      offload.enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = [
-    nvidia-offload
-  ];
+  services.logind = {
+    lidSwitch = "hibernate";
+    powerKey = "poweroff";
+    extraConfig = ''
+      IdleAction=suspend
+      IdleActionSec=2m
+    '';
+  };
 
   services.tlp = {
     enable = true;
     settings = {
-      DEVICES_TO_DISABLE_ON_STARTUP = "bluetooth";
-      CPU_SCALING_GOVERNOR_ON_BAT= "powersave";
+      DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth";
+      DEVICES_TO_DISABLE_ON_LAN_CONNECT="wifi wwan";
+      DEVICES_TO_DISABLE_ON_WIFI_CONNECT="wwan";
+
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      PLATFORM_PROFILE_ON_AC = "balanced";
+      PLATFORM_PROFILE_ON_BAT = "low-power";
+
+      CPU_BOOST_ON_AC=1;
+      CPU_BOOST_ON_BAT=0;
+      CPU_HWP_DYN_BOOST_ON_AC=1;
+      CPU_HWP_DYN_BOOST_ON_BAT=0;
+
     };
   };
 }

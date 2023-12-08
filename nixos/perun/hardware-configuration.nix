@@ -31,6 +31,7 @@
   fileSystems."/home/kruppenfield/VMs" =
     { device = "/dev/disk/by-uuid/9e7d7537-26e4-472c-b0a7-c5c1afef0388";
       fsType = "ext4";
+      options = [ "rw" ];
     };
 
   swapDevices =

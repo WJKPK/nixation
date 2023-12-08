@@ -1,16 +1,10 @@
-{
-  pkgs,
-  lib,
-  default,
-  ...
-}:
+{ pkgs, lib,... }:
 let
     wallpaper = builtins.fetchurl {
       url = "https://www.pixground.com/wp-content/uploads/2023/09/Mount-Everest-4K-Wallpaper.jpg";
       sha256 = "0dkgxnnvjvl5apml3rir2d0p34h2n4vddwxfyl99qydpmf8xjxbm";
     };
-  in {
-
+in {
   home.packages = with pkgs; [
     swaybg
   ];

@@ -13,7 +13,7 @@ in
   home.file = {
     ".config/wofi/config" = {
       text = ''
-        width=480
+        width=780
         lines=15
         location=0
         prompt=Search...

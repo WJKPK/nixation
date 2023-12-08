@@ -5,7 +5,6 @@
     ./themes
     ./wallpapers
     ./monitors.nix
-    ./gpu.nix
   ];
   nixpkgs = {
     # You can add overlays here
