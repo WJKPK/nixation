@@ -79,6 +79,7 @@
     gparted
     transmission-gtk
     nerdfonts
+    distrobox
   ];
 
   # Nicely reload system units when changing configs

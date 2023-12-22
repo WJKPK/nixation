@@ -1,0 +1,21 @@
+[project]
+name = "<name>"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+
+[project.scripts]
+simulations = "<project_sub_dir>.main:main"
+
+[tool.pylama]
+ignore = "E203,C901"
+
+[tool.pylama.linter.pycodestyle]
+max_line_length = 100
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+line_length = 100
+profile = "black"
