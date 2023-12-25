@@ -25,7 +25,7 @@
       nvim-lspconfig
       nvim-tree-lua
       nvim-ts-rainbow
-      (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+      nvim-treesitter
       plenary-nvim
       telescope-fzy-native-nvim telescope-nvim
       vim-floaterm
@@ -62,7 +62,6 @@
         "nvim-cmp"
         "theming"
         "treesitter"
-        "treesitter-textobjects"
         "which-key"
       	"dashboard"
         "nerdtree"
