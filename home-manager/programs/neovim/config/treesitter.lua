@@ -1,7 +1,7 @@
 require("nvim-treesitter.configs").setup({
 	highlight = {
 		enable = true,
-		disable = {},
+		disable = { "lua" },
 	},
 	rainbow = {
 		enable = true,

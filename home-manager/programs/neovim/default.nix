@@ -27,13 +27,11 @@
       nvim-ts-rainbow
       nvim-treesitter
       plenary-nvim
-      telescope-fzy-native-nvim telescope-nvim
-      vim-floaterm
-      vim-sneak
+      telescope-fzy-native-nvim
+      telescope-nvim
       vim-vsnip
       which-key-nvim
       dashboard-nvim
-      nvim-web-devicons
       nerdtree
       leap-nvim
     ];
@@ -72,4 +70,13 @@
       
     '';
   };
+
+  xdg.configFile."nvim/parser".source = "${pkgs.symlinkJoin {
+    name = "treesitter-parsers";
+    paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: with plugins; [
+      c
+      lua
+      query
+    ])).dependencies;
+  }}/parser";
 }

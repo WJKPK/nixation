@@ -78,7 +78,5 @@ let
     OVMFFull.fd
   ];
   virtualisation.spiceUSBRedirection.enable = true;
-  # after 23.11
-  # virtualisation.libvirtd.enable = true;
-  # programs.virt-manager.enable = true;
 }
+

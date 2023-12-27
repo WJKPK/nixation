@@ -1,21 +1,21 @@
 -- telescope
 local telescope = require('telescope')
 telescope.setup {
-  defaults = { 
-    file_ignore_patterns = { 
+  defaults = {
+    file_ignore_patterns = {
       "build",
       ".git"
     }
   }
 }
 telescope.load_extension('fzy_native')
-
 require("gitsigns").setup()
-
+require("neogit").setup()
 -- autopairs
 require('nvim-autopairs').setup{}
+require('gitsigns').setup{}
 
-require('leap').add_default_mappings() 
+require('leap').add_default_mappings()
 
 -- copy to system clipboard
 vim.api.nvim_set_keymap( 'v', '<Leader>y', '"+y', {noremap = true})

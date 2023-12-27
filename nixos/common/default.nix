@@ -2,7 +2,6 @@
 let
   udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
 in {
-  services.udev.packages = [ udevRules ];
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -39,6 +38,27 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.kruppenfield = {
+    isNormalUser = true;
+    shell = pkgs.zsh;
+    description = "kruppenfield";
+    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" ];
+    packages = with pkgs; [
+      home-manager
+    ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    usbutils
+    pciutils
+    man
+    lxqt.lxqt-policykit
+    gawk
+  ];
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -59,7 +79,7 @@ in {
     LC_TELEPHONE = "pl_PL.UTF-8";
     LC_TIME = "pl_PL.UTF-8";
   };
-  programs.dconf.enable = true;
+
   hardware.opengl = {
     enable = true;  
     driSupport = true;
@@ -68,19 +88,14 @@ in {
 
   # Enable the X11 windowing system.
   #services.xserver.displayManager.startx.enable = true;
-  services.flatpak.enable = true;
-  services.xserver = {
-    enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
-    layout = "pl";
-    xkbVariant = "";
-  };
- programs.zsh.enable = true;
- programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    xwayland.enable = true;
+  programs = {
+    dconf.enable = lib.mkDefault true;
+    zsh.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      xwayland.enable = true;
+    };
   };
 
   xdg.portal = {
@@ -96,14 +111,34 @@ in {
         };
       };
   };
-  services.blueman.enable = true;
+
+  services = {
+    xserver = {
+      enable = true;
+      displayManager.gdm.enable = true;
+      displayManager.gdm.wayland = true;
+      layout = "pl";
+      xkbVariant = "";
+    };
+    flatpak.enable = true;
+    udev.packages = [ udevRules ];
+    blueman.enable = true;
+    printing.enable = true;
+    gvfs.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+      # use the example session manager (no others are packaged yet so this is enabled by default,
+      # no need to redefine it in your config for now)
+      #media-session.enable = true;
+    };
+  };
 
   # Configure console keymap
   console.keyMap = "pl2";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.gvfs.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -114,44 +149,9 @@ in {
   security = {
     rtkit.enable = true;
     pam.services = {
-    swaylock = { };
+      swaylock = { };
+    };
   };
-
-  };
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.kruppenfield = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    description = "kruppenfield";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" ];
-    packages = with pkgs; [
-      home-manager
-    ];
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    usbutils
-    pciutils
-    man
-    lxqt.lxqt-policykit
-    gawk
-  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

@@ -16,10 +16,10 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ../common
-    ../common/docker.nix
-    ../common/virt-manager.nix
     ./hardware-configuration.nix
     ./gpu_isolate.nix
+    ./virt-manager.nix
+    ./docker.nix
   ];
 
   networking = {
