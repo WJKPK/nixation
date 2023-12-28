@@ -1,8 +1,8 @@
 { pkgs, lib,... }:
 let
     wallpaper = builtins.fetchurl {
-      url = "https://www.pixground.com/wp-content/uploads/2023/09/Mount-Everest-4K-Wallpaper.jpg";
-      sha256 = "0dkgxnnvjvl5apml3rir2d0p34h2n4vddwxfyl99qydpmf8xjxbm";
+      url = "https://images4.alphacoders.com/101/1011201.jpg";
+      sha256 = "1h4mchqmjg182rk36zagpimph18iz6390p221gscbvnby7hpy5rg";
     };
 in {
   home.packages = with pkgs; [
