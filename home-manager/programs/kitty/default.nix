@@ -18,6 +18,13 @@
       '';
     };
   };
+  home.shellAliases = {
+    ls = "eza --icons=always";
+    ll="eza -l --icons=always --smart-group -F";
+    nix-shell = "nix-shell --command zsh";
+    nd = "nix develop --command zsh";
+    ns = "nix shell --command zsh";
+  };
 
   xdg.configFile."kitty/theme.conf".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/catppuccin/kitty/main/themes/frappe.conf";

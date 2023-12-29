@@ -7,9 +7,7 @@
     };
 
     theme = {
-      #name = "Dracula";
       name = "Catppuccin-Mocha-Compact-Blue-Dark";
-      #package = pkgs.dracula-theme;
       package = pkgs.catppuccin-gtk.override {
         size = "compact";
         variant = "mocha";

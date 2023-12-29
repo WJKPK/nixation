@@ -80,6 +80,7 @@
     transmission-gtk
     nerdfonts
     distrobox
+    eza
   ];
 
   # Nicely reload system units when changing configs
