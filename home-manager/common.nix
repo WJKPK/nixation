@@ -1,16 +1,14 @@
 { inputs, outputs, pkgs, ... }: {
   imports = [
     inputs.hyprland.homeManagerModules.default
+    inputs.nix-colors.homeManagerModules.default
     ./programs 
     ./themes
     ./wallpapers
-    ./monitors.nix
-  ];
+  ] ++ (builtins.attrValues outputs.homeManagerModules);
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
@@ -32,6 +30,9 @@
       allowUnfreePredicate = (_: true);
     };
   };
+
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
+
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
@@ -47,7 +48,6 @@
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     kitty
-    mako
     firefox
     pavucontrol
     mpc-cli

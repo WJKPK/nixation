@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
 
   programs.waybar = {
     enable = true;
@@ -14,7 +14,12 @@
         min-height: 25px;
       }
       window#waybar {
-        background: transparent;
+        background: #${config.colorScheme.colors.base00};
+        border-radius: 8px;
+        border-style: solid; 
+        border-width: 2px;
+        border-color: #${config.colorScheme.colors.base05};
+        padding: 3px;
       }
       #clock,
       #memory,
@@ -27,56 +32,38 @@
       #custom-launcher,
       #workspaces,
       #custom-powermenu {
-        background-color: #11111b;
-        border-radius: 8px;
-        color: #cdd6f4;
-        margin-top: 5px;
-        margin-right: 5px;
-        margin-left: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 12px;
+        padding-right: 12px;
       }
       #workspaces button {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        padding-left: 6px;
-        padding-right: 6px;
+        color: #${config.colorScheme.colors.base04};
       }
       #workspaces button.active {
-        background-color: #45475a;
-        color: rgb(26, 24, 38);
-      }
-      #workspaces button.urgent {
-        color: rgb(26, 24, 38);
-      }
-      #workspaces button:hover {
-        background-color: #313244;
-        color: rgb(26, 24, 38);
+        color: #${config.colorScheme.colors.base0F};
       }
       #custom-launcher {
-        color: #7ebae4;
+        color: #${config.colorScheme.colors.base0F};
       }
       #memory {
-        color: rgb(181, 232, 224);
+        color: #${config.colorScheme.colors.base0A};
       }
       #cpu {
-        color: rgb(245, 194, 231);
+        color: #${config.colorScheme.colors.base0A};
       }
       #clock {
-        color: rgb(217, 224, 238);
+        color: #${config.colorScheme.colors.base0A};
       }
-      
       #battery {
         min-width: 55px;
-        color: rgb(126, 186, 244);
+        color: #${config.colorScheme.colors.base0B};
       }
       #battery.charging,
       #battery.full,
       #battery.plugged {
-        color: #26a65b;
+        color: #${config.colorScheme.colors.base0B};
       }
       #battery.critical:not(.charging) {
-        color: #f53c3c;
+        color: #${config.colorScheme.colors.base08};
         animation-name: blink;
         animation-duration: 0.5s;
         animation-timing-function: linear;
@@ -84,19 +71,19 @@
         animation-direction: alternate;
       }
       #temperature {
-        color: rgb(150, 205, 251);
+        color: #${config.colorScheme.colors.base08};
       }
       #pulseaudio {
-        color: rgb(245, 224, 220);
+        color: #${config.colorScheme.colors.base06};
       }
       #network {
-        color: #abe9b3;
+        color: #${config.colorScheme.colors.base0B};
       }
       #network.disconnected {
-        color: rgb(255, 255, 255);
+        color: #${config.colorScheme.colors.base09};
       }
       #custom-powermenu {
-        color: rgb(242, 143, 173);
+        color: #${config.colorScheme.colors.base08};
       }
     '';
     settings = [{
@@ -105,7 +92,6 @@
       modules-left = [
         "custom/launcher"
         "temperature"
-        "clock"
       ];
       modules-center = [
         "hyprland/workspaces"
@@ -115,6 +101,7 @@
         "battery"
         "memory"
         "network"
+        "clock"
         "custom/powermenu"
       ];
       "custom/launcher" = {
@@ -161,7 +148,7 @@
         "on-click" = "kitty --class nmwui nmtui";
       };
       "battery" = {
-          "format" = "{capacity}% {icon}";
+          "format" = "{icon}  {capacity}%";
           "format-icons" = ["" "" "" "" ""];
 	  "interval" =  30;
           "states" = {

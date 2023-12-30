@@ -8,6 +8,7 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-colors.url = "github:misterio77/nix-colors";
 
     hyprland.url = "github:hyprwm/Hyprland";
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
@@ -23,14 +24,7 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-    in
-    rec {
-      # Your custom packages
-      # Acessible through 'nix build', 'nix shell', etc
-      packages = forAllSystems (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
-        in import ./pkgs { inherit pkgs; }
-      );
+    in {
       # Devshell for bootstrapping
       # Acessible through 'nix develop' or 'nix-shell' (legacy)
       devShells = forAllSystems (system:
@@ -38,7 +32,6 @@
         in import ./shell.nix { inherit pkgs; }
       );
 
-      # Your custom packages and modifications, exported as overlays
       overlays = import ./overlays { inherit inputs; };
       # Reusable nixos modules you might want to export
       # These are usually stuff you would upstream into nixpkgs
@@ -53,15 +46,12 @@
         abel = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            nixos-hardware.nixosModules.lenovo-thinkpad-t480s
-            # > Our main nixos configuration file <
             ./nixos/abel/configuration.nix
           ];
         };
         perun = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            # > Our main nixos configuration file <
             ./nixos/perun/configuration.nix
           ];
         };
@@ -74,7 +64,6 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
-            # > Our main home-manager configuration file <
             ./home-manager/abel.nix
           ];
         };
@@ -82,7 +71,6 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
-            # > Our main home-manager configuration file <
             ./home-manager/perun.nix
           ];
         };

@@ -29,8 +29,8 @@ in {
     # Set en layout at startup
 
     general {
-        gaps_in = 3
-        gaps_out = 3
+        gaps_in = 5
+        gaps_out = 5
         border_size = 2
         layout = dwindle
     }
@@ -40,7 +40,7 @@ in {
     }
 
     decoration {
-        rounding = 5
+        rounding = 10
         drop_shadow = true
         shadow_range = 3
         shadow_render_power = 2

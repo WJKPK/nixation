@@ -17,37 +17,41 @@ in {
       font-size = 15;
 
       line-uses-inside = true;
-      layout-bg-color = 00000000;
-      layout-border-color = 00000000;
-      layout-text-color = "c6d0f5";
-      line-clear-color = 00000000;
-      line-caps-lock-color = 00000000;
-      line-ver-color = 00000000;
-      line-wrong-color = 00000000;
-      ring-clear-color = "f2d5cf";
-      ring-caps-lock-color = "ef9f76";
-      ring-ver-color = "8caaee";
-      ring-wrong-color = "ea999c";
-      separator-color = 00000000;
-      text-color = "c6d0f5";
-      text-clear-color = "f2d5cf";
-      text-caps-lock-color = "ef9f76";
-      text-ver-color = "8caaee";
-      text-wrong-color = "ea999c";
-
-      line-color = 00000000;
-      inside-clear-color = 00000000;
-      inside-caps-lock-color = 00000000;
-      inside-ver-color = 00000000;
-      inside-wrong-color = 00000000;
-      bs-hl-color = "f5e0dc";
-      key-hl-color = "e48eff";
-      ring-color = "b4befe";
       disable-caps-lock-text = true;
       indicator-caps-lock = true;
-      indicator-radius = 40;
+      indicator-radius = 100;
+      indicator-thickness = 10;
       indicator-idle-visible = true;
-      indicator-y-position = 1000;
+      key-hl-color = "00000066";
+      separator-color = "00000000";
+      
+      inside-color = "00000033";
+      inside-clear-color = "ffffff00";
+      inside-caps-lock-color = "ffffff00";
+      inside-ver-color = "ffffff00";
+      inside-wrong-color = "ffffff00";
+      
+      ring-color = "ffffff";
+      ring-clear-color = "ffffff";
+      ring-caps-lock-color = "ffffff";
+      ring-ver-color = "ffffff";
+      ring-wrong-color = "ffffff";
+      
+      line-color = "00000000";
+      line-clear-color = "ffffffFF";
+      line-caps-lock-color = "ffffffFF";
+      line-ver-color = "ffffffFF";
+      line-wrong-color = "ffffffFF";
+      
+      text-color = "ffffff";
+      text-clear-color = "ffffff";
+      text-ver-color = "ffffff";
+      text-wrong-color = "ffffff";
+      
+      bs-hl-color = "ffffff";
+      caps-lock-key-hl-color = "ffffffFF";
+      caps-lock-bs-hl-color = "ffffffFF";
+      text-caps-lock-color = "ffffff";
     };
   };
 }

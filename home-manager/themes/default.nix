@@ -2,15 +2,18 @@
   gtk = {
     enable = true;
     iconTheme = {
-      name = "Catppuccin-Mocha-Compact-Blue-Dark";
-      package = pkgs.catppuccin-gtk;
+      name = "Catppuccin-Frappe-Standard-Flamingo-Dark";
+      package = pkgs.catppuccin-gtk.override {
+        variant = "frappe";
+        accents = [ "flamingo" ];
+      };
     };
 
     theme = {
-      name = "Catppuccin-Mocha-Compact-Blue-Dark";
+      name = "Catppuccin-Frappe-Standard-Flamingo-Dark";
       package = pkgs.catppuccin-gtk.override {
-        size = "compact";
-        variant = "mocha";
+        variant = "frappe";
+        accents = [ "flamingo" ];
       };
     };
 

@@ -6,7 +6,7 @@ in {
     # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
+      #outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
     ];
@@ -34,9 +34,9 @@ in {
     };
   };
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernel.sysctl = { "vm.swappiness" = 5;};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kruppenfield = {
@@ -57,6 +57,8 @@ in {
     man
     lxqt.lxqt-policykit
     gawk
+    libsForQt5.qt5.qtquickcontrols2   
+    libsForQt5.qt5.qtgraphicaleffects
   ];
 
   # Enable networking
@@ -103,6 +105,7 @@ in {
     wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-wlr
+      xdg-desktop-portal-gtk
     ];
   };
 
@@ -119,8 +122,11 @@ in {
   services = {
     xserver = {
       enable = true;
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = true;
+      displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+      };
       layout = "pl";
       xkbVariant = "";
     };
