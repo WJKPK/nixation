@@ -32,8 +32,10 @@
       vim-vsnip
       which-key-nvim
       dashboard-nvim
+      nvim-web-devicons
       nerdtree
       leap-nvim
+      toggleterm-nvim
     ];
 
     extraPackages = with pkgs; [

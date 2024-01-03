@@ -6,6 +6,7 @@ wk.setup({})
 
 wk.register({
   ["<leader>"] = {
+    t = { "<cmd>ToggleTerm<cr>", "Toggle term" },
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
     ["/"] = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
     f = { "<cmd>Telescope find_files<cr>", "Find File" },

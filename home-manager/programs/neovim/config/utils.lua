@@ -14,9 +14,15 @@ require("neogit").setup()
 -- autopairs
 require('nvim-autopairs').setup{}
 require('gitsigns').setup{}
+require("toggleterm").setup{
+  direction = 'float',
+  on_open = function(term)
+    vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<esc>", "exit<CR>", { noremap = true, silent = true })
+  end,
+  close_on_exit = true,
+}
 
 require('leap').add_default_mappings()
-
 -- copy to system clipboard
 vim.api.nvim_set_keymap( 'v', '<Leader>y', '"+y', {noremap = true})
 vim.api.nvim_set_keymap( 'n', '<Leader>y', ':%+y<CR>', {noremap = true})

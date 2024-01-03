@@ -8,7 +8,6 @@
         accents = [ "flamingo" ];
       };
     };
-
     theme = {
       name = "Catppuccin-Frappe-Standard-Flamingo-Dark";
       package = pkgs.catppuccin-gtk.override {
