@@ -1,8 +1,8 @@
 { pkgs, lib,... }:
 let
     wallpaper = builtins.fetchurl {
-      url = "https://images4.alphacoders.com/101/1011201.jpg";
-      sha256 = "1h4mchqmjg182rk36zagpimph18iz6390p221gscbvnby7hpy5rg";
+      url = "https://github.com/Gingeh/wallpapers/blob/main/landscapes/evening-sky.png?raw=true";
+      sha256 = "01vhwfx2qsvxgcrhbyx5d0c6c0ahjp50qy147638m7zfinhk70vx";
     };
 in {
   home.packages = with pkgs; [

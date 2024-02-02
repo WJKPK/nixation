@@ -14,16 +14,14 @@ in {
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
   wayland.windowManager.hyprland = {
     enable = true;
-    systemdIntegration = true;
+    systemd.enable = true;
     xwayland.enable = true;
     extraConfig = ''
     ${monitor}
     ${workspace}
     # Autostart
-    exec-once = lxqt-policykit-agent
     exec-once = hyprctl setcursor Bibata-Modern-Classic 18
     exec-once = dunst
-
     exec = pkill waybar & sleep 0.5 && waybar
 
     # Set en layout at startup

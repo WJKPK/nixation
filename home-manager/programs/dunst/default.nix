@@ -3,8 +3,8 @@
     enable = true;
     settings = {
       global = {
-        frame_color = "#${config.colorScheme.colors.base0F}";
-        separator_color = "#${config.colorScheme.colors.base0E}";
+        frame_color = "#${config.colorScheme.palette.base0F}";
+        separator_color = "#${config.colorScheme.palette.base0E}";
         width = 320;
         height = 380;
         offset = "0x15";
@@ -26,23 +26,23 @@
         transparency = 10;
         progress_bar = true;
         progress_bar_frame_width = 0;
-        highlight = "#${config.colorScheme.colors.base0E}";
+        highlight = "#${config.colorScheme.palette.base0E}";
       };
       fullscreen_delay_everything.fullscreen = "delay";
       urgency_low = {
-        background = "#${config.colorScheme.colors.base00}";
-        foreground = "#${config.colorScheme.colors.base07}";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base07}";
         timeout = 5;
       };
       urgency_normal = {
-        background = "#${config.colorScheme.colors.base00}";
-        foreground = "#${config.colorScheme.colors.base07}";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base07}";
         timeout = 6;
       };
       urgency_critical = {
-        background = "#${config.colorScheme.colors.base00}";
-        foreground = "#${config.colorScheme.colors.base08}";
-        frame_color = "#${config.colorScheme.colors.base05}";
+        background = "#${config.colorScheme.palette.base00}";
+        foreground = "#${config.colorScheme.palette.base08}";
+        frame_color = "#${config.colorScheme.palette.base05}";
         timeout = 0;
       };
     };

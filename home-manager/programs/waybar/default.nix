@@ -4,7 +4,6 @@
     enable = true;
     systemd = {
       enable = false;
-      target = "graphical-session.target";
     };
     style = ''
       * {
@@ -14,11 +13,11 @@
         min-height: 25px;
       }
       window#waybar {
-        background: #${config.colorScheme.colors.base00};
+        background: #${config.colorScheme.palette.base00};
         border-radius: 8px;
         border-style: solid; 
         border-width: 2px;
-        border-color: #${config.colorScheme.colors.base05};
+        border-color: #${config.colorScheme.palette.base05};
         padding: 3px;
       }
       #clock,
@@ -36,34 +35,34 @@
         padding-right: 12px;
       }
       #workspaces button {
-        color: #${config.colorScheme.colors.base04};
+        color: #${config.colorScheme.palette.base04};
       }
       #workspaces button.active {
-        color: #${config.colorScheme.colors.base0F};
+        color: #${config.colorScheme.palette.base0F};
       }
       #custom-launcher {
-        color: #${config.colorScheme.colors.base0F};
+        color: #${config.colorScheme.palette.base0F};
       }
       #memory {
-        color: #${config.colorScheme.colors.base0A};
+        color: #${config.colorScheme.palette.base0A};
       }
       #cpu {
-        color: #${config.colorScheme.colors.base0A};
+        color: #${config.colorScheme.palette.base0A};
       }
       #clock {
-        color: #${config.colorScheme.colors.base0A};
+        color: #${config.colorScheme.palette.base0A};
       }
       #battery {
         min-width: 55px;
-        color: #${config.colorScheme.colors.base0B};
+        color: #${config.colorScheme.palette.base0B};
       }
       #battery.charging,
       #battery.full,
       #battery.plugged {
-        color: #${config.colorScheme.colors.base0B};
+        color: #${config.colorScheme.palette.base0B};
       }
       #battery.critical:not(.charging) {
-        color: #${config.colorScheme.colors.base08};
+        color: #${config.colorScheme.palette.base08};
         animation-name: blink;
         animation-duration: 0.5s;
         animation-timing-function: linear;
@@ -71,19 +70,19 @@
         animation-direction: alternate;
       }
       #temperature {
-        color: #${config.colorScheme.colors.base08};
+        color: #${config.colorScheme.palette.base08};
       }
       #pulseaudio {
-        color: #${config.colorScheme.colors.base06};
+        color: #${config.colorScheme.palette.base06};
       }
       #network {
-        color: #${config.colorScheme.colors.base0B};
+        color: #${config.colorScheme.palette.base0B};
       }
       #network.disconnected {
-        color: #${config.colorScheme.colors.base09};
+        color: #${config.colorScheme.palette.base09};
       }
       #custom-powermenu {
-        color: #${config.colorScheme.colors.base08};
+        color: #${config.colorScheme.palette.base08};
       }
     '';
     settings = [{
@@ -99,6 +98,7 @@
       modules-right = [
         "pulseaudio"
         "battery"
+        "cpu"
         "memory"
         "network"
         "clock"

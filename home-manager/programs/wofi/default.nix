@@ -28,7 +28,7 @@
       text = ''
         window {
           margin: 0px;
-          background-color: #${config.colorScheme.colors.base00};
+          background-color: #${config.colorScheme.palette.base00};
         }
 
         #input {
@@ -37,10 +37,10 @@
           padding: 4px 10px;
           margin: 4px;
           border: none;
-          color: #${config.colorScheme.colors.base07};
+          color: #${config.colorScheme.palette.base07};
           font-weight: bold;
-          background-color: #${config.colorScheme.colors.base00};
-          outline: #${config.colorScheme.colors.base05};
+          background-color: #${config.colorScheme.palette.base00};
+          outline: #${config.colorScheme.palette.base05};
         }
 
         #inner-box {
@@ -53,16 +53,16 @@
           padding: 3px;
           border: none;
           border-radius: 10px;
-          border: 2px solid #${config.colorScheme.colors.base05};
+          border: 2px solid #${config.colorScheme.palette.base05};
         }
 
         #text:selected {
-          color: #${config.colorScheme.colors.base00};
+          color: #${config.colorScheme.palette.base00};
           background-color: transparent;
         }
 
         #entry:selected {
-          background-color: #${config.colorScheme.colors.base0F};
+          background-color: #${config.colorScheme.palette.base0F};
         }
       '';
     };

@@ -2,20 +2,20 @@
   gtk = {
     enable = true;
     iconTheme = {
-      name = "Catppuccin-Frappe-Standard-Flamingo-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        variant = "frappe";
-        accents = [ "flamingo" ];
+      package = pkgs.catppuccin-papirus-folders.override {
+        flavor = "frappe";
+        accent = "lavender";
       };
+      name = "Papirus-Dark";
     };
     theme = {
-      name = "Catppuccin-Frappe-Standard-Flamingo-Dark";
+      name = "Catppuccin-Frappe-Compact-Flamingo-Dark";
       package = pkgs.catppuccin-gtk.override {
-        variant = "frappe";
         accents = [ "flamingo" ];
+        size = "compact";
+        variant = "frappe";
       };
     };
-
     cursorTheme = {
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;

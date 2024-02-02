@@ -1,8 +1,7 @@
 {pkgs, inputs, outputs, lib, config, ...} :
 let
   udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
-in {
-  nixpkgs = {
+in { nixpkgs = {
     # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
@@ -37,6 +36,21 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernel.sysctl = { "vm.swappiness" = 5;};
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kruppenfield = {
@@ -55,9 +69,10 @@ in {
     usbutils
     pciutils
     man
-    lxqt.lxqt-policykit
+    polkit_gnome
     gawk
-    libsForQt5.qt5.qtquickcontrols2   
+    libsForQt5.kdeconnect-kde
+    libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
   ];
 
@@ -88,8 +103,6 @@ in {
     driSupport32Bit = true;
   };
 
-  # Enable the X11 windowing system.
-  #services.xserver.displayManager.startx.enable = true;
   programs = {
     dconf.enable = lib.mkDefault true;
     zsh.enable = true;
@@ -98,14 +111,18 @@ in {
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       xwayland.enable = true;
     };
+    kdeconnect.enable = true;
+    xfconf.enable = true;
   };
 
   xdg.portal = {
     enable = true;
     wlr.enable = true;
     extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-kde
     ];
   };
 
@@ -161,6 +178,7 @@ in {
     pam.services = {
       swaylock = { };
     };
+    polkit.enable = true;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
