@@ -1,7 +1,13 @@
-{ config, ... }: {
+{ pkgs, config, ... }:
+  let
+    kitty = if config.targets.genericLinux.enable then
+      (pkgs.wrapWithNixGL pkgs.kitty)."${pkgs.kitty.name}-intel" else
+      pkgs.kitty;
+  in {
   programs = {
     kitty = {
       enable = true;
+      package = kitty;
       font = {
         name = "jetbrains mono nerd font";
         size = 12;

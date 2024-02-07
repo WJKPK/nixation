@@ -2,7 +2,6 @@
   imports = [
     inputs.hyprland.homeManagerModules.default
     inputs.nix-colors.homeManagerModules.default
-    ./programs 
     ./themes
     ./wallpapers
   ] ++ (builtins.attrValues outputs.homeManagerModules);
@@ -11,16 +10,7 @@
     overlays = [
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+      outputs.overlays.nixGL-overlay
     ];
     # Configure your nixpkgs instance
     config = {
@@ -31,23 +21,16 @@
     };
   };
 
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
 
-  home = {
-    username = "kruppenfield";
-    homeDirectory = "/home/kruppenfield";
-  };
-
   programs.home-manager.enable = true;
-  programs.git = {
-    enable = true;
-    userEmail = "krupskiwojciech@gmail.com";
-    userName = "WJKPK";
-  };
-
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    kitty
     firefox
     pavucontrol
     mpc-cli

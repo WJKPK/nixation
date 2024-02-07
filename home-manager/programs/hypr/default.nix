@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ pkgs, lib, config, ... }:
 let
   monitor = lib.concatStrings (map (m: let
         resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
@@ -149,6 +149,9 @@ in {
     bindm = $mainMod, mouse:273, resizewindow
     bindm = ALT, mouse:272, resizewindow
     '';
+  };
+  home.shellAliases = {
+    Hyprland = "${hyprland}";
   };
 }
 

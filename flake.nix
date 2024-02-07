@@ -11,9 +11,11 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
+    flake-utils.url = "github:numtide/flake-utils";
+    nixgl.url = "github:guibou/nixGL";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, nixgl, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -69,6 +71,13 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./home-manager/perun.nix
+          ];
+        };
+        "wkrupski@hades" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./home-manager/hades.nix
           ];
         };
       };

@@ -1,6 +1,8 @@
 {...}: {
   imports = [
+    ./programs/wayland-conf.nix
     ./common.nix
+    ./own_credentials.nix
   ];
   monitors = [
     {
