@@ -1,7 +1,8 @@
 { pkgs, config, ... }:
   let
+    wrapNixGL = pkgs.callPackage (import ./../wrap-nix-gl.nix) { };
     kitty = if config.targets.genericLinux.enable then
-      (pkgs.wrapWithNixGL pkgs.kitty)."${pkgs.kitty.name}-intel" else
+      wrapNixGL pkgs.kitty else
       pkgs.kitty;
   in {
   programs = {

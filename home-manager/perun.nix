@@ -1,8 +1,10 @@
-{...}: {
+{inputs, ...}: {
   imports = [
+    inputs.hyprland.homeManagerModules.default
     ./programs/wayland-conf.nix
     ./common.nix
     ./own_credentials.nix
+    ./wallpapers
   ];
   monitors = [
     {

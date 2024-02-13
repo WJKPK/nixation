@@ -1,11 +1,11 @@
 { ... }: {
+  targets.genericLinux.enable = true;
   imports = [
     ./programs/standalone-terminal.nix
-    ./common.nix
+    ./standalone.nix
   ];
-  targets.genericLinux.enable = true;
   home = {
-    username = "wkrupski";
-    homeDirectory = "/home/wkrupski";
+    username = "kruppenfield";
+    homeDirectory = "/home/kruppenfield";
   };
 }

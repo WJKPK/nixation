@@ -28,22 +28,10 @@
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    firefox
-    pavucontrol
-    mpc-cli
-    brightnessctl
-    pamixer
-    openscad
-    glxinfo
     nerdfonts
-    cura
     stm32cubemx
     saleae-logic-2
-    gcc
-    rustup
-    unzip
     ripgrep
-    wireguard-tools
     xfce.thunar
     xfce.xfce4-appfinder
     xfce.xfce4-settings
@@ -51,14 +39,6 @@
     xfce.thunar-volman
     xfce.ristretto
     xfce.tumbler
-    grim
-    slurp
-    gnumake
-    cmake
-    gparted
-    transmission-gtk
-    nerdfonts
-    distrobox
     eza
   ];
 
@@ -66,5 +46,6 @@
   systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 }
+
