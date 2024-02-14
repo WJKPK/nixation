@@ -5,7 +5,7 @@
     ./standalone.nix
   ];
   home = {
-    username = "kruppenfield";
-    homeDirectory = "/home/kruppenfield";
+    username = "wkrupski";
+    homeDirectory = "/home/wkrupski";
   };
 }
