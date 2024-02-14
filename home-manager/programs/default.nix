@@ -1,14 +1,20 @@
-{
-  imports = [
+{ lib, specialArgs, ...}:
+let
+  inherit (specialArgs) isNixos;
+  common-pkgs = [
     ./neovim
-    ./dunst
-    ./hypr
     ./kitty
-    ./waybar
     ./zsh
     ./git
-    ./wofi
-    ./swaylock
     ./direnv
+    ./rofi
   ];
+  nixos-os-pkgs = (lib.optionals isNixos [
+    ./dunst
+    ./hypr
+    ./waybar
+    ./swaylock
+  ]);
+in {
+  imports = common-pkgs ++ (nixos-os-pkgs);
 }
