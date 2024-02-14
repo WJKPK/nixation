@@ -9,11 +9,8 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
     ];
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = (_: true);
     };
   };
@@ -27,23 +24,11 @@
 
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
+
   home.packages = with pkgs; [
-    firefox
-    pavucontrol
-    mpc-cli
-    brightnessctl
-    pamixer
-    openscad
-    glxinfo
-    nerdfonts
-    cura
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     stm32cubemx
     saleae-logic-2
-    gcc
-    rustup
-    unzip
-    ripgrep
-    wireguard-tools
     xfce.thunar
     xfce.xfce4-appfinder
     xfce.xfce4-settings
@@ -51,15 +36,6 @@
     xfce.thunar-volman
     xfce.ristretto
     xfce.tumbler
-    grim
-    slurp
-    gnumake
-    cmake
-    gparted
-    transmission-gtk
-    nerdfonts
-    distrobox
-    eza
   ];
 
   # Nicely reload system units when changing configs

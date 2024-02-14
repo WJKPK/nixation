@@ -32,15 +32,11 @@
       );
 
       overlays = import ./overlays { inherit inputs; };
-      # Reusable nixos modules you might want to export
-      # These are usually stuff you would upstream into nixpkgs
       nixosModules = import ./modules/nixos;
-      # Reusable home-manager modules you might want to export
-      # These are usually stuff you would upstream into home-manager
       homeManagerModules = import ./modules/home-manager;
 
       # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
+      # Available through 'sudo nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         abel = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
@@ -56,33 +52,27 @@
         };
       };
 
+      # HomeManager configuration entrypoint
+      # Available through 'home-manager switch --flake .#config-name"
       homeConfigurations = {
         "abel" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
           modules = [
             ./home-manager/abel.nix
           ];
         };
         "perun" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
           modules = [
             ./home-manager/perun.nix
           ];
         };
         "standalone" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = { inherit inputs outputs; };
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs nixgl; isNixos = false; };
           modules = [
-          {
-            nixpkgs = {
-              overlays = [
-                nixgl.overlay
-              ];
-              config.allowUnfree = true;
-            };
-          }
             ./home-manager/hades.nix
           ];
         };

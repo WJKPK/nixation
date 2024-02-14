@@ -1,10 +1,12 @@
-{ pkgs, config, ... }:
+{ pkgs, config, specialArgs, ... }:
   let
+    inherit (specialArgs) isNixos;
     wrapNixGL = pkgs.callPackage (import ./../wrap-nix-gl.nix) { };
-    kitty = if config.targets.genericLinux.enable then
-      wrapNixGL pkgs.kitty else
-      pkgs.kitty;
+    kitty = if !isNixos then wrapNixGL pkgs.kitty else pkgs.kitty;
   in {
+  home.packages = with pkgs; [
+    eza
+  ];
   programs = {
     kitty = {
       enable = true;

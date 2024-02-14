@@ -1,10 +1,9 @@
 { inputs, ...}: {
   imports = [
     inputs.hyprland.homeManagerModules.default
-    ./programs/wayland-conf.nix
     ./common.nix
-    ./own_credentials.nix
-    ./wallpapers
+    ./programs
+    ./nixos-specific.nix
   ];
   monitors = [
     {
@@ -17,4 +16,13 @@
       primary = true;
     }
   ];
+  home = {
+    username = "kruppenfield";
+    homeDirectory = "/home/kruppenfield";
+  };
+  programs.git = {
+    enable = true;
+    userEmail = "krupskiwojciech@gmail.com";
+    userName = "WJKPK";
+  };
 }
