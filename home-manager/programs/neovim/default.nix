@@ -81,4 +81,13 @@
       query
     ])).dependencies;
   }}/parser";
+
+  xdg.desktopEntries.nvim = {
+    categories = [ "Utility" "TextEditor" ];
+    exec = "${pkgs.kitty}/bin/kitty -e nvim"; # launch with kitty
+    genericName = "Text Editor";
+    icon = "nvim";
+    name = "Neovim";
+    terminal = false; # dont launch with default terminal
+  };
 }
