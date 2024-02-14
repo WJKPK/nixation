@@ -9,6 +9,7 @@ wk.register({
     t = { "<cmd>ToggleTerm<cr>", "Toggle term" },
     b = { "<cmd>Telescope buffers<cr>", "Buffers" },
     ["/"] = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
+    w = { "<cmd>Telescope grep_string<cr>", "Grep string" },
     f = { "<cmd>Telescope find_files<cr>", "Find File" },
     g = {
       name = "Git / VCS",
