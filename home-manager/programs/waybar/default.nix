@@ -159,7 +159,7 @@
       };
       "custom/powermenu" = {
         "format" = "";
-        "on-click" = "bash ~/.config/wofi/power.sh";
+        "on-click" = "bash ~/.config/rofi/power.sh";
         "tooltip" = false;
       };
     }];

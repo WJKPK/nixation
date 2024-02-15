@@ -1,9 +1,9 @@
 {inputs, ...}: {
   imports = [
     inputs.hyprland.homeManagerModules.default
-    ./programs
     ./common.nix
     ./nixos-specific.nix
+    ./programs
   ];
   monitors = [
     {
@@ -26,6 +26,5 @@
     userEmail = "krupskiwojciech@gmail.com";
     userName = "WJKPK";
   };
-
 }
 

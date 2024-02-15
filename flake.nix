@@ -73,7 +73,7 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs nixgl; isNixos = false; };
           modules = [
-            ./home-manager/hades.nix
+            ./home-manager/standalone.nix
           ];
         };
       };

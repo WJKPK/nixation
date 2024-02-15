@@ -4,7 +4,6 @@
     ./themes
   ] ++ (builtins.attrValues outputs.homeManagerModules);
   nixpkgs = {
-    # You can add overlays here
     overlays = [
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
@@ -26,7 +25,7 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+   (nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" "CascadiaCode" ]; })
     stm32cubemx
     saleae-logic-2
     xfce.thunar

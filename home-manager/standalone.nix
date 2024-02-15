@@ -1,4 +1,4 @@
-{ nixgl, config, specialArgs, ... }:
+{ nixgl, specialArgs, ... }:
 let
   inherit (specialArgs) isNixos;
 in {
@@ -8,8 +8,8 @@ in {
     ./common.nix
   ];
   home = {
-    username = "wkrupski";
-    homeDirectory = "/home/wkrupski";
+    username = "kruppenfield";
+    homeDirectory = "/home/kruppenfield";
   };
   nixpkgs = {
     overlays = [

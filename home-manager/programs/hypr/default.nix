@@ -86,7 +86,7 @@ in {
     bind = $mainMod, M, exit,
     bind = $mainMod, F, exec, thunar
     bind = $mainMod, V, togglefloating,
-    bind = $mainMod, w, exec, wofi --show drun
+    bind = $mainMod, w, exec, rofi -show combi -combi-modes "window,drun"
     bind = $mainMod, L, exec, swaylock -f 
     bind = $mainMod, J, togglesplit, # dwindle
 
@@ -149,9 +149,6 @@ in {
     bindm = $mainMod, mouse:273, resizewindow
     bindm = ALT, mouse:272, resizewindow
     '';
-  };
-  home.shellAliases = {
-    Hyprland = "${hyprland}";
   };
 }
 

@@ -12,7 +12,7 @@
       enable = true;
       package = kitty;
       font = {
-        name = "jetbrains mono nerd font";
+        name = "JetBrainsMono Nerd Font";
         size = 12;
       };
       environment = { };

@@ -2,8 +2,8 @@
   imports = [
     inputs.hyprland.homeManagerModules.default
     ./common.nix
-    ./programs
     ./nixos-specific.nix
+    ./programs
   ];
   monitors = [
     {
