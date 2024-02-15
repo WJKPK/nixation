@@ -1,4 +1,19 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }: 
+let
+  getMonitorMaxSize = monitorsList:
+    let
+      maxWidth = lib.foldl' (m: acc: if m.width > acc.width then m.width else acc.width) {width = 0;} monitorsList;
+      maxHeight = lib.foldl' (m: acc: if m.height > acc.height then m.height else acc.height) {height = 0;} monitorsList;
+    in
+    {
+      width = maxWidth;
+      height = maxHeight;
+    };
+     max_monitor_size = getMonitorMaxSize config.monitors;
+     target_width = toString(max_monitor_size.width / 2);
+     target_height = toString(max_monitor_size.height / 2);
+in
+{
   home.packages = with pkgs; [
     rofi-wayland
   ];
@@ -18,8 +33,8 @@
            fg-col2: #${config.colorScheme.palette.base0F};
            grey: #${config.colorScheme.palette.base04};
        
-           width: 900;
-           font: "JetBrainsMono Nerd Font 10";
+           width: ${target_width};
+           font: "JetBrainsMono Nerd Font 12";
        }
        
        element-text, element-icon , mode-switcher {
@@ -28,7 +43,7 @@
        }
        
        window {
-           height: 560px;
+           height: ${target_height}px;
            border: 2px;
            border-radius: 10px;
            border-color: @border-col;
