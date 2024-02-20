@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{inputs, pkgs, ...}: {
   imports = [
     inputs.hyprland.homeManagerModules.default
     ./common.nix
@@ -26,5 +26,8 @@
     userEmail = "krupskiwojciech@gmail.com";
     userName = "WJKPK";
   };
+  home.packages = with pkgs.unstable; [
+    lutris
+  ];
 }
 

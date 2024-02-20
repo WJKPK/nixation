@@ -18,7 +18,8 @@
       environment = { };
       keybindings = { };
       settings = {
-        shell = "zsh";
+        shell = "${config.programs.zsh.package}/bin/zsh";
+#        shell = "zsh";
         scrollback_lines = 10000;
         enable_audio_bell = false;
       };
@@ -110,5 +111,17 @@
       color15 #${config.colorScheme.palette.base06}
     '';
     };
+  };
+  xdg.dataFile."applications/kitty.desktop" = {
+  text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=kitty
+    GenericName=Terminal emulator
+    Comment=Fast, feature-rich, GPU based terminal
+    Exec=${config.programs.kitty.package}/bin/kitty
+    Icon=${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg
+    Categories=System;TerminalEmulator;
+  '';
   };
 }
