@@ -10,7 +10,20 @@ let
     workspace = lib.concatStrings ( map (m:
         "\nworkspace = ${m.name},${m.workspace}"
       ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors));
+    jumper = pkgs.writeShellScript "jumper.sh" ''
+      # Define the function clampString for jq
+      if [ "$1" ]; then
+          # switch focus
+          hyprctl dispatch focuswindow address:$ROFI_INFO >/dev/null &
+      else
+          # parse valid windows into options for rofi
+          hyprctl clients -j | ${pkgs.jq}/bin/jq -r '.[] | select(.pid != -1) | "  \(.class)  \(.title[0:48])\u0000info\u001f\(.address)\u001ficon\u001f\(.class | ascii_downcase)"'
+      fi
+     '';
 in {
+  home.packages = with pkgs; [
+    jq
+  ];
   systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -86,7 +99,7 @@ in {
     bind = $mainMod, M, exit,
     bind = $mainMod, F, exec, thunar
     bind = $mainMod, V, togglefloating,
-    bind = $mainMod, w, exec, rofi -show combi -combi-modes "window,drun"
+    bind = $mainMod, w, exec, rofi -show combi -combi-modi "window:${jumper},drun"
     bind = $mainMod, L, exec, swaylock -f 
     bind = $mainMod, J, togglesplit, # dwindle
 

@@ -3,8 +3,12 @@
     ./wallpapers
   ];
 
+  services.syncthing = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
-    firefox
+    unstable.firefox
     pavucontrol
     mpc-cli
     brightnessctl

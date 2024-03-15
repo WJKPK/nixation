@@ -19,7 +19,6 @@
       keybindings = { };
       settings = {
         shell = "${config.programs.zsh.package}/bin/zsh";
-#        shell = "zsh";
         scrollback_lines = 10000;
         enable_audio_bell = false;
       };
@@ -116,7 +115,7 @@
   text = ''
     [Desktop Entry]
     Type=Application
-    Name=kitty
+    Name=Kitty
     GenericName=Terminal emulator
     Comment=Fast, feature-rich, GPU based terminal
     Icon=${config.programs.kitty.package}/share/icons/hicolor/scalable/apps/kitty.svg
