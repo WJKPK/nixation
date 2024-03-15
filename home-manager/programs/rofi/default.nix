@@ -1,17 +1,16 @@
 { pkgs, config, lib, ... }: 
 let
-  getMonitorMaxSize = monitorsList:
+  getAvgMonitorSize = monitorsList:
     let
-      maxWidth = lib.foldl' (m: acc: if m.width > acc.width then m.width else acc.width) {width = 0;} monitorsList;
-      maxHeight = lib.foldl' (m: acc: if m.height > acc.height then m.height else acc.height) {height = 0;} monitorsList;
+      maxWidth = lib.foldl' (m: acc: acc.width + m.width) {width = 0;} monitorsList;
+      maxHeight = lib.foldl' (m: acc: acc.height + m.height) {height = 0;} monitorsList;
+      numMonitors = lib.length monitorsList;
     in
     {
-      width = maxWidth;
-      height = maxHeight;
+      width = toString(maxWidth / numMonitors / 2);
+      height = toString(maxHeight / numMonitors / 2);
     };
-     max_monitor_size = getMonitorMaxSize config.monitors;
-     target_width = toString(max_monitor_size.width / 2);
-     target_height = toString(max_monitor_size.height / 2);
+     avg_monitor_size = getAvgMonitorSize config.monitors;
 in
 {
   home.packages = with pkgs; [
@@ -33,7 +32,7 @@ in
            fg-col2: #${config.colorScheme.palette.base0F};
            grey: #${config.colorScheme.palette.base04};
        
-           width: ${target_width};
+           width: ${avg_monitor_size.width};
            font: "JetBrainsMono Nerd Font 12";
        }
        
@@ -43,7 +42,7 @@ in
        }
        
        window {
-           height: ${target_height}px;
+           height: ${avg_monitor_size.height}px;
            border: 2px;
            border-radius: 10px;
            border-color: @border-col;

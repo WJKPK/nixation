@@ -19,8 +19,11 @@ wk.register({
     },
     l = {
       name = "LSP",
-      d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition"},
-      D = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "Goto declaration" },
+      i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto implementation"},
+      d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition" },
+      R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename under cursor" },
+      r = { "<cmd>lua vim.lsp.buf.references()<cr>", "Find all references" },
+      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
     },
       p = { "\"+p", "Paste from clipboard" },
       P = { "\"+P", "Paste from clipboard before cursor" },

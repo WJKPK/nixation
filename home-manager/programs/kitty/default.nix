@@ -119,9 +119,10 @@
     Name=kitty
     GenericName=Terminal emulator
     Comment=Fast, feature-rich, GPU based terminal
+    Icon=${config.programs.kitty.package}/share/icons/hicolor/scalable/apps/kitty.svg
     Exec=${config.programs.kitty.package}/bin/kitty
-    Icon=${pkgs.kitty}/share/icons/hicolor/scalable/apps/kitty.svg
     Categories=System;TerminalEmulator;
   '';
   };
+
 }

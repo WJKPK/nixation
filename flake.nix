@@ -15,7 +15,7 @@
     nixgl.url = "github:guibou/nixGL";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, nixgl, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -55,23 +55,23 @@
       # HomeManager configuration entrypoint
       # Available through 'home-manager switch --flake .#config-name"
       homeConfigurations = {
-        "abel" = home-manager.lib.homeManagerConfiguration {
+        "abel" = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
           modules = [
             ./home-manager/abel.nix
           ];
         };
-        "perun" = home-manager.lib.homeManagerConfiguration {
+        "perun" = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
           modules = [
             ./home-manager/perun.nix
           ];
         };
-        "standalone" = home-manager.lib.homeManagerConfiguration {
+        "standalone" = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs nixgl; isNixos = false; };
+          extraSpecialArgs = { inherit inputs outputs; isNixos = false; };
           modules = [
             ./home-manager/standalone.nix
           ];

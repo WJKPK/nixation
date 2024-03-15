@@ -1,13 +1,25 @@
 -- telescope
 local telescope = require('telescope')
+local actions = require('telescope.actions')
+
 telescope.setup {
   defaults = {
     file_ignore_patterns = {
       "build",
       ".git"
+    },
+    mappings = {
+      n = {
+          ["<C-w>"] = actions.send_selected_to_qflist + actions.open_qflist,
+      },
+      i = {
+          ["<C-w>"] = actions.send_selected_to_qflist + actions.open_qflist,
+      },
+
     }
   }
 }
+
 telescope.load_extension('fzy_native')
 require("gitsigns").setup()
 require("neogit").setup()

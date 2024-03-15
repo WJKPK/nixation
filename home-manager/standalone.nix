@@ -1,4 +1,4 @@
-{ nixgl, specialArgs, ... }:
+{ pkgs, inputs, specialArgs, ... }:
 let
   inherit (specialArgs) isNixos;
 in {
@@ -7,9 +7,13 @@ in {
     ./programs
     ./common.nix
   ];
+  home.packages = with pkgs; [
+    libreoffice
+  ];
+
   home = {
-    username = "kruppenfield";
-    homeDirectory = "/home/kruppenfield";
+    username = "wkrupski";
+    homeDirectory = "/home/wkrupski";
   };
   monitors = [
     {
@@ -22,7 +26,7 @@ in {
   ];
   nixpkgs = {
     overlays = [
-      nixgl.overlay
+      inputs.nixgl.overlay
     ];
   };
 }
