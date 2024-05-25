@@ -6,7 +6,7 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+      outputs.overlays.stable-packages
     ];
     config = {
       allowUnfree = true;
@@ -35,6 +35,8 @@
     xfce.thunar-volman
     xfce.ristretto
     xfce.tumbler
+    killall
+    htop
   ];
 
   # Nicely reload system units when changing configs

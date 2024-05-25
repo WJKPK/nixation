@@ -18,7 +18,7 @@ in { pkgs, lib, config, ... }: {
         "vfio_pci"
         "vfio"
         "vfio_iommu_type1"
-        "vfio_virqfd"
+#        "vfio_virqfd"
 
         "nvidia"
         "nvidia_modeset"

@@ -28,7 +28,8 @@
   };
 
   home.packages = with pkgs; [
-    ollama
+    (ollama.override { acceleration = "cuda";})
+    nvtopPackages.full
   ];
 }
 

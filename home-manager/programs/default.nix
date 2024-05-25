@@ -13,7 +13,7 @@ let
     ./dunst
     ./hypr
     ./waybar
-    ./swaylock
+    ./hyprlock
   ]);
 in {
   imports = common-pkgs ++ (nixos-os-pkgs);

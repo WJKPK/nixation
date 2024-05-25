@@ -7,7 +7,7 @@ in { nixpkgs = {
       # Add overlays your own flake exports (from overlays and pkgs dir):
       #outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+      outputs.overlays.stable-packages
     ];
     # Configure your nixpkgs instance
     config = {
@@ -137,15 +137,17 @@ in { nixpkgs = {
   };
 
   services = {
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+    };
     xserver = {
       enable = true;
-      displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-        theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+      xkb = {
+        layout = "pl";
+        variant = "";
       };
-      layout = "pl";
-      xkbVariant = "";
     };
     flatpak.enable = true;
     udev.packages = [ udevRules ];
@@ -176,7 +178,6 @@ in { nixpkgs = {
   security = {
     rtkit.enable = true;
     pam.services = {
-      swaylock = { };
     };
     polkit.enable = true;
   };

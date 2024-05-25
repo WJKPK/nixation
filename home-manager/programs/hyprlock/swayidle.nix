@@ -1,4 +1,4 @@
-{pkgs, config, ...}: let
+{pkgs, config, lib, ...}: let
   suspendScript = pkgs.writeShellScript "suspend-script" ''
     ${pkgs.ps}/bin/ps -aux | ${pkgs.ripgrep}/bin/rg qemu | ${pkgs.ripgrep}/bin/rg -wv rg
     # only suspend if vm's aren't running
@@ -6,8 +6,8 @@
       ${pkgs.systemd}/bin/systemctl suspend
     fi
   '';
+  lock = lib.getExe config.programs.hyprlock.package;
 in {
-  # screen idle
   services.swayidle = {
     enable = true;
     events = [
@@ -17,7 +17,7 @@ in {
       }
       {
         event = "lock";
-        command = "${pkgs.swaylock}/bin/swaylock -f";
+        command = lock;
       }
     ];
     timeouts = [

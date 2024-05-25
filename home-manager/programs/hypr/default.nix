@@ -32,6 +32,7 @@ in {
     extraConfig = ''
     ${monitor}
     ${workspace}
+    monitor=Unknown-1,disable
     # Autostart
     exec-once = hyprctl setcursor Bibata-Modern-Classic 18
     exec-once = dunst
@@ -85,6 +86,8 @@ in {
       disable_hyprland_logo = yes
       animate_manual_resizes = yes
       animate_mouse_windowdragging = yes
+      mouse_move_enables_dpms = true
+      key_press_enables_dpms = true
     }
 
     # Example windowrule v1
@@ -100,7 +103,7 @@ in {
     bind = $mainMod, F, exec, thunar
     bind = $mainMod, V, togglefloating,
     bind = $mainMod, w, exec, rofi -show combi -combi-modi "window:${jumper},drun"
-    bind = $mainMod, L, exec, swaylock -f 
+    bind = $mainMod, L, exec, "${config.programs.hyprlock.package}/bin/hyprlock"
     bind = $mainMod, J, togglesplit, # dwindle
 
     bind = SUPER SHIFT, H, movewindow, l

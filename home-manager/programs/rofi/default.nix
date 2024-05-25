@@ -151,10 +151,10 @@ in
        case "$chosen" in
          "  Power Off") poweroff ;;
          "  Restart") reboot ;;
-         "  Suspend") systemctl suspend-then-hibernate ;;
+         "  Suspend") systemctl suspend;;
          "  Hibernate") systemctl hibernate ;;
          "󰍃  Log Out") loginctl kill-user $USER ;;
-         "  Lock") swaylock ;;
+         "  Lock") hyprlock;;
          *) exit 1 ;;
        esac
      '';
