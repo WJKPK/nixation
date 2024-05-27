@@ -1,20 +1,5 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
-
 { pkgs, config, lib, ... }: {
-  # You can import other NixOS modules here
   imports = [
-    # If you want to use modules your own flake exports (from modules/nixos):
-    # outputs.nixosModules.example
-
-    # Or modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
-
-    # Import your generated (nixos-generate-config) hardware configuration
     ../common
     ./hardware-configuration.nix
     ./gpu_isolate.nix
@@ -23,10 +8,10 @@
   ];
 
   networking = {
-    hostName = "perun"; # Define your hostname.
+    hostName = "perun";
     dhcpcd.denyInterfaces = [ "macvtap*" ];
   };
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
   powerManagement.enable = true;
   services.xserver = {
     videoDrivers = [ "nvidia" ];
@@ -42,8 +27,11 @@
 
   programs.steam.enable = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+  };
+
   hardware.nvidia = {
     powerManagement.enable = true;
     modesetting.enable = true;

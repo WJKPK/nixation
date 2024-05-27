@@ -4,7 +4,7 @@ let
     "10de:1b81" # Graphics
     "10de:10f0" # Audio
   ];
-in { pkgs, lib, config, ... }: {
+in { lib, config, ... }: {
   options.vfio.enable = with lib; mkOption {
       description = "Whether to enable VFIO";
       type = types.bool;
@@ -18,7 +18,6 @@ in { pkgs, lib, config, ... }: {
         "vfio_pci"
         "vfio"
         "vfio_iommu_type1"
-#        "vfio_virqfd"
 
         "nvidia"
         "nvidia_modeset"
@@ -27,7 +26,6 @@ in { pkgs, lib, config, ... }: {
       ];
 
       kernelParams = [
-        # enable IOMMU
         "amd_iommu=on"
       ] ++ lib.optional cfg.enable
         # isolate the GPU

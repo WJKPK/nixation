@@ -12,6 +12,7 @@
       height = 1440;
       x = 0;
       workspace = "1";
+      scale = 1.0;
       refreshRate = 165; 
       enabled = true;
       primary = true;

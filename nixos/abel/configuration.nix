@@ -1,6 +1,5 @@
 { inputs, ... }:
   {
-  # You can import other NixOS modules here
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
 
