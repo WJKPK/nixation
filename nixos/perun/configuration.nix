@@ -16,8 +16,11 @@
   services.xserver = {
     videoDrivers = [ "nvidia" ];
   };
-
-   users.users.kruppenfield = {
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+  users.users.kruppenfield = {
     extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
   };
 

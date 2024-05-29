@@ -29,7 +29,7 @@
   };
 
   home.packages = with pkgs; [
-    (ollama.override { acceleration = "cuda";})
+    #(ollama.override { acceleration = "cuda";})
     nvtopPackages.full
   ];
 }

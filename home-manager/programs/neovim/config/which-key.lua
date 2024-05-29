@@ -25,14 +25,14 @@ wk.register({
       r = { "<cmd>lua vim.lsp.buf.references()<cr>", "Find all references" },
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
     },
-      p = { "\"+p", "Paste from clipboard" },
-      P = { "\"+P", "Paste from clipboard before cursor" },
-      y = { "\"+y", "Yank to clipboard" },
+    p = { "\"+p", "Paste from clipboard" },
+    P = { "\"+P", "Paste from clipboard before cursor" },
+    y = { "\"+y", "Yank to clipboard" },
     },
-  g = {
-    l = { "$", "Line end" },
-    h = { "0", "Line start" },
-    s = { "^", "First non-blank in line" },
-    e = { "G", "Bottom" },
-  },
 })
+
+wk.register({
+  ["<leader>"] = {
+    o = { ":'<,'>Gen<cr>", "Ollama"},
+  }
+}, {mode = "v"})

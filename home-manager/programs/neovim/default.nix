@@ -1,4 +1,15 @@
-{pkgs, ...}: {
+{pkgs, ...}: 
+let
+  gen-nvim = pkgs.vimUtils.buildVimPlugin {
+      name = "gen.nvim";
+      version = "03.05.2024";
+      src = pkgs.fetchFromGitHub {
+        owner = "David-Kunz";
+        repo = "gen.nvim";
+        rev = "bd19cf584b5b82123de977b44105e855e61e5f39";
+        sha256 = "sha256-0AEB6im8Jz5foYzmL6KEGSAYo48g1bkFpjlCSWT6JeE=";
+      };
+  }; in {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -27,6 +38,7 @@
       rainbow-delimiters-nvim
       nvim-treesitter
       plenary-nvim
+      telescope-ui-select-nvim
       telescope-fzy-native-nvim
       telescope-nvim
       vim-vsnip
@@ -36,6 +48,7 @@
       nerdtree
       leap-nvim
       toggleterm-nvim
+      gen-nvim
     ];
 
     extraPackages = with pkgs; [

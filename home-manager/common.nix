@@ -37,6 +37,7 @@
     xfce.tumbler
     killall
     htop
+    logseq
   ];
 
   # Nicely reload system units when changing configs

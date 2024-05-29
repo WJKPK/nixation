@@ -2,16 +2,11 @@
 let
   udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
 in { nixpkgs = {
-    # You can add overlays here
     overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      #outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.stable-packages
     ];
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
     };
   };
@@ -26,9 +21,7 @@ in { nixpkgs = {
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
-      # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
-      # Deduplicate and optimize nix store
       auto-optimise-store = true;
     };
   };
@@ -52,12 +45,13 @@ in { nixpkgs = {
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.groups.plugdev = { };
+  users.groups.spice = { };
   users.users.kruppenfield = {
     isNormalUser = true;
     shell = pkgs.zsh;
     description = "kruppenfield";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "spice" ];
     packages = with pkgs; [
       home-manager
     ];
@@ -126,7 +120,6 @@ in { nixpkgs = {
     ];
   };
 
-  # Bluetooth
   hardware.bluetooth = {
     enable = true;
     settings = {
@@ -150,7 +143,9 @@ in { nixpkgs = {
       };
     };
     flatpak.enable = true;
+
     udev.packages = [ udevRules ];
+
     blueman.enable = true;
     printing.enable = true;
     gvfs.enable = true;
@@ -166,10 +161,8 @@ in { nixpkgs = {
     };
   };
 
-  # Configure console keymap
   console.keyMap = "pl2";
 
-  # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio = {
     enable = false;

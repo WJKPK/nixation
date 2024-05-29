@@ -3,6 +3,13 @@ local telescope = require('telescope')
 local actions = require('telescope.actions')
 
 telescope.setup {
+  extensions = {
+    ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        -- even more opts
+      };
+    };
+  };
   defaults = {
     file_ignore_patterns = {
       "build",
@@ -21,6 +28,8 @@ telescope.setup {
 }
 
 telescope.load_extension('fzy_native')
+telescope.load_extension("ui-select")
+
 require("gitsigns").setup()
 require("neogit").setup()
 -- autopairs
