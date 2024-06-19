@@ -23,13 +23,13 @@
       fsType = "vfat";
     };
 
-  fileSystems."/home/kruppenfield/Multimedia" =
+  fileSystems."/multimedia" =
     { device = "/dev/disk/by-uuid/654c816d-34b1-4b55-b447-8ccb61ee51ca";
       fsType = "ext4";
       options = [ "rw" ];
     };
 
-  fileSystems."/home/kruppenfield/VMs" =
+  fileSystems."/vms" =
     { device = "/dev/disk/by-uuid/9e7d7537-26e4-472c-b0a7-c5c1afef0388";
       fsType = "ext4";
       options = [ "rw" ];

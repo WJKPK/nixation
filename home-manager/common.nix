@@ -38,6 +38,7 @@
     killall
     htop
     logseq
+    gnumake
   ];
 
   # Nicely reload system units when changing configs

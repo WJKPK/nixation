@@ -7,6 +7,14 @@
     fi
   '';
   lock = lib.getExe config.programs.hyprlock.package;
+  lockScript = pkgs.writeShellScript "lock-script" ''
+    ${pkgs.ps}/bin/ps -aux | ${pkgs.ripgrep}/bin/rg hyprlock | ${pkgs.ripgrep}/bin/rg -wv rg
+    # only lock if lock aren't already running
+    if [ $? == 1 ]; then
+      ${lock}
+    fi
+  '';
+
 in {
   services.swayidle = {
     enable = true;
@@ -17,7 +25,7 @@ in {
       }
       {
         event = "lock";
-        command = lock;
+        command = lockScript.outPath;
       }
     ];
     timeouts = [

@@ -8,7 +8,7 @@ lspc.lua_ls.setup{}
 -- This is your opts table
 --
 require('gen').setup({
-      model = "deepseek-coder:33b-instruct-q4_K_M",
+      model = "codestral:22b-v0.1-q5_K_M",
       host = "localhost", -- The host running the Ollama service.
       port = "11434", -- The port on which the Ollama service is listening.
       quit_map = "q", -- set keymap for close the response window
