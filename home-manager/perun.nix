@@ -1,6 +1,5 @@
-{pkgs, inputs, ...}: {
+{pkgs, ...}: {
   imports = [
-    inputs.hyprland.homeManagerModules.default
     ./common.nix
     ./nixos-specific.nix
     ./programs
@@ -29,7 +28,6 @@
   };
 
   home.packages = with pkgs; [
-    #(ollama.override { acceleration = "cuda";})
     nvtopPackages.full
   ];
 }

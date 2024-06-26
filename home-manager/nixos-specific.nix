@@ -18,6 +18,7 @@
     unzip
     grim
     slurp
+    wl-clipboard
     gparted
     transmission-gtk
     distrobox

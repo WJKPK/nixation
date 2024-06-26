@@ -1,6 +1,5 @@
-{ inputs, ...}: {
+{...}: {
   imports = [
-    inputs.hyprland.homeManagerModules.default
     ./common.nix
     ./nixos-specific.nix
     ./programs

@@ -8,6 +8,7 @@ let
     ./git
     ./direnv
     ./rofi
+    ./kicad
   ];
   nixos-os-pkgs = (lib.optionals isNixos [
     ./dunst

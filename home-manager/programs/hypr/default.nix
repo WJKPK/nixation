@@ -112,8 +112,8 @@ in {
     bind = SUPER SHIFT, K, movewindow, u
     bind = SUPER SHIFT, J, movewindow, d 
 
-    bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
-    bind = SHIFT, Print, exec, grim -g "$(slurp)"
+    bind = SUPER SHIFT, P, exec, grim -g "$(slurp)" - | wl-copy
+    bind = SUPER SHIFT, {, exec, grim -g "$(slurp)"
 
     # Functional keybinds
     bind =,XF86AudioMicMute,exec,pamixer --default-source -t

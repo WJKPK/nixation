@@ -1,5 +1,6 @@
 { inputs, outputs, pkgs, ... }: {
   imports = [
+    inputs.catppuccin.homeManagerModules.catppuccin
     inputs.nix-colors.homeManagerModules.default
     ./themes
   ] ++ (builtins.attrValues outputs.homeManagerModules);
@@ -26,6 +27,7 @@
 
   home.packages = with pkgs; [
    (nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" "CascadiaCode" ]; })
+    arc-theme
     stm32cubemx
     saleae-logic-2
     xfce.thunar

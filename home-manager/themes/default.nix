@@ -1,4 +1,15 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: rec {
+  qt.style.catppuccin = {
+    enable = true;
+    accent = "lavender";
+    apply = true;
+  };
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 20;
+  };
   gtk = {
     enable = true;
     iconTheme = {
@@ -16,9 +27,15 @@
         variant = "frappe";
       };
     };
-    cursorTheme = {
-      name = "Bibata-Modern-Classic";
-      package = pkgs.bibata-cursors;
+    gtk2.extraConfig = ''
+      gtk-application-prefer-dark-theme = true;
+    '';
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
     };
   };
+  home.sessionVariables.GTK_THEME = gtk.theme.name;
 }

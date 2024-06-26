@@ -6,13 +6,14 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nix-colors.url = "github:misterio77/nix-colors";
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
     flake-utils.url = "github:numtide/flake-utils";
     nixgl.url = "github:guibou/nixGL";
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
