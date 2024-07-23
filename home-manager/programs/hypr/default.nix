@@ -75,10 +75,6 @@ in {
         preserve_split = yes
     }
 
-    master {
-        new_is_master = yes
-    }
-
     gestures {
         workspace_swipe = false
     }

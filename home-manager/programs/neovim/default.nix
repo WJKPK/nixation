@@ -49,6 +49,7 @@ let
       leap-nvim
       toggleterm-nvim
       gen-nvim
+      mini-nvim
     ];
 
     extraPackages = with pkgs; [

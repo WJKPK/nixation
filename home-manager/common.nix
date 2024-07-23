@@ -39,7 +39,7 @@
     xfce.tumbler
     killall
     htop
-    logseq
+    stable.logseq
     gnumake
   ];
 

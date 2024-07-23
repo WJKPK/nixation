@@ -9,18 +9,18 @@
 
   home.packages = with pkgs; [
     firefox
-    pavucontrol
+    stable.pavucontrol
     mpc-cli
     brightnessctl
     pamixer
     openscad
-    cura
+#    cura
     unzip
     grim
     slurp
     wl-clipboard
     gparted
-    transmission-gtk
+    transmission_3-gtk
     distrobox
   ];
 }

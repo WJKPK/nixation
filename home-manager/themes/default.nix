@@ -1,8 +1,7 @@
-{ pkgs, ... }: rec {
-  qt.style.catppuccin = {
-    enable = true;
-    accent = "lavender";
-    apply = true;
+{ pkgs, ... }: {
+  qt = {
+      enable = true;
+      platformTheme.name = "gtk";
   };
   home.pointerCursor = {
     gtk.enable = true;
@@ -14,28 +13,28 @@
     enable = true;
     iconTheme = {
       package = pkgs.catppuccin-papirus-folders.override {
-        flavor = "frappe";
+        flavor = "macchiato";
         accent = "lavender";
       };
       name = "Papirus-Dark";
     };
     theme = {
-      name = "Catppuccin-Frappe-Compact-Flamingo-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = [ "flamingo" ];
-        size = "compact";
-        variant = "frappe";
-      };
+        name = "catppuccin-macchiato-mauve-compact";
+        package = pkgs.catppuccin-gtk.override {
+          accents = ["mauve"];
+          variant = "macchiato";
+          size = "compact";
+        };
     };
-    gtk2.extraConfig = ''
-      gtk-application-prefer-dark-theme = true;
-    '';
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
     };
     gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
     };
   };
-  home.sessionVariables.GTK_THEME = gtk.theme.name;
 }
