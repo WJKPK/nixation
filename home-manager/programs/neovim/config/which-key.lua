@@ -1,38 +1,29 @@
 vim.g.mapleader = " "
-
 local wk = require("which-key")
 
 wk.setup({})
 
-wk.register({
-  ["<leader>"] = {
-    t = { "<cmd>ToggleTerm<cr>", "Toggle term" },
-    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-    ["/"] = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
-    w = { "<cmd>Telescope grep_string<cr>", "String Grep" },
-    f = { "<cmd>Telescope find_files<cr>", "Find File" },
-    g = {
-      name = "Git / VCS",
-      b = { "<cmd>Gitsigns blame_line<cr>", "Blame line" },
-      c = { "<cmd>Neogit commit<cr>", "Commit" },
-      s = { "<cmd>Neogit kind=split<cr>", "Staging" },
-    },
-    l = {
-      name = "LSP",
-      i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "Goto implementation"},
-      d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "Goto definition" },
-      R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename under cursor" },
-      r = { "<cmd>lua vim.lsp.buf.references()<cr>", "Find all references" },
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code action" },
-    },
-    p = { "\"+p", "Paste from clipboard" },
-    P = { "\"+P", "Paste from clipboard before cursor" },
-    y = { "\"+y", "Yank to clipboard" },
-    },
-})
+wk.add({
+  -- Normal mode mappings
+  { "<leader>t", "<cmd>ToggleTerm<cr>", desc = "Toggle term" },
+  { "<leader>b", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+  { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+  { "<leader>w", "<cmd>Telescope grep_string<cr>", desc = "String Grep" },
+  { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find File" },
+  { "<leader>g", group = "Git / VCS" },
+  { "<leader>gb", "<cmd>Gitsigns blame_line<cr>", desc = "Blame line" },
+  { "<leader>gc", "<cmd>Neogit commit<cr>", desc = "Commit" },
+  { "<leader>gs", "<cmd>Neogit kind=split<cr>", desc = "Staging" },
+  { "<leader>l", group = "LSP" },
+  { "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<cr>", desc = "Goto implementation" },
+  { "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<cr>", desc = "Goto definition" },
+  { "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename under cursor" },
+  { "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", desc = "Find all references" },
+  { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code action" },
+  { "<leader>p", "\"+p", desc = "Paste from clipboard" },
+  { "<leader>P", "\"+P", desc = "Paste from clipboard before cursor" },
+  { "<leader>y", "\"+y", desc = "Yank to clipboard" },
 
-wk.register({
-  ["<leader>"] = {
-    o = { ":'<,'>Gen<cr>", "Ollama"},
-  }
-}, {mode = "v"})
+  -- Visual mode mapping
+  { "<leader>o", ":'<,'>Gen<cr>", desc = "Ollama", mode = "v" },
+})

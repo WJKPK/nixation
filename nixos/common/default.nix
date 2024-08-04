@@ -91,9 +91,9 @@ in { nixpkgs = {
     LC_TIME = "pl_PL.UTF-8";
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;  
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   programs = {
