@@ -41,6 +41,7 @@
     htop
     stable.logseq
     gnumake
+    museeks
   ];
 
   # Nicely reload system units when changing configs

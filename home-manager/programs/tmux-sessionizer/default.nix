@@ -21,7 +21,6 @@ in
     tmux-sessionizer
   ];
 
-
   programs.tmux = {
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";
@@ -39,13 +38,17 @@ in
     '';
   };
 
+  home.shellAliases = {
+    ts = "tms switch";
+  };
+
   home.file = {
     ".config/tms/config.toml" = {
      text = ''
        session_sort_order = "LastAttached"
 
        [[search_dirs]]
-       path = "${config.home.homeDirectory}/Seas"
+       path = "${config.home.homeDirectory}/Programowanie"
        depth = 6 
 
        [[search_dirs]]

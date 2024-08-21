@@ -1,5 +1,6 @@
 {pkgs, inputs, outputs, lib, config, ...} :
 let
+  musicDirectory = "/home/kruppenfield/Muzyka";
   udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
 in { nixpkgs = {
     overlays = [
@@ -70,10 +71,8 @@ in { nixpkgs = {
     libsForQt5.qt5.qtgraphicaleffects
   ];
 
-  # Enable networking
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "Europe/Warsaw";
 
   # Select internationalisation properties.
@@ -110,10 +109,8 @@ in { nixpkgs = {
 
   xdg.portal = {
     enable = true;
-#    wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gnome
-#      xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
       xdg-desktop-portal-kde
     ];
@@ -127,6 +124,26 @@ in { nixpkgs = {
         };
       };
   };
+
+#  services.mpd = {
+#    enable = true;
+#    user = "kruppenfield";
+#    inherit musicDirectory;
+#
+#    extraConfig = ''
+#      audio_output {
+#        type "pipewire"
+#        name "MPD PipeWire Output"
+#      }
+#    '';
+#  };
+#  systemd.services.mpd = {
+#    environment = {
+#      # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
+#      XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.kruppenfield.uid}"; # User-id must match above user. MPD will look inside this directory for the PipeWire socket.
+#    };
+#    serviceConfig.SupplementaryGroups = [ "pipewire" ];
+#  };
 
   services = {
     displayManager.sddm = {
@@ -161,9 +178,6 @@ in { nixpkgs = {
   };
 
   console.keyMap = "pl2";
-  hardware.pulseaudio = {
-    enable = false;
-  };
 
   security = {
     rtkit.enable = true;

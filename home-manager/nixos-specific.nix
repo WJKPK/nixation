@@ -8,8 +8,9 @@
   };
 
   home.packages = with pkgs; [
-    firefox
-    stable.pavucontrol
+    stable.firefox-esr
+    pavucontrol
+    pwvucontrol
     mpc-cli
     brightnessctl
     pamixer
