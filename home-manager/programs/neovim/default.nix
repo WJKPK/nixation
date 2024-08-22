@@ -50,6 +50,7 @@ let
       toggleterm-nvim
       gen-nvim
       mini-nvim
+      vim-tmux-navigator
     ];
 
     extraPackages = with pkgs; [
