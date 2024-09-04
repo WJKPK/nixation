@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 
 vim.opt.expandtab = true
+vim.opt.relativenumber = true
 vim.opt.hidden = true
 vim.opt.incsearch = true
 vim.opt.mouse = "a"
@@ -16,3 +17,4 @@ vim.opt.exrc = true
 vim.cmd("syntax on")
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+

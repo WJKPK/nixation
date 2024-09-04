@@ -8,8 +8,7 @@ let
         repo = "gen.nvim";
         rev = "bd19cf584b5b82123de977b44105e855e61e5f39";
         sha256 = "sha256-0AEB6im8Jz5foYzmL6KEGSAYo48g1bkFpjlCSWT6JeE=";
-      };
-  }; in {
+      }; }; in {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -29,12 +28,13 @@ let
       gitsigns-nvim
       lightline-vim
       lspkind-nvim
-      neogit
       nvim-autopairs
       nvim-tree-lua
       nvim-cmp
+      vim-fugitive
       nvim-lspconfig
       nvim-treesitter
+      nvim-colorizer-lua
       plenary-nvim
       telescope-fzy-native-nvim
       telescope-nvim
@@ -53,7 +53,7 @@ let
       gcc
       ripgrep
       fd
-      nil
+      nixd 
       rust-analyzer
       wl-clipboard
       clang-tools_16
@@ -67,15 +67,14 @@ let
           ./config
           + "/${module}.lua");
       luaConfig = builtins.concatStringsSep "\n" (map luaRequire [
-        "init"
+        "vim-setup"
         "utils"
-        "lspconfig"
-        "nvim-cmp"
+        "code-processing"
+        "git-integration"
         "theming"
-        "treesitter"
         "which-key"
       	"dashboard"
-        "nerdtree"
+        "navigation"
       ]);
     in ''
       lua <<
@@ -91,15 +90,16 @@ let
       lua
       cpp
       python
+      query
     ])).dependencies;
   }}/parser";
 
   xdg.desktopEntries.nvim = {
     categories = [ "Utility" "TextEditor" ];
-    exec = "${pkgs.kitty}/bin/kitty -e nvim"; # launch with kitty
+    exec = "${pkgs.kitty}/bin/kitty -e nvim";
     genericName = "Text Editor";
     icon = "nvim";
     name = "Neovim";
-    terminal = false; # dont launch with default terminal
+    terminal = false;
   };
 }

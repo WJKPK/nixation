@@ -1,8 +1,6 @@
-vim.g.mapleader = " "
 local wk = require("which-key")
 
 wk.setup({})
-
 wk.add({
   -- Normal mode mappings
   { "<leader>t", "<cmd>ToggleTerm<cr>", desc = "Toggle term" },
@@ -23,7 +21,14 @@ wk.add({
   { "<leader>p", "\"+p", desc = "Paste from clipboard" },
   { "<leader>P", "\"+P", desc = "Paste from clipboard before cursor" },
   { "<leader>y", "\"+y", desc = "Yank to clipboard" },
+  { "<leader>o", "<cmd>Gen<cr>", desc = "Ollama"},
+  { "<C-s>", "<cmd>vs<cr>", desc = "Vertical Split" },
+  { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Nvim Tree" },
+  { "<leader>-", "<cmd>NvimTreeResize -10<cr>", desc = "Resize NvimTree -10" },
+  { "<leader>+", "<cmd>NvimTreeResize +10<cr>", desc = "Resize NvimTree +10" },
+
 
   -- Visual mode mapping
   { "<leader>o", ":'<,'>Gen<cr>", desc = "Ollama", mode = "v" },
+  { "<leader>y", "\"+y", desc = "Yank to clipboard", mode = "v" },
 })
