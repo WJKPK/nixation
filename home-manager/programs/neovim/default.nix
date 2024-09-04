@@ -31,20 +31,16 @@ let
       lspkind-nvim
       neogit
       nvim-autopairs
-      nvim-cmp
-      nvim-colorizer-lua
-      nvim-lspconfig
       nvim-tree-lua
-      rainbow-delimiters-nvim
+      nvim-cmp
+      nvim-lspconfig
       nvim-treesitter
       plenary-nvim
-      telescope-ui-select-nvim
       telescope-fzy-native-nvim
       telescope-nvim
       vim-vsnip
       which-key-nvim
       dashboard-nvim
-      nvim-web-devicons
       nerdtree
       leap-nvim
       toggleterm-nvim
@@ -82,9 +78,8 @@ let
         "nerdtree"
       ]);
     in ''
-      lua << 
+      lua <<
       ${luaConfig}
-      
     '';
   };
 
@@ -92,8 +87,10 @@ let
     name = "treesitter-parsers";
     paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: with plugins; [
       c
+      rust
       lua
-      query
+      cpp
+      python
     ])).dependencies;
   }}/parser";
 

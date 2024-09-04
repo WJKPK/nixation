@@ -8,7 +8,7 @@ require("catppuccin").setup()
 vim.cmd [[colorscheme catppuccin]]
 
 -- enable colorizer
-require'colorizer'.setup()
+-- require'colorizer'.setup()
 
 -- set sign
 vim.cmd 'sign define DiagnosticSignError text=  linehl= texthl=DiagnosticSignError numhl='

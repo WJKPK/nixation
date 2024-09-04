@@ -3,10 +3,6 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		disable = { "lua" },
 	},
-	rainbow = {
-		enable = true,
-		extended_mode = true,
-	},
 	autotag = {
 		enable = true,
 	},
