@@ -12,12 +12,9 @@ let
         "\nworkspace = ${m.name},${m.workspace}"
       ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors));
     jumper = pkgs.writeShellScript "jumper.sh" ''
-      # Define the function clampString for jq
       if [ "$1" ]; then
-          # switch focus
           hyprctl dispatch focuswindow address:$ROFI_INFO >/dev/null &
       else
-          # parse valid windows into options for rofi
           hyprctl clients -j | ${pkgs.jq}/bin/jq -r '.[] | select(.pid != -1) | "  \(.class)  \(.title[0:48])\u0000info\u001f\(.address)\u001ficon\u001f\(.class | ascii_downcase)"'
       fi
      '';
@@ -25,7 +22,6 @@ in {
   home.packages = with pkgs; [
     jq
   ];
-  systemd.user.services.swayidle.Install.WantedBy = lib.mkForce ["hyprland-session.target"];
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
@@ -53,10 +49,31 @@ in {
     }
 
     decoration {
-        rounding = 10
-        drop_shadow = true
-        shadow_range = 3
-        shadow_render_power = 2
+        rounding = 7
+    
+        active_opacity = 0.95
+        inactive_opacity = 0.93
+    
+        blur {
+            enabled = yes
+            size = 5
+            passes = 4
+            ignore_opacity = true
+            new_optimizations = true
+            xray = false
+            noise = 0.0
+            popups = true
+        }
+    
+        dim_inactive = false
+        dim_strength = 0.05
+    
+        drop_shadow = yes
+        shadow_range = 30
+        shadow_scale = 2
+        shadow_render_power = 5
+        col.shadow = rgb(${config.colorScheme.palette.base00})
+        col.shadow_inactive = rgb(${config.colorScheme.palette.base01})
     }
 
     animations {

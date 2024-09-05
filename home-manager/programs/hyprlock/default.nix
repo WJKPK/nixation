@@ -3,6 +3,9 @@
       url = "https://images4.alphacoders.com/130/1301526.png";
       sha256 = "0m2ilvs8rbyfw999lf7540cdx993mqq2rqw79z4dq22bfm0mnjfc";
   };
+  myImage = builtins.path {
+    path = ./tortoise.jpg;
+  };
 in {
   imports = [
     ./swayidle.nix
@@ -34,7 +37,7 @@ in {
             inner_color = "rgb(${config.colorScheme.palette.base00})";
             font_color = "rgb(${config.colorScheme.palette.base05})";
             fade_on_empty = true;
-            position = "0, 100";
+            position = "0, 15";
             halign = "center";
             valign = "center";
         }
@@ -48,7 +51,7 @@ in {
 
             halign = "center";
             valign = "center";
-            position = "0, -10";
+            position = "0, -60";
           }
           # Date
           {
@@ -58,8 +61,18 @@ in {
 
             halign = "center";
             valign = "center";
-            position = "0, -60";
+            position = "0, -120";
           }
+        ];
+        image = [
+            {
+                path = "${myImage}";
+                shadow_passes = 2;
+                rounding = -1; # negative values mean circle
+                position = "0, 150";
+                halign = "center";
+                valign = "center";
+            }
         ];
     };
   };
