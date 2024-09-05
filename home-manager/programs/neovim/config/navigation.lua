@@ -13,6 +13,17 @@ vim.api.nvim_set_keymap("n", "n", "nzzzv", { noremap = true })
 vim.api.nvim_set_keymap("n", "N", "Nzzzv", { noremap = true })
 
 leap.add_default_mappings()
+local function center_buffer()
+  vim.cmd('normal! zz')
+end
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'LeapLeave',
+  callback = function()
+    center_buffer()
+  end,
+})
+
 telescope.load_extension('fzy_native')
 telescope.setup {
   extensions = {

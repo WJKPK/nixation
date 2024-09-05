@@ -10,6 +10,7 @@ let
     ./rofi
     ./kicad
     ./tmux-sessionizer
+    ./yazi
   ];
   nixos-os-pkgs = (lib.optionals isNixos [
     ./dunst
