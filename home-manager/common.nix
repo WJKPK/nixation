@@ -39,6 +39,7 @@
     xfce.tumbler
     killall
     htop
+    btop
     stable.logseq
     gnumake
     museeks

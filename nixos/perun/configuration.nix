@@ -40,7 +40,7 @@
     modesetting.enable = true;
     #open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
 #    package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
 #      version = "555.42.02";
 #      sha256_64bit = "sha256-k7cI3ZDlKp4mT46jMkLaIrc2YUx1lh1wj/J4SVSHWyk=";
@@ -69,9 +69,11 @@
   };
 
   nix.settings = {
-    substituters = [ "https://cuda-maintainers.cachix.org" ];
+    substituters = [ "https://cuda-maintainers.cachix.org"
+                     "https://hyprland.cachix.org" ];
     trusted-public-keys = [
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
   specialisation."ML-spec".configuration = {

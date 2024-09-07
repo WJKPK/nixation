@@ -22,13 +22,13 @@
       }
       #clock,
       #memory,
-      #temperature,
       #cpu,
       #temperature,
       #pulseaudio,
       #network,
       #battery,
       #custom-launcher,
+      #custom-gpu,
       #workspaces,
       #custom-powermenu {
         padding-left: 12px;
@@ -72,6 +72,9 @@
       #temperature {
         color: #${config.colorScheme.palette.base08};
       }
+      #custom-gpu {
+        color: #${config.colorScheme.palette.base08};
+      }
       #pulseaudio {
         color: #${config.colorScheme.palette.base06};
       }
@@ -91,6 +94,9 @@
       modules-left = [
         "custom/launcher"
         "temperature"
+        "custom/gpu"
+        "cpu"
+        "memory"
       ];
       modules-center = [
         "hyprland/workspaces"
@@ -98,8 +104,6 @@
       modules-right = [
         "pulseaudio"
         "battery"
-        "cpu"
-        "memory"
         "network"
         "clock"
         "custom/powermenu"
@@ -162,6 +166,24 @@
         "on-click" = "bash ~/.config/rofi/power.sh";
         "tooltip" = false;
       };
+     "temperature" = {
+       "critical-threshold" = 90;
+       "on-click" = "kitty --class center-float-large btop";
+       "hwmon-path" = "/sys/class/hwmon/hwmon1/temp1_input";
+       "format-critical" = "{icon} {temperatureC}°C";
+       "format" = "{icon} {temperatureC}°C";
+       "format-icons" =  ["" "" ""];
+       "tooltip" = true;
+       "interval" = 3;
+      };
+      "custom/gpu" = {
+         "exec" = "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader";
+         "critical-threshold" = 90;
+         "format" = "{icon} {}°C";
+         "format-icons" =  ["" "" ""];
+         "interval" = 3;
+      };
+
     }];
   };
 }
