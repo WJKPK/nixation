@@ -1,6 +1,5 @@
 {pkgs, inputs, outputs, lib, config, ...} :
 let
-  musicDirectory = "/home/kruppenfield/Muzyka";
   udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
 in { nixpkgs = {
     overlays = [
@@ -53,19 +52,18 @@ in { nixpkgs = {
     shell = pkgs.zsh;
     description = "kruppenfield";
     extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "spice" ];
-    packages = with pkgs; [
-      home-manager
-    ];
   };
 
   environment.systemPackages = with pkgs; [
+    man
     vim
     wget
     usbutils
     pciutils
-    man
+    coreutils
     polkit_gnome
     gawk
+    home-manager
     libsForQt5.kdeconnect-kde
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects

@@ -23,5 +23,7 @@
     gparted
     transmission_3-gtk
     distrobox
+    procps
+    coreutils
   ];
 }
