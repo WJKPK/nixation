@@ -87,7 +87,7 @@
       
       # green
       color2  #${config.colorScheme.palette.base0B}
-      color10 #${config.colorScheme.palette.base0C}
+      color10 #${config.colorScheme.palette.base0B}
       
       # yellow
       color3  #${config.colorScheme.palette.base0A}
