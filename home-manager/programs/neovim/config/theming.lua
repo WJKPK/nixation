@@ -1,16 +1,18 @@
 local catppuccin = require("catppuccin")
 local colorizer = require("colorizer")
 
-vim.g.catppuccin_flavour = "frappe"
+vim.g.catppuccin_flavour = "macchiato"
 vim.g.lightline = { colorscheme = "catppuccin" }
 
 catppuccin.setup({
   integrations = {
       leap = true,
+      treesitter = true,
+      cmp = true,
   }
 })
-colorizer.setup()
 
+colorizer.setup()
 vim.cmd.colorscheme "catppuccin"
 
 vim.cmd 'sign define DiagnosticSignError text=  linehl= texthl=DiagnosticSignError numhl='

@@ -20,7 +20,7 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-frappe;
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
 
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;

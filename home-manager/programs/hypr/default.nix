@@ -52,7 +52,7 @@ in {
     decoration {
         rounding = 7
     
-        active_opacity = 0.95
+        active_opacity = 0.92
         inactive_opacity = 0.85
     
         blur {
@@ -141,8 +141,8 @@ in {
     bind = SUPER SHIFT, K, movewindow, u
     bind = SUPER SHIFT, J, movewindow, d 
 
-    bind = SUPER SHIFT, P, exec, grim -g "$(slurp)" - | wl-copy
-    bind = SUPER SHIFT, {, exec, grim -g "$(slurp)"
+
+    bind = SUPER SHIFT, P, exec, "${config.xdg.configHome}/rofi/screenshot.sh"
 
     # Functional keybinds
     bind =,XF86AudioMicMute,exec,pamixer --default-source -t

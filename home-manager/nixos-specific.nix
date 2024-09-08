@@ -25,5 +25,7 @@
     distrobox
     procps
     coreutils
+    hyprshot
+    satty
   ];
 }

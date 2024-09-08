@@ -87,7 +87,7 @@
       
       # green
       color2  #${config.colorScheme.palette.base0B}
-      color10 #${config.colorScheme.palette.base0B}
+      color10 #${config.colorScheme.palette.base0C}
       
       # yellow
       color3  #${config.colorScheme.palette.base0A}
@@ -95,11 +95,11 @@
       
       # blue
       color4  #${config.colorScheme.palette.base0D}
-      color12 #${config.colorScheme.palette.base0D}
+      color12 #${config.colorScheme.palette.base0E}
       
       # magenta
       color5  #${config.colorScheme.palette.base0F}
-      color13 #${config.colorScheme.palette.base0F}
+      color13 #${config.colorScheme.palette.base0E}
       
       # cyan
       color6  #${config.colorScheme.palette.base0C}

@@ -11,6 +11,7 @@ let
     ./kicad
     ./tmux-sessionizer
     ./yazi
+    ./btop
   ];
   nixos-os-pkgs = (lib.optionals isNixos [
     ./dunst

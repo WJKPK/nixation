@@ -21,6 +21,7 @@ in
   imports = [
     ./launcher.nix
     ./power.nix
+    ./screenshot.nix
   ];
 
   home.packages = with pkgs; [
@@ -36,11 +37,11 @@ in
         accent:           #${config.colorScheme.palette.base0D};
         background-tb:    #${config.colorScheme.palette.base00};
         border-tb:        #${config.colorScheme.palette.base05};
-        selected:         linear-gradient(to right, #${config.colorScheme.palette.base01}, #B7BDF869);
+        selected:         linear-gradient(to right, #${config.colorScheme.palette.base01}, #${config.colorScheme.palette.base07});
         button:           linear-gradient(#${config.colorScheme.palette.base04});
-        button-selected:  linear-gradient(#B7BDF869);
-        active:           linear-gradient(to right, #8BD5CAFF, #A6DA95FF);
-        urgent:           #ED8796FF;
+        button-selected:  linear-gradient(#${config.colorScheme.palette.base07});
+        active:           linear-gradient(to right, #${config.colorScheme.palette.base0B}, #${config.colorScheme.palette.base0C});
+        urgent:           #${config.colorScheme.palette.base08};
       }
      '';
    };

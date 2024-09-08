@@ -44,10 +44,10 @@
         color: #${config.colorScheme.palette.base0F};
       }
       #memory {
-        color: #${config.colorScheme.palette.base0A};
+        color: #${config.colorScheme.palette.base0E};
       }
       #cpu {
-        color: #${config.colorScheme.palette.base0A};
+        color: #${config.colorScheme.palette.base0F};
       }
       #clock {
         color: #${config.colorScheme.palette.base0A};
@@ -70,10 +70,10 @@
         animation-direction: alternate;
       }
       #temperature {
-        color: #${config.colorScheme.palette.base08};
+        color: #${config.colorScheme.palette.base0F};
       }
       #custom-gpu {
-        color: #${config.colorScheme.palette.base08};
+        color: #${config.colorScheme.palette.base0E};
       }
       #pulseaudio {
         color: #${config.colorScheme.palette.base06};
@@ -119,7 +119,7 @@
       };
       "pulseaudio" = {
         "scroll-step" = 1;
-        "format" = "{icon} {volume}%";
+        "format" = "{icon}  {volume}%";
         "format-muted" = "󰖁 Muted";
         "format-icons" = {
           "default" = [ "" "" "" ];

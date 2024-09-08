@@ -1,9 +1,8 @@
 { pkgs, lib,... }:
 let
-    wallpaper = builtins.fetchurl {
-      url = "https://github.com/Gingeh/wallpapers/blob/main/landscapes/evening-sky.png?raw=true";
-      sha256 = "01vhwfx2qsvxgcrhbyx5d0c6c0ahjp50qy147638m7zfinhk70vx";
-    };
+  wallpaper = builtins.path {
+    path = ./delorean-pastel.png;
+  };
 in {
   home.packages = with pkgs; [
     swaybg

@@ -32,9 +32,9 @@ let
       nvim-tree-lua
       nvim-cmp
       vim-fugitive
+      nvim-colorizer-lua
       nvim-lspconfig
       nvim-treesitter
-      nvim-colorizer-lua
       plenary-nvim
       telescope-fzy-native-nvim
       telescope-nvim
