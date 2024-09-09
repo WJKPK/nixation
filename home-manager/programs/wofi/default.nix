@@ -52,7 +52,7 @@
           margin: 0px;
           padding: 3px;
           border: none;
-          border-radius: 10px;
+          border-radius: 0px;
           border: 2px solid #${config.colorScheme.palette.base05};
         }
 

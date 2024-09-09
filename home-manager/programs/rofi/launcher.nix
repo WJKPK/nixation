@@ -30,7 +30,7 @@
       window {
           height: ${toString config.rofi_settings.launcher_height}px;
           border: 2px;
-          border-radius: 10px;
+          border-radius: 0px;
           border-color: @border-tb;
           background-color: @background;
           padding: 25px;
@@ -43,7 +43,7 @@
       inputbar {
           children: [prompt,entry];
           background-color: @background;
-          border-radius: 5px;
+          border-radius: 0px;
           padding: 2px;
       }
       
@@ -51,7 +51,7 @@
           background-color: @accent;
           padding: 6px;
           text-color: @background;
-          border-radius: 3px;
+          border-radius: 0px;
           margin: 20px 0px 0px 20px;
       }
       
@@ -70,7 +70,7 @@
       listview {
           border: 0px 0px 0px;
           padding: 8px;
-          border-radius: 0px 0px 15px 15px;
+          border-radius: 0px 0px 0px 0px;
           padding: 6px 0px 0px;
           margin: 10px 0px 0px 20px;
           columns: 2;
@@ -91,7 +91,7 @@
       element selected {
           background-color:  @selected;
           text-color: @foreground;
-          border-radius: 10px;
+          border-radius: 0px;
           border-color: @border-tb;
           border: 2px;
       }
@@ -117,7 +117,7 @@
           background-color: @background-tb;
           margin: 2px;
           padding: 2px;
-          border-radius: 5px;
+          border-radius: 0px;
       }
       
       textbox {

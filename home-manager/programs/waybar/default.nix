@@ -14,11 +14,12 @@
       }
       window#waybar {
         background: #${config.colorScheme.palette.base00};
-        border-radius: 8px;
+        border-radius: 0px;
         border-style: solid; 
         border-width: 2px;
         border-color: #${config.colorScheme.palette.base05};
         padding: 3px;
+        opacity: 0.85;
       }
       #clock,
       #memory,

@@ -9,7 +9,7 @@
         height = 380;
         offset = "0x15";
         font = "JetBrainsMono Nerd Font";
-        corner_radius = 10;
+        corner_radius = 0;
         origin = "top-center";
         notification_limit = 3;
         idle_threshold = 120;

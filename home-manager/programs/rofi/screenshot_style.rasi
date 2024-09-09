@@ -21,7 +21,7 @@ window {
   margin:                      0px;
   padding:                     0px;
   border:                      2px solid;
-  border-radius:               10px;
+  border-radius:               0px;
   border-color:                @accent;
   cursor:                      "default";
   background-color:            @background;
@@ -34,7 +34,7 @@ mainbox {
   margin:                      0px;
   padding:                     30px;
   border:                      0px solid;
-  border-radius:               5px;
+  border-radius:               0px;
   border-color:                @selected;
   background-color:            transparent;
   children:                    [ "message", "listview" ];
@@ -47,7 +47,7 @@ inputbar {
   margin:                      0px;
   padding:                     0px;
   border:                      0px;
-  border-radius:               5px;
+  border-radius:               0px;
   border-color:                @selected;
   background-color:            transparent;
   text-color:                  @foreground;
@@ -64,7 +64,7 @@ textbox-prompt-colon {
   expand:                      false;
   str:                         "";
   padding:                     0 14px;
-  border-radius:               10px;
+  border-radius:               0px;
   border-color:                @urgent;
   border:                      2px solid;
   background-color:            @background;
@@ -76,7 +76,7 @@ textbox-prompt-colon {
 prompt {
   enabled:                     false;
   padding:                     12px;
-  border-radius:               10px;
+  border-radius:               0px;
   border-color:                @active;
   border:                      2px solid;
   background-color:            @background;
@@ -89,7 +89,7 @@ message {
   margin:                      0px;
   padding:                     12px;
   border:                      0px solid;
-  border-radius:               10px;
+  border-radius:               0px;
   border-color:                @selected;
   background-color:            @background-tb;
   text-color:                  @foreground;
@@ -108,7 +108,7 @@ textbox {
 error-message {
   padding:                     12px;
   border:                      0px solid;
-  border-radius:               10px;
+  border-radius:               0px;
   border-color:                @selected;
   background-color:            @background;
   text-color:                  @foreground;
@@ -144,7 +144,7 @@ element {
   margin:                      0px;
   padding:                     10px;
   border:                      0px solid;
-  border-radius:               10px;
+  border-radius:               0px;
   border-color:                @accent;
   background-color:            transparent;
   text-color:                  @foreground;

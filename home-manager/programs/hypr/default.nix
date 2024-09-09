@@ -50,7 +50,7 @@ in {
     }
 
     decoration {
-        rounding = 7
+        rounding = 0
     
         active_opacity = 0.92
         inactive_opacity = 0.85
@@ -76,7 +76,6 @@ in {
         col.shadow = rgb(${config.colorScheme.palette.base00})
         col.shadow_inactive = rgb(${config.colorScheme.palette.base01})
     }
-
     animations {
         enabled = yes
 
@@ -85,18 +84,18 @@ in {
         bezier = liner, 1, 1, 1, 1
         bezier = ease,0.4,0.02,0.21,1
 
-        animation = windows, 1, 7, wind, popin
-        animation = windowsIn, 1, 7, ease, popin
-        animation = windowsOut, 1, 5, ease, popin
-        animation = windowsMove, 1, 6, ease, slide
-        animation = layers, 1, 5, default, popin
-        animation = fadeIn, 1, 10, default
-        animation = fadeOut, 1, 10, default
-        animation = fadeSwitch, 1, 10, default
-        animation = fadeShadow, 1, 10, default
-        animation = fadeDim, 1, 10, default
-        animation = fadeLayers, 1, 10, default
-        animation = workspaces, 1, 7, ease, slide
+        animation = windows, 1, 2, wind, popin
+        animation = windowsIn, 1, 3, ease, popin
+        animation = windowsOut, 1, 3, ease, popin
+        animation = windowsMove, 1, 2, ease, slide
+        animation = layers, 1, 2, default, popin
+        animation = fadeIn, 1, 4, default
+        animation = fadeOut, 1, 4, default
+        animation = fadeSwitch, 1, 4, default
+        animation = fadeShadow, 1, 4, default
+        animation = fadeDim, 1, 4, default
+        animation = fadeLayers, 1, 4, default
+        animation = workspaces, 1, 3, ease, slide
         animation = border, 1, 1, liner
         animation = borderangle, 1, 30, liner, loop
     }
