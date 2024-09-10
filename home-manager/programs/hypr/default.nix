@@ -11,13 +11,13 @@ let
     workspace = lib.concatStrings ( map (m:
         "\nworkspace = ${m.name},${m.workspace}"
       ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors));
-    jumper = pkgs.writeShellScript "jumper.sh" ''
-      if [ "$1" ]; then
-          hyprctl dispatch focuswindow address:$ROFI_INFO >/dev/null &
-      else
-          hyprctl clients -j | ${pkgs.jq}/bin/jq -r '.[] | select(.pid != -1) | "  \(.class)  \(.title[0:48])\u0000info\u001f\(.address)\u001ficon\u001f\(.class | ascii_downcase)"'
-      fi
-     '';
+#    jumper = pkgs.writeShellScript "jumper.sh" ''
+#      if [ "$1" ]; then
+#          hyprctl dispatch focuswindow address:$ROFI_INFO >/dev/null &
+#      else
+#          hyprctl clients -j | ${pkgs.jq}/bin/jq -r '.[] | select(.pid != -1) | "  \(.class)  \(.title[0:48])\u0000info\u001f\(.address)\u001ficon\u001f\(.class | ascii_downcase)"'
+#      fi
+#     '';
 in {
   home.packages = with pkgs; [
     jq
@@ -78,26 +78,6 @@ in {
     }
     animations {
         enabled = yes
-
-        bezier = default, 0.05, 0.9, 0.1, 1.05
-        bezier = wind, 0.05, 0.9, 0.1, 1.05
-        bezier = liner, 1, 1, 1, 1
-        bezier = ease,0.4,0.02,0.21,1
-
-        animation = windows, 1, 2, wind, popin
-        animation = windowsIn, 1, 3, ease, popin
-        animation = windowsOut, 1, 3, ease, popin
-        animation = windowsMove, 1, 2, ease, slide
-        animation = layers, 1, 2, default, popin
-        animation = fadeIn, 1, 4, default
-        animation = fadeOut, 1, 4, default
-        animation = fadeSwitch, 1, 4, default
-        animation = fadeShadow, 1, 4, default
-        animation = fadeDim, 1, 4, default
-        animation = fadeLayers, 1, 4, default
-        animation = workspaces, 1, 3, ease, slide
-        animation = border, 1, 1, liner
-        animation = borderangle, 1, 30, liner, loop
     }
 
     dwindle {
@@ -131,7 +111,9 @@ in {
     bind = $mainMod, M, exit,
     bind = $mainMod, F, exec, thunar
     bind = $mainMod, V, togglefloating,
-    bind = $mainMod, w, exec, rofi -show combi -combi-modi "window:${jumper},drun"
+#    bind = $mainMod, w, exec, rofi -show combi -combi-modi "window:jumper,drun"
+    bind = $mainMod, w, exec, rofi -show combi -combi-modi "window,drun"
+
     bind = $mainMod, L, exec, "${config.programs.hyprlock.package}/bin/hyprlock"
     bind = $mainMod, J, togglesplit, # dwindle
 

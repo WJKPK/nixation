@@ -28,7 +28,7 @@ in
            -theme-str 'mainbox {children: [ "message", "listview" ];}' \
            -theme-str 'listview {columns: 2; lines: 1;}' \
            -theme-str 'element-text {horizontal-align: 0.5;}' \
-           -theme-str 'textbox {horizontal-align: 0.5;}' \
+           -theme-str 'textbox {text-color: @foreground; background-color: @background-tb; horizontal-align: 0.5;}' \
            -dmenu \
            -p 'Confirmation' \
            -mesg 'Are you sure?' \

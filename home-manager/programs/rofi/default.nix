@@ -34,13 +34,13 @@ in
        * {
         background:       #${config.colorScheme.palette.base00};
         foreground:       #${config.colorScheme.palette.base0F};
-        accent:           #${config.colorScheme.palette.base0D};
-        background-tb:    #${config.colorScheme.palette.base00};
+        accent:           #${config.colorScheme.palette.base0E};
+        background-tb:    #${config.colorScheme.palette.base02};
         border-tb:        #${config.colorScheme.palette.base05};
-        selected:         linear-gradient(to right, #${config.colorScheme.palette.base01}, #${config.colorScheme.palette.base07});
-        button:           linear-gradient(#${config.colorScheme.palette.base04});
-        button-selected:  linear-gradient(#${config.colorScheme.palette.base07});
-        active:           linear-gradient(to right, #${config.colorScheme.palette.base0B}, #${config.colorScheme.palette.base0C});
+        selected:         #${config.colorScheme.palette.base01};
+        button:           #${config.colorScheme.palette.base0D};
+        button-selected:  #${config.colorScheme.palette.base07};
+        active:           #${config.colorScheme.palette.base0B};
         urgent:           #${config.colorScheme.palette.base08};
       }
      '';

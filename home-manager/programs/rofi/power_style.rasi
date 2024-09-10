@@ -9,7 +9,6 @@ configuration {
 
 // Main Window
 window {
-  transparency:                "real";
   location:                    center;
   anchor:                      center;
   fullscreen:                  false;
@@ -38,49 +37,6 @@ mainbox {
   border-color:                @selected;
   background-color:            transparent;
   children:                    [ "listview" ];
-}
-
-// Inputbar
-inputbar {
-  enabled:                     false;
-  spacing:                     15px;
-  margin:                      0px;
-  padding:                     0px;
-  border:                      0px;
-  border-radius:               0px;
-  border-color:                @selected;
-  background-color:            transparent;
-  text-color:                  @foreground;
-  children:                    [ "textbox-prompt-colon", "prompt" ];
-}
-
-dummy {
-  background-color:            transparent;
-}
-
-textbox-prompt-colon {
-  font:                        "Symbols Nerd Font 12";
-  enabled:                     false;
-  expand:                      false;
-  str:                         "";
-  padding:                     0 14px;
-  border-radius:               0px;
-  border-color:                @urgent;
-  border:                      2px solid;
-  background-color:            @background;
-  text-color:                  @foreground;
-  vertical-align:              0.5;
-  horizontal-align:            0.5;
-}
-
-prompt {
-  enabled:                     false;
-  padding:                     12px;
-  border-radius:               0px;
-  border-color:                @active;
-  border:                      2px solid;
-  background-color:            @background;
-  text-color:                  @foreground;
 }
 
 // Listview

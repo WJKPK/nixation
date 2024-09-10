@@ -3,7 +3,8 @@
   ".config/rofi/config.rasi" = {
     text = ''
       configuration{
-        modes: "window,drun,combi";
+        font: "JetBrainsMono Nerd Font 14";
+        modes: "combi";
         combi-modes: "window,drun";
         show-icons: true;
         terminal: "kitty";
@@ -13,11 +14,8 @@
         disable-history: false;
         hide-scrollbar: true;
         display-drun: "   Apps ";
-        display-run: "   Run ";
         display-window: " 󰕰  Window";
         display-combi: " ⚡︎ Combi";
-        display-Network: " 󰤨  Network";
-        sidebar-mode: true;
       }
       
       @theme "theme"
@@ -28,12 +26,14 @@
       }
       
       window {
+          transparency: "background";
           height: ${toString config.rofi_settings.launcher_height}px;
+          width: ${toString config.rofi_settings.launcher_width}px;
           border: 2px;
           border-radius: 0px;
-          border-color: @border-tb;
+          border-color: @accent;
           background-color: @background;
-          padding: 25px;
+          padding: 5px;
       }
       
       mainbox {
@@ -44,15 +44,15 @@
           children: [prompt,entry];
           background-color: @background;
           border-radius: 0px;
-          padding: 2px;
+          padding: 8px;
       }
       
       prompt {
-          background-color: @accent;
+          background-color: @foreground;
           padding: 6px;
           text-color: @background;
-          border-radius: 0px;
-          margin: 20px 0px 0px 20px;
+          border-radius: 3px;
+          margin: 6px 0px 0px 6px;
       }
       
       textbox-prompt-colon {
@@ -61,8 +61,9 @@
       }
       
       entry {
-          padding: 6px;
-          margin: 20px 0px 0px 10px;
+          padding: 2px;
+          placeholder: "Search...";
+          margin: 10px 0px 0px 10px;
           text-color: @foreground;
           background-color: @background;
       }
@@ -79,54 +80,20 @@
       }
       
       element {
-          padding: 5px;
+          padding: 3px;
           background-color: @background;
           text-color: @foreground;
       }
       
       element-icon {
-          size: 25px;
+          size: 30px;
       }
       
       element selected {
-          background-color:  @selected;
-          text-color: @foreground;
-          border-radius: 0px;
-          border-color: @border-tb;
-          border: 2px;
+          text-color: @selected;
+          background-color: @foreground;
+          border-radius: 2px;
       }
-      
-      mode-switcher {
-          spacing: 0;
-        }
-      
-      button {
-          padding: 10px;
-          background-color: @background-tb;
-          text-color: @foreground;
-          vertical-align: 0.5; 
-          horizontal-align: 0.5;
-      }
-      
-      button selected {
-        background-color: @background;
-        text-color: @accent;
-      }
-      
-      message {
-          background-color: @background-tb;
-          margin: 2px;
-          padding: 2px;
-          border-radius: 0px;
-      }
-      
-      textbox {
-          padding: 6px;
-          margin: 20px 0px 0px 20px;
-          text-color: @accent;
-          background-color: @background-tb;
-      }
-      
     '';
     };
   };
