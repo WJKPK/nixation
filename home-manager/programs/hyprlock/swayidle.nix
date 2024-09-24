@@ -1,7 +1,7 @@
 {pkgs, config, lib, ...}: let
    #match any qemu process, suspend only if any found
   suspendScript = pkgs.writeShellScript "suspend-script" ''
-    ${pkgs.coreutils}/bin/pgrep qemu || ${pkgs.systemd}/bin/systemctl suspend
+    ${pkgs.procps}/bin/pgrep qemu || ${pkgs.systemd}/bin/systemctl suspend
   '';
   lock = lib.getExe config.programs.hyprlock.package;
   lockScript = pkgs.writeShellScript "lock-script" ''
