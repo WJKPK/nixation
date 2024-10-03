@@ -24,7 +24,10 @@ in {
   ];
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = true;
+    systemd = {
+      enable = true;
+      variables = ["--all"];
+    };
     xwayland.enable = true;
     extraConfig = ''
     ${monitor}
@@ -45,6 +48,9 @@ in {
         layout = dwindle
     }
 
+    cursor {
+        no_hardware_cursors = true
+    }
     input {
         kb_layout=pl
     }
@@ -76,9 +82,9 @@ in {
         col.shadow = rgb(${config.colorScheme.palette.base00})
         col.shadow_inactive = rgb(${config.colorScheme.palette.base01})
     }
-    animations {
-        enabled = yes
-    }
+    #animations {
+    #    enabled = yes
+    #}
 
     dwindle {
         pseudotile = yes

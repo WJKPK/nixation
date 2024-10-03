@@ -3,7 +3,7 @@ local gen = require("gen")
 local treesitter = require("nvim-treesitter.configs")
 local cmp = require("cmp")
 local lspkind = require("lspkind")
-
+local parrot = require("parrot")
 require('nvim-autopairs').setup{}
 
 lspc.nixd.setup{}
@@ -45,6 +45,13 @@ gen.setup({
       no_auto_close = true, -- Never closes the window automatically.
       debug = false -- Prints errors and the command which is run.
 })
+parrot.setup {
+      -- Providers must be explicitly added to make them available.
+      providers = {
+        -- provide an empty list to make provider available (no API key required)
+        ollama = {},
+      },
+    }
 
 treesitter.setup({
 	highlight = {
