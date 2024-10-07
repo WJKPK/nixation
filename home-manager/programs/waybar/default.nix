@@ -7,19 +7,45 @@
     };
     style = ''
       * {
-        border: none;
+        border: 1px;
         font-family: "JetBrainsMono Nerd Font";
         font-size: 13pt;
-        min-height: 25px;
+        min-height: 24px;
+      }
+      .modules-right,
+      .modules-center,
+      .modules-left {
+        background-color: #${config.colorScheme.palette.base00};
+        border-radius: 0px;
+        border-style: solid;
+        border-width: 2px;
+        opacity: 0.75;
+      }
+      .modules-right,
+      .modules-left {
+        border-color: #${config.colorScheme.palette.base05};
+      }
+      .modules-right {
+        margin: 4px 10px 4px 4px;
+      }
+      .modules-center {
+        margin: 4px 0 4px 0;
+        border-color: #${config.colorScheme.palette.base0F};
+      }
+      .modules-left {
+        margin: 4px 4px 4px 6px;
       }
       window#waybar {
-        background: #${config.colorScheme.palette.base00};
-        border-radius: 0px;
-        border-style: solid; 
-        border-width: 2px;
-        border-color: #${config.colorScheme.palette.base05};
-        padding: 3px;
-        opacity: 0.85;
+        background-color: transparent;
+        padding: 4px;
+        padding-bottom: 4px;
+      }
+      window#waybar.hidden {
+        opacity: 0.2;
+      }
+      window#waybar.empty #window {
+          background-color: transparent;
+          color: transparent;
       }
       #clock,
       #memory,
@@ -54,7 +80,7 @@
         color: #${config.colorScheme.palette.base0A};
       }
       #battery {
-        min-width: 55px;
+        min-width: 54px;
         color: #${config.colorScheme.palette.base0B};
       }
       #battery.charging,

@@ -36,7 +36,7 @@ in {
     # Autostart
     exec-once = hyprctl setcursor Bibata-Modern-Classic 18
     exec-once = dunst
-    exec = pkill waybar & sleep 0.5 && waybar
+    exec-once = waybar
 
     # Set en layout at startup
 
@@ -82,9 +82,17 @@ in {
         col.shadow = rgb(${config.colorScheme.palette.base00})
         col.shadow_inactive = rgb(${config.colorScheme.palette.base01})
     }
-    #animations {
-    #    enabled = yes
-    #}
+    animations {
+        enabled = yes
+        bezier = myBezier, 0.05, 0.9, 0.1, 1.05
+
+        animation = windows, 1, 7, myBezier
+        animation = windowsOut, 1, 7, default, popin 80%
+        animation = border, 1, 10, default
+        animation = borderangle, 1, 8, default
+        animation = fade, 1, 7, default
+        animation = workspaces, 1, 6, default
+    }
 
     dwindle {
         pseudotile = yes
