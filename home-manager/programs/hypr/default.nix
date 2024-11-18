@@ -11,13 +11,6 @@ let
     workspace = lib.concatStrings ( map (m:
         "\nworkspace = ${m.name},${m.workspace}"
       ) (lib.filter (m: m.enabled && m.workspace != null) config.monitors));
-#    jumper = pkgs.writeShellScript "jumper.sh" ''
-#      if [ "$1" ]; then
-#          hyprctl dispatch focuswindow address:$ROFI_INFO >/dev/null &
-#      else
-#          hyprctl clients -j | ${pkgs.jq}/bin/jq -r '.[] | select(.pid != -1) | "  \(.class)  \(.title[0:48])\u0000info\u001f\(.address)\u001ficon\u001f\(.class | ascii_downcase)"'
-#      fi
-#     '';
 in {
   home.packages = with pkgs; [
     jq
@@ -36,7 +29,6 @@ in {
     # Autostart
     exec-once = hyprctl setcursor Bibata-Modern-Classic 18
     exec-once = dunst
-    exec-once = waybar
 
     # Set en layout at startup
 
@@ -82,16 +74,9 @@ in {
         col.shadow = rgb(${config.colorScheme.palette.base00})
         col.shadow_inactive = rgb(${config.colorScheme.palette.base01})
     }
-    animations {
-        enabled = yes
-        bezier = myBezier, 0.05, 0.9, 0.1, 1.05
 
-        animation = windows, 1, 7, myBezier
-        animation = windowsOut, 1, 7, default, popin 80%
-        animation = border, 1, 10, default
-        animation = borderangle, 1, 8, default
-        animation = fade, 1, 7, default
-        animation = workspaces, 1, 6, default
+    animations {
+        enabled = no
     }
 
     dwindle {

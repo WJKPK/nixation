@@ -49,11 +49,11 @@ in
 
        [[search_dirs]]
        path = "${config.home.homeDirectory}/Programowanie"
-       depth = 6 
+       depth = 3 
 
        [[search_dirs]]
        path = "${config.home.homeDirectory}/nixation"
-       depth = 6
+       depth = 2
      '';
     };
   };
