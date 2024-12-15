@@ -29,6 +29,7 @@ in {
     # Autostart
     exec-once = hyprctl setcursor Bibata-Modern-Classic 18
     exec-once = dunst
+    exec = hyprshade auto
 
     # Set en layout at startup
 
@@ -66,13 +67,6 @@ in {
     
         dim_inactive = false
         dim_strength = 0.05
-    
-        drop_shadow = yes
-        shadow_range = 30
-        shadow_scale = 2
-        shadow_render_power = 5
-        col.shadow = rgb(${config.colorScheme.palette.base00})
-        col.shadow_inactive = rgb(${config.colorScheme.palette.base01})
     }
 
     animations {

@@ -19,6 +19,7 @@ let
     ./hypr
     ./waybar
     ./hyprlock
+    ./hyprshade
   ]);
 in {
   imports = common-pkgs ++ (nixos-os-pkgs);

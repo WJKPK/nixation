@@ -128,26 +128,6 @@ in { nixpkgs = {
       };
   };
 
-#  services.mpd = {
-#    enable = true;
-#    user = "kruppenfield";
-#    inherit musicDirectory;
-#
-#    extraConfig = ''
-#      audio_output {
-#        type "pipewire"
-#        name "MPD PipeWire Output"
-#      }
-#    '';
-#  };
-#  systemd.services.mpd = {
-#    environment = {
-#      # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/609
-#      XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.kruppenfield.uid}"; # User-id must match above user. MPD will look inside this directory for the PipeWire socket.
-#    };
-#    serviceConfig.SupplementaryGroups = [ "pipewire" ];
-#  };
-
   services = {
     displayManager.sddm = {
       enable = true;
@@ -184,8 +164,7 @@ in { nixpkgs = {
 
   security = {
     rtkit.enable = true;
-    pam.services = {
-    };
+    pam.services.hyprlock = { };
     polkit.enable = true;
   };
 

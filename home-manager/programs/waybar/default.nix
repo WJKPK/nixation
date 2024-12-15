@@ -10,7 +10,7 @@
       * {
         border: 1px;
         font-family: "JetBrainsMono Nerd Font";
-        font-size: 13pt;
+        font-size: 12pt;
         min-height: 24px;
       }
       .modules-right,
@@ -27,19 +27,19 @@
         border-color: #${config.colorScheme.palette.base05};
       }
       .modules-right {
-        margin: 4px 10px 4px 4px;
+        margin: 2px 5px 2px 2px;
       }
       .modules-center {
-        margin: 4px 0 4px 0;
+        margin: 2px 0 2px 0;
         border-color: #${config.colorScheme.palette.base0F};
       }
       .modules-left {
-        margin: 4px 4px 4px 6px;
+        margin: 2px 0px 2px 4px;
       }
       window#waybar {
         background-color: transparent;
-        padding: 4px;
-        padding-bottom: 4px;
+        padding: 1px;
+        padding-bottom: 1px;
       }
       window#waybar.hidden {
         opacity: 0.2;
@@ -81,7 +81,7 @@
         color: #${config.colorScheme.palette.base0A};
       }
       #battery {
-        min-width: 54px;
+        min-width: 52px;
         color: #${config.colorScheme.palette.base0B};
       }
       #battery.charging,
