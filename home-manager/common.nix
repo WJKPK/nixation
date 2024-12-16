@@ -50,7 +50,9 @@ in {
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-   (nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly" "CascadiaCode" ]; })
+    pkgs.nerd-fonts.jetbrains-mono
+    pkgs.nerd-fonts.symbols-only
+    cascadia-code
     arc-theme
     stm32cubemx
     saleae-logic-2
