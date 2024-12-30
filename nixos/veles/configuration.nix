@@ -11,28 +11,26 @@
     users.kruppenfield = import ../../home-manager/veles.nix;
   };
 
-  nvidiaManagement = {
-      driver.enable = true;
-      optimus = {
-        enable = true;
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-  };
+  nvidiaManagement.driver.enable = false;
 
   specialisation."GPU-enable".configuration = {
     system.nixos.tags = [ "GPU-enable" ];
-    nvidiaManagement.driver.enable = lib.mkForce true;
+    nvidiaManagement = {
+        driver.enable = lib.mkForce true;
+        optimus = {
+          enable = true;
+          intelBusId = "PCI:0:2:0";
+          nvidiaBusId = "PCI:1:0:0";
+        };
+    };
   };
 
   networking.hostName = "veles";
   services = {
-    xserver = {
-      libinput = {
-        enable = true;
-        touchpad = {
-          scrollMethod = "twofinger";
-        };
+    libinput = {
+      enable = true;
+      touchpad = {
+        scrollMethod = "twofinger";
       };
     };
     logind = {

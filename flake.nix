@@ -35,11 +35,11 @@
       # NixOS configuration entrypoint
       # Available through 'sudo nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        wales = nixpkgs.lib.nixosSystem {
+        veles = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
             inputs.home-manager.nixosModules.home-manager
-            ./nixos/wales/configuration.nix
+            ./nixos/veles/configuration.nix
           ];
         };
         perun = nixpkgs.lib.nixosSystem {
