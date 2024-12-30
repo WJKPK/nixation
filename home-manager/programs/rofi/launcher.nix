@@ -1,4 +1,17 @@
-{ config, ...} : {
+{ config, lib, ...} :
+let 
+  getAvgMonitorSize = monitorsList:
+    let
+      sumWidth = lib.foldl' (m: acc: acc.width + m.width) {width = 0;} monitorsList;
+      sumHeight = lib.foldl' (m: acc: acc.height + m.height) {height = 0;} monitorsList;
+      numMonitors = lib.length monitorsList;
+    in
+    {
+      width = sumWidth / numMonitors / 2;
+      height = sumHeight / numMonitors / 2;
+    };
+  window_size = getAvgMonitorSize config.monitors;
+in{
   home.file = {
   ".config/rofi/config.rasi" = {
     text = ''
@@ -27,8 +40,8 @@
       
       window {
           transparency: "background";
-          height: ${toString config.rofi_settings.launcher_height}px;
-          width: ${toString config.rofi_settings.launcher_width}px;
+          height: ${toString window_size.height}px;
+          width: ${toString window_size.width}px;
           border: 2px;
           border-radius: 0px;
           border-color: @accent;

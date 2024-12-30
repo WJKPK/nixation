@@ -1,4 +1,4 @@
-{ pkgs, inputs, specialArgs, ... }:
+{ pkgs, outputs, inputs, specialArgs, ... }:
 let
   inherit (specialArgs) isNixos;
 in {
@@ -7,6 +7,26 @@ in {
     ./programs
     ./common.nix
   ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.stable-packages
+      inputs.nixgl.overlay
+    ];
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+      permittedInsecurePackages = [
+        "electron-27.3.11" # logseq dep
+      ];
+    };
+  };
+
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
+
   home.packages = with pkgs; [
     libreoffice
   ];
@@ -24,9 +44,4 @@ in {
       enabled = false;
     }
   ];
-  nixpkgs = {
-    overlays = [
-      inputs.nixgl.overlay
-    ];
-  };
 }

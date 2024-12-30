@@ -22,5 +22,5 @@ let
     ./hyprshade
   ]);
 in {
-  imports = common-pkgs ++ (nixos-os-pkgs);
+  imports = common-pkgs ++ nixos-os-pkgs;
 }

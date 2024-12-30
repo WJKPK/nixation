@@ -35,15 +35,17 @@
       # NixOS configuration entrypoint
       # Available through 'sudo nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        abel = nixpkgs.lib.nixosSystem {
+        wales = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            ./nixos/abel/configuration.nix
+            inputs.home-manager.nixosModules.home-manager
+            ./nixos/wales/configuration.nix
           ];
         };
         perun = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            inputs.home-manager.nixosModules.home-manager
             ./nixos/perun/configuration.nix
           ];
         };
@@ -51,28 +53,12 @@
 
       # HomeManager configuration entrypoint
       # Available through 'home-manager switch --flake .#config-name"
-      homeConfigurations = {
-        "abel" = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
-          modules = [
-            ./home-manager/abel.nix
-          ];
-        };
-        "perun" = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
-          modules = [
-            ./home-manager/perun.nix
-          ];
-        };
-        "standalone" = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; isNixos = false; };
-          modules = [
-            ./home-manager/standalone.nix
-          ];
-        };
+      "standalone" = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs outputs; isNixos = false; };
+        modules = [
+          ./home-manager/standalone.nix
+        ];
       };
     };
 }

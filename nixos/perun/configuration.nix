@@ -1,59 +1,14 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, lib, inputs, outputs, ... }: {
   imports = [
     ../common
     ./hardware-configuration.nix
-    ./gpu_isolate.nix
     ./virt-manager.nix
     ./docker.nix
   ];
 
-  networking = {
-    hostName = "perun";
-    dhcpcd.denyInterfaces = [ "macvtap*" ];
-  };
-
-  powerManagement.enable = true;
-  services.xserver = {
-    videoDrivers = [ "nvidia" ];
-  };
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-    acceleration = "cuda";
-  };
-  users.users.kruppenfield = {
-    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
-  };
-
-  environment.systemPackages = with pkgs; [
-    docker-compose  
-  ];
-
-  programs.steam.enable = true;
-
-  boot = {
-    kernelPackages = pkgs.linuxPackages;
-    kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-  };
-
-  hardware.nvidia = {
-    powerManagement.enable = true;
-    modesetting.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  environment = {
-    sessionVariables = {
-      GBM_BACKEND = "nvidia-drm";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      LIBVA_DRIVER_NAME = "nvidia";
-      XDG_SESSION_TYPE= "wayland";
-
-      NIXOS_OZONE_WL = "1";
-      MOZ_ENABLE_WAYLAND = 0;
-    };
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
+    users.kruppenfield = import ../../home-manager/perun.nix;
   };
 
   nix.settings = {
@@ -65,8 +20,53 @@
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
+
+  users.users.kruppenfield = {
+    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
+  };
+
+  networking = {
+    hostName = "perun";
+    dhcpcd.denyInterfaces = [ "macvtap*" ];
+  };
+
+  boot.kernelPackages = pkgs.linuxPackages;
+  nvidiaManagement = {
+      driver.enable = true;
+      vfio = {
+      enable = true;
+      gpuIDs = [
+        "10de:1b81" # GTX 1070 Graphics
+        "10de:10f0" # GTX 1070 Audio
+      ];
+    };
+  };
+
   specialisation."ML-spec".configuration = {
     system.nixos.tags = [ "ML-spec" ];
-    vfio.enable = false;
+    nvidiaManagement.vfio.enable = lib.mkForce false;
+  };
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+    acceleration = "cuda";
+  };
+
+  programs.steam.enable = true;
+  environment.systemPackages = with pkgs; [
+    docker-compose  
+  ];
+
+  environment = {
+    sessionVariables = {
+      GBM_BACKEND = "nvidia-drm";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      LIBVA_DRIVER_NAME = "nvidia";
+      XDG_SESSION_TYPE= "wayland";
+
+      NIXOS_OZONE_WL = "1";
+      MOZ_ENABLE_WAYLAND = 0;
+    };
   };
 }

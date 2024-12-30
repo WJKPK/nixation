@@ -5,9 +5,12 @@
   '';
   lock = lib.getExe config.programs.hyprlock.package;
   lockScript = pkgs.writeShellScript "lock-script" ''
-    ${pkgs.procps}/bin/pidof hyprlock || ${lock} -c ${config.xdg.configHome}/hypr/hyprlock.conf
+    if ${pkgs.procps}/bin/pidof hyprlock; then
+        exit 0
+    else
+        ${lock} -c ${config.xdg.configHome}/hypr/hyprlock.conf
+    fi
   '';
-
 in {
   services.swayidle = {
     enable = true;

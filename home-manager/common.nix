@@ -25,24 +25,6 @@ in {
     inputs.nix-colors.homeManagerModules.default
     ./themes
   ] ++ (builtins.attrValues outputs.homeManagerModules);
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.modifications
-      outputs.overlays.stable-packages
-    ];
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = (_: true);
-      permittedInsecurePackages = [
-        "electron-27.3.11" # logseq dep
-      ];
-    };
-  };
-
-  nix = {
-    package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-  };
 
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
 

@@ -1,13 +1,21 @@
 {pkgs, inputs, outputs, lib, config, ...} :
 let
   udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
-in { nixpkgs = {
+in {
+  imports = [
+    ./nvidia-management.nix
+  ];
+
+  nixpkgs = {
     overlays = [
-      outputs.overlays.modifications
       outputs.overlays.stable-packages
     ];
     config = {
       allowUnfree = true;
+      allowUnfreePredicate = (_: true);
+      permittedInsecurePackages = [
+        "electron-27.3.11" # logseq dep
+      ];
     };
   };
 
@@ -31,9 +39,32 @@ in { nixpkgs = {
     };
   };
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernel.sysctl = { "vm.swappiness" = 5;};
+  users = {
+    groups = {
+      plugdev = { };
+      spice = { };
+    };
+    users.kruppenfield = {
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      description = "kruppenfield";
+      extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "spice" ];
+    };
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
+
+  boot = {
+    loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+    };
+    kernel.sysctl = { "vm.swappiness" = 5;};
+  };
+
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
@@ -50,15 +81,6 @@ in { nixpkgs = {
     };
   };
 
-  users.groups.plugdev = { };
-  users.groups.spice = { };
-  users.users.kruppenfield = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    description = "kruppenfield";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "spice" ];
-  };
-
   environment.systemPackages = with pkgs; [
     man
     vim
@@ -68,6 +90,7 @@ in { nixpkgs = {
     coreutils
     polkit_gnome
     gawk
+    git
     home-manager
     libsForQt5.kdeconnect-kde
     libsForQt5.qt5.qtquickcontrols2

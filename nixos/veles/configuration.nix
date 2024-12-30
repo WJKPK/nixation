@@ -1,20 +1,31 @@
-{ inputs, ... }:
+{ inputs, outputs, lib, ... }:
   {
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
-
     ../common
-    ./gpu.nix
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "abel";
+  home-manager = {
+    extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
+    users.kruppenfield = import ../../home-manager/veles.nix;
+  };
+
+  nvidiaManagement = {
+      driver.enable = true;
+      optimus = {
+        enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+  };
 
   specialisation."GPU-enable".configuration = {
     system.nixos.tags = [ "GPU-enable" ];
-    gpu.enable = true;
+    nvidiaManagement.driver.enable = lib.mkForce true;
   };
 
+  networking.hostName = "veles";
   services = {
     xserver = {
       libinput = {
@@ -41,7 +52,7 @@
 
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balence_power";
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
         PLATFORM_PROFILE_ON_AC = "balanced";
         PLATFORM_PROFILE_ON_BAT = "low-power";
