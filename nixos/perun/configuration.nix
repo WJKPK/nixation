@@ -7,7 +7,7 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; isNixos = true; };
+    extraSpecialArgs = { inherit inputs outputs;};
     users.kruppenfield = import ../../home-manager/perun.nix;
   };
 

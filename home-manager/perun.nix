@@ -2,7 +2,23 @@
   imports = [
     ./common.nix
     ./nixos-specific.nix
-    ./programs
+    ./wallpapers
+    ./programs/neovim
+    ./programs/kitty
+    ./programs/zsh
+    ./programs/git
+    ./programs/direnv
+    ./programs/rofi
+    ./programs/kicad
+    ./programs/tmux-sessionizer
+    ./programs/yazi
+    ./programs/btop
+    ./programs/openscad
+    ./programs/dunst
+    ./programs/hypr
+    ./programs/waybar
+    ./programs/hyprlock
+    ./programs/hyprshade
   ];
   monitors = [
     {
@@ -30,5 +46,8 @@
   home.packages = with pkgs; [
     nvtopPackages.full
   ];
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  home.stateVersion = "23.05";
 }
 

@@ -49,13 +49,20 @@
             ./nixos/perun/configuration.nix
           ];
         };
+        rod = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            inputs.home-manager.nixosModules.home-manager
+            ./nixos/rod/configuration.nix
+          ];
+        };
       };
 
       # HomeManager configuration entrypoint
       # Available through 'home-manager switch --flake .#config-name"
       "standalone" = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit inputs outputs; isNixos = false; };
+        extraSpecialArgs = { inherit inputs outputs;};
         modules = [
           ./home-manager/standalone.nix
         ];

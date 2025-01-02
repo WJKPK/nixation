@@ -1,10 +1,17 @@
-{ pkgs, outputs, inputs, specialArgs, ... }:
-let
-  inherit (specialArgs) isNixos;
-in {
-  targets.genericLinux.enable = !isNixos;
+{ pkgs, outputs, inputs, specialArgs, osConfig ? null, ... }: {
+  targets.genericLinux.enable = builtins.isNull osConfig;
   imports = [
-    ./programs
+    ./programs/neovim
+    ./programs/kitty
+    ./programs/zsh
+    ./programs/git
+    ./programs/direnv
+    ./programs/rofi
+    ./programs/kicad
+    ./programs/tmux-sessionizer
+    ./programs/yazi
+    ./programs/btop
+    ./programs/openscad
     ./common.nix
   ];
 
@@ -31,6 +38,13 @@ in {
     libreoffice
   ];
 
+  # depends on these fonts, nixos hosts imports from nixos specific configs
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
+    cascadia-code
+  ];
+
   home = {
     username = "wkrupski";
     homeDirectory = "/home/wkrupski";
@@ -44,4 +58,6 @@ in {
       enabled = false;
     }
   ];
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  home.stateVersion = "23.05";
 }

@@ -4,6 +4,7 @@ let
 in {
   imports = [
     ./nvidia-management.nix
+    ./fonts.nix
   ];
 
   nixpkgs = {

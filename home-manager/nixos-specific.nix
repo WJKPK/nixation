@@ -1,8 +1,4 @@
 { pkgs, ... }: {
- imports = [
-    ./wallpapers
-  ];
-
   services.syncthing = {
     enable = true;
   };
@@ -11,11 +7,9 @@
     stable.firefox-esr
     pavucontrol
     pwvucontrol
-    mpc-cli
     brightnessctl
     pamixer
     openscad
-#    cura
     prusa-slicer
     unzip
     grim
