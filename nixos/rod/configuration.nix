@@ -15,11 +15,14 @@
   users.users.kruppenfield = {
     isNormalUser = true;
     extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
-    initialPassword = "admin";
     group = "admin";
   };
 
   networking.hostName = "rod";
+
+  graphicalEnvironment = {
+      enable = false;
+  };
 
   hardware.graphics = {
     enable = true;
@@ -27,14 +30,22 @@
       intel-media-driver
     ];
   };
+
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
   users.users.immich.extraGroups = [ "video" "render" ];
-  boot.kernelPackages = pkgs.linuxPackages;
+
+  boot = {
+    kernelPackages = pkgs.linuxPackages_6_12;
+    swraid.enable = true;
+    initrd.supportedFilesystems = [ "xfs" ];
+  };
+
   nvidiaManagement = {
       driver.enable = false;
   };
 
   environment.systemPackages = with pkgs; [
+    mdadm
     docker-compose  
   ];
 
@@ -53,4 +64,7 @@
   };
 
   networking.firewall.allowedTCPPorts = [ 22 ];
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "24.11";
 }

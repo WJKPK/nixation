@@ -25,6 +25,14 @@
         };
     };
   };
+  graphicalEnvironment = {
+      enable = true;
+      compositor = {
+        enable = true;
+        type = "hyprland";
+        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      };
+  };
 
   networking.hostName = "veles";
   services = {
@@ -64,9 +72,20 @@
     };
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+          Enable = "Source,Sink,Media,Socket";
+        };
+      };
+  };
+
   security.protectKernelImage = false;
   boot.resumeDevice = "/dev/disk/by-uuid/54bf766e-32b7-42c6-8c01-58238bf6219b";
   #filefrag -v /var/lib/swapfile| awk '{ if($1=="0:"){print $4} }
   boot.kernelParams = ["resume_offset=54437888" "mitigations=off"];
 
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "23.05";
 }

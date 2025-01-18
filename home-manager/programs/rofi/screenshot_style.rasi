@@ -22,7 +22,7 @@ window {
   padding:                     0px;
   border:                      2px solid;
   border-radius:               0px;
-  border-color:                @accent;
+  border-color:                @border-tb;
   cursor:                      "default";
   background-color:            @background;
 }

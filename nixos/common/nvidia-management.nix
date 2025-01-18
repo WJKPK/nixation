@@ -1,6 +1,7 @@
 { lib, pkgs, config, ... }:
 
 let
+  inherit (lib) mkOption mkEnableOption mkIf mkMerge;
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
@@ -10,21 +11,10 @@ let
   '';
 in {
   options.nvidiaManagement = {
-    driver = {
-      enable = lib.mkOption {
-        description = "Whether to enable VFIO passthrough for NVIDIA GPU";
-        type = lib.types.bool;
-        default = false;
-      };
-    };
+    driver.enable = mkEnableOption "Whether to enable VFIO passthrough for NVIDIA GPU";
     vfio = {
-      enable = lib.mkOption {
-        description = "Whether to enable VFIO passthrough for NVIDIA GPU";
-        type = lib.types.bool;
-        default = false;
-      };
-
-      gpuIDs = lib.mkOption {
+      enable = mkEnableOption "Whether to enable VFIO passthrough for NVIDIA GPU";
+      gpuIDs = mkOption {
         description = "List of PCI IDs for NVIDIA GPU and its audio component";
         type = lib.types.listOf lib.types.str;
         default = [
@@ -37,19 +27,14 @@ in {
     };
     
     optimus = {
-      enable = lib.mkOption {
-        description = "Whether to enable NVIDIA Optimus (Prime) support";
-        type = lib.types.bool;
-        default = false;
-      };
-      
-      intelBusId = lib.mkOption {
+      enable = mkEnableOption "Whether to enable NVIDIA Optimus (Prime) support";
+      intelBusId = mkOption {
         description = "PCI bus ID of the Intel GPU";
         type = lib.types.str;
         default = "";
       };
       
-      nvidiaBusId = lib.mkOption {
+      nvidiaBusId = mkOption {
         description = "PCI bus ID of the NVIDIA GPU";
         type = lib.types.str;
         default = "";
@@ -58,8 +43,8 @@ in {
   };
 
   config = let cfg = config.nvidiaManagement;
-  in lib.mkMerge [
-    (lib.mkIf cfg.driver.enable {
+  in mkMerge [
+    (mkIf cfg.driver.enable {
       services.xserver.videoDrivers = [ "nvidia" ];
       boot = {
         kernelParams = [ "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
@@ -73,7 +58,7 @@ in {
       };
     })
 
-    (lib.mkIf cfg.vfio.enable {
+    (mkIf cfg.vfio.enable {
       boot = {
         initrd.kernelModules = [
           "vfio_pci"
@@ -91,7 +76,7 @@ in {
       };
     })
 
-    (lib.mkIf cfg.optimus.enable {
+    (mkIf cfg.optimus.enable {
       hardware.nvidia = {
         prime = {
           offload.enable = true;

@@ -6,10 +6,6 @@
     ./screenshot.nix
   ];
 
-  home.packages = with pkgs; [
-    rofi-wayland
-  ];
-
   home.file = {
    ".local/share/rofi/themes/theme.rasi" = {
      text = ''

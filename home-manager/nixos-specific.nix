@@ -15,7 +15,6 @@
     grim
     slurp
     wl-clipboard
-    gparted
     transmission_3-gtk
     distrobox
     procps

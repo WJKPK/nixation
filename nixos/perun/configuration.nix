@@ -42,6 +42,15 @@
     };
   };
 
+  graphicalEnvironment = {
+      enable = true;
+      compositor = {
+        enable = true;
+        type = "hyprland";
+        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      };
+  };
+
   specialisation."ML-spec".configuration = {
     system.nixos.tags = [ "ML-spec" ];
     nvidiaManagement.vfio.enable = lib.mkForce false;
@@ -51,6 +60,15 @@
     enable = true;
     package = pkgs.ollama-cuda;
     acceleration = "cuda";
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+          Enable = "Source,Sink,Media,Socket";
+        };
+      };
   };
 
   programs.steam.enable = true;
@@ -69,4 +87,7 @@
       MOZ_ENABLE_WAYLAND = 0;
     };
   };
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = "23.05";
 }

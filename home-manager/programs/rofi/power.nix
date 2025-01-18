@@ -52,8 +52,6 @@ in
            elif [[ $1 == '--reboot' ]]; then
              systemctl reboot
            elif [[ $1 == '--suspend' ]]; then
-             mpc -q pause
-             hyprlock
              systemctl suspend
            elif [[ $1 == '--logout' ]]; then
              hyprctl dispatch exit
