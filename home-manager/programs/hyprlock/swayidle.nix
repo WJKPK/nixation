@@ -3,17 +3,11 @@
   suspendScript = pkgs.writeShellScript "suspend-script" ''
     ${pkgs.procps}/bin/pgrep qemu || ${pkgs.systemd}/bin/systemctl suspend
   '';
-  lock = lib.getExe config.programs.hyprlock.package;
-  lockScript = pkgs.writeShellScript "lock-script" ''
-    if ${pkgs.procps}/bin/pidof hyprlock; then
-        exit 0
-    else
-        ${lock} -c ${config.xdg.configHome}/hypr/hyprlock.conf
-    fi
-  '';
+  locker = lib.getExe pkgs.hyprlock;
 in {
   services.swayidle = {
     enable = true;
+    extraArgs = ["-d" "-w"];
     events = [
       {
         event = "before-sleep";
@@ -21,7 +15,7 @@ in {
       }
       {
         event = "lock";
-        command = lockScript.outPath;
+        command = "${locker}";
       }
     ];
     timeouts = [

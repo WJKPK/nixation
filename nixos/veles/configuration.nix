@@ -1,4 +1,4 @@
-{ inputs, outputs, lib, ... }:
+{ pkgs, inputs, outputs, lib, ... }:
   {
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
@@ -12,6 +12,7 @@
   };
 
   nvidiaManagement.driver.enable = false;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   specialisation."GPU-enable".configuration = {
     system.nixos.tags = [ "GPU-enable" ];

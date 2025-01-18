@@ -30,7 +30,7 @@
     dhcpcd.denyInterfaces = [ "macvtap*" ];
   };
 
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
   nvidiaManagement = {
       driver.enable = true;
       vfio = {

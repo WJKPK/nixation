@@ -10,17 +10,6 @@ let
       sha256 = "sha256-0AEB6im8Jz5foYzmL6KEGSAYo48g1bkFpjlCSWT6JeE=";
     };
   };
-  parrot-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "parrot.nvim";
-    version = "v0.7.0";
-    src = pkgs.fetchFromGitHub {
-      owner = "frankroeder";
-      repo = "parrot.nvim";
-      rev = "v0.7.0";
-      sha256 = "sha256-//hiiv1lbdTXPZ/FNgwym6BeiwyiKVapz1XpRUvSgfs=";
-    };
-  };
-
 in {
   programs.neovim = {
     enable = true;
@@ -58,7 +47,6 @@ in {
       leap-nvim
       toggleterm-nvim
       gen-nvim
-      parrot-nvim
       mini-nvim
       vim-tmux-navigator
     ];

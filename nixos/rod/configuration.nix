@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ./home-assistant.nix
     ./adguard.nix
+    ./immich.nix
   ];
 
   home-manager = {
@@ -18,11 +19,16 @@
     group = "admin";
   };
 
-  networking = {
-    hostName = "rod";
-    dhcpcd.denyInterfaces = [ "macvtap*" ];
-  };
+  networking.hostName = "rod";
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+    ];
+  };
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
+  users.users.immich.extraGroups = [ "video" "render" ];
   boot.kernelPackages = pkgs.linuxPackages;
   nvidiaManagement = {
       driver.enable = false;

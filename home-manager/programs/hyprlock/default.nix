@@ -1,4 +1,4 @@
-{config, ...}: let
+{pkgs, config, lib, ...}: let
   wallpaper = builtins.fetchurl {
       url = "https://images4.alphacoders.com/130/1301526.png";
       sha256 = "0m2ilvs8rbyfw999lf7540cdx993mqq2rqw79z4dq22bfm0mnjfc";
@@ -28,7 +28,7 @@ in {
       ];
       input-field = [
         {
-          monitor = "";
+            monitor = "";
             size = "350, 50";
             outline_thickness = 3;
             dots_size = 0.1;
@@ -37,42 +37,45 @@ in {
             inner_color = "rgb(${config.colorScheme.palette.base00})";
             font_color = "rgb(${config.colorScheme.palette.base05})";
             fade_on_empty = true;
-            position = "0, 15";
+            position = "0, -80";
             halign = "center";
             valign = "center";
+            rounding = 0;
         }
       ];
       label = [
-          # Time
           {
-            text = "cmd[update:200] date +'%r'";
-            color = "rgb(${config.colorScheme.palette.base0F})";
-            font_size = 30;
+            monitor = "";
+            text = "$TIME";
+            color = "rgba(200, 200, 200, 1.0)";
+            font_size = 120;
+            font_family = "JetBrainsMono Nerd Font";
+            rotate = 0.000000;
+            shadow_passes = 0;
+            shadow_size = 3;
+            shadow_color = "rgba(0, 0, 0, 1.0)";
+            shadow_boost = 1.200000;
 
+            position = "0, 100";
             halign = "center";
             valign = "center";
-            position = "0, -60";
           }
-          # Date
           {
-            text = "cmd[update:1000] date +'%a, %x'";
-            color = "rgb(${config.colorScheme.palette.base0F})";
+            monitor = "";
+            text = ''cmd[update:3600000] echo -e "$(date +"%a, %d %b")"'';
+            color = "rgba(200, 200, 200, 1.0)";
             font_size = 20;
+            font_family = "JetBrainsMono Nerd Font";
+            rotate = 0.000000;
+            shadow_passes = 0;
+            shadow_size = 3;
+            shadow_color = "rgba(0, 0, 0, 1.0)";
+            shadow_boost = 1.200000;
 
+            position = "0, 00";
             halign = "center";
             valign = "center";
-            position = "0, -120";
           }
-        ];
-        image = [
-            {
-                path = "${myImage}";
-                shadow_passes = 2;
-                rounding = -1; # negative values mean circle
-                position = "0, 150";
-                halign = "center";
-                valign = "center";
-            }
         ];
     };
   };

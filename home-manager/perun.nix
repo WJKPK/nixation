@@ -42,7 +42,7 @@
     userEmail = "krupskiwojciech@gmail.com";
     userName = "WJKPK";
   };
-
+  desktop.addons.waybar.enable = true;
   home.packages = with pkgs; [
     nvtopPackages.full
   ];

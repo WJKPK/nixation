@@ -1,217 +1,211 @@
-{ config, ... }: {
-
-  programs.waybar = {
-    enable = true;
-    systemd = {
-      enable = true;
-      target = "hyprland-session.target";
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib;
+let
+  cfg = config.desktop.addons.waybar;
+in
+{
+  options.desktop.addons.waybar = with types; {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable/disable waybar";
     };
-    style = ''
-      * {
-        border: 1px;
-        font-family: "JetBrainsMono Nerd Font";
-        font-size: 12pt;
-        min-height: 24px;
-      }
-      .modules-right,
-      .modules-center,
-      .modules-left {
-        background-color: #${config.colorScheme.palette.base00};
-        border-radius: 0px;
-        border-style: solid;
-        border-width: 2px;
-        opacity: 0.75;
-      }
-      .modules-right,
-      .modules-left {
-        border-color: #${config.colorScheme.palette.base05};
-      }
-      .modules-right {
-        margin: 2px 5px 2px 2px;
-      }
-      .modules-center {
-        margin: 2px 0 2px 0;
-        border-color: #${config.colorScheme.palette.base0F};
-      }
-      .modules-left {
-        margin: 2px 0px 2px 4px;
-      }
-      window#waybar {
-        background-color: transparent;
-        padding: 1px;
-        padding-bottom: 1px;
-      }
-      window#waybar.hidden {
-        opacity: 0.2;
-      }
-      window#waybar.empty #window {
-          background-color: transparent;
-          color: transparent;
-      }
-      #clock,
-      #memory,
-      #cpu,
-      #temperature,
-      #pulseaudio,
-      #network,
-      #battery,
-      #custom-launcher,
-      #custom-gpu,
-      #workspaces,
-      #custom-powermenu {
-        padding-left: 12px;
-        padding-right: 12px;
-      }
-      #workspaces button {
-        color: #${config.colorScheme.palette.base04};
-      }
-      #workspaces button.active {
-        color: #${config.colorScheme.palette.base0F};
-      }
-      #custom-launcher {
-        color: #${config.colorScheme.palette.base0F};
-      }
-      #memory {
-        color: #${config.colorScheme.palette.base0E};
-      }
-      #cpu {
-        color: #${config.colorScheme.palette.base0F};
-      }
-      #clock {
-        color: #${config.colorScheme.palette.base0A};
-      }
-      #battery {
-        min-width: 52px;
-        color: #${config.colorScheme.palette.base0B};
-      }
-      #battery.charging,
-      #battery.full,
-      #battery.plugged {
-        color: #${config.colorScheme.palette.base0B};
-      }
-      #battery.critical:not(.charging) {
-        color: #${config.colorScheme.palette.base08};
-        animation-name: blink;
-        animation-duration: 0.5s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-      }
-      #temperature {
-        color: #${config.colorScheme.palette.base0F};
-      }
-      #custom-gpu {
-        color: #${config.colorScheme.palette.base0E};
-      }
-      #pulseaudio {
-        color: #${config.colorScheme.palette.base06};
-      }
-      #network {
-        color: #${config.colorScheme.palette.base0B};
-      }
-      #network.disconnected {
-        color: #${config.colorScheme.palette.base09};
-      }
-      #custom-powermenu {
-        color: #${config.colorScheme.palette.base08};
-      }
-    '';
-    settings = [{
-      "layer" = "top";
-      "position" = "top";
-      modules-left = [
-        "custom/launcher"
-        "temperature"
-        "custom/gpu"
-        "cpu"
-        "memory"
-      ];
-      modules-center = [
-        "hyprland/workspaces"
-      ];
-      modules-right = [
-        "pulseaudio"
-        "battery"
-        "network"
-        "clock"
-        "custom/powermenu"
-      ];
-      "custom/launcher" = {
-        "format" = " ";
-        "tooltip" = false;
-      };
-      "hyprland/workspaces" = {
-        "tooltip" = false;
-        "all-outputs" = true;
-        "on-click" = "activate";
-      };
-      "pulseaudio" = {
-        "scroll-step" = 1;
-        "format" = "{icon}  {volume}%";
-        "format-muted" = "󰖁 Muted";
-        "format-icons" = {
-          "default" = [ "" "" "" ];
-        };
-        "on-click" = "pavucontrol";
-        "tooltip" = false;
-      };
-      "clock" = {
-        "format-alt" = "{:%Y-%m-%d}";
-        "tooltip-format" = "{:%Y-%m-%d | %H:%M}";
-      };
-      "memory" = {
-        "interval" = 1;
-        "format" = "󰻠 {percentage}%";
-        "states" = {
-          "warning" = 85;
-        };
-      };
-      "cpu" = {
-        "interval" = 1;
-        "format" = "󰍛 {usage}%";
-      };
-      "network" = {
-        "format-disconnected" = "󰯡 Disconnected";
-        "format-ethernet" = "󰒢 Connected!";
-        "format-linked" = "󰖪 {essid} (No IP)";
-        "format-wifi" = "󰖩 {essid}";
-        "interval" = 1;
-        "tooltip" = false;
-        "on-click" = "kitty --class nmwui nmtui";
-      };
-      "battery" = {
-          "format" = "{icon}  {capacity}%";
-          "format-icons" = ["" "" "" "" ""];
-	  "interval" =  30;
-          "states" = {
-              "warning" = 25;
-              "critical" = 10;
-          };
-          "tooltip" =  false;
-      };
-      "custom/powermenu" = {
-        "format" = "";
-        "on-click" = "bash ~/.config/rofi/power.sh";
-        "tooltip" = false;
-      };
-     "temperature" = {
-       "critical-threshold" = 90;
-       "on-click" = "kitty --class center-float-large btop";
-       "hwmon-path" = "/sys/class/hwmon/hwmon1/temp1_input";
-       "format-critical" = "{icon} {temperatureC}°C";
-       "format" = "{icon} {temperatureC}°C";
-       "format-icons" =  ["" "" ""];
-       "tooltip" = true;
-       "interval" = 3;
-      };
-      "custom/gpu" = {
-         "exec" = "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader";
-         "critical-threshold" = 90;
-         "format" = "{icon} {}°C";
-         "format-icons" =  ["" "" ""];
-         "interval" = 3;
-      };
+  };
 
-    }];
+  config = mkIf cfg.enable {
+    programs.waybar = {
+      enable = true;
+      systemd = {
+        enable = true;
+        target = "hyprland-session.target";
+      };
+    };
+
+    home.file.".config/waybar/config.jsonc" = {
+      source = ./config.jsonc;
+      onChange = ''
+        ${pkgs.busybox}/bin/pkill -SIGUSR2 waybar
+      '';
+    };
+    home.file.".config/waybar/style.css" = {
+      text = ''
+        * {
+          /* `otf-font-awesome` is required to be installed for icons */
+          font-family: JetBrainsMono Nerd Font;
+          font-size: 16px;
+          border-radius: 12px;
+        }
+
+        #clock,
+        #custom-notification,
+        #custom-launcher,
+        #custom-powermenu,
+        #custom-window,
+        #memory,
+        #disk,
+        #network,
+        #battery,
+        #pulseaudio,
+        #window,
+        #temperature,
+        #custom-gpu,
+
+        #tray {
+          padding: 5 15px;
+          border-radius: 12px;
+          background: #${config.colorScheme.palette.base00};
+          color: #${config.colorScheme.palette.base07};
+          margin-top: 4px;
+          margin-bottom: 4px;
+          margin-right: 2px;
+          margin-left: 2px;
+          transition: all 0.3s ease;
+        }
+
+        #window {
+          background-color: transparent;
+          box-shadow: none;
+        }
+
+        window#waybar {
+          background-color: rgba(0, 0, 0, 0.096);
+          border-radius: 17px;
+        }
+
+        window * {
+          background-color: transparent;
+          border-radius: 0px;
+        }
+
+        #workspaces button label {
+          color: #${config.colorScheme.palette.base07};
+        }
+
+        #workspaces button.active label {
+          color: #${config.colorScheme.palette.base00};
+          font-weight: bolder;
+        }
+
+        #workspaces button:hover {
+          box-shadow: #${config.colorScheme.palette.base07} 0 0 0 1.5px;
+          background-color: #${config.colorScheme.palette.base00};
+          min-width: 50px;
+        }
+
+        #workspaces {
+          background-color: transparent;
+          border-radius: 14px;
+          padding: 5 0px;
+          margin-top: 3px;
+          margin-bottom: 3px;
+        }
+
+        #workspaces button {
+          background-color: #${config.colorScheme.palette.base00};
+          border-radius: 12px;
+          margin-left: 10px;
+
+          transition: all 0.3s ease;
+        }
+
+        #workspaces button.active {
+          min-width: 50px;
+          box-shadow: rgba(0, 0, 0, 0.288) 2 2 5 2px;
+          background-color: #${config.colorScheme.palette.base0F};
+          background-size: 400% 400%;
+          transition: all 0.3s ease;
+          background: linear-gradient(
+            58deg,
+            #${config.colorScheme.palette.base0E},
+            #${config.colorScheme.palette.base0E},
+            #${config.colorScheme.palette.base0E},
+            #${config.colorScheme.palette.base0D},
+            #${config.colorScheme.palette.base0D},
+            #${config.colorScheme.palette.base0E},
+            #${config.colorScheme.palette.base08}
+          );
+          background-size: 300% 300%;
+          animation: colored-gradient 20s ease infinite;
+        }
+
+        @keyframes colored-gradient {
+          0% {
+            background-position: 71% 0%;
+          }
+          50% {
+            background-position: 30% 100%;
+          }
+          100% {
+            background-position: 71% 0%;
+          }
+        }
+
+        #custom-powermenu {
+          margin-right: 10px;
+          padding-left: 12px;
+          padding-right: 15px;
+          padding-top: 3px;
+        }
+
+        #custom-gpu {
+          margin-right: 10px;
+          padding-left: 12px;
+          padding-right: 15px;
+          padding-top: 3px;
+        }
+
+        @keyframes grey-gradient {
+          0% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: -33% 50%;
+          }
+        }
+
+        #tray menu {
+          background-color: #${config.colorScheme.palette.base00};
+          opacity: 0.8;
+        }
+
+        #pulseaudio.muted {
+          color: #${config.colorScheme.palette.base08};
+          padding-right: 16px;
+        }
+
+        #custom-notification.collapsed,
+        #custom-notification.waiting_done {
+          min-width: 12px;
+          padding-right: 17px;
+        }
+
+        #custom-notification.waiting_start,
+        #custom-notification.expanded {
+          background-color: transparent;
+          background: linear-gradient(
+            90deg,
+            #${config.colorScheme.palette.base02},
+            #${config.colorScheme.palette.base00},
+            #${config.colorScheme.palette.base00},
+            #${config.colorScheme.palette.base00},
+            #${config.colorScheme.palette.base00},
+            #${config.colorScheme.palette.base02}
+          );
+          background-size: 400% 100%;
+          animation: grey-gradient 3s linear infinite;
+          min-width: 500px;
+          border-radius: 17px;
+        }
+      '';
+      onChange = ''
+        ${pkgs.busybox}/bin/pkill -SIGUSR2 waybar
+      '';
+    };
   };
 }
+
