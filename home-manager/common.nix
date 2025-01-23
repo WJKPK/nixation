@@ -37,20 +37,9 @@ in {
     colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
-      arc-theme
-      stm32cubemx
-      saleae-logic-2
-      xfce.thunar
-      xfce.xfce4-appfinder
-      xfce.xfce4-settings
-      xfce.thunar-archive-plugin
-      xfce.thunar-volman
-      xfce.ristretto
-      xfce.tumbler
       killall
       htop
       btop
-      logseq
       gnumake
       custom-kew
     ];

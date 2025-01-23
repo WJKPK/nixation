@@ -5,6 +5,7 @@
     ./home-assistant.nix
     ./adguard.nix
     ./immich.nix
+    ./syncthing.nix
   ];
 
   home-manager = {
@@ -30,9 +31,7 @@
       intel-media-driver
     ];
   };
-
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
-  users.users.immich.extraGroups = [ "video" "render" ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_6_12;

@@ -1,16 +1,37 @@
 { ... }: {
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    3002
+  ];
+
+  networking.firewall.allowedUDPPorts = [
+    53
+  ];
+
   services.adguardhome = {
     enable = true;
-    port = 3000;
+    mutableSettings = false;
+    port = 3002;
     settings = {
+      http.address = "0.0.0.0:3002";
+      schema_version = 20;
       dns = {
-        upstream_dns = [
-          "9.9.9.9#dns.quad9.net"
-          "149.112.112.112#dns.quad9.net"
-          # Uncomment the following to use a local DNS service (e.g. Unbound)
-          # Additionally replace the address & port as needed
-          # "127.0.0.1:5335"
+        ratelimit = 0;
+        bind_hosts = [ "0.0.0.0" ];
+        bootstrap_dns = [
+          "9.9.9.10"
+          "149.112.112.10"
+          "2620:fe::10"
+          "2620:fe::fe:10"
         ];
+        upstream_dns = [
+          "1.1.1.1"
+          "1.0.0.1"
+          "8.8.8.8"
+          "8.8.4.4"
+        ];
+        dhcp.enabled = false;
       };
       filtering = {
         protection_enabled = true;
@@ -22,14 +43,9 @@
         };
       };
       filters = map(url: { enabled = true; url = url; }) [
-        "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
         "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"
-        "https://adaway.org/hosts.txt"
         "https://big.oisd.nl"
       ];
     };
-  };
-  networking.firewall = {
-    allowedTCPPorts = [ 3000 ];
   };
 }
