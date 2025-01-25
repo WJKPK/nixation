@@ -1,23 +1,28 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 let 
     mqtt_port = 1883;
 in {
   services.home-assistant = {
-     enable = true;
-     openFirewall = true;
-     extraComponents = [
-       # List of components required to complete the onboarding
-       "default_config"
-       "met"
-       "esphome"
-       "radio_browser"
-       "mqtt"
-       "zha" #just to avoid python traceback in journal
-     ];
-     config = {
-       default_config = { };
-     };
-   };
+    enable = true;
+    openFirewall = true;
+    extraComponents = [
+      # List of components required to complete the onboarding
+      "default_config"
+      "met"
+      "esphome"
+      "radio_browser"
+      "mqtt"
+      "lovelace"
+      "zha" #just to avoid python traceback in journal
+    ];
+    config = {
+      default_config = { };
+      "automation ui" = "!include automations.yaml";
+    };
+    customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+       apexcharts-card
+    ];
+  };
   services.zigbee2mqtt = {
     enable = true;
     settings = {
