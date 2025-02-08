@@ -9,6 +9,7 @@ lspc.nixd.setup{}
 lspc.clangd.setup{}
 lspc.rust_analyzer.setup{}
 lspc.cmake.setup{}
+lspc.zls.setup {}
 lspc.lua_ls.setup{
   settings = {
     Lua = {
@@ -18,6 +19,13 @@ lspc.lua_ls.setup{
       },
     },
   },
+}
+lspc.tinymist.setup {
+    settings = {
+        formatterMode = "typstyle",
+        exportPdf = "onType",
+        semanticTokens = "disable"
+    }
 }
 
 gen.setup({

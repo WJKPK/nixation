@@ -56,10 +56,16 @@
     nvidiaManagement.vfio.enable = lib.mkForce false;
   };
 
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-cuda;
-    acceleration = "cuda";
+  services = {
+    ollama = {
+      enable = true;
+      package = pkgs.ollama-cuda;
+      acceleration = "cuda";
+    };
+    open-webui = {
+      enable = true;
+      port = 8085;
+    };
   };
 
   hardware.bluetooth = {

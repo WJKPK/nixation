@@ -61,6 +61,8 @@ in {
       clang-tools_16
       lua-language-server
       cmake-language-server
+      tinymist
+      zls
     ];
 
     extraConfig = let
