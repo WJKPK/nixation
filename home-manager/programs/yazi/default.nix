@@ -6,7 +6,7 @@
 
     settings = {
       manager = {
-        layout = [ 1 4 3 ];
+        ratio = [ 1 3 7 ];
         sort_by = "alphabetical";
         sort_sensitive = true;
         sort_reverse = false;
@@ -18,8 +18,8 @@
 
       preview = {
         tab_size = 2;
-        max_width = 600;
-        max_height = 900;
+        max_width = 2000;
+        max_height = 1400;
         cache_dir = "${config.xdg.cacheHome}";
       };
     };

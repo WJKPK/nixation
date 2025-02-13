@@ -23,9 +23,9 @@ wk.add({
   { "<leader>y", "\"+y", desc = "Yank to clipboard" },
   { "<leader>o", "<cmd>Gen<cr>", desc = "Ollama"},
   { "<C-s>", "<cmd>vs<cr>", desc = "Vertical Split" },
-  { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Nvim Tree" },
-  { "<leader>-", "<cmd>NvimTreeResize -10<cr>", desc = "Resize NvimTree -10" },
-  { "<leader>+", "<cmd>NvimTreeResize +10<cr>", desc = "Resize NvimTree +10" },
+  { "<leader>e", "<cmd>Yazi<cr>", desc = "Yazi toggle" },
+  { "<leader>s", "<cmd>Yazi cwd<cr>", desc = "Yazi source directory" },
+
 
 
   -- Visual mode mapping

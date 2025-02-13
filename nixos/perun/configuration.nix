@@ -65,6 +65,7 @@
     open-webui = {
       enable = true;
       port = 8085;
+      package = pkgs.stable.open-webui;
     };
   };
 

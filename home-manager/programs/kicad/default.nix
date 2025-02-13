@@ -1,11 +1,18 @@
-{pkgs, ...}: let
-  kicad-dark = pkgs.stable.kicad.overrideAttrs (prevAttrs: {
-    nativeBuildInputs = (prevAttrs.nativeBuildInputs or []) ++ [ pkgs.makeBinaryWrapper ];
-
-    postInstall = (prevAttrs.postInstall or "") + ''
-      wrapProgram $out/bin/kicad --set GTK_THEME Arc-Dark
+{pkgs, ...}:
+let
+  kicad-dark = pkgs.symlinkJoin {
+    name = "kicad-dark";
+    paths = [pkgs.stable.kicad];
+    buildInputs = [pkgs.makeWrapper];
+    # workaround for crashes: https://github.com/NixOS/nixpkgs/issues/366299#issuecomment-2613745185
+    postBuild = ''
+      wrapProgram $out/bin/kicad \
+        --set GTK_THEME Arc-Dark \
+        --set __GLX_VENDOR_LIBRARY_NAME mesa \
+        --set __EGL_VENDOR_LIBRARY_FILENAMES ${pkgs.mesa.drivers}/share/glvnd/egl_vendor.d/50_mesa.json
     '';
-  });
+  };
+
   kicadThemes = pkgs.fetchFromGitHub {
     owner = "pointhi";
     repo = "kicad-color-schemes";
@@ -13,14 +20,9 @@
     hash = "sha256-PYgFOyK5MyDE1vTkz5jGnPWAz0pwo6Khu91ANgJ2OO4=";
   };
 in {
-  home.packages = [
-    kicad-dark 
-  ];
+  home.packages = [kicad-dark];
 
-  # Add behave dark theme
   xdg.configFile."kicad/8.0/colors/behave-dark.json" = {
     source = "${kicadThemes}/behave-dark/behave-dark.json";
   };
-
 }
-

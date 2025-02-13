@@ -1,21 +1,4 @@
-{ pkgs, lib, config, ... }: 
-let
-  removeUnstableSuffix = packageName:
-    let parts = builtins.split "-unstable-[0-9]{4}-[0-9]{2}-[0-9]{2}$" packageName;
-    in builtins.head parts;
-
-  pluginConf = plugins:
-    builtins.concatStringsSep "\n\n" (map (plugin:
-      let name = removeUnstableSuffix (lib.removePrefix "tmuxplugin-" plugin.name);
-      in "run-shell ${plugin}/share/tmux-plugins/${name}/${name}.tmux")
-      plugins);
-
-  plugins = with pkgs.tmuxPlugins; [
-    catppuccin
-    vim-tmux-navigator
-  ];
-in 
-{
+{ pkgs, config, ... }: {
   home.packages = with pkgs; [
     fzf
     tmux-sessionizer
@@ -32,9 +15,27 @@ in
     shortcut = "a";
     terminal = "tmux-256color";
     baseIndex = 1;
+    plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavour 'frappe'
+          set -g @catppuccin_date_time ""
+          set -g @catppuccin_user "off"
+          set -g @catppuccin_host "on"
+        '';
+      }
+      vim-tmux-navigator
+    ];
+
     extraConfig = ''
-      ${builtins.readFile ./tmux.conf}
-      ${pluginConf plugins}
+        bind | split-window -h
+        bind _ split-window -v
+        bind t display-popup -E "tms switch"
+        # yazi releated
+        set -g allow-passthrough on
+        set -ga update-environment TERM
+        set -ga update-environment TERM_PROGRAM
     '';
   };
 
