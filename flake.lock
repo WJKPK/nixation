@@ -20,11 +20,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736702516,
-        "narHash": "sha256-NbJiiPFnmciji3JHpqF/L0SdMQXKXn+q3Q/D8RjF/ak=",
+        "lastModified": 1739103745,
+        "narHash": "sha256-c53dcRaw0F4Os9WD05HwIRs9kTDZw4Mxe1XK4edEALo=",
         "owner": "hyprwm",
         "repo": "aquamarine",
-        "rev": "e7719f9b9f5321c7100733773ad9f38cb6db6b6f",
+        "rev": "a3dda0d10ce9aa1d1dfb7a6c139ea8c2872c74bd",
         "type": "github"
       },
       "original": {
@@ -54,25 +54,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737579274,
-        "narHash": "sha256-8kBIYfn8TI9jbffhDNS12SdbQHb9ITXflwcgIJBeGqw=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736785029,
-        "narHash": "sha256-xHe4X4Je/4WjBL3BPlI1KGqA5N7VQpi4x57YYU9ZOlI=",
-=======
-        "lastModified": 1738834647,
-        "narHash": "sha256-NdetLk2Ie+syABcq/1MWSpqInhkODItR0xRkwDvWlpk=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1739283129,
+        "narHash": "sha256-GXJllf1wY7tOF6uei9S3PnSEghFbnJP1vkxM0kkMOoI=",
         "owner": "catppuccin",
         "repo": "nix",
-<<<<<<< HEAD
-        "rev": "06f0ea19334bcc8112e6d671fd53e61f9e3ad63a",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "4a5ac694d7f8a63dec75cbe0ac1c84c818b6b789",
-=======
-        "rev": "7f2e0e709ad3e47a2ae0e735168438144c134947",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "d4e258e29075a86a82dacaf4f5e0985935ae4658",
         "type": "github"
       },
       "original": {
@@ -159,67 +145,11 @@
         ]
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737575492,
-        "narHash": "sha256-qa/D3NC1JoApnUuLrq1gseBmIxeg6icm/ojPgggMDVQ=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736508663,
-        "narHash": "sha256-ZOaGwa+WnB7Zn3YXimqjmIugAnHePdXCmNu+AHkq808=",
-=======
-        "lastModified": 1739044880,
-        "narHash": "sha256-l+bzq9rsBIQQnBtGayJeOS30L53+mYPjgfQALi20XDg=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1739470101,
+        "narHash": "sha256-NxNe32VB4XI/xIXrsKmIfrcgtEx5r/5s52pL3CpEcA4=",
         "owner": "nix-community",
         "repo": "home-manager",
-<<<<<<< HEAD
-        "rev": "cefb1889b96ddd1dac3dd4734e894f4cadab7802",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "2532b500c3ed2b8940e831039dcec5a5ea093afc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "home-manager-stable": {
-      "inputs": {
-        "nixpkgs": [
-          "catppuccin",
-          "nixpkgs-stable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1736373539,
-        "narHash": "sha256-dinzAqCjenWDxuy+MqUQq0I4zUSfaCvN9rzuCmgMZJY=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "bd65bc3cde04c16755955630b344bc9e35272c56",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "release-24.11",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "home-manager_2": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1736785676,
-        "narHash": "sha256-TY0jUwR3EW0fnS0X5wXMAVy6h4Z7Y6a3m+Yq++C9AyE=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "fc52a210b60f2f52c74eac41a8647c1573d2071d",
-=======
-        "rev": "bf9a1a068919ccdfa7d130873936c5fd4c826e85",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "5031c6d2978109336637977c165f82aa49fa16a7",
         "type": "github"
       },
       "original": {
@@ -245,25 +175,11 @@
         ]
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737391116,
-        "narHash": "sha256-wOlplOftCnD2J1VwkRiAzASiXi80LypWqhVJcBYuLG8=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1734906540,
-        "narHash": "sha256-vQ/L9hZFezC0LquLo4TWXkyniWtYBlFHAKIsDc7PYJE=",
-=======
-        "lastModified": 1738178255,
-        "narHash": "sha256-+D6Nu2ewXbMTFzx/Q4jDOo+LAOUPr0cxQJg5k33daIE=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1738664950,
+        "narHash": "sha256-xIeGNM+iivwVHkv9tHwOqoUP5dDrtees34bbFKKMZYs=",
         "owner": "hyprwm",
         "repo": "hyprcursor",
-<<<<<<< HEAD
-        "rev": "3219b311283803d4dbdacb3c5cc10cf9e9b7c2b5",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "69270ba8f057d55b0e6c2dca0e165d652856e613",
-=======
-        "rev": "dcadd3398abe146d60c67e0d9ee6e27b301cae82",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "7c6d165e1eb9045a996551eb9f121b6d1b30adc3",
         "type": "github"
       },
       "original": {
@@ -288,11 +204,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1738437059,
-        "narHash": "sha256-J+8ecqaP3zD9GHeN8Y4hUapoELSoggp0IZI8laTFt/0=",
+        "lastModified": 1739049071,
+        "narHash": "sha256-3+7TpXMrbsUXSwgr5VAKAnmkzMb6JO+Rvc9XRb5NMg4=",
         "owner": "hyprwm",
         "repo": "hyprgraphics",
-        "rev": "5ac80e3686a4dfa55d2bd15c81a266b89594a295",
+        "rev": "175c6b29b6ff82100539e7c4363a35a02c74dd73",
         "type": "github"
       },
       "original": {
@@ -317,27 +233,11 @@
         "xdph": "xdph"
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737556066,
-        "narHash": "sha256-7X0RvVxmqd2OxS8FsOapMvB5NEzRElT0+RmRFENL4yc=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736701836,
-        "narHash": "sha256-K6bxd1ZbIQKcF1USNuupv+bsEk5GyidGS/zcTUTgWt8=",
-=======
-        "lastModified": 1739048455,
-        "narHash": "sha256-hn3GGgilLPezJlIm82SZYN7jpIgbjVBELsGORIoYx+0=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1739446679,
+        "narHash": "sha256-W4/dpSdDzsqw2diGefNHlhYFhx18oX4k7GLDjvGc96E=",
         "ref": "refs/heads/main",
-<<<<<<< HEAD
-        "rev": "fda5626594c3f31bbab08e877a797a623c98c450",
-        "revCount": 5699,
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "a6b263713a2b862ed41362082e2147e081934077",
-        "revCount": 5670,
-=======
-        "rev": "8e10ddb592977ef2e1836e75b0e5550ba8fb56f0",
-        "revCount": 5801,
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "40adb3dfb4b6f8cf0c5093f095954e3ef162a8eb",
+        "revCount": 5813,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
       },
@@ -358,25 +258,11 @@
         ]
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737127640,
-        "narHash": "sha256-mIQ3/axCZ4g8ySwWRbW4fJcyC9v55uAii3cqlJRtW8g=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1735774328,
-        "narHash": "sha256-vIRwLS9w+N99EU1aJ+XNOU6mJTxrUBa31i1r82l0V7s=",
-=======
         "lastModified": 1738422629,
         "narHash": "sha256-5v+bv75wJWvahyM2xcMTSNNxmV8a7hb01Eey5zYnBJw=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
         "owner": "hyprwm",
         "repo": "hyprland-protocols",
-<<<<<<< HEAD
-        "rev": "455c055883d9639d4fcbfcedb4c6d12ce313791e",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "e3b6af97ddcfaafbda8e2828c719a5af84f662cb",
-=======
         "rev": "755aef8dab49d0fc4663c715fa4ad221b2aedaed",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
         "type": "github"
       },
       "original": {
@@ -385,36 +271,6 @@
         "type": "github"
       }
     },
-<<<<<<< HEAD
-    "hyprland-qt-support": {
-      "inputs": {
-        "nixpkgs": [
-          "hyprland",
-          "hyprland-qtutils",
-          "nixpkgs"
-        ],
-        "systems": [
-          "hyprland",
-          "hyprland-qtutils",
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1736376766,
-        "narHash": "sha256-tZG+mkJJzqoi/gH8nN6P/yY1/PEYtom9+2WdYKKv5YM=",
-        "owner": "hyprwm",
-        "repo": "hyprland-qt-support",
-        "rev": "0ecf224f213497c45b12c4dc7bdc2c2edd0e3084",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hyprwm",
-        "repo": "hyprland-qt-support",
-        "type": "github"
-      }
-    },
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-=======
     "hyprland-qt-support": {
       "inputs": {
         "hyprlang": [
@@ -447,19 +303,13 @@
         "type": "github"
       }
     },
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
     "hyprland-qtutils": {
       "inputs": {
-<<<<<<< HEAD
-        "hyprland-qt-support": "hyprland-qt-support",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-=======
         "hyprland-qt-support": "hyprland-qt-support",
         "hyprlang": [
           "hyprland",
           "hyprlang"
         ],
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
         "hyprutils": [
           "hyprland",
           "hyprland-qtutils",
@@ -476,25 +326,11 @@
         ]
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1736774415,
-        "narHash": "sha256-pb8v7axHdVKFGhQHEAxIuZP/9REsmlyuDW5eLGIplLc=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736114838,
-        "narHash": "sha256-FxbuGQExtN37ToWYnGmO6weOYN6WPHN/RAqbr7gNPek=",
-=======
-        "lastModified": 1737981711,
-        "narHash": "sha256-lh6cL5D8nPplB3WovCQjLUZ7k7MViiBrMlpkfm4R7/c=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1739048983,
+        "narHash": "sha256-REhTcXq4qs3B3cCDtLlYDz0GZvmsBSh947Ub6pQWGTQ=",
         "owner": "hyprwm",
         "repo": "hyprland-qtutils",
-<<<<<<< HEAD
-        "rev": "534cd1badc46ec9bdd986ab41ad2408bf845961e",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "6997fe382dcf396704227d2b98ffdd5066da6959",
-=======
-        "rev": "96bf0677fa9cd13508294e3d4559dfbbc8beff73",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "3504a293c8f8db4127cb0f7cfc1a318ffb4316f8",
         "type": "github"
       },
       "original": {
@@ -519,11 +355,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1737634606,
-        "narHash": "sha256-W7W87Cv6wqZ9PHegI6rH1+ve3zJPiyevMFf0/HwdbCQ=",
+        "lastModified": 1739048914,
+        "narHash": "sha256-vd5rJBTmp2w7SDgfv23Zcd84ktI5eDA7e5UBzx+pKrU=",
         "owner": "hyprwm",
         "repo": "hyprlang",
-        "rev": "f41271d35cc0f370d300413d756c2677f386af9d",
+        "rev": "a7334904d591f38757c46fbe2ab68651877d9099",
         "type": "github"
       },
       "original": {
@@ -544,25 +380,11 @@
         ]
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1736613432,
-        "narHash": "sha256-x7nMS1dFtlzgG13QoguKMZ6SKwSIQw82OANA5ZKF0d0=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736164519,
-        "narHash": "sha256-1LimBKvDpBbeX+qW7T240WEyw+DBVpDotZB4JYm8Aps=",
-=======
-        "lastModified": 1737978343,
-        "narHash": "sha256-TfFS0HCEJh63Kahrkp1h9hVDMdLU8a37Zz+IFucxyfA=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1739048933,
+        "narHash": "sha256-ck6MaoYvISBQKqZR+HcxXnx0wOhyCauxfVMaV5zhJxQ=",
         "owner": "hyprwm",
         "repo": "hyprutils",
-<<<<<<< HEAD
-        "rev": "72dfbf52967e4040693164319a027d8ac6315887",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "3c895da64b0eb19870142196fa48c07090b441c4",
-=======
-        "rev": "6a8bc9d2a4451df12f5179dc0b1d2d46518a90ab",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "e4e018a2ca6f5a9c33511973454199e1c7c85499",
         "type": "github"
       },
       "original": {
@@ -583,11 +405,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1735493474,
-        "narHash": "sha256-fktzv4NaqKm94VAkAoVqO/nqQlw+X0/tJJNAeCSfzK4=",
+        "lastModified": 1739049028,
+        "narHash": "sha256-RleJp7LYbr6s+M1xgbmhtBs+fYa3ZdIiF7+QalJ4D1g=",
         "owner": "hyprwm",
         "repo": "hyprwayland-scanner",
-        "rev": "de913476b59ee88685fdc018e77b8f6637a2ae0b",
+        "rev": "04146df74a8d5ec0b579657307be01f1e241125f",
         "type": "github"
       },
       "original": {
@@ -636,25 +458,11 @@
     },
     "nixos-hardware": {
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737590910,
-        "narHash": "sha256-qM/y6Dtpu9Wmf5HqeZajQdn+cS0aljdYQQQnrvx+LJE=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736441705,
-        "narHash": "sha256-OL7leZ6KBhcDF3nEKe4aZVfIm6xQpb1Kb+mxySIP93o=",
-=======
         "lastModified": 1738816619,
         "narHash": "sha256-5yRlg48XmpcX5b5HesdGMOte+YuCy9rzQkJz+imcu6I=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
         "owner": "NixOs",
         "repo": "nixos-hardware",
-<<<<<<< HEAD
-        "rev": "9368027715d8dde4b84c79c374948b5306fdd2db",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "8870dcaff63dfc6647fb10648b827e9d40b0a337",
-=======
         "rev": "2eccff41bab80839b1d25b303b53d339fbb07087",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
         "type": "github"
       },
       "original": {
@@ -697,41 +505,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737404927,
-        "narHash": "sha256-e1WgPJpIYbOuokjgylcsuoEUCB4Jl2rQXa2LUD6XAG8=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736061677,
-        "narHash": "sha256-DjkQPnkAfd7eB522PwnkGhOMuT9QVCZspDpJJYyOj60=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "cbd8ec4de4469333c82ff40d057350c30e9f7d36",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-24.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-stable_2": {
-      "locked": {
-        "lastModified": 1736684107,
-        "narHash": "sha256-vH5mXxEvZeoGNkqKoCluhTGfoeXCZ1seYhC2pbMN0sg=",
-=======
-        "lastModified": 1738843498,
-        "narHash": "sha256-7x+Q4xgFj9UxZZO9aUDCR8h4vyYut4zPUvfj3i+jBHE=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1739357830,
+        "narHash": "sha256-9xim3nJJUFbVbJCz48UP4fGRStVW5nv4VdbimbKxJ3I=",
         "owner": "nixos",
         "repo": "nixpkgs",
-<<<<<<< HEAD
-        "rev": "ae584d90cbd0396a422289ee3efb1f1c9d141dc3",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "635e887b48521e912a516625eee7df6cf0eba9c1",
-=======
-        "rev": "f5a32fa27df91dfc4b762671a0e0a859a8a0058f",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "0ff09db9d034a04acd4e8908820ba0b410d7a33a",
         "type": "github"
       },
       "original": {
@@ -743,25 +521,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737062831,
-        "narHash": "sha256-Tbk1MZbtV2s5aG+iM99U8FqwxU/YNArMcWAv6clcsBc=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736012469,
-        "narHash": "sha256-/qlNWm/IEVVH7GfgAIyP6EsVZI6zjAx1cV5zNyrs+rI=",
-=======
-        "lastModified": 1738410390,
-        "narHash": "sha256-xvTo0Aw0+veek7hvEVLzErmJyQkEcRk6PSR4zsRQFEc=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1739020877,
+        "narHash": "sha256-mIvECo/NNdJJ/bXjNqIh8yeoSjVLAuDuTUzAo7dzs8Y=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-<<<<<<< HEAD
-        "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "8f3e1f807051e32d8c95cd12b9b421623850a34d",
-=======
-        "rev": "3a228057f5b619feb3186e986dbe76278d707b6e",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "a79cfe0ebd24952b580b1cf08cd906354996d547",
         "type": "github"
       },
       "original": {
@@ -788,25 +552,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1737469691,
-        "narHash": "sha256-nmKOgAU48S41dTPIXAq0AHZSehWUn6ZPrUKijHAMmIk=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1736701207,
-        "narHash": "sha256-jG/+MvjVY7SlTakzZ2fJ5dC3V1PrKKrUEOEE30jrOKA=",
-=======
-        "lastModified": 1739020877,
-        "narHash": "sha256-mIvECo/NNdJJ/bXjNqIh8yeoSjVLAuDuTUzAo7dzs8Y=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "lastModified": 1739214665,
+        "narHash": "sha256-26L8VAu3/1YRxS8MHgBOyOM8xALdo6N0I04PgorE7UM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-<<<<<<< HEAD
-        "rev": "9e4d5190a9482a1fb9d18adf0bdb83c6e506eaab",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "ed4a395ea001367c1f13d34b1e01aa10290f67d6",
-=======
-        "rev": "a79cfe0ebd24952b580b1cf08cd906354996d547",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
+        "rev": "64e75cd44acf21c7933d61d7721e812eac1b5a0a",
         "type": "github"
       },
       "original": {
@@ -910,25 +660,11 @@
         ]
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1736421203,
-        "narHash": "sha256-BNe2xnHsSsTZiHp8OWl9UUf697w0gVtzh67AYe+pP+g=",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "lastModified": 1734907020,
-        "narHash": "sha256-p6HxwpRKVl1KIiY5xrJdjcEeK3pbmc///UOyV6QER+w=",
-=======
         "lastModified": 1737634991,
         "narHash": "sha256-dBAnb7Kbnier30cA7AgxVSxxARmxKZ1vHZT33THSIr8=",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
-<<<<<<< HEAD
-        "rev": "7613351375de66ca0d56689e333d460e2db05454",
-||||||| parent of ac4d414 (Update & tmux/nvim/kicad thinkering)
-        "rev": "d7f18dda5e511749fa1511185db3536208fb1a63",
-=======
         "rev": "e09dfe2726c8008f983e45a0aa1a3b7416aaeb8a",
->>>>>>> ac4d414 (Update & tmux/nvim/kicad thinkering)
         "type": "github"
       },
       "original": {
