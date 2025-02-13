@@ -1,24 +1,39 @@
-{ pkgs, ... }: {
-  services.syncthing = {
-    enable = true;
-  };
-
-  home.packages = with pkgs; [
+{ pkgs, lib, config, ... }: let
+  guiApps = with pkgs; [
     stable.firefox-esr
     pavucontrol
     pwvucontrol
-    brightnessctl
-    pamixer
-    openscad
     prusa-slicer
-    unzip
+    transmission_3-gtk
+    openscad
+    satty
+    hyprshot
     grim
     slurp
     wl-clipboard
-    transmission_3-gtk
+    arc-theme
+    saleae-logic-2
+    xfce.thunar
+    xfce.xfce4-appfinder
+    xfce.xfce4-settings
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
+    xfce.ristretto
+    xfce.tumbler
+    logseq
+  ];
+
+  nonGuiApps = with pkgs; [
+    brightnessctl
+    pamixer
+    unzip
     distrobox
     procps
-    hyprshot
-    satty
   ];
+in {
+  services.syncthing.enable = true;
+  home.packages = nonGuiApps ++ (lib.optionals
+    (lib.any (m: m.enabled) config.monitors)
+    guiApps);
 }
+

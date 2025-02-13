@@ -45,17 +45,6 @@
   };
   home.packages = with pkgs; [
     nvtopPackages.full
-    arc-theme
-    stm32cubemx
-    saleae-logic-2
-    xfce.thunar
-    xfce.xfce4-appfinder
-    xfce.xfce4-settings
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
-    xfce.ristretto
-    xfce.tumbler
-    logseq
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
