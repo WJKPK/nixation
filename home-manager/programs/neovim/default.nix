@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}:
+let
+in {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -35,6 +37,7 @@
       toggleterm-nvim
       mini-nvim
       vim-tmux-navigator
+      devdocs-vim
     ];
 
     extraPackages = with pkgs; [
@@ -57,8 +60,8 @@
           ./config
           + "/${module}.lua");
       luaConfig = builtins.concatStringsSep "\n" (map luaRequire [
-        "vim-setup"
         "utils"
+        "vim-setup"
         "code-processing"
         "git-integration"
         "theming"

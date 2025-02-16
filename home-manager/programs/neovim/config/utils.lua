@@ -1,7 +1,6 @@
 local yazi = require("yazi");
 
 yazi.setup {}
-
 require("toggleterm").setup {
   direction = 'float',
   on_open = function(term)

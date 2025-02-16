@@ -21,14 +21,12 @@ wk.add({
   { "<leader>p", "\"+p", desc = "Paste from clipboard" },
   { "<leader>P", "\"+P", desc = "Paste from clipboard before cursor" },
   { "<leader>y", "\"+y", desc = "Yank to clipboard" },
-  { "<leader>o", "<cmd>Gen<cr>", desc = "Ollama"},
   { "<C-s>", "<cmd>vs<cr>", desc = "Vertical Split" },
   { "<leader>e", "<cmd>Yazi<cr>", desc = "Yazi toggle" },
   { "<leader>s", "<cmd>Yazi cwd<cr>", desc = "Yazi source directory" },
-
-
+  { "<M-j>", "<cmd>cnext<cr>", desc = "Next quickfix list item" },
+  { "<M-k>", "<cmd>cprev<cr>", desc = "Previous quickfix list item" },
 
   -- Visual mode mapping
-  { "<leader>o", ":'<,'>Gen<cr>", desc = "Ollama", mode = "v" },
   { "<leader>y", "\"+y", desc = "Yank to clipboard", mode = "v" },
 })

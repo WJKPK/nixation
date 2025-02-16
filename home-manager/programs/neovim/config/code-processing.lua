@@ -3,7 +3,6 @@ local treesitter = require("nvim-treesitter.configs")
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 require('nvim-autopairs').setup{}
-
 lspc.nixd.setup{}
 lspc.clangd.setup{}
 lspc.rust_analyzer.setup{}

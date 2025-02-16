@@ -60,12 +60,21 @@
 
       # HomeManager configuration entrypoint
       # Available through 'home-manager switch --flake .#config-name"
-      "standalone" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit inputs outputs;};
-        modules = [
-          ./home-manager/standalone.nix
-        ];
+      homeConfigurations = {
+        "standalone" = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs;};
+          modules = [
+            ./home-manager/standalone.nix
+          ];
+        };
+        "minimal-nvim" = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs outputs;};
+          modules = [
+            ./home-manager/minimal-nvim.nix
+          ];
+        };
       };
     };
 }

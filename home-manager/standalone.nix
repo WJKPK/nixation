@@ -12,6 +12,7 @@
     ./programs/yazi
     ./programs/btop
     ./programs/openscad
+    ./programs/devcontainers-workflow.nix
     ./common.nix
   ];
 
@@ -34,12 +35,9 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
+  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     libreoffice
-  ];
-
-  # depends on these fonts, nixos hosts imports from nixos specific configs
-  fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
     cascadia-code

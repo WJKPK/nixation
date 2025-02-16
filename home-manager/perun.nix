@@ -18,6 +18,7 @@
     ./programs/waybar
     ./programs/hyprlock
     ./programs/hyprshade
+    ./programs/devcontainers-workflow.nix
   ];
   monitors = [
     {
