@@ -2,9 +2,23 @@
 let
   start-devcontainer = pkgs.writeShellScriptBin "start-devcontainer" ''
     WORKSPACE_DIR="''${1:-.}"
+    DEVCONTAINER_JSON="$WORKSPACE_DIR/.devcontainer/devcontainer.json"
+    MOUNT_STRING="type=bind,source=/tmp/.X11-unix,target=/tmp/.X11-unix"
+    MOUNT_ARGS=()
+  
+    if [ -f "$DEVCONTAINER_JSON" ]; then
+      if ${pkgs.jq}/bin/jq -e --arg mount "$MOUNT_STRING" '.mounts // [] | index($mount)' "$DEVCONTAINER_JSON" > /dev/null; then
+        echo "Mount already present in devcontainer.json, skipping..."
+      else
+        MOUNT_ARGS+=(--mount "$MOUNT_STRING")
+      fi
+    else
+      MOUNT_ARGS+=(--mount "$MOUNT_STRING")
+    fi
+  
     ${pkgs.devcontainer}/bin/devcontainer up \
       --remove-existing-container \
-      --mount "type=bind,source=/tmp/.X11-unix,target=/tmp/.X11-unix" \
+      "''${MOUNT_ARGS[@]}" \
       --workspace-folder "$WORKSPACE_DIR"
   '';
 
