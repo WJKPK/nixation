@@ -54,10 +54,8 @@ setup-devcontainer = pkgs.writeShellScriptBin "setup-devcontainer" ''
     ${pkgs.devcontainer}/bin/devcontainer exec \
       --workspace-folder "$WORKING_DIR" \
       bash -c "
-        if [ -d 'nixation' ]; then
-          rm -rf nixation
-          git clone https://github.com/WJKPK/nixation
-        fi && \
+        rm -rf nixation; \
+        git clone https://github.com/WJKPK/nixation && \
         cd nixation && \
         home-manager switch --flake .#minimal-nvim -b backup --extra-experimental-features 'nix-command flakes' && \
         cd .. && \
@@ -66,7 +64,7 @@ setup-devcontainer = pkgs.writeShellScriptBin "setup-devcontainer" ''
     '';
 
   shell-devcontainer = pkgs.writeShellScriptBin "shell-devcontainer" ''
-     ${pkgs.devcontainer}/bin/devcontainer exec --workspace-folder . --remote-env DISPLAY=$DISPLAY bash -c "tmux attach || tmux new"
+     ${pkgs.devcontainer}/bin/devcontainer exec --workspace-folder . --remote-env DISPLAY=$DISPLAY zsh -c "tmux attach || tmux new"
   '';
 
 in {
