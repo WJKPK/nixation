@@ -28,6 +28,7 @@ in {
       nvim-treesitter
       plenary-nvim
       telescope-fzy-native-nvim
+      telescope-live-grep-args-nvim
       telescope-nvim
       vim-vsnip
       which-key-nvim

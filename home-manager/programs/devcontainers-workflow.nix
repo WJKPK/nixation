@@ -64,7 +64,7 @@ setup-devcontainer = pkgs.writeShellScriptBin "setup-devcontainer" ''
     '';
 
   shell-devcontainer = pkgs.writeShellScriptBin "shell-devcontainer" ''
-     ${pkgs.devcontainer}/bin/devcontainer exec --workspace-folder . --remote-env DISPLAY=$DISPLAY zsh -c "tmux attach || tmux new"
+     ${pkgs.devcontainer}/bin/devcontainer exec --workspace-folder . --remote-env DISPLAY=$DISPLAY zsh -i
   '';
 
 in {
