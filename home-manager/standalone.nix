@@ -34,7 +34,7 @@
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
-
+  application.wrap-gl = true;
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     libreoffice

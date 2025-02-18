@@ -18,17 +18,11 @@
 #}
 
 # From https://github.com/nix-community/nixGL/issues/114#issuecomment-1585323281
-{ pkgs, config, ... }:
-    options.application = {
-    wrap-gl = pkgs.lib.mkOption {
-      type = pkgs.lib.types.bool;
-      default = false;
-      description = "Whether to wrap applications with nixGL";
-    };
-  };
+{ pkgs }:
 
 # Wrap a single package
 pkg:
+
 # Wrap the package's binaries with nixGL, while preserving the rest of
 # the outputs and derivation attributes.
 pkg.overrideAttrs (old: {
