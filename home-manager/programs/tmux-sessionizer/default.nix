@@ -13,7 +13,7 @@
     historyLimit = 5000;
     keyMode = "vi";
     shortcut = "a";
-    terminal = "tmux-256color";
+    terminal = "xterm-256color";
     baseIndex = 1;
     plugins = with pkgs.tmuxPlugins; [
       {
