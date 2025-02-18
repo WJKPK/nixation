@@ -3,6 +3,8 @@
   imports = [
     ./programs/neovim
     ./programs/yazi
+    ./programs/tmux-sessionizer
+    ./programs/zsh
   ];
 
   nixpkgs = {
