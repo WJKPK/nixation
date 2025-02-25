@@ -1,8 +1,8 @@
-{ ... }: {
+{ config, lib, ... }: {
     programs = {
         zsh = {
             enable = true;
-            initExtra = ''
+            initExtra = lib.mkIf (!config.minimalTerminal.enable) ''
               if [ -z "$TMUX" ]; then
                 tms start 
               fi

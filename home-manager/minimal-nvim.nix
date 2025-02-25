@@ -5,7 +5,7 @@
     ./programs/yazi
     ./programs/tmux-sessionizer
     ./programs/zsh
-  ];
+  ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
     overlays = [
@@ -18,7 +18,7 @@
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
-
+  minimalTerminal.enable = true;
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
