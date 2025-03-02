@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   imports = [
     ./common.nix
     ./nixos-specific.nix
@@ -19,6 +19,7 @@
     ./programs/hyprlock
     ./programs/hyprshade
     ./programs/devcontainers-workflow.nix
+    ./programs/prusa-slicer
   ];
   monitors = [
     {
@@ -48,6 +49,9 @@
     nvtopPackages.full
     stm32cubemx
     xfce.xfburn
+    firefox
+    inputs.dni.packages.${pkgs.system}.default
+    (callPackage programs/zen.nix {})
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

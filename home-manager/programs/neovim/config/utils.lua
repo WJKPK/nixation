@@ -1,5 +1,10 @@
 local yazi = require("yazi");
 
+require("markview").setup {
+    config = {
+        typst = true
+    }
+}
 yazi.setup {}
 require("toggleterm").setup {
   direction = 'float',

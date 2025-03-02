@@ -1,9 +1,8 @@
 { pkgs, lib, config, ... }: let
   guiApps = with pkgs; [
-    stable.firefox-esr
+    librewolf
     pavucontrol
     pwvucontrol
-    prusa-slicer
     transmission_3-gtk
     openscad
     satty

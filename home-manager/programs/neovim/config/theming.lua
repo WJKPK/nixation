@@ -3,7 +3,7 @@ local colorizer = require("colorizer")
 
 vim.g.catppuccin_flavour = "macchiato"
 vim.g.lightline = { colorscheme = "catppuccin" }
-
+require('nvim-web-devicons').setup{}
 catppuccin.setup({
   integrations = {
       leap = true,

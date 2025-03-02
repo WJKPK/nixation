@@ -1,5 +1,6 @@
-{pkgs, ...}:
+{pkgs, lib, ...}:
 let
+    gitIntegration = import ./config/git-integration.nix;
 in {
   programs.neovim = {
     enable = true;
@@ -27,7 +28,7 @@ in {
       nvim-lspconfig
       nvim-treesitter
       plenary-nvim
-      telescope-fzy-native-nvim
+      telescope-fzf-native-nvim
       telescope-live-grep-args-nvim
       telescope-nvim
       vim-vsnip
@@ -38,11 +39,11 @@ in {
       toggleterm-nvim
       mini-nvim
       vim-tmux-navigator
-      devdocs-vim
+      markview-nvim
+      nvim-web-devicons
     ];
 
     extraPackages = with pkgs; [
-      gcc
       ripgrep
       fd
       nixd 
@@ -60,16 +61,18 @@ in {
         builtins.readFile (builtins.toString
           ./config
           + "/${module}.lua");
-      luaConfig = builtins.concatStringsSep "\n" (map luaRequire [
-        "utils"
-        "vim-setup"
-        "code-processing"
-        "git-integration"
-        "theming"
-        "which-key"
-      	"dashboard"
-        "navigation"
-      ]);
+      luaConfig = ''
+        ${gitIntegration { inherit lib; minimalNvim = false; }}
+        ${builtins.concatStringsSep "\n" (map luaRequire [
+          "utils"
+          "vim-setup"
+          "code-processing"
+          "theming"
+          "which-key"
+          "dashboard"
+          "navigation"
+        ])}
+      '';
     in ''
       lua <<
       ${luaConfig}
@@ -85,6 +88,11 @@ in {
       cpp
       python
       query
+      nix
+      latex
+      typst
+      markdown
+      markdown_inline
     ])).dependencies;
   }}/parser";
 
