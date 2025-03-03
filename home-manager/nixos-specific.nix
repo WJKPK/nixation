@@ -1,6 +1,5 @@
 { pkgs, lib, config, ... }: let
   guiApps = with pkgs; [
-    librewolf
     pavucontrol
     pwvucontrol
     transmission_3-gtk

@@ -53,7 +53,6 @@
     xfce.xfburn
     firefox
     inputs.dni.packages.${pkgs.system}.default
-    (callPackage programs/zen.nix {})
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

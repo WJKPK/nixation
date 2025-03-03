@@ -25,6 +25,7 @@
           unpaywall
           vimium-c
           youtube-shorts-block
+          darkreader
         ];
         search.default = "https://duckduckgo.com";
         search.privateDefault = "https://duckduckgo.com";
