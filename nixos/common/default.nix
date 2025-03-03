@@ -11,6 +11,7 @@ in {
   nixpkgs = {
     overlays = [
       outputs.overlays.stable-packages
+      inputs.nur.overlays.default
     ];
     config = {
       allowUnfree = true;

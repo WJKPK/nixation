@@ -19,6 +19,7 @@
     ./programs/hypr
     ./programs/waybar
     ./programs/hyprlock
+    ./programs/librewolf
     ./programs/hyprshade
   ];
 

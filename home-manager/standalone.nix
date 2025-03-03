@@ -12,6 +12,7 @@
     ./programs/yazi
     ./programs/btop
     ./programs/openscad
+    ./programs/librewolf
     ./programs/devcontainers-workflow.nix
     ./common.nix
   ];
@@ -19,6 +20,7 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.stable-packages
+      inputs.nur.overlays.default
       inputs.nixgl.overlay
     ];
     config = {
@@ -41,6 +43,7 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
     cascadia-code
+    inputs.dni.packages.${pkgs.system}.default
   ];
 
   home = {

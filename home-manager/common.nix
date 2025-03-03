@@ -27,6 +27,7 @@ in {
       description = "Whether to wrap applications with nixGL";
     };
   };
+
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
     inputs.nix-colors.homeManagerModules.default
@@ -41,11 +42,12 @@ in {
       htop
       btop
       logseq
-      obsidian
       gnumake
       custom-kew
       vlc
+      keepassxc
     ];
+    programs.firefox.nativeMessagingHosts = [ pkgs.keepassxc ];
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";
   };
