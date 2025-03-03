@@ -6,6 +6,7 @@
     ./adguard.nix
     ./immich.nix
     ./syncthing.nix
+    ./nix-serve.nix
   ];
 
   home-manager = {
