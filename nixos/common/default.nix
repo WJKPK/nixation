@@ -18,7 +18,10 @@ in {
       allowUnfreePredicate = (_: true);
       permittedInsecurePackages = [
         "electron-27.3.11" # logseq dep
+        "segger-jlink-qt4-796s"
+        "segger-jlink-qt4-810"
       ];
+      segger-jlink.acceptLicense = true;
     };
   };
 
@@ -34,6 +37,13 @@ in {
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
+      substituters = [ 
+          "https://cache.nixos.org"
+        ];
+        extra-trusted-public-keys = [
+          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        ];
+
     };
     gc = {
       automatic = true;

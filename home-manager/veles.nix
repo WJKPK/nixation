@@ -35,6 +35,7 @@
       primary = true;
     }
   ];
+  desktop.addons.waybar.enable = true;
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
@@ -46,6 +47,20 @@
   };
   home.packages = with pkgs; [
     nvtopPackages.full
+    arc-theme
+    stm32cubemx
+    saleae-logic-2
+    xfce.thunar
+    xfce.xfce4-appfinder
+    xfce.xfce4-settings
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
+    xfce.ristretto
+    xfce.tumbler
+    logseq
+    nrfutil
+    nrf-command-line-tools
+    segger-jlink
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

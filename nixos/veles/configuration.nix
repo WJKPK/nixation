@@ -35,6 +35,12 @@
   };
 
   networking.hostName = "veles";
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = [
+    # Add any missing dynamic libraries for unpackaged programs
+  ];
+
   services = {
     libinput = {
       enable = true;
@@ -81,10 +87,9 @@
       };
   };
   nix.settings = {
-    substituters = [ "192.168.1.121:5050"
-                     ];
+    substituters = [ "http://192.168.1.121:5050" ];
     trusted-public-keys = [
-      "rod.:Heo/aYT+t88zY84icFimhsYkDPWvkN1oqiGA+eD5n8A=%"
+      "rod.:Heo/aYT+t88zY84icFimhsYkDPWvkN1oqiGA+eD5n8A="
     ];
   };
 
