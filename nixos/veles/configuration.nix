@@ -89,7 +89,7 @@
   nix.settings = {
     substituters = [ "http://192.168.1.121:5050" ];
     trusted-public-keys = [
-      "rod.:Heo/aYT+t88zY84icFimhsYkDPWvkN1oqiGA+eD5n8A="
+      "192.168.1.121:fnlnYpQQiCll81ZIkTrJTN49sGKPl1d3Pro58BcS5MM="
     ];
   };
 
