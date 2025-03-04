@@ -80,6 +80,13 @@
         };
       };
   };
+  nix.settings = {
+    substituters = [ "192.168.1.121:5050"
+                     ];
+    trusted-public-keys = [
+      "rod.:Heo/aYT+t88zY84icFimhsYkDPWvkN1oqiGA+eD5n8A=%"
+    ];
+  };
 
   security.protectKernelImage = false;
   boot.resumeDevice = "/dev/disk/by-uuid/54bf766e-32b7-42c6-8c01-58238bf6219b";
