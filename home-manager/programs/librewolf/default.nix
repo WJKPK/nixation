@@ -1,6 +1,8 @@
 { pkgs, ...}: {
   programs.librewolf = {
     enable = true;
+    nativeMessagingHosts = [ pkgs.keepassxc ];
+
     package = pkgs.wrapFirefox pkgs.librewolf-unwrapped {
       inherit (pkgs.librewolf-unwrapped) extraPrefsFiles extraPoliciesFiles;
       wmClass = "LibreWolf";
@@ -18,21 +20,21 @@
     };
     profiles.default = {
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          darkreader
           don-t-fuck-with-paste
           keepassxc-browser
-          return-youtube-dislikes
           ublock-origin
           unpaywall
           vimium-c
           youtube-shorts-block
-          darkreader
+          return-youtube-dislikes
+          youtube-recommended-videos
         ];
         search.default = "https://duckduckgo.com";
         search.privateDefault = "https://duckduckgo.com";
         settings = {
           "browser.aboutConfig.showWarning" = false;
           "browser.contentblocking.category" = "custom";
-          "browser.download.dir" = "/home/charlotte/downloads";
           "browser.newtabpage.enabled" = false;
           "browser.safebrowsing.malware.enabled" = false;
           "browser.safebrowsing.phishing.enabled" = false;

@@ -1,7 +1,4 @@
-{pkgs, lib, ...}:
-let
-    gitIntegration = import ./config/git-integration.nix;
-in {
+{pkgs, config, lib, ...}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -46,36 +43,43 @@ in {
     extraPackages = with pkgs; [
       ripgrep
       fd
-      nixd 
       rust-analyzer
-      wl-clipboard
       clang-tools_16
+      ruff
+      basedpyright
+    ] ++ lib.optionals (!config.minimalTerminal.enable) [
+      wl-clipboard
+      zls
+      tinymist
+      nixd
       lua-language-server
       cmake-language-server
-      tinymist
-      zls
     ];
 
     extraConfig = let
-      luaRequire = module:
-        builtins.readFile (builtins.toString
-          ./config
-          + "/${module}.lua");
+      luaRequire = module: builtins.readFile (
+        builtins.toString ./config + "/${module}"
+      );
+      
+      modules = [
+        "utils.lua"
+        "vim-setup.lua"
+        "code-processing.lua"
+        "git-integration.lua"
+        "theming.lua"
+        "which-key.lua"
+        "dashboard.lua"
+        "navigation.lua"
+      ];
+      
       luaConfig = ''
-        ${gitIntegration { inherit lib; minimalNvim = false; }}
-        ${builtins.concatStringsSep "\n" (map luaRequire [
-          "utils"
-          "vim-setup"
-          "code-processing"
-          "theming"
-          "which-key"
-          "dashboard"
-          "navigation"
-        ])}
+        vim.g.nix_minimal_mode = ${lib.boolToString config.minimalTerminal.enable}
+        ${builtins.concatStringsSep "\n" (map luaRequire modules)}
       '';
     in ''
-      lua <<
+      lua << EOF
       ${luaConfig}
+      EOF
     '';
   };
 
@@ -84,10 +88,11 @@ in {
     paths = (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: with plugins; [
       c
       rust
-      lua
       cpp
       python
       query
+    ]++ lib.optionals (!config.minimalTerminal.enable) [
+      lua
       nix
       latex
       typst

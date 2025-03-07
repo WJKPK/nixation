@@ -1,5 +1,3 @@
-{ lib, minimalNvim ? false, ... }:
-''
 require('gitsigns').setup({
   current_line_blame = true,
   current_line_blame_opts = {
@@ -11,5 +9,4 @@ require('gitsigns').setup({
     use_focus = true,
   }
 })
-''
 

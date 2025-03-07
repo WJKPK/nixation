@@ -3,30 +3,40 @@ local treesitter = require("nvim-treesitter.configs")
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 require('nvim-autopairs').setup{}
-lspc.nixd.setup{}
-lspc.clangd.setup{}
-lspc.rust_analyzer.setup{}
-lspc.cmake.setup{}
-lspc.zls.setup {}
-lspc.lua_ls.setup{
-  settings = {
-    Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-    },
-  },
-}
-lspc.tinymist.setup {
-    settings = {
-        formatterMode = "typstyle",
-        exportPdf = "onType",
-        semanticTokens = "disable"
-    }
-}
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+if not vim.g.nix_minimal_mode then
+    lspc.nixd.setup{capabilities = capabilities}
+    lspc.zls.setup {capabilities = capabilities}
+    lspc.lua_ls.setup{
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = {'vim'},
+          },
+        },
+      },
+    }
+    lspc.tinymist.setup {
+        capabilities = capabilities,
+        settings = {
+            formatterMode = "typstyle",
+            exportPdf = "onType",
+            semanticTokens = "disable"
+        }
+    }
+end
+
+lspc.clangd.setup{capabilities = capabilities}
+lspc.rust_analyzer.setup{capabilities = capabilities}
+lspc.cmake.setup{capabilities = capabilities}
+lspc.ruff.setup({capabilities = capabilities})
+lspc.basedpyright.setup{capabilities = capabilities}
 treesitter.setup({
+
 	highlight = {
 		enable = true,
 		disable = { "lua" },

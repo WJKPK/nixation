@@ -22,6 +22,7 @@
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
     ./programs/prusa-slicer
+    ./programs/keepassxc
   ];
   monitors = [
     {
@@ -51,7 +52,6 @@
     nvtopPackages.full
     stm32cubemx
     xfce.xfburn
-    firefox
     inputs.dni.packages.${pkgs.system}.default
   ];
 

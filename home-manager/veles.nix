@@ -21,6 +21,7 @@
     ./programs/hyprlock
     ./programs/librewolf
     ./programs/hyprshade
+    ./programs/keepassxc
   ];
 
   monitors = [

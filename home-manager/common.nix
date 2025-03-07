@@ -1,4 +1,4 @@
-{ inputs, outputs, pkgs, lib, ... }: 
+{ inputs, outputs, pkgs, ... }: 
 let
   custom-kew = pkgs.kew.overrideAttrs (oldAttrs: {
     version = "2.8.2";
@@ -45,9 +45,8 @@ in {
       gnumake
       custom-kew
       vlc
-      keepassxc
     ];
-    programs.firefox.nativeMessagingHosts = [ pkgs.keepassxc ];
+
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";
   };

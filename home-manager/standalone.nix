@@ -14,6 +14,7 @@
     ./programs/openscad
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
+    ./programs/keepassxc/
     ./common.nix
   ];
 
