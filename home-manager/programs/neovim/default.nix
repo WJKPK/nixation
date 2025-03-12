@@ -47,13 +47,13 @@
       clang-tools_16
       ruff
       basedpyright
+      cmake-language-server
     ] ++ lib.optionals (!config.minimalTerminal.enable) [
       wl-clipboard
       zls
       tinymist
       nixd
       lua-language-server
-      cmake-language-server
     ];
 
     extraConfig = let
@@ -89,6 +89,7 @@
       c
       rust
       cpp
+      cmake
       python
       query
     ]++ lib.optionals (!config.minimalTerminal.enable) [

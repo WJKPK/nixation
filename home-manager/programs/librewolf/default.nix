@@ -1,13 +1,10 @@
 { pkgs, ...}: {
   programs.librewolf = {
     enable = true;
-    nativeMessagingHosts = [ pkgs.keepassxc ];
-
-    package = pkgs.wrapFirefox pkgs.librewolf-unwrapped {
-      inherit (pkgs.librewolf-unwrapped) extraPrefsFiles extraPoliciesFiles;
-      wmClass = "LibreWolf";
-      libName = "librewolf";
-      nativeMessagingHosts = with pkgs; [ keepassxc ];
+    package = pkgs.librewolf.override {
+      nativeMessagingHosts = with pkgs; [
+        keepassxc
+      ];
     };
     policies = {
       DisableFirefoxStudies = true;
