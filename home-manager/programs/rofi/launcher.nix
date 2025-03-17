@@ -44,7 +44,7 @@ in
             spacing = mkLiteral "0px";
             border = mkLiteral "2px";
             border-color = "@border-color";
-            border-radius = mkLiteral "20px";
+            border-radius = mkLiteral "0px";
             background-color = mkLiteral "@background";
           };
           "mainbox" = {
@@ -62,7 +62,7 @@ in
             padding = mkLiteral "5px 5px 120px 5px";
             margin = mkLiteral "5px";
             background-color = mkLiteral "transparent";
-            border-radius = "25px";
+            border-radius = "0px";
             orientation = mkLiteral "horizontal";
             children = map mkLiteral [
               "entry"
@@ -76,7 +76,7 @@ in
             expand = false;
             width = mkLiteral "20%";
             padding = mkLiteral "5px";
-            border-radius = mkLiteral "6px";
+            border-radius = mkLiteral "0px";
             background-color = mkLiteral "@selected";
             text-color = mkLiteral "@text-selected";
             cursor = mkLiteral "text";
@@ -120,7 +120,7 @@ in
           "button" = {
             width = mkLiteral "5%";
             padding = mkLiteral "6px";
-            border-radius = mkLiteral "6px";
+            border-radius = mkLiteral "0px";
             background-color = mkLiteral "@text-selected";
             text-color = mkLiteral "@text-color";
             cursor = mkLiteral "pointer";
@@ -140,7 +140,7 @@ in
             enabled = true;
             spacing = mkLiteral "5px";
             padding = mkLiteral "5px";
-            border-radius = mkLiteral "6px";
+            border-radius = mkLiteral "0px";
             background-color = mkLiteral "transparent";
             cursor = mkLiteral "pointer";
           };
@@ -200,7 +200,7 @@ in
           };
           "textbox" = {
             padding = mkLiteral "6px";
-            border-radius = mkLiteral "5px";
+            border-radius = mkLiteral "0px";
             background-color = mkLiteral "@background-alt";
             text-color = mkLiteral "@background";
             vertical-align = mkLiteral "0.5";
@@ -208,7 +208,7 @@ in
           };
           "error-message" = {
             padding = mkLiteral "6px";
-            border-radius = mkLiteral "20px";
+            border-radius = mkLiteral "0px";
             background-color = mkLiteral "@background-alt";
             text-color = mkLiteral "@background";
           };

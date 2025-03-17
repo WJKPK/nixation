@@ -17,23 +17,27 @@ in
        logout='󰍃'
        yes='󰸞'
        no='󱎘'
-       
+
+       uptime="`uptime -p | sed -e 's/up //g'`"
+
        rofi_cmd() {
          rofi -dmenu \
-           -theme ${powermenu_config}
+            -p "Uptime: $uptime" \
+            -mesg "Uptime: $uptime" \
+            -theme ${powermenu_config}
        }
-       
-       confirm_cmd() {
-         rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
-           -theme-str 'mainbox {children: [ "message", "listview" ];}' \
-           -theme-str 'listview {columns: 2; lines: 1;}' \
-           -theme-str 'element-text {horizontal-align: 0.5;}' \
-           -theme-str 'textbox {text-color: @foreground; background-color: @background-tb; horizontal-align: 0.5;}' \
-           -dmenu \
-           -p 'Confirmation' \
-           -mesg 'Are you sure?' \
-           -theme ${powermenu_config}
-       }
+
+        confirm_cmd() {
+        	rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
+        		-theme-str 'mainbox {children: [ "message", "listview" ];}' \
+        		-theme-str 'listview {columns: 2; lines: 1;}' \
+        		-theme-str 'element-text {width: 350px; horizontal-align: 0.5;}' \
+        		-theme-str 'textbox {horizontal-align: 0.5;}' \
+        		-dmenu \
+        		-p 'Confirmation' \
+        		-mesg 'Are you Sure?' \
+                -theme ${powermenu_config}
+        }
        
        confirm_exit() {
          echo -e "$yes\n$no" | confirm_cmd

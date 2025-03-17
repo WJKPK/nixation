@@ -38,7 +38,7 @@ in
           /* `otf-font-awesome` is required to be installed for icons */
           font-family: JetBrainsMono Nerd Font;
           font-size: 16px;
-          border-radius: 12px;
+          border-radius: 0px;
         }
 
         #clock,
@@ -57,7 +57,7 @@ in
 
         #tray {
           padding: 5 15px;
-          border-radius: 12px;
+          border-radius: 0px;
           background: #${config.colorScheme.palette.base00};
           color: #${config.colorScheme.palette.base07};
           margin-top: 4px;
@@ -74,7 +74,7 @@ in
 
         window#waybar {
           background-color: rgba(0, 0, 0, 0.096);
-          border-radius: 17px;
+          border-radius: 0px;
         }
 
         window * {
@@ -99,7 +99,7 @@ in
 
         #workspaces {
           background-color: transparent;
-          border-radius: 14px;
+          border-radius: 0px;
           padding: 5 0px;
           margin-top: 3px;
           margin-bottom: 3px;
@@ -107,7 +107,7 @@ in
 
         #workspaces button {
           background-color: #${config.colorScheme.palette.base00};
-          border-radius: 12px;
+          border-radius: 0px;
           margin-left: 10px;
 
           transition: all 0.3s ease;
@@ -199,7 +199,7 @@ in
           background-size: 400% 100%;
           animation: grey-gradient 3s linear infinite;
           min-width: 500px;
-          border-radius: 17px;
+          border-radius: 0px;
         }
       '';
       onChange = ''
