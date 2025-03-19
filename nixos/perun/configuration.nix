@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ./virt-manager.nix
     ./docker.nix
+    ./remote-builder.nix
   ];
 
   home-manager = {
@@ -48,6 +49,14 @@
     nvidiaManagement.vfio.enable = lib.mkForce false;
     nvidia-undervolt.enable = lib.mkForce true;
   };
+
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true;
+  };
+
+  networking.firewall.allowedTCPPorts = [ 22 ];
+
 
   services = {
     ollama = {
