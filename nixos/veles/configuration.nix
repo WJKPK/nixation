@@ -87,9 +87,9 @@
       };
   };
   nix.settings = {
-    substituters = [ "http://192.168.1.121:5050" ];
+    substituters = [ "http://rod" ];
     trusted-public-keys = [
-      "192.168.1.121:fnlnYpQQiCll81ZIkTrJTN49sGKPl1d3Pro58BcS5MM="
+      "rod:X4DIb22/yZroa+tm0DLZgtgq2EEBhm28EtrwbHUxT+0="
     ];
   };
 

@@ -4,7 +4,7 @@
 # nix-store --generate-binary-cache-key $(hostname).$(hostname -d) cache-priv-key.pem cache-pub-key.pem
 #
 # curl localhost:5050/nix-cache-info
-{ pkgs, ...}:
+{ pkgs, config, ...}:
 let
     serve_port = 5050;
 in {
@@ -16,8 +16,17 @@ in {
       port = serve_port;
     };
   };
+
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    virtualHosts.cache = {
+      locations."/".proxyPass = "http://${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}";
+    };
+  };
+
   networking.firewall = {
-    allowedTCPPorts = [ serve_port ];
+    allowedTCPPorts = [ config.services.nginx.defaultHTTPListenPort ];
   };
 }
 
