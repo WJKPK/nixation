@@ -14,6 +14,7 @@
       cmp-spell
       cmp-treesitter
       cmp-vsnip
+      minuet-ai-nvim
       friendly-snippets
       gitsigns-nvim
       lightline-vim

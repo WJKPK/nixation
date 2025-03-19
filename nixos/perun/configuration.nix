@@ -32,6 +32,8 @@
     };
   };
 
+  nvidia-undervolt.enable = true;
+
   graphicalEnvironment = {
       enable = true;
       compositor = {
@@ -44,6 +46,7 @@
   specialisation."ML-spec".configuration = {
     system.nixos.tags = [ "ML-spec" ];
     nvidiaManagement.vfio.enable = lib.mkForce false;
+    nvidia-undervolt.enable = lib.mkForce true;
   };
 
   services = {

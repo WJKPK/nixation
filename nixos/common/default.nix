@@ -4,6 +4,7 @@ let
 in {
   imports = [
     ./nvidia-management.nix
+    ./nvidia-undervolt.nix
     ./gui.nix
     ./fonts.nix
   ];

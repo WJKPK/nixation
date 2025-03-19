@@ -37,6 +37,7 @@
       primary = true;
     }
   ];
+
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
@@ -47,6 +48,7 @@
     userEmail = "krupskiwojciech@gmail.com";
     userName = "WJKPK";
   };
+
   desktop.addons.waybar.enable = true;
   home.packages = with pkgs; [
     nvtopPackages.full
