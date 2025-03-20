@@ -4,7 +4,7 @@
     createHome = false;
     group = "remotebuild";
 
-    openssh.authorizedKeys.keyFiles = [ ./remotebuilder.pub ];
+    openssh.authorizedKeys.keyFiles = [ ./veles_remotebuilder.pub ./remotebuilder.pub ];
   };
 
   users.groups.remotebuild = {};
