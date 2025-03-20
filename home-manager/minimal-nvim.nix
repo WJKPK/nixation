@@ -18,7 +18,9 @@
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
+
   minimalTerminal.enable = true;
+
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

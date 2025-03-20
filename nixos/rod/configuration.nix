@@ -7,6 +7,7 @@
     ./immich.nix
     ./syncthing.nix
     ./nix-serve.nix
+    ./distributed-builds.nix
   ];
 
   home-manager = {

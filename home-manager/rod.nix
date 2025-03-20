@@ -16,6 +16,9 @@
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
   };
+
+  minimalTerminal.enable = true;
+
   programs.git = {
     enable = true;
     userEmail = "krupskiwojciech@gmail.com";
