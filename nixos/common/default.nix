@@ -38,15 +38,19 @@ in {
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
-
+      trusted-users = [
+        "root" "kruppenfield"
+      ];
       substituters = [ 
-          "https://cache.nixos.org"
-          "https://cuda-maintainers.cachix.org"
-        ];
-        extra-trusted-public-keys = [
-          "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-          "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
-        ];
+        "https://cuda-maintainers.cachix.org"
+	    "https://hyprland.cachix.org"
+	    "http://rod"
+      ];
+      trusted-public-keys = [
+        "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "rod-1:X4DIb22/yZroa+tm0DLZgtgq2EEBhm28EtrwbHUxT+0="
+      ];
     };
     gc = {
       automatic = true;

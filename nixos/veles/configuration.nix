@@ -4,6 +4,7 @@
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
     ../common
     ./hardware-configuration.nix
+    ./distributed-builds.nix
   ];
 
   home-manager = {
@@ -85,12 +86,6 @@
           Enable = "Source,Sink,Media,Socket";
         };
       };
-  };
-  nix.settings = {
-    substituters = [ "http://rod" ];
-    trusted-public-keys = [
-      "rod:X4DIb22/yZroa+tm0DLZgtgq2EEBhm28EtrwbHUxT+0="
-    ];
   };
 
   security.protectKernelImage = false;
