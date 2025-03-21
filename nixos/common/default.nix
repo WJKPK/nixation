@@ -18,7 +18,6 @@ in {
       allowUnfree = true;
       allowUnfreePredicate = (_: true);
       permittedInsecurePackages = [
-        "electron-27.3.11" # logseq dep
         "segger-jlink-qt4-796s"
         "segger-jlink-qt4-810"
       ];
@@ -41,10 +40,10 @@ in {
       trusted-users = [
         "root" "kruppenfield"
       ];
+      trusted-substituters = [ "http://rod" ];
       substituters = [ 
         "https://cuda-maintainers.cachix.org"
 	    "https://hyprland.cachix.org"
-	    "http://rod"
       ];
       trusted-public-keys = [
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="

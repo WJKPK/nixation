@@ -41,7 +41,6 @@ in {
       killall
       htop
       btop
-      logseq
       gnumake
       custom-kew
       vlc

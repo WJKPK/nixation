@@ -18,7 +18,6 @@
     xfce.thunar-volman
     xfce.ristretto
     xfce.tumbler
-    logseq
   ];
 
   nonGuiApps = with pkgs; [

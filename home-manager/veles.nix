@@ -58,7 +58,6 @@
     xfce.thunar-volman
     xfce.ristretto
     xfce.tumbler
-    logseq
     nrfutil
     nrf-command-line-tools
     segger-jlink
