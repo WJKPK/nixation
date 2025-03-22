@@ -25,13 +25,150 @@ in
         target = "hyprland-session.target";
       };
     };
-
     home.file.".config/waybar/config.jsonc" = {
-      source = ./config.jsonc;
+      text = ''
+      {
+        "layer": "top",
+        "position": "top",
+        "mod": "dock",
+        "exclusive": true,
+        "passtrough": false,
+        "gtk-layer-shell": true,
+        "height": 48,
+
+        "modules-left": [
+            "hyprland/workspaces",
+        ],
+
+        "modules-center": [],
+
+        "modules-right": [
+        	"tray",
+            "temperature",
+            "custom/gpu",
+            "network",
+            "battery",
+            "clock",
+            "custom/powermenu"
+        ],
+
+        "hyprland/window": {
+            "format": "{}"
+        },
+
+        "hyprland/workspaces": {
+            "on-scroll-up": "hyprctl dispatch workspace e+1",
+            "on-scroll-down": "hyprctl dispatch workspace e-1",
+            "all-outputs": true,
+            "on-click": "activate",
+            "format": "{icon}",
+            "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "10"
+            }
+        },
+
+        "tray": {
+            "icon-size": 12,
+            "tooltip": false,
+            "spacing": 10
+        },
+
+        "clock": {
+            "format": "{:%H:%M}",
+            "format-alt": "{:%A, %B %d, %Y (%R)} 󱄅",
+            "tooltip-format": "<tt><small>{calendar}</small></tt>",
+            "calendar": {
+            	"mode"          : "year",
+            	"mode-mon-col"  : 3,
+            	"weeks-pos"     : "right",
+            	"on-scroll"     : 1,
+            	"on-click-right": "mode",
+            	"format": {
+            		"months":     "<span color='#${config.colorScheme.palette.base0B}'><b>{}</b></span>",
+            		"days":       "<span color='#${config.colorScheme.palette.base0F}'><b>{}</b></span>",
+            		"weeks":      "<span color='#${config.colorScheme.palette.base0E}'><b>W{}</b></span>",
+            		"weekdays":   "<span color='#${config.colorScheme.palette.base0A}'><b>{}</b></span>",
+            		"today":      "<span color='#${config.colorScheme.palette.base08}'><b><u>{}</u></b></span>"
+            	}
+            },
+            "actions": {
+            	"on-click-right": "mode",
+            	"on-click-forward": "tz_up",
+            	"on-click-backward": "tz_down",
+            	"on-scroll-up": "shift_up",
+            	"on-scroll-down": "shift_down"
+            }
+        },
+
+        "pulseaudio": {
+            "format": "  {volume}%",
+            "tooltip": false,
+            "format-muted": "  N/A",
+            "on-click": "pavucontrol &",
+            "scroll-step": 5
+        },
+
+        "network": {
+            "format-disconnected": "󰈂",
+            "format-ethernet" : "󰒢",
+            "format-linked" : "󰖪 {essid} (No IP)",
+            "format-wifi" : "󰖩 {essid} {signalStrength}%",
+            "interval" : 1,
+            "tooltip" : false,
+            "on-click" : "kitty --class nmwui nmtui"
+        },
+
+        "custom/powermenu" : {
+            "format" : "",
+            "on-click" : "bash ~/.config/rofi/power.sh",
+            "tooltip" : false
+        },
+
+        "battery": {
+            "states": {
+                "warning": 20,
+                "critical": 15
+            },
+            "format": "󰁹 {capacity}%",
+            "format-charging": "󰂄 {capacity}%",
+            "format-plugged": "󰂄 {capacity}%"
+        },
+
+        "temperature" : {
+            "critical-threshold" : 90,
+            "on-click" : "kitty --class center-float-large btop",
+            "hwmon-path" : "/sys/class/hwmon/hwmon1/temp1_input",
+            "format-critical" : "{icon} {temperatureC}°C",
+            "format" : "{icon} {temperatureC}°C",
+            "format-icons" :  ["", "", ""],
+            "tooltip" : true,
+            "interval" : 3
+        },
+
+        "custom/gpu" : {
+            "exec" : "nvidia-smi --query-gpu:temperature.gpu --format:csv,noheader",
+            "critical-threshold" : 90,
+            "format" : "{icon} {}°C",
+            "format-icons" :  ["", "", ""],
+            "tooltip" : true,
+            "interval" : 3
+        }
+      }
+      '';
       onChange = ''
         ${pkgs.busybox}/bin/pkill -SIGUSR2 waybar
       '';
     };
+
     home.file.".config/waybar/style.css" = {
       text = ''
         * {
@@ -200,6 +337,11 @@ in
           animation: grey-gradient 3s linear infinite;
           min-width: 500px;
           border-radius: 0px;
+        }
+
+        tooltip {
+          border-radius: 0px;
+          background-color: #${config.colorScheme.palette.base00};
         }
       '';
       onChange = ''
