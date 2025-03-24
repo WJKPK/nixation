@@ -15,6 +15,10 @@
   nvidiaManagement.driver.enable = false;
   boot.kernelPackages = pkgs.linuxPackages_6_12;
 
+  environment.systemPackages = with pkgs; [
+    wireguard-tools
+  ];
+
   specialisation."GPU-enable".configuration = {
     system.nixos.tags = [ "GPU-enable" ];
     nvidiaManagement = {
@@ -35,7 +39,16 @@
       };
   };
 
-  networking.hostName = "veles";
+  networking = {
+    hostName = "veles";
+    wg-quick.interfaces.veles = {
+      configFile = "/etc/wireguard/veles.conf";
+    };
+    firewall = {
+        allowedUDPPorts = [ 51820 52810 ];
+        checkReversePath = false;
+    };
+  };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = [
