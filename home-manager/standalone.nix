@@ -30,6 +30,11 @@
     };
   };
 
+  aiCodingSupport = {
+    enable = true;
+    llmModelName = "qwen2.5-coder:3b";
+  };
+
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];

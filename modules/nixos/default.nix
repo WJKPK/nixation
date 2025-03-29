@@ -1,3 +1,2 @@
 {
-  hw = import ./hw.nix;
 }

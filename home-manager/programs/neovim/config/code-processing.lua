@@ -28,23 +28,6 @@ if not vim.g.nix_minimal_mode then
             semanticTokens = "disable"
         }
     }
-    require('minuet').setup {
-        provider = 'openai_fim_compatible',
-        n_completions = 1, -- recommend for local model for resource saving
-        context_window = 2048,
-        provider_options = {
-            openai_fim_compatible = {
-                api_key = 'TERM',
-                name = 'Ollama',
-                end_point = 'http://localhost:11434/v1/completions',
-                model = 'qwen2.5-coder:14b',
-                optional = {
-                    max_tokens = 256,
-                    top_p = 0.9,
-                },
-            },
-        },
-    }
 end
 lspc.clangd.setup{capabilities = capabilities}
 lspc.rust_analyzer.setup{capabilities = capabilities}
@@ -85,14 +68,13 @@ end
 
 cmp.setup({
 	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "cmp_tabnine" },
-		{ name = "treesitter" },
-		{ name = "buffer" },
-		{ name = "path" },
-		{ name = "vsnip" },
-        { name = 'minuet' },
-	},
+        { name = "nvim_lsp" },
+        { name = "cmp_tabnine" },
+        { name = "treesitter" },
+        { name = "buffer" },
+        { name = "path" },
+        { name = "vsnip" },
+    },
     performance = {
         -- It is recommended to increase the timeout duration due to
         -- the typically slower response speed of LLMs compared to
@@ -116,7 +98,6 @@ cmp.setup({
 				treesitter = "[TS]",
 				cmp_tabnine = "[TN]",
 				vsnip = "[Snip]",
-                minuet = '[LLM]'
 			},
 		}),
 	},

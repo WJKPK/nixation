@@ -1,4 +1,7 @@
 {pkgs, config, lib, ...}: {
+   home.sessionVariables = {
+     ANTHROPIC_API_KEY = "";
+  };
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -39,6 +42,68 @@
       vim-tmux-navigator
       markview-nvim
       nvim-web-devicons
+    ] ++ lib.optionals (config.aiCodingSupport.enable) [
+      {
+        plugin = pkgs.vimPlugins.avante-nvim.overrideAttrs (oldAttrs: {
+          src = pkgs.fetchFromGitHub {
+            owner = "yetone";
+            repo = "avante.nvim";
+            rev = "master";
+            hash = "sha256-7qvx/VypcaTutrNvIo7kGn+MAetTXYTQRPgRK2+eoDA=";
+          };
+          version = "unstable";
+           nvimSkipModules = oldAttrs.nvimSkipModules ++ [
+            "avante.providers.vertex_claude"
+            "avante.providers.ollama"
+          ]; 
+        }); 
+        type = "lua";
+        config = ''
+          local opts = {
+            provider = "ollama",
+            use_absolute_path = true,
+            auto_suggestions_provider = "ollama",
+              ---@type AvanteProvider
+              ollama = {
+                endpoint = "http://localhost:11434",
+                model = "${config.aiCodingSupport.llmModelName}",
+              },
+            behaviour = {
+              auto_suggestions = false, -- Experimental stage
+              auto_set_highlight_group = true,
+              auto_set_keymaps = true,
+              auto_apply_diff_after_generation = false,
+              support_paste_from_clipboard = true,
+            },
+            hints = { enabled = true },
+            windows = {
+              position = "right",
+              wrap = true,
+              width = 30,
+              sidebar_header = {
+                align = "center", -- left, center, right for title
+                rounded = false,
+              },
+            },
+            highlights = {
+              ---@type AvanteConflictHighlights
+              diff = {
+                current = "DiffText",
+                incoming = "DiffAdd",
+              },
+            },
+            --- @class AvanteConflictUserConfig
+            diff = {
+              autojump = true,
+              ---@type string | fun(): any
+              list_opener = "copen",
+            },
+   	      };  
+          require("avante_lib").load()
+          require("avante").setup()
+          require("avante.config").setup(opts)
+        '';
+      }
     ];
 
     extraPackages = with pkgs; [
@@ -75,6 +140,7 @@
       
       luaConfig = ''
         vim.g.nix_minimal_mode = ${lib.boolToString config.minimalTerminal.enable}
+        vim.g.ai_support = ${lib.boolToString config.aiCodingSupport.enable}
         ${builtins.concatStringsSep "\n" (map luaRequire modules)}
       '';
     in ''

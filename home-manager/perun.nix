@@ -37,7 +37,10 @@
       primary = true;
     }
   ];
-
+  aiCodingSupport = {
+    enable = true;
+    llmModelName = "qwen2.5-coder:14b";
+  };
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
