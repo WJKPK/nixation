@@ -1,7 +1,4 @@
 {pkgs, config, lib, ...}: {
-   home.sessionVariables = {
-     ANTHROPIC_API_KEY = "";
-  };
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -44,64 +41,80 @@
       nvim-web-devicons
     ] ++ lib.optionals (config.aiCodingSupport.enable) [
       {
-        plugin = pkgs.vimPlugins.avante-nvim.overrideAttrs (oldAttrs: {
-          src = pkgs.fetchFromGitHub {
-            owner = "yetone";
-            repo = "avante.nvim";
-            rev = "master";
-            hash = "sha256-7qvx/VypcaTutrNvIo7kGn+MAetTXYTQRPgRK2+eoDA=";
-          };
-          version = "unstable";
-           nvimSkipModules = oldAttrs.nvimSkipModules ++ [
-            "avante.providers.vertex_claude"
-            "avante.providers.ollama"
-          ]; 
-        }); 
+        plugin = pkgs.vimPlugins.codecompanion-nvim; 
         type = "lua";
         config = ''
-          local opts = {
-            provider = "ollama",
-            use_absolute_path = true,
-            auto_suggestions_provider = "ollama",
-              ---@type AvanteProvider
-              ollama = {
-                endpoint = "http://localhost:11434",
-                model = "${config.aiCodingSupport.llmModelName}",
-              },
-            behaviour = {
-              auto_suggestions = false, -- Experimental stage
-              auto_set_highlight_group = true,
-              auto_set_keymaps = true,
-              auto_apply_diff_after_generation = false,
-              support_paste_from_clipboard = true,
-            },
-            hints = { enabled = true },
-            windows = {
-              position = "right",
-              wrap = true,
-              width = 30,
-              sidebar_header = {
-                align = "center", -- left, center, right for title
-                rounded = false,
+          require("codecompanion").setup {
+            display = {
+              action_palette = {
+                provider = "telescope",
               },
             },
-            highlights = {
-              ---@type AvanteConflictHighlights
-              diff = {
-                current = "DiffText",
-                incoming = "DiffAdd",
+            opts = {
+              system_prompt = function(opts)
+                return [[
+                  You are a technical advisor to an experienced software engineer working in Neovim.
+                  
+                  Assume advanced programming knowledge and familiarity with software engineering principles.
+                  
+                  When responding:
+                  - Prioritize technical depth and architectural implications
+                  - Focus on edge cases, performance considerations, and scalability
+                  - Discuss trade-offs between different approaches when relevant
+                  - Skip explanations of standard patterns or basic concepts unless requested
+                  - Reference advanced patterns, algorithms, or design principles when applicable
+                  - Prefer showing code over explaining it unless analysis is specifically requested
+                  
+                  For code improvement:
+                  - Focus on optimizations beyond obvious refactorings
+                  - Highlight potential concurrency issues, memory management concerns, or runtime complexity
+                  - Consider backwards compatibility, maintainability, and testing implications
+                  - Suggest modern idioms and language features when appropriate
+                  
+                  For architecture discussions:
+                  - Consider system boundaries, coupling concerns, and dependency management
+                  - Address long-term maintenance and extensibility implications
+                  - Discuss relevant architectural patterns without overexplaining them
+                  
+                  Deliver responses with professional brevity. Skip preamble and unnecessary context.
+                ]]
+              end,
+            },
+            strategies = {
+              chat = {
+                adapter = "ollama-qwen2.5-coder",
+                slash_commands = {
+                  ['buffer'] = { opts = { provider = 'telescope' } },
+                  ['file'] = { opts = { provider = 'telescope' } },
+                  ["files"] = { opts = { provider = 'telescope' } },
+                },
+              },
+              inline = {
+                adapter = "ollama-qwen2.5-coder",
               },
             },
-            --- @class AvanteConflictUserConfig
-            diff = {
-              autojump = true,
-              ---@type string | fun(): any
-              list_opener = "copen",
+            adapters = {
+              ["ollama-qwen2.5-coder"] = function()
+                return require("codecompanion.adapters").extend(
+                  "ollama",
+                  {
+                    name = "qwen2.5-coder",
+                    schema = {
+                      model = {
+                        default = "${config.aiCodingSupport.llmModelName}",
+                      },
+                      num_ctx = {
+                        default = 16384,
+                      },
+                      num_predict = {
+                        default = -1,
+                      },
+                    },
+                  }
+                )
+              end,
             },
-   	      };  
-          require("avante_lib").load()
-          require("avante").setup()
-          require("avante.config").setup(opts)
+        }
         '';
       }
     ];
@@ -178,3 +191,4 @@
     terminal = false;
   };
 }
+

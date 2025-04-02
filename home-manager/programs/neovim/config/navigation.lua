@@ -33,16 +33,16 @@ telescope.setup {
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
-    };
+    },
     live_grep_args = {
       auto_quoting = true, -- enable/disable auto-quoting
       -- define mappings, e.g.
       mappings = { -- extend mappings
         i = {
-          ["<C-w>"] = lga_actions.quote_prompt(),
-          ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
           -- freeze the current list and start a fuzzy search in the frozen list
           ["<C-space>"] = actions.to_fuzzy_refine,
+          ["<C-w>"] = lga_actions.quote_prompt(),
+          ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
         },
       },
       -- ... also accepts theme settings, for example:
@@ -50,8 +50,15 @@ telescope.setup {
       -- theme = { }, -- use own theme spec
       -- layout_config = { mirror=true }, -- mirror preview pane
     }
-  };
+  },
   defaults = {
+    mappings = {
+      i = {
+        ["<C-DOWN>"] = require('telescope.actions').cycle_history_next,
+        ["<C-UP>"] = require('telescope.actions').cycle_history_prev,
+      },
+      n = i,
+    },
     file_ignore_patterns = {
       "build",
       ".git",

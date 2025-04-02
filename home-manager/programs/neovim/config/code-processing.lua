@@ -74,6 +74,7 @@ cmp.setup({
         { name = "buffer" },
         { name = "path" },
         { name = "vsnip" },
+        { name = "codecompanion"}
     },
     performance = {
         -- It is recommended to increase the timeout duration due to
@@ -98,6 +99,7 @@ cmp.setup({
 				treesitter = "[TS]",
 				cmp_tabnine = "[TN]",
 				vsnip = "[Snip]",
+				companion = "[LLM]",
 			},
 		}),
 	},

@@ -26,7 +26,9 @@ wk.add({
   { "<leader>s", "<cmd>Yazi cwd<cr>", desc = "Yazi source directory" },
   { "<M-j>", "<cmd>cnext<cr>", desc = "Next quickfix list item" },
   { "<M-k>", "<cmd>cprev<cr>", desc = "Previous quickfix list item" },
-
+  { "<leader>ac", "<cmd>CodeCompanionChat<cr>", desc = "Code Companion Chat", mode = { "n", "v" } },
+  { "<leader>aa", "<cmd>CodeCompanionActions<cr>", desc = "Code Companion Actions", mode = { "n", "v" } },
+  
   -- Visual mode mapping
   { "<leader>y", "\"+y", desc = "Yank to clipboard", mode = "v" },
 })
