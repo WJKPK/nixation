@@ -73,11 +73,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1742305944,
-        "narHash": "sha256-6vMOTCoFlfQWJJsow3c98tUIyicDabLS5sJUq0WrWhA=",
+        "lastModified": 1742808713,
+        "narHash": "sha256-EOr1k9qvgWBJuCtDSD1/emYnB85dkECJQJhsnx67lMk=",
         "owner": "WJKPK",
         "repo": "devcontainer-nix-injector",
-        "rev": "59445f6729cf7f938334ed164b3e798fdb6f50e6",
+        "rev": "f9f4e2c22aa166adc46861ef1d0cf17b018bf7fc",
         "type": "github"
       },
       "original": {

@@ -7,14 +7,12 @@
     ./programs/git
     ./programs/direnv
     ./programs/rofi
-    ./programs/kicad
     ./programs/tmux-sessionizer
     ./programs/yazi
     ./programs/btop
-    ./programs/openscad
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
-    ./programs/keepassxc/
+    ./programs/keepassxc
     ./common.nix
   ];
 
@@ -50,8 +48,8 @@
   ];
 
   home = {
-    username = "wkrupski";
-    homeDirectory = "/home/wkrupski";
+    username = "kruppenfield";
+    homeDirectory = "/home/kruppenfield";
   };
   monitors = [
     {
