@@ -1,6 +1,5 @@
 {
   description = "Nixation";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
@@ -32,8 +31,7 @@
         let pkgs = nixpkgs.legacyPackages.${system};
         in import ./shell.nix { inherit pkgs; }
       );
-
-      overlays = import ./overlays { inherit inputs; };
+    overlays = import ./overlays { inherit inputs; };
       nixosModules = import ./modules/nixos;
       homeManagerModules = import ./modules/home-manager;
 
