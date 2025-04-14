@@ -39,7 +39,7 @@
   ];
   aiCodingSupport = {
     enable = true;
-    llmModelName = "qwen2.5-coder:14b";
+    llmModelName = "qwen2.5-coder:32b";
   };
   home = {
     username = "kruppenfield";

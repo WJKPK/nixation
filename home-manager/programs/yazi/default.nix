@@ -15,13 +15,18 @@
         show_hidden = false;
         show_symlink = true;
       };
-
       preview = {
         tab_size = 2;
         max_width = 2000;
         max_height = 1400;
         cache_dir = "${config.xdg.cacheHome}";
       };
+    };
+
+    keymap = {
+      manager.prepend_keymap = [
+        { run = "close"; on = [ "<Esc>" ]; } 
+      ];
     };
   };
   home.file = {
