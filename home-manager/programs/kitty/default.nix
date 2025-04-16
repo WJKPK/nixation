@@ -34,6 +34,7 @@
       nix-shell = "nix-shell --command zsh";
       nd = "nix develop --command zsh";
       ns = "nix shell --command zsh";
+      vim = "nvim";
     };
 
     home.file = {

@@ -1,7 +1,6 @@
 { pkgs, outputs, inputs, specialArgs, osConfig ? null, ... }: {
   targets.genericLinux.enable = builtins.isNull osConfig;
   imports = [
-    ./programs/neovim
     ./programs/kitty
     ./programs/zsh
     ./programs/git

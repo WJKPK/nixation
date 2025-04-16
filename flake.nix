@@ -18,6 +18,7 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lavix.url = "github:WJKPK/lavix";
   };
 
   outputs = { self, nixpkgs, ... }@inputs:

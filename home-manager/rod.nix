@@ -2,7 +2,6 @@
   imports = [
     ./common.nix
     ./nixos-specific.nix
-    ./programs/neovim
     ./programs/kitty
     ./programs/zsh
     ./programs/git

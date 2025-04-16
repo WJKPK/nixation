@@ -1,7 +1,6 @@
 { pkgs, outputs, inputs, osConfig ? null, ... }: {
   targets.genericLinux.enable = builtins.isNull osConfig;
   imports = [
-    ./programs/neovim
     ./programs/yazi
     ./programs/tmux-sessionizer
     ./programs/zsh
@@ -23,6 +22,7 @@
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    inputs.lavix.packages.${pkgs.system}.default
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
     cascadia-code

@@ -38,6 +38,7 @@ in {
     colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
+      inputs.lavix.packages.${pkgs.system}.default
       killall
       htop
       btop

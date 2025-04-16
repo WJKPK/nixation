@@ -4,7 +4,6 @@
     ./nixos-specific.nix
     ./wallpapers
 
-    ./programs/neovim
     ./programs/kitty
     ./programs/zsh
     ./programs/git
