@@ -1,25 +1,4 @@
-{ inputs, outputs, pkgs, ... }: 
-let
-  custom-kew = pkgs.kew.overrideAttrs (oldAttrs: {
-    version = "2.8.2";
-    src = pkgs.fetchFromGitHub {
-      owner = "ravachol";
-      repo = "kew";
-      rev = "52745bebb33614afb6c3670874bb5b4049057611";
-      hash = "sha256-engA05eoq4SmRV8LXG7wHsI6XNVoSoI0BL7jb186u4o=";
-    };
-    buildInputs = with pkgs;[
-      ffmpeg
-      fftwFloat
-      chafa
-      glib
-      opusfile
-      libopus
-      libvorbis
-    ];
-    buildFlags = "-I${pkgs.opusfile.dev}/include/opus";
-  });
-in {
+{ inputs, outputs, pkgs, ... }: {
   options.application = {
     wrap-gl = pkgs.lib.mkOption {
       type = pkgs.lib.types.bool;
@@ -43,8 +22,9 @@ in {
       htop
       btop
       gnumake
-      custom-kew
+      kew
       vlc
+      obsidian
     ];
 
     # Nicely reload system units when changing configs

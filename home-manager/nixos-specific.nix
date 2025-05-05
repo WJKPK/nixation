@@ -8,7 +8,7 @@
     hyprshot
     grim
     slurp
-    wl-clipboard
+    #wl-clipboard
     arc-theme
     saleae-logic-2
     xfce.thunar

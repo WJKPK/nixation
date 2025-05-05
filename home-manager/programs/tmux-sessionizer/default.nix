@@ -25,14 +25,21 @@
           set -g @catppuccin_host "on"
         '';
       }
-      {
-        plugin = vim-tmux-navigator;
+     {
+        plugin = resurrect; # Used by tmux-continuum
+        # Use XDG data directory
+        # https://github.com/tmux-plugins/tmux-resurrect/issues/348
         extraConfig = ''
-          set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
-          set -g @vim_navigator_mapping_right "C-Right C-l"
-          set -g @vim_navigator_mapping_up "C-k"
-          set -g @vim_navigator_mapping_down "C-j"
-          set -g @vim_navigator_mapping_prev ""  # removes the C-\ binding
+          set -g @resurrect-dir '$HOME/.cache/tmux/resurrect'
+          set -g @resurrect-capture-pane-contents 'on'
+          set -g @resurrect-pane-contents-area 'visible'
+        '';
+      }
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-save-interval '5' # minutes
         '';
       }
     ];
