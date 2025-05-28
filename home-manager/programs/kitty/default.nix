@@ -1,7 +1,6 @@
 { pkgs, config,  ... }:
   let
-    wrapNixGL = pkgs.callPackage (import ./../wrap-nix-gl.nix) { };
-    wrappedKitty = wrapNixGL pkgs.kitty;
+    wrappedKitty = (config.lib.nixGL.wrap pkgs.kitty);
     kitty = if config.application.wrap-gl then wrappedKitty else pkgs.kitty;
   in {
   config = {

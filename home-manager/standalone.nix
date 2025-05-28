@@ -27,7 +27,7 @@
       allowUnfreePredicate = (_: true);
     };
   };
-
+  nixGL.packages = inputs.nixgl.packages;
   aiCodingSupport = {
     enable = true;
     llmModelName = "qwen2.5-coder:3b";

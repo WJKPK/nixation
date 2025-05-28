@@ -12,7 +12,10 @@
     hyprland.url = "git+https://github.com/hyprwm/Hyprland";
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
     flake-utils.url = "github:numtide/flake-utils";
-    nixgl.url = "github:guibou/nixGL";
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     catppuccin.url = "github:catppuccin/nix";
     dni.url = "github:WJKPK/devcontainer-nix-injector";
     nur = {
