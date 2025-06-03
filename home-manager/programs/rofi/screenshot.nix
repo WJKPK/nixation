@@ -7,41 +7,48 @@
 in
  {
   home.file = {
-   ".config/rofi/screenshot.sh" = {
-     executable = true;
-     text = ''
-      #!/usr/bin/env bash
-
-      if [ "$1" = "--freeze" ]; then
-        extra_args="--freeze"
-      fi
-      
-      # variables
-      filename="captura-$(date +%Y-%m-%d-%s).png"
-      command="${lib.getExe pkgs.hyprshot} -o ${save_dir} -f $filename $extra_args"
-      
-      # options to be displayed
-      region="󰆞"
-      output=""
-      window=""
-      folder=""
-      
-      selected="$(echo -e "$region\n$output\n$window\n$folder" | rofi -dmenu -theme "${screenshot_config}")"
-      case $selected in
-      $region)
-        $command -m region
-        ;;
-      $output)
-        $command -m output
-        ;;
-      $window)
-        $command -m window
-        ;;
-      $folder)
-        ~/.config/rofi/screenshot-selection.sh
-        ;;
-      esac
-     '';
+    ".config/rofi/screenshot.sh" = {
+      executable = true;
+      text = ''
+        #!/usr/bin/env bash
+    
+        if [ "$1" = "--freeze" ]; then
+          extra_args="--freeze"
+        fi
+    
+        # variables
+        filename="captura-$(date +%Y-%m-%d-%s).png"
+        command="${lib.getExe pkgs.hyprshot} -o ${save_dir} -f $filename $extra_args"
+    
+        # wrap command with hyprshot off/auto
+        run_with_mode() {
+          ${lib.getExe pkgs.hyprshade} off
+          "$@"
+          ${lib.getExe pkgs.hyprshade} auto
+        }
+    
+        # options to be displayed
+        region="󰆞"
+        output=""
+        window=""
+        folder=""
+    
+        selected="$(echo -e "$region\n$output\n$window\n$folder" | rofi -dmenu -theme "${screenshot_config}")"
+        case $selected in
+        $region)
+          run_with_mode $command -m region
+          ;;
+        $output)
+          run_with_mode $command -m output
+          ;;
+        $window)
+          run_with_mode $command -m window
+          ;;
+        $folder)
+          ~/.config/rofi/screenshot-selection.sh
+          ;;
+        esac
+      '';
     };
     ".config/rofi/screenshot-selection.sh" = {
     executable = true;
