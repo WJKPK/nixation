@@ -57,6 +57,7 @@
     stm32cubemx
     xfce.xfburn
     inputs.dni.packages.${pkgs.system}.default
+    heroic
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

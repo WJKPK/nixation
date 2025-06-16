@@ -40,6 +40,11 @@ in {
         xwayland.enable = true;
       };
     };
+    services = {
+      hypridle = mkIf (cfg.compositor.type == "hyprland") {
+        enable = cfg.compositor.enable;
+      };
+    };
     environment.systemPackages = with pkgs; [
        gparted
        polkit_gnome
