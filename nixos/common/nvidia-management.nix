@@ -14,8 +14,7 @@ in {
     driver.enable = mkEnableOption "Whether to enable VFIO passthrough for NVIDIA GPU";
     vfio = {
       enable = mkEnableOption "Whether to enable VFIO passthrough for NVIDIA GPU";
-      gpuIDs = mkOption {
-        description = "List of PCI IDs for NVIDIA GPU and its audio component";
+      gpuIDs = mkOption { description = "List of PCI IDs for NVIDIA GPU and its audio component";
         type = lib.types.listOf lib.types.str;
         default = [
         ];
@@ -60,6 +59,10 @@ in {
 
     (mkIf cfg.vfio.enable {
       boot = {
+        extraModprobeConfig = ''
+          softdep late-module pre: early-module-1 early-module-2
+          softdep nvidia pre: vfio vfio_pci
+        '';
         initrd.kernelModules = [
           "vfio_pci"
           "vfio"

@@ -40,7 +40,7 @@
       compositor = {
         enable = true;
         type = "hyprland";
-        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        package = pkgs.hyprland;
       };
   };
 
@@ -83,14 +83,14 @@
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     docker-compose  
+    nvidia-vaapi-driver
   ];
 
   environment = {
     sessionVariables = {
-      GBM_BACKEND = "nvidia-drm";
       __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       LIBVA_DRIVER_NAME = "nvidia";
-      XDG_SESSION_TYPE= "wayland";
+      NVD_BACKEND = "direct";
 
       NIXOS_OZONE_WL = "1";
       MOZ_ENABLE_WAYLAND = 0;

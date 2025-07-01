@@ -35,7 +35,7 @@
       compositor = {
         enable = true;
         type = "hyprland";
-        package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        package = pkgs.hyprland;
       };
   };
 

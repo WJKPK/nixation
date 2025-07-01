@@ -8,7 +8,6 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nix-colors.url = "github:misterio77/nix-colors";
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland";
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
     flake-utils.url = "github:numtide/flake-utils";
     nixgl.url = "github:guibou/nixGL";
