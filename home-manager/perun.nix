@@ -58,6 +58,9 @@
     xfce.xfburn
     inputs.dni.packages.${pkgs.system}.default
     heroic
+    rtl-sdr
+    rtl_433
+    sdrangel
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

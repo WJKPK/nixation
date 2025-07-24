@@ -11,6 +11,7 @@
     #wl-clipboard
     arc-theme
     saleae-logic-2
+    pulseview
     xfce.thunar
     xfce.xfce4-appfinder
     xfce.xfce4-settings

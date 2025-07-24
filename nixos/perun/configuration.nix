@@ -71,6 +71,7 @@
     };
   };
 
+  hardware.rtl-sdr.enable = true;
   hardware.bluetooth = {
     enable = true;
     settings = {

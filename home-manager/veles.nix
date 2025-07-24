@@ -60,6 +60,9 @@
     nrfutil
     nrf-command-line-tools
     segger-jlink
+    rtl-sdr
+    rtl_433
+    sdrangel
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
