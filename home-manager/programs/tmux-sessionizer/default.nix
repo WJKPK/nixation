@@ -48,10 +48,15 @@
         bind | split-window -h
         bind _ split-window -v
         bind t display-popup -E "tms switch"
+
         # yazi releated
         set -g allow-passthrough on
         set -ga update-environment TERM
         set -ga update-environment TERM_PROGRAM
+
+        # lazygit releated
+        bind -n C-j if-shell "[ #{pane_current_command} = lazygit ]" "send-keys C-j"  "select-pane -D"
+        bind -n C-k if-shell "[ #{pane_current_command} = lazygit ]" "send-keys C-k"  "select-pane -U"
     '';
   };
 
