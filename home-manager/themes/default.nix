@@ -1,4 +1,12 @@
 { pkgs, ... }: {
+  dconf = {
+    settings = {
+      "org/gnome/desktop/interface" = {
+        gtk-theme = "catppuccin-macchiato-mauve-compact";
+        color-scheme = "prefer-dark";
+      };
+    };
+  };
   qt = {
       enable = true;
       platformTheme.name = "gtk";
@@ -7,7 +15,7 @@
     gtk.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
-    size = 20;
+    size = 12;
   };
   gtk = {
     enable = true;

@@ -8,9 +8,9 @@
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";
     aggressiveResize = true;
-    newSession = true;
+    newSession = false;
     escapeTime = 10;
-    historyLimit = 5000;
+    historyLimit = 10000;
     keyMode = "vi";
     shortcut = "a";
     terminal = "xterm-256color";
