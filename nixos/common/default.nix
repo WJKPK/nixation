@@ -7,6 +7,7 @@ in {
     ./nvidia-undervolt.nix
     ./gui.nix
     ./fonts.nix
+    ./wireless.nix
   ];
 
   nixpkgs = {
@@ -122,7 +123,6 @@ in {
 
   services = {
     udev.packages = [ udevRules ];
-    blueman.enable = true;
     printing.enable = true;
     pipewire = {
       enable = true;

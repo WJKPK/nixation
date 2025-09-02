@@ -1,17 +1,19 @@
 {pkgs, ...}:
 let
-  dni-arise = pkgs.writeShellScriptBin "dni-arise" ''
-    dni setup --github WJKPK/nixation --config minimal-nvim
+  devc-nix-infect = pkgs.writeShellScriptBin "devc-nix-infect" ''
+    devcontainer up --workspace-folder . && devcontainer exec --workspace-folder . -- bash -c "echo 'sandbox = false' > /tmp/nix.conf && \
+        curl -L https://nixos.org/nix/install | bash -s -- --no-daemon --nix-extra-conf-file /tmp/nix.conf && \
+        . \$HOME/.nix-profile/etc/profile.d/nix.sh"
   '';
 
-  dni-shell = pkgs.writeShellScriptBin "dni-shell" ''
-    dni shell
+  devc-shell = pkgs.writeShellScriptBin "devc-shell" ''
+    devcontainer exec --workspace-folder . -- zsh -i
   '';
 
 in {
   home.packages = [ 
-    dni-arise
-    dni-shell
+    devc-nix-infect
+    devc-shell
     pkgs.devcontainer
   ];
 }

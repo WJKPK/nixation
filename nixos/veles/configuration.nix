@@ -15,10 +15,6 @@
   nvidiaManagement.driver.enable = false;
   boot.kernelPackages = pkgs.linuxPackages_6_12;
 
-  environment.systemPackages = with pkgs; [
-    wireguard-tools
-  ];
-
   specialisation."GPU-enable".configuration = {
     system.nixos.tags = [ "GPU-enable" ];
     nvidiaManagement = {
@@ -35,10 +31,16 @@
       compositor = {
         enable = true;
         type = "hyprland";
-        package = pkgs.hyprland;
       };
   };
+  wirelessSettings = {
+    bluetooth.enable = true;
+    subGhzAdapter.enable = true;
+  };
 
+  environment.systemPackages = with pkgs; [
+    wireguard-tools
+  ];
   networking = {
     hostName = "veles";
     wg-quick.interfaces.veles = {
@@ -90,16 +92,6 @@
         CPU_HWP_DYN_BOOST_ON_BAT=0;
       };
     };
-  };
-
-  hardware.rtl-sdr.enable = true;
-  hardware.bluetooth = {
-    enable = true;
-    settings = {
-      General = {
-          Enable = "Source,Sink,Media,Socket";
-        };
-      };
   };
 
   security.protectKernelImage = false;

@@ -36,10 +36,6 @@
       primary = true;
     }
   ];
-  aiCodingSupport = {
-    enable = true;
-    llmModelName = "qwen2.5-coder:32b";
-  };
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
@@ -56,7 +52,6 @@
     nvtopPackages.full
     stm32cubemx
     xfce.xfburn
-    inputs.dni.packages.${pkgs.system}.default
     heroic
     rtl-sdr
     rtl_433

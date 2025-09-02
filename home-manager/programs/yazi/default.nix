@@ -1,7 +1,6 @@
 { pkgs, inputs, config, ... }: { 
   programs.yazi = {
     enable = true;
-
     # Prevent Home Manager from installing yazi, it comes from lavix
     package = null;
 

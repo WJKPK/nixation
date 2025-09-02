@@ -12,7 +12,6 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixgl.url = "github:guibou/nixGL";
     catppuccin.url = "github:catppuccin/nix";
-    dni.url = "github:WJKPK/devcontainer-nix-injector";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -3,4 +3,4 @@
 
 - `Perun`  PC with Ryzen 5950x and two Nvidia GPUs for development/machine learning/simulations/virtualization and occasional gaming.
 - `Veles` Thinkpad T480s intended to be handy and somewhat battery-efficient.
-- `Rod` Home Server/NAS fomr Home Assistant and data storage
+- `Rod` Home Server/NAS for Home Assistant and data storage

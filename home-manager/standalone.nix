@@ -27,11 +27,6 @@
     };
   };
 
-  aiCodingSupport = {
-    enable = true;
-    llmModelName = "qwen2.5-coder:3b";
-  };
-
   nix = {
     package = pkgs.nix;
     settings.experimental-features = [ "nix-command" "flakes" ];
@@ -43,12 +38,25 @@
     nerd-fonts.jetbrains-mono
     nerd-fonts.symbols-only
     cascadia-code
-    inputs.dni.packages.${pkgs.system}.default
+    distrobox
   ];
 
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
+    sessionVariables = {
+      LANG = "en_US.UTF-8";
+      LC_ALL = "en_US.UTF-8";
+      LC_ADDRESS = "pl_PL.UTF-8";
+      LC_IDENTIFICATION = "pl_PL.UTF-8";
+      LC_MEASUREMENT = "pl_PL.UTF-8";
+      LC_MONETARY = "pl_PL.UTF-8";
+      LC_NAME = "pl_PL.UTF-8";
+      LC_NUMERIC = "pl_PL.UTF-8";
+      LC_PAPER = "pl_PL.UTF-8";
+      LC_TELEPHONE = "pl_PL.UTF-8";
+      LC_TIME = "pl_PL.UTF-8";
+    };
   };
   monitors = [
     {

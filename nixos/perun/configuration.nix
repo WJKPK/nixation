@@ -1,10 +1,9 @@
 { pkgs, lib, inputs, outputs, ... }: {
   imports = [
     ../common
+    ./virtualization
     ./hardware-configuration.nix
-    ./virt-manager.nix
-    ./docker.nix
-    ./remote-builder.nix
+    ./remote-build/remote-builder.nix
   ];
 
   home-manager = {
@@ -22,6 +21,7 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
+
   nvidiaManagement = {
       driver.enable = true;
       vfio = {
@@ -32,16 +32,17 @@
       ];
     };
   };
-
   nvidia-undervolt.enable = true;
-
   graphicalEnvironment = {
       enable = true;
       compositor = {
         enable = true;
         type = "hyprland";
-        package = pkgs.hyprland;
       };
+  };
+  wirelessSettings = {
+    bluetooth.enable = true;
+    subGhzAdapter.enable = true;
   };
 
   specialisation."ML-spec".configuration = {
@@ -57,7 +58,6 @@
 
   networking.firewall.allowedTCPPorts = [ 22 ];
 
-
   services = {
     ollama = {
       enable = true;
@@ -70,17 +70,6 @@
       package = pkgs.stable.open-webui;
     };
   };
-
-  hardware.rtl-sdr.enable = true;
-  hardware.bluetooth = {
-    enable = true;
-    settings = {
-      General = {
-          Enable = "Source,Sink,Media,Socket";
-        };
-      };
-  };
-
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     docker-compose  
