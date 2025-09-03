@@ -117,11 +117,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1756846111,
-        "narHash": "sha256-8D/PVVJXcMzVod6PGijI6AVr1uspbGg9XIFvBIQmlkI=",
+        "lastModified": 1756845421,
+        "narHash": "sha256-65xPI77DdO5Gi2o+RBJlnVm4lS0K+GTJ6h4nk2ikwtw=",
         "owner": "WJKPK",
         "repo": "lavix",
-        "rev": "0202c91b93ce2c44d3ebf9a84873e062a430be07",
+        "rev": "747d791a093b65476d53d808ddf392f46a3c63e9",
         "type": "github"
       },
       "original": {
