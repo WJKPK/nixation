@@ -8,7 +8,7 @@
   };
 
   imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     inputs.nix-colors.homeManagerModules.default
     ./themes
   ] ++ (builtins.attrValues outputs.homeManagerModules);

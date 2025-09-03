@@ -4,7 +4,7 @@
             enable = true;
             initExtra = lib.mkIf (!config.minimalTerminal.enable) ''
               if [ -z "$TMUX" ]; then
-                tms start 
+                tms start
               fi
             '';
             oh-my-zsh = {
@@ -20,10 +20,10 @@
             syntaxHighlighting.enable = true;
         };
     };
-    home.file.".zshrc".text = ''
-      export PATH=$HOME/bin:/usr/local/bin:$PATH
-      #export ZSH="$HOME/.oh-my-zsh"
-      
-      ZSH_THEME="bira"
-    '';
+#    home.file.".zshrc".text = ''
+#      export PATH=$HOME/bin:/usr/local/bin:$PATH
+#      #export ZSH="$HOME/.oh-my-zsh"
+#
+#      ZSH_THEME="bira"
+#    '';
 }
