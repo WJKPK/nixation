@@ -30,6 +30,7 @@ in {
     exec-once = hyprctl setcursor Bibata-Modern-Classic 18
     exec-once = dunst
     exec-once = dbus-update-activation-environment --systemd HYPRLAND_INSTANCE_SIGNATURE
+    exec-once = systemctl --user start hyprpolkitagent
     exec = hyprshade auto
 
     # Set en layout at startup
