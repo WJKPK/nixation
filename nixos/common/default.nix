@@ -8,6 +8,7 @@ in {
     ./gui.nix
     ./fonts.nix
     ./wireless.nix
+    ./ai.nix
   ];
 
   nixpkgs = {

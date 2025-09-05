@@ -14,6 +14,7 @@
     extraSpecialArgs = { inherit inputs outputs; };
     users.kruppenfield = import ../../home-manager/rod.nix;
   };
+
   users.groups.admin = {};
   users.users.kruppenfield = {
     isNormalUser = true;
@@ -21,10 +22,16 @@
     group = "admin";
   };
 
-  networking.hostName = "rod";
+  networking = {
+    hostName = "rod";
+    firewall.allowedTCPPorts = [ 22 ];
+  }; 
 
   graphicalEnvironment = {
       enable = false;
+  };
+  nvidiaManagement = {
+      driver.enable = false;
   };
 
   hardware.graphics = {
@@ -33,7 +40,6 @@
       intel-media-driver
     ];
   };
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 
   boot = {
     kernelPackages = pkgs.linuxPackages_6_12;
@@ -41,21 +47,18 @@
     initrd.supportedFilesystems = [ "xfs" ];
   };
 
-  nvidiaManagement = {
-      driver.enable = false;
+  environment = {
+    sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
+    systemPackages = with pkgs; [
+      mdadm
+      docker-compose  
+    ];
   };
-
-  environment.systemPackages = with pkgs; [
-    mdadm
-    docker-compose  
-  ];
 
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;
   };
-
-  networking.firewall.allowedTCPPorts = [ 22 ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "24.11";

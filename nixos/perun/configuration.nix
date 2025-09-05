@@ -18,6 +18,7 @@
   networking = {
     hostName = "perun";
     dhcpcd.denyInterfaces = [ "macvtap*" ];
+    firewall.allowedTCPPorts = [ 22 ];
   };
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
@@ -50,46 +51,17 @@
     nvidiaManagement.vfio.enable = lib.mkForce false;
     nvidia-undervolt.enable = lib.mkForce true;
   };
+  aiLocal.enable = true;
 
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
-
-  services = {
-    ollama = {
-      enable = true;
-      package = pkgs.ollama-cuda;
-      acceleration = "cuda";
-      environmentVariables = {
-        OLLAMA_FLASH_ATTENTION = "1";
-        OLLAMA_CONTEXT_LENGTH = "16384";
-      };
-    };
-    open-webui = {
-      enable = true;
-      port = 8085;
-      package = pkgs.stable.open-webui;
-    };
-  };
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     docker-compose  
-    nvidia-vaapi-driver
   ];
-
-  environment = {
-    sessionVariables = {
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      LIBVA_DRIVER_NAME = "nvidia";
-      NVD_BACKEND = "direct";
-
-      NIXOS_OZONE_WL = "1";
-      MOZ_ENABLE_WAYLAND = 0;
-    };
-  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

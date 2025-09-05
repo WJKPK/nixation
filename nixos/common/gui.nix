@@ -2,8 +2,7 @@
 let
   inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
 
-  # Each compositor is a *module function*.
-  compositorModules = {
+  compositorSettings = {
     hyprland = {
       programs.hyprland = {
         enable = true;
@@ -19,23 +18,29 @@ let
       services.desktopManager.cosmic.enable = true;
     };
   };
-in
-{
-  options.graphicalEnvironment = {
-    enable = mkEnableOption "Enable graphical environment configuration";
-    compositor = {
-      enable = mkEnableOption "Enable compositor configuration";
-      type = mkOption {
-        type = types.enum [ "hyprland" "cosmic" ];
-        default = "hyprland";
-        description = "The compositor / desktop environment to use.";
+
+  hyprlandEnv = {
+    environment = {
+      sessionVariables = {
+        NIXOS_OZONE_WL = "1";
+        MOZ_ENABLE_WAYLAND = 0;
+      };
+    };
+    environment.systemPackages = with pkgs; [ hyprpolkitagent ];
+    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  };
+
+  nvidiaEnv = {
+    environment = {
+      sessionVariables = {
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        LIBVA_DRIVER_NAME = "nvidia";
+        NVD_BACKEND = "direct";
       };
     };
   };
 
-  config = let cfg = config.graphicalEnvironment;
-  in mkMerge [
-    (mkIf cfg.enable {
+  commonWaylandSettings = {
       services.displayManager.sddm = {
         enable = true;
         wayland.enable = true;
@@ -45,7 +50,6 @@ in
       services.gvfs.enable = true;
       environment.systemPackages = with pkgs; [
         gparted
-        hyprpolkitagent
         libsForQt5.qt5.qtquickcontrols2
         libsForQt5.qt5.qtgraphicaleffects
       ];
@@ -62,15 +66,49 @@ in
         rtkit.enable = true;
         polkit.enable = true;
       };
+    };
+in
+{
+  options.graphicalEnvironment = {
+    enable = mkEnableOption "Enable graphical environment configuration";
+    compositor = {
+      enable = mkEnableOption "Enable compositor configuration";
+      type = mkOption {
+        type = types.enum [ "hyprland" "cosmic" ];
+        default = "hyprland";
+        description = "The compositor / desktop environment to use.";
+      };
+    };
+  };
 
+  config = let 
+    cfg = config.graphicalEnvironment;
+    nvidia-cfg = config.nvidiaManagement;
+  in mkMerge [
+    (mkIf cfg.enable commonWaylandSettings)
+    (mkIf (cfg.enable && cfg.compositor.enable && cfg.compositor.type == "hyprland") (
+      mkMerge [
+        compositorSettings.hyprland
+        hyprlandEnv
+        (mkIf (nvidia-cfg.driver.enable && !nvidia-cfg.optimus.enable) nvidiaEnv)
+      ]
+    ))
+    (mkIf (cfg.enable && cfg.compositor.enable && cfg.compositor.type == "cosmic") compositorSettings.cosmic)
+    {
       assertions = [
         {
           assertion = cfg.compositor.enable -> cfg.compositor.type != null;
           message = "If compositor is enabled, a type must be specified.";
         }
+        {
+          assertion = (cfg.compositor.enable && cfg.compositor.type == "hyprland" && nvidia-cfg.driver.enable) -> !nvidia-cfg.optimus.enable;
+          message = "NVIDIA Optimus must be disabled when using Hyprland with NVIDIA driver.";
+        }
+        {
+          assertion = (cfg.compositor.enable && cfg.compositor.type == "hyprland") -> (config.nvidiaManagement or {} ? driver && config.nvidiaManagement or {} ? optimus);
+          message = "nvidiaManagement must be defined when using Hyprland with NVIDIA settings.";
+        }
       ];
-    })
-    (mkIf (cfg.enable && cfg.compositor.enable && cfg.compositor.type == "hyprland") compositorModules.hyprland)
-    (mkIf (cfg.enable && cfg.compositor.enable && cfg.compositor.type == "cosmic") compositorModules.cosmic)
-   ];
+    }
+  ];
 }
