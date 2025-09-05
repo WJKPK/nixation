@@ -77,7 +77,6 @@
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     docker-compose  
-    nvidia-vaapi-driver
   ];
 
   environment = {

@@ -2,23 +2,21 @@
 let
   inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
 
-  # Each compositor is a *module function*.
-  compositorModules = {
-    hyprland = {
-      programs.hyprland = {
-        enable = true;
-        withUWSM = true;
-        package = pkgs.hyprland;
-        xwayland.enable = true;
+  compositorModules = type: {
+      hyprland = {
+        programs.hyprland = {
+          enable = true;
+          withUWSM = true;
+          package = pkgs.hyprland;
+          xwayland.enable = true;
+        };
+        services.hypridle.enable = true;
+        security.pam.services.hyprlock = {};
       };
-      services.hypridle.enable = true;
-      security.pam.services.hyprlock = {};
-    };
-
-    cosmic = {
-      services.desktopManager.cosmic.enable = true;
-    };
-  };
+      cosmic = {
+        services.desktopManager.cosmic.enable = true;
+      };
+    }.${type} or {};
 in
 {
   options.graphicalEnvironment = {
@@ -33,7 +31,9 @@ in
     };
   };
 
-  config = let cfg = config.graphicalEnvironment;
+  config = let 
+     cfg = config.graphicalEnvironment;
+     #nvidia-cfg = config.nvidiaManagement;
   in mkMerge [
     (mkIf cfg.enable {
       services.displayManager.sddm = {
@@ -70,7 +70,6 @@ in
         }
       ];
     })
-    (mkIf (cfg.enable && cfg.compositor.enable && cfg.compositor.type == "hyprland") compositorModules.hyprland)
-    (mkIf (cfg.enable && cfg.compositor.enable && cfg.compositor.type == "cosmic") compositorModules.cosmic)
+    (mkIf (cfg.enable && cfg.compositor.enable) (compositorModules cfg.compositor.type))
    ];
 }
