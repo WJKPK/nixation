@@ -16,7 +16,7 @@
     homeDirectory = "/home/kruppenfield";
   };
 
-  minimalTerminal.enable = true;
+  application.minimalTerminal.enable = true;
 
   programs.git = {
     enable = true;

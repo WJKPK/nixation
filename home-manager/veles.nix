@@ -23,18 +23,6 @@
     ./programs/keepassxc
   ];
 
-  monitors = [
-    {
-      name = "eDP-1";
-      width = 2560;
-      height = 1440;
-      x = 0;
-      workspace = "1";
-      scale = 1.25;
-      enabled = true;
-      primary = true;
-    }
-  ];
   desktop.addons.waybar.enable = true;
   home = {
     username = "kruppenfield";

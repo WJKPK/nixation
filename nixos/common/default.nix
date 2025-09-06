@@ -9,6 +9,7 @@ in {
     ./fonts.nix
     ./wireless.nix
     ./ai.nix
+    ./monitors.nix
   ];
 
   nixpkgs = {

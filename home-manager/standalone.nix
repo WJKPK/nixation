@@ -58,15 +58,6 @@
       LC_TIME = "pl_PL.UTF-8";
     };
   };
-  monitors = [
-    {
-      name = "HDMI-1";
-      width = 1920;
-      height = 1080;
-      primary = true;
-      enabled = false;
-    }
-  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";

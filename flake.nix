@@ -31,30 +31,24 @@
         in import ./shell.nix { inherit pkgs; }
       );
     overlays = import ./overlays { inherit inputs; };
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
-
       # NixOS configuration entrypoint
       # Available through 'sudo nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         veles = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            inputs.home-manager.nixosModules.home-manager
             ./nixos/veles/configuration.nix
           ];
         };
         perun = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            inputs.home-manager.nixosModules.home-manager
             ./nixos/perun/configuration.nix
           ];
         };
         rod = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
-            inputs.home-manager.nixosModules.home-manager
             ./nixos/rod/configuration.nix
           ];
         };

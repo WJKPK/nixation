@@ -33,6 +33,18 @@
         type = "hyprland";
       };
   };
+  monitors = [
+    {
+      name = "eDP-1";
+      width = 2560;
+      height = 1440;
+      x = 0;
+      workspace = "1";
+      scale = 1.25;
+      enabled = true;
+      primary = true;
+    }
+  ];
   wirelessSettings = {
     bluetooth.enable = true;
     subGhzAdapter.enable = true;

@@ -18,7 +18,7 @@
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
-  minimalTerminal.enable = true;
+  application.minimalTerminal.enable = true;
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [

@@ -41,6 +41,19 @@
         type = "hyprland";
       };
   };
+  monitors = [
+    {
+      name = "DP-1";
+      width = 3440;
+      height = 1440;
+      x = 0;
+      workspace = "1";
+      scale = 1.0;
+      refreshRate = 165; 
+      enabled = true;
+      primary = true;
+    }
+  ];
   wirelessSettings = {
     bluetooth.enable = true;
     subGhzAdapter.enable = true;

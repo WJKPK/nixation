@@ -1,4 +1,5 @@
-{ pkgs, lib, config, ... }: let
+{ pkgs, lib, osConfig, ... }: let
+  monitors = osConfig.monitors;
   guiApps = with pkgs; [
     pavucontrol
     pwvucontrol
@@ -31,7 +32,7 @@
 in {
   services.syncthing.enable = true;
   home.packages = nonGuiApps ++ (lib.optionals
-    (lib.any (m: m.enabled) config.monitors)
+    (lib.any (m: m.enabled) monitors)
     guiApps);
 }
 
