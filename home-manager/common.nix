@@ -21,7 +21,7 @@ in {
     inputs.catppuccin.homeModules.catppuccin
     inputs.nix-colors.homeManagerModules.default
     ./themes
-  ] ++ (builtins.attrValues outputs.homeManagerModules);
+  ];
   config = {
     colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
     programs.home-manager.enable = true;
