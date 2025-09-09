@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.desktop.addons.waybar;
+  cycle-sink = pkgs.writeShellScriptBin "cycle-sink" (builtins.readFile ./cycle-sink.sh);
 in
 {
   options.desktop.addons.waybar = with types; {
@@ -44,8 +45,11 @@ in
 
         "modules-right": [
         	"tray",
+            "wireplumber",
             "temperature",
             "custom/gpu",
+            "memory",
+            "disk",
             "network",
             "battery",
             "clock",
@@ -55,7 +59,20 @@ in
         "hyprland/window": {
             "format": "{}"
         },
-
+        "memory": {
+          "interval": 2,
+          "format": " {}%",
+          "tooltip": true,
+          "tooltip-format": "{used:0.1f}GiB used\n{avail:0.1f}GiB available",
+          "max-length": 10,
+        },
+        "disk": {
+            "interval": 60,
+            "format": "󰋊 <span foreground=\"#e5e1e9\">{percentage_used}%</span>",
+            "tooltip": true,
+            "tooltip-format": "Free: {free} ({percentage_free}%)\nTotal: {total}",
+            "path": "/",
+        },
         "hyprland/workspaces": {
             "on-scroll-up": "hyprctl dispatch workspace e+1",
             "on-scroll-down": "hyprctl dispatch workspace e-1",
@@ -108,15 +125,15 @@ in
             	"on-scroll-down": "shift_down"
             }
         },
-
-        "pulseaudio": {
-            "format": "  {volume}%",
-            "tooltip": false,
-            "format-muted": "  N/A",
-            "on-click": "pavucontrol &",
-            "scroll-step": 5
+        "wireplumber": {
+            "format": "{node_name} - {volume}% {icon}",
+            "format-muted": "",
+            "format-icons": ["", "", ""],
+            "on-click": "${lib.getExe cycle-sink} -q",
+            "on-click-right": "${lib.getExe pkgs.pavucontrol}",
+            "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+            "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
         },
-
         "network": {
             "format-disconnected": "󰈂",
             "format-ethernet" : "󰒢",
@@ -155,10 +172,10 @@ in
         },
 
         "custom/gpu" : {
-            "exec" : "nvidia-smi --query-gpu:temperature.gpu --format:csv,noheader",
+            "exec" : "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
+            "on-click" : "kitty --class center-float-large nvtop",
             "critical-threshold" : 90,
-            "format" : "{icon} {}°C",
-            "format-icons" :  ["", "", ""],
+            "format" : "󰢮 {}°C",
             "tooltip" : true,
             "interval" : 3
         }
@@ -187,7 +204,7 @@ in
         #disk,
         #network,
         #battery,
-        #pulseaudio,
+        #wireplumber,
         #window,
         #temperature,
         #custom-gpu,
@@ -289,13 +306,6 @@ in
           padding-top: 3px;
         }
 
-        #custom-gpu {
-          margin-right: 10px;
-          padding-left: 12px;
-          padding-right: 15px;
-          padding-top: 3px;
-        }
-
         @keyframes grey-gradient {
           0% {
             background-position: 100% 50%;
@@ -308,11 +318,6 @@ in
         #tray menu {
           background-color: #${config.colorScheme.palette.base00};
           opacity: 0.8;
-        }
-
-        #pulseaudio.muted {
-          color: #${config.colorScheme.palette.base08};
-          padding-right: 16px;
         }
 
         #custom-notification.collapsed,

@@ -37,18 +37,21 @@
         veles = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            inputs.home-manager.nixosModules.home-manager
             ./nixos/veles/configuration.nix
           ];
         };
         perun = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            inputs.home-manager.nixosModules.home-manager
             ./nixos/perun/configuration.nix
           ];
         };
         rod = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [
+            inputs.home-manager.nixosModules.home-manager
             ./nixos/rod/configuration.nix
           ];
         };
