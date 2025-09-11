@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, ... }:
 let
   wallpaper = builtins.path {
     path = ../../wallpapers/colorful-planets-small.jpg;

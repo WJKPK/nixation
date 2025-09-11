@@ -18,12 +18,11 @@ in {
 
 
   imports = [
-    inputs.catppuccin.homeModules.catppuccin
     inputs.nix-colors.homeManagerModules.default
     ./themes
   ];
   config = {
-    colorScheme = inputs.nix-colors.colorSchemes.catppuccin-macchiato;
+    colorScheme = inputs.nix-colors.colorSchemes.gruvbox-material-dark-medium;
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
       inputs.lavix.packages.${pkgs.system}.default

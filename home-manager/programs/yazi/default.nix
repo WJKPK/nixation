@@ -32,6 +32,6 @@
     };
   };
   home.file = {
-    ".config/yazi/theme.toml".source = ./frappe.toml;
+    ".config/yazi/theme.toml".source = ./gruvbox.toml;
   };
 }

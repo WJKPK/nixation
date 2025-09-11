@@ -11,7 +11,6 @@
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
     flake-utils.url = "github:numtide/flake-utils";
     nixgl.url = "github:guibou/nixGL";
-    catppuccin.url = "github:catppuccin/nix";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";

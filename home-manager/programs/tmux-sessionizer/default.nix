@@ -17,12 +17,9 @@
     baseIndex = 1;
     plugins = with pkgs.tmuxPlugins; [
       {
-        plugin = catppuccin;
+        plugin = gruvbox;
         extraConfig = ''
-          set -g @catppuccin_flavour 'frappe'
-          set -g @catppuccin_date_time ""
-          set -g @catppuccin_user "off"
-          set -g @catppuccin_host "on"
+          set -g @tmux-gruvbox 'dark'
         '';
       }
      {
