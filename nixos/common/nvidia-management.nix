@@ -53,14 +53,13 @@ in {
         modesetting.enable = true;
         open = false;
         nvidiaSettings = true;
-        package = config.boot.kernelPackages.nvidiaPackages.latest;
+        package = config.boot.kernelPackages.nvidiaPackages.stable;
       };
     })
 
     (mkIf cfg.vfio.enable {
       boot = {
         extraModprobeConfig = ''
-          softdep late-module pre: early-module-1 early-module-2
           softdep nvidia pre: vfio vfio_pci
         '';
         initrd.kernelModules = [

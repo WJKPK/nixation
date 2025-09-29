@@ -81,10 +81,6 @@ in {
         preserve_split = yes
     }
 
-    gestures {
-        workspace_swipe = false
-    }
-
     misc {
       disable_hyprland_logo = yes
       animate_manual_resizes = yes

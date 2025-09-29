@@ -5,11 +5,12 @@ let
     paths = [pkgs.stable.kicad];
     buildInputs = [pkgs.makeWrapper];
     # workaround for crashes: https://github.com/NixOS/nixpkgs/issues/366299#issuecomment-2613745185
+    #    --set __GLX_VENDOR_LIBRARY_NAME mesa \
+    #    --set __EGL_VENDOR_LIBRARY_FILENAMES ${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json
+
     postBuild = ''
       wrapProgram $out/bin/kicad \
-        --set GTK_THEME Arc-Dark \
-        --set __GLX_VENDOR_LIBRARY_NAME mesa \
-        --set __EGL_VENDOR_LIBRARY_FILENAMES ${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json
+        --set GTK_THEME Arc-Dark
     '';
   };
 
@@ -22,7 +23,7 @@ let
 in {
   home.packages = [kicad-dark];
 
-  xdg.configFile."kicad/8.0/colors/behave-dark.json" = {
+  xdg.configFile."kicad/9.0/colors/behave-dark.json" = {
     source = "${kicadThemes}/behave-dark/behave-dark.json";
   };
 }

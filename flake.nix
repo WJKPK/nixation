@@ -5,7 +5,7 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nix-colors.url = "github:misterio77/nix-colors";
 
     nixos-hardware.url = "github:NixOs/nixos-hardware/master";
