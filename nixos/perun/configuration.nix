@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, outputs, ... }: {
+{ pkgs, lib, inputs, outputs, color-scheme, ... }: {
   imports = [
     ../common
     ./virtualization
@@ -7,7 +7,7 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs;};
+    extraSpecialArgs = { inherit inputs outputs color-scheme;};
     users.kruppenfield = import ../../home-manager/perun.nix;
   };
 

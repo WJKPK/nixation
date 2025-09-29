@@ -1,4 +1,4 @@
-{ pkgs, inputs, config, ... }: { 
+{ config, ... }: { 
   programs.yazi = {
     enable = true;
     # Prevent Home Manager from installing yazi, it comes from lavix
@@ -7,7 +7,7 @@
     enableZshIntegration = true;
 
     settings = {
-      manager = {
+      mgr = {
         ratio = [ 1 3 7 ];
         sort_by = "alphabetical";
         sort_sensitive = true;
@@ -27,7 +27,16 @@
 
     keymap = {
       manager.prepend_keymap = [
-        { run = "close"; on = [ "<Esc>" ]; } 
+        { 
+          run = "close"; on = [ "<Esc>" ]; 
+        } 
+        {
+          run = [ 
+            "shell -- for path in \"$@\"; do echo \"file://$path\"; done | wl-copy -t text/uri-list" 
+            "yank" 
+          ];
+          on = [ "y" ];
+        }
       ];
     };
   };

@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, color-scheme, ... }:
 let
   inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
 
@@ -44,7 +44,7 @@ let
       services.displayManager.sddm = {
         enable = true;
         wayland.enable = true;
-        theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+        theme = "${import ./sddm-theme.nix { inherit pkgs color-scheme; }}";
       };
 
       services.gvfs.enable = true;
@@ -99,10 +99,6 @@ in
         {
           assertion = cfg.compositor.enable -> cfg.compositor.type != null;
           message = "If compositor is enabled, a type must be specified.";
-        }
-        {
-          assertion = (cfg.compositor.enable && cfg.compositor.type == "hyprland" && nvidia-cfg.driver.enable) -> !nvidia-cfg.optimus.enable;
-          message = "NVIDIA Optimus must be disabled when using Hyprland with NVIDIA driver.";
         }
         {
           assertion = (cfg.compositor.enable && cfg.compositor.type == "hyprland") -> (config.nvidiaManagement or {} ? driver && config.nvidiaManagement or {} ? optimus);

@@ -18,12 +18,13 @@
     lavix.url = "github:WJKPK/lavix";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs:
+  outputs = { self, nixpkgs, nix-colors, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs [
         "x86_64-linux"
       ];
+      color-scheme = nix-colors.colorSchemes.gruvbox-material-dark-medium;
     in {
       devShells = forAllSystems (system:
         let pkgs = nixpkgs.legacyPackages.${system};
@@ -34,21 +35,21 @@
       # Available through 'sudo nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         veles = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs color-scheme; };
           modules = [
             inputs.home-manager.nixosModules.home-manager
             ./nixos/veles/configuration.nix
           ];
         };
         perun = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs color-scheme; };
           modules = [
             inputs.home-manager.nixosModules.home-manager
             ./nixos/perun/configuration.nix
           ];
         };
         rod = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
+          specialArgs = { inherit inputs outputs color-scheme; };
           modules = [
             inputs.home-manager.nixosModules.home-manager
             ./nixos/rod/configuration.nix
@@ -61,14 +62,14 @@
       homeConfigurations = {
         "standalone" = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs;};
+          extraSpecialArgs = { inherit inputs outputs color-scheme;};
           modules = [
             ./home-manager/standalone.nix
           ];
         };
         "minimal-nvim" = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs;};
+          extraSpecialArgs = { inherit inputs outputs color-scheme;};
           modules = [
             ./home-manager/minimal-nvim.nix
           ];

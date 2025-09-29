@@ -1,4 +1,4 @@
-{pkgs, inputs, outputs, lib, config, ...} :
+{pkgs, inputs, outputs, lib, config, color-scheme, ...} :
 let
   udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
 in {
