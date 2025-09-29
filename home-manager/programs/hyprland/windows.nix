@@ -10,6 +10,9 @@
       "float, class:^(org.pulseaudio.pavucontrol)$"
       "size 50% 50%, class:^(org.pulseaudio.pavucontrol)$"
 
+      "float, class:^(.*blueman-manager.*)$"
+      "size 50% 50%, class:^(.*blueman-manager.*)$"
+
       # Float Steam
       "float, class:^(steam)$"
 

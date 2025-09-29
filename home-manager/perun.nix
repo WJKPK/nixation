@@ -14,7 +14,7 @@
     ./programs/btop
     ./programs/openscad
     ./programs/dunst
-    ./programs/hypr
+    ./programs/hyprland
     ./programs/waybar
     ./programs/hyprlock
     ./programs/hyprshade

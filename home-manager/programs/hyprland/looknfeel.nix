@@ -41,6 +41,10 @@ in {
         layout = "dwindle";
       };
 
+      cursor = {
+        no_hardware_cursors = true;
+      };
+
       decoration = {
         rounding = 0;
 
@@ -51,7 +55,6 @@ in {
           ignore_window = true;
           color = "rgba(00000045)";
         };
-
         blur = {
           enabled = true;
           size = 5;
