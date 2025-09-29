@@ -42,8 +42,8 @@
   ];
 
   home = {
-    username = "kruppenfield";
-    homeDirectory = "/home/kruppenfield";
+    username = "wkrupski";
+    homeDirectory = "/home/wkrupski";
     sessionVariables = {
       LANG = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";

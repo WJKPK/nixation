@@ -1,4 +1,4 @@
-{ inputs, outputs, pkgs, lib, ... }: 
+{ inputs, outputs, pkgs, lib, color-scheme, ... }: 
 let inherit (lib) mkOption types;
 in {
   options.application = {
@@ -22,7 +22,7 @@ in {
     ./themes
   ];
   config = {
-    colorScheme = inputs.nix-colors.colorSchemes.gruvbox-material-dark-medium;
+    colorScheme = color-scheme;
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
       inputs.lavix.packages.${pkgs.system}.default

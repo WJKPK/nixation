@@ -1,4 +1,4 @@
-{ pkgs, inputs, outputs, lib, ... }:
+{ pkgs, inputs, outputs, lib, color-scheme, ... }:
   {
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
@@ -8,7 +8,7 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs;};
+    extraSpecialArgs = { inherit inputs outputs color-scheme;};
     users.kruppenfield = import ../../home-manager/veles.nix;
   };
 

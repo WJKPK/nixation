@@ -1,4 +1,4 @@
-{ pkgs, inputs, outputs, ... }: {
+{ pkgs, inputs, outputs, color-scheme, ... }: {
   imports = [
     ../common
     ./hardware-configuration.nix
@@ -11,7 +11,7 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = { inherit inputs outputs color-scheme; };
     users.kruppenfield = import ../../home-manager/rod.nix;
   };
 

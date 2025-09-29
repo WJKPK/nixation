@@ -1,8 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, color-scheme, ... }:
 let
-  image = builtins.fetchurl {
-      url = "https://images4.alphacoders.com/130/1301526.png";
-      sha256 = "0m2ilvs8rbyfw999lf7540cdx993mqq2rqw79z4dq22bfm0mnjfc";
+  image = builtins.path {
+    path = ./mountains.jpg;
   };
 in
 pkgs.stdenv.mkDerivation {
@@ -19,6 +18,6 @@ pkgs.stdenv.mkDerivation {
     cd $out/
     rm Background.jpg
     cp -r ${image} $out/Background.jpg
-    echo "ThemeColor=#303446" >> $out/theme.conf
+    echo "ThemeColor=#${color-scheme.palette.base00}" >> $out/theme.conf
    '';
 }
