@@ -9,6 +9,7 @@
     ./programs/tmux-sessionizer
     ./programs/yazi
     ./programs/btop
+    ./programs/kicad
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
     ./programs/keepassxc

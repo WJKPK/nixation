@@ -1,24 +1,5 @@
-## From https://github.com/izelnakri/home-manager/blob/main/modules/functions/wrap-nix-gl.nix
-#{ pkgs }:
-#pkg:
-#let
-#  bins = "${pkg}/bin";
-#in
-#pkgs.buildEnv {
-#  name = "nixGL-${pkg.name}";
-#  paths =
-#    [ pkg ] ++
-#    (map
-#      (bin: pkgs.hiPrio (
-#        pkgs.writeShellScriptBin bin ''
-#          exec -a "$0" "${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel" "${bins}/${bin}" "$@"
-#        ''
-#      ))
-#      (builtins.attrNames (builtins.readDir bins)));
-#}
-
 # From https://github.com/nix-community/nixGL/issues/114#issuecomment-1585323281
-{ pkgs }:
+{ pkgs, lib }:
 
 # Wrap a single package
 pkg:
@@ -42,11 +23,10 @@ pkg.overrideAttrs (old: {
     rm -rf $out/bin/*
     shopt -s nullglob # Prevent loop from running if no files
     for file in ${pkg.out}/bin/*; do
-      echo "#!${pkgs.bash}/bin/bash" > "$out/bin/$(basename $file)"
-      echo "exec -a \"\$0\" ${pkgs.nixgl.nixGLIntel}/bin/nixGLIntel $file \"\$@\"" >> "$out/bin/$(basename $file)"
+      echo "#!${lib.getExe pkgs.bash}" > "$out/bin/$(basename $file)"
+      echo "exec -a \"\$0\" ${lib.getExe pkgs.nixgl.nixGLIntel} $file \"\$@\"" >> "$out/bin/$(basename $file)"
       chmod +x "$out/bin/$(basename $file)"
     done
     shopt -u nullglob # Revert nullglob back to its normal default state
   '';
 })
-

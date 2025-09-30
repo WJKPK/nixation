@@ -1,18 +1,22 @@
-{pkgs, ...}:
+{ pkgs, config, ... }:
 let
+  wrapNixGL = pkgs.callPackage (import ./../wrap-nix-gl.nix) { };
   kicad-dark = pkgs.symlinkJoin {
     name = "kicad-dark";
-    paths = [pkgs.stable.kicad];
-    buildInputs = [pkgs.makeWrapper];
+    paths = [ pkgs.stable.kicad ];
+    buildInputs = [ pkgs.makeWrapper ];
+
     # workaround for crashes: https://github.com/NixOS/nixpkgs/issues/366299#issuecomment-2613745185
     #    --set __GLX_VENDOR_LIBRARY_NAME mesa \
     #    --set __EGL_VENDOR_LIBRARY_FILENAMES ${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json
-
     postBuild = ''
       wrapProgram $out/bin/kicad \
         --set GTK_THEME Arc-Dark
     '';
   };
+
+  wrappedKicad = wrapNixGL kicad-dark;
+  kicad = if config.application.wrap-gl then wrappedKicad else kicad-dark;
 
   kicadThemes = pkgs.fetchFromGitHub {
     owner = "pointhi";
@@ -21,7 +25,7 @@ let
     hash = "sha256-PYgFOyK5MyDE1vTkz5jGnPWAz0pwo6Khu91ANgJ2OO4=";
   };
 in {
-  home.packages = [kicad-dark];
+  home.packages = [ kicad pkgs.arc-theme ];
 
   xdg.configFile."kicad/9.0/colors/behave-dark.json" = {
     source = "${kicadThemes}/behave-dark/behave-dark.json";
