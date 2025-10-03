@@ -1,9 +1,9 @@
 { pkgs, ...}: {
   programs.librewolf = {
     enable = true;
-    package = pkgs.stable.librewolf.override {
+    package = pkgs.librewolf.override {
       nativeMessagingHosts = with pkgs; [
-        stable.keepassxc
+        keepassxc
       ];
     };
     policies = {

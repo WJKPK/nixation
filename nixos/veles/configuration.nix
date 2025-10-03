@@ -73,12 +73,12 @@
       };
     };
     logind = {
-      lidSwitch = "hibernate";
-      powerKey = "poweroff";
-      extraConfig = ''
-        IdleAction=suspend
-        IdleActionSec=2m
-      '';
+      settings.Login = {
+        HandlePowerKey = "poweroff";
+        HandleLidSwitch = "hibernate";
+        IdleAction = "suspend";
+        IdleActionSec = "2min";
+      };
     };
     tlp = {
       enable = true;

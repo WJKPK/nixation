@@ -23,6 +23,7 @@ in {
       permittedInsecurePackages = [
         "segger-jlink-qt4-796s"
         "segger-jlink-qt4-810"
+        "segger-jlink-qt4-824"
       ];
       segger-jlink.acceptLicense = true;
     };
