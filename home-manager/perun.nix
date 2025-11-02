@@ -20,7 +20,7 @@
     ./programs/hyprshade
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
-    ./programs/prusa-slicer
+#    ./programs/prusa-slicer
     ./programs/keepassxc
   ];
   home = {
@@ -43,6 +43,7 @@
     rtl-sdr
     rtl_433
     sdrangel
+    prusa-slicer
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
