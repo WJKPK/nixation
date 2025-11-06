@@ -13,6 +13,7 @@
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
     ./programs/keepassxc
+    ./programs/television
     ./common.nix
   ];
 
