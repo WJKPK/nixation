@@ -83,13 +83,13 @@
             "jq"
           ];
         };
-      
+
         source = {
           command = "docker images --format \"{{.Repository}}:{{.Tag}} {{.ID}}\"";
           # original output = "{split: :-1}"
           output = "{ split: :-1; }";
         };
-      
+
         preview = {
           command = "docker image inspect '{split: :-1}' | jq -C";
         };
@@ -106,16 +106,16 @@
           command = ''
             {
               # Get system packages
-              nix-store --query --requisites /run/current-system 2>/dev/null | 
-                sed -E 's|/nix/store/[^-]+-||' | 
-                grep -vE '\.(patch|tar\.|zip|gz|bz2|xz)$|source$|\.drv$' | 
+              nix-store --query --requisites /run/current-system 2>/dev/null |
+                sed -E 's|/nix/store/[^-]+-||' |
+                grep -vE '\.(patch|tar\.|zip|gz|bz2|xz)$|source$|\.drv$' |
                 sort | uniq
-              
+
               # Get home-manager packages if profile exists
               if [[ -L "$HOME/.nix-profile" ]]; then
-                nix-store --query --requisites "$HOME/.nix-profile" 2>/dev/null | 
-                  sed -E 's|/nix/store/[^-]+-||' | 
-                  grep -vE '\.(patch|tar\.|zip|gz|bz2|xz)$|source$|\.drv$' | 
+                nix-store --query --requisites "$HOME/.nix-profile" 2>/dev/null |
+                  sed -E 's|/nix/store/[^-]+-||' |
+                  grep -vE '\.(patch|tar\.|zip|gz|bz2|xz)$|source$|\.drv$' |
                   sort | uniq
               fi
             } | sort | uniq | grep -v '^$'
@@ -139,6 +139,155 @@
             echo "📋 Store path information:"
             nix-store --query --roots /nix/store/*{}* 2>/dev/null | head -5 || echo "No store information available"
           '';
+        };
+      };
+      distrobox-list = {
+          metadata = {
+            name = "distrobox-list";
+            description = "A channel to select a container from distrobox";
+            requirements = [
+              "distrobox"
+              "bat"
+            ];
+          };
+
+          source = {
+            command = "distrobox list | awk -F '|' '{ gsub(/ /, \"\", $2); print $2}' | tail --lines=+2";
+          };
+
+          preview = {
+            command = "(distrobox list | column -t -s '|' | awk -v selected_name={} 'NR==1 || $0 ~ selected_name') && echo && distrobox enter -d {} | bat --plain --color=always -lbash";
+          };
+
+          keybindings = {
+            ctrl-e = "actions:distrobox-enter";
+            ctrl-l = "actions:distrobox-list";
+            ctrl-r = "actions:distrobox-rm";
+            ctrl-s = "actions:distrobox-stop";
+            ctrl-u = "actions:distrobox-upgrade";
+          };
+
+          actions = {
+            distrobox-enter = {
+              description = "Enter a distrobox";
+              command = "distrobox enter {}";
+              mode = "execute";
+            };
+
+            distrobox-list = {
+              description = "List a distrobox";
+              command = "distrobox list | column -t -s '|' | awk -v selected_name={} 'NR==1 || $0 ~ selected_name'";
+              mode = "execute";
+            };
+
+            distrobox-rm = {
+              description = "Remove a distrobox";
+              command = "distrobox rm {}";
+              mode = "execute";
+            };
+
+            distrobox-stop = {
+              description = "Stop a distrobox";
+              command = "distrobox stop {}";
+              mode = "execute";
+            };
+
+            distrobox-upgrade = {
+              description = "Upgrade a distrobox";
+              command = "distrobox upgrade {}";
+              mode = "execute";
+            };
+          };
+        };
+      env = {
+        metadata = {
+          name = "env";
+          description = "A channel to select from environment variables";
+        };
+
+        source = {
+          command = "printenv";
+          output = "{split:=:1..}"; # output the value
+        };
+
+        preview = {
+          command = "echo '{split:=:1..}'";
+        };
+
+        ui = {
+          layout = "portrait";
+          preview_panel = {
+            size = 20;
+            header = "{split:=:0}";
+          };
+        };
+
+        keybindings = {
+          shortcut = "f3";
+        };
+      };
+      openocd-all = {
+        metadata = {
+          name = "openocd-all";
+          description = "Browse all OpenOCD configurations with categories";
+          requirements = [
+            "openocd"
+            "bat"
+          ];
+        };
+      
+        source = {
+          command = ''
+            cd $OPENOCD_PATH/share/openocd/scripts
+            for dir in board target interface chip cpu cpld fpga; do
+              if [ -d "$dir" ]; then
+                find "$dir" -name '*.cfg' | while read -r file; do
+                  printf "[%s] %-40s :: %s\n" "$dir" "$(basename "$file")" "$OPENOCD_PATH/share/openocd/scripts/$file"
+                done
+              fi
+            done | sort
+          '';
+          output = "{split: :: :1}";
+        };
+      
+        preview = {
+          command = ''
+            fullpath=$(echo {} | awk -F ' :: ' '{print $2}')
+            category=$(echo {} | sed -n 's/^\[\(.*\)\].*/\1/p')
+            filename=$(echo {} | awk '{print $2}')
+      
+            echo "📂 Category: $category"
+            echo "📄 File: $filename"
+            echo "📍 Path: $fullpath"
+            echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+            echo ""
+            bat --color=always --style=numbers --language=tcl "$fullpath"
+          '';
+        };
+      
+        keybindings = {
+          ctrl-o = "actions:open-location";
+          ctrl-y = "actions:copy-path";
+        };
+      
+        actions = {
+          open-location = {
+            description = "Open config directory in file manager";
+            command = ''
+              fullpath=$(echo {} | awk -F ' :: ' '{print $2}')
+              xdg-open "$(dirname "$fullpath")"
+            '';
+            mode = "execute";
+          };
+      
+          copy-path = {
+            description = "Copy full path to clipboard";
+            command = ''
+              fullpath=$(echo {} | awk -F ' :: ' '{print $2}')
+              echo -n "$fullpath" | xclip -selection clipboard
+            '';
+            mode = "execute";
+          };
         };
       };
     };

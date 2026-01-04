@@ -21,6 +21,7 @@
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
 #    ./programs/prusa-slicer
+    ./programs/television
     ./programs/keepassxc
   ];
   home = {
