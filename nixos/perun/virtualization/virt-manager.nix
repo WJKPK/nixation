@@ -57,10 +57,10 @@ let
       qemu = {
         package = pkgs.qemu_kvm;
         swtpm.enable = true;
-        ovmf = {
-          enable = true;
-          packages = with pkgs; [ OVMFFull.fd ];
-        };
+#        ovmf = {
+#          enable = true;
+#          packages = with pkgs; [ OVMFFull.fd ];
+#        };
       };
       hooks.qemu = {
         hugepages_handler = "${hugepage_handler}";

@@ -6,7 +6,6 @@ let
       ollama = {
         enable = true;
         package = pkgs.ollama-cuda;
-        acceleration = "cuda";
         environmentVariables = {
           OLLAMA_FLASH_ATTENTION = "1";
           OLLAMA_CONTEXT_LENGTH = "16384";

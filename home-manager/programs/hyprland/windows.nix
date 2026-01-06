@@ -3,34 +3,39 @@
 }: {
   wayland.windowManager.hyprland.settings = {
     windowrule = [
-      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-      "suppressevent maximize, class:.*"
+      # Suppress maximize events globally
+      "suppress_event maximize, match:class .*"
 
       # Settings management
-      "float, class:^(org.pulseaudio.pavucontrol)$"
-      "size 50% 50%, class:^(org.pulseaudio.pavucontrol)$"
+      "float on, match:class ^(org.pulseaudio.pavucontrol)$"
+      "size 50% 50%, match:class ^(org.pulseaudio.pavucontrol)$"
 
-      "float, class:^(.*blueman-manager.*)$"
-      "size 50% 50%, class:^(.*blueman-manager.*)$"
+      "float on, match:class ^(.*blueman-manager.*)$"
+      "size 50% 50%, match:class ^(.*blueman-manager.*)$"
 
       # Float Steam
-      "float, class:^(steam)$"
+      "float on, match:class ^(steam)$"
 
-      # Just dash of transparency
-      "opacity 0.97 0.9, class:.*"
-      # Normal chrome Youtube tabs
-      "opacity 1 1, class:^(librewolf|firefox)$, title:.*Youtube.*"
-      "opacity 1 0.97, class:^(librewolf|firefox)$"
-      "opacity 1 1, class:^(steam)$"
+      # Global slight transparency
+      "opacity 0.97 0.9, match:class .*"
 
-      # Fix some dragging issues with XWayland
-      "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      # Normal Firefox / LibreWolf YouTube tabs
+      "opacity 1 1, match:class ^(librewolf|firefox)$, match:title .*Youtube.*"
+
+      # Firefox / LibreWolf default opacity
+      "opacity 1 0.97, match:class ^(librewolf|firefox)$"
+
+      # Steam always opaque
+      "opacity 1 1, match:class ^(steam)$"
+
+      # Fix dragging issues with XWayland ghost windows
+      "no_focus on, match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false"
     ];
 
     layerrule = [
-      "blur,rofi"
-      "noanim,rofi"
-      "blur,waybar"
+      "blur on, match:namespace rofi"
+      "no_anim on, match:namespace rofi"
+      "blur on, match:namespace waybar"
     ];
   };
 }

@@ -39,7 +39,7 @@
   home.packages = with pkgs; [
     nvtopPackages.full
     stm32cubemx
-    xfce.xfburn
+    xfburn
     heroic
     rtl-sdr
     rtl_433

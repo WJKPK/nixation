@@ -3,7 +3,7 @@
   guiApps = with pkgs; [
     pavucontrol
     pwvucontrol
-    transmission_3-gtk
+    transmission_4-gtk
     openscad
     satty
     hyprshot
@@ -13,13 +13,13 @@
     arc-theme
     saleae-logic-2
     pulseview
-    xfce.thunar
-    xfce.xfce4-appfinder
-    xfce.xfce4-settings
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
-    xfce.ristretto
-    xfce.tumbler
+    thunar
+    xfce4-appfinder
+    xfce4-settings
+    thunar-archive-plugin
+    thunar-volman
+    ristretto
+    tumbler
   ];
 
   nonGuiApps = with pkgs; [

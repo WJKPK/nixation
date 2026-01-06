@@ -27,6 +27,7 @@ in {
         "MOZ_ENABLE_WAYLAND,1"
         "ELECTRON_OZONE_PLATFORM_HINT,wayland"
         "OZONE_PLATFORM,wayland"
+        "XDG_CURRENT_DESKTOP,Hyprland"
 
         # Make .desktop files available for rofi 
         "XDG_DATA_DIRS,$XDG_DATA_DIRS:$HOME/.nix-profile/share:/nix/var/nix/profiles/default/share"

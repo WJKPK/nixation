@@ -1,6 +1,6 @@
 { lib, pkgs, config, color-scheme, ... }:
 let
-  inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
+  inherit (lib) mkEnableOption mkOption types mkIf mkMerge mkForce;
 
   compositorSettings = {
     hyprland = {
@@ -42,13 +42,23 @@ let
 
   commonWaylandSettings = {
       services.displayManager.sddm = {
+        package = pkgs.kdePackages.sddm;
         enable = true;
+        theme = "sddm-astronaut-theme";
+        #theme = "${import ./sddm-theme.nix { inherit pkgs color-scheme; }}";
         wayland.enable = true;
-        theme = "${import ./sddm-theme.nix { inherit pkgs color-scheme; }}";
+        extraPackages = with pkgs; [
+          kdePackages.qtsvg
+          kdePackages.qtmultimedia
+          kdePackages.qtvirtualkeyboard
+        ];
       };
 
       services.gvfs.enable = true;
       environment.systemPackages = with pkgs; [
+        (sddm-astronaut.override {
+          embeddedTheme = "purple_leaves";
+        })
         gparted
         libsForQt5.qt5.qtquickcontrols2
         libsForQt5.qt5.qtgraphicaleffects
