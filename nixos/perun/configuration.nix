@@ -21,7 +21,7 @@
     firewall.allowedTCPPorts = [ 22 ];
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   nvidiaManagement = {
       driver.enable = true;

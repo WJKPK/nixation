@@ -35,6 +35,7 @@ in {
       obsidian
       element-desktop
       xournalpp
+      jq
     ];
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";
