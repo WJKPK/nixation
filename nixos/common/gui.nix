@@ -1,7 +1,6 @@
-{ lib, pkgs, config, color-scheme, ... }:
+{ lib, pkgs, config, ... }:
 let
-  inherit (lib) mkEnableOption mkOption types mkIf mkMerge mkForce;
-
+  inherit (lib) mkEnableOption mkOption types mkIf mkMerge;
   compositorSettings = {
     hyprland = {
       programs.hyprland = {
@@ -14,8 +13,23 @@ let
       security.pam.services.hyprlock = {};
     };
 
-    cosmic = {
-      services.desktopManager.cosmic.enable = true;
+    niri = {
+      programs.niri.enable = true;
+      programs.niri.package = pkgs.niri;
+      environment.sessionVariables = {
+        NIXOS_OZONE_WL = "1";
+        MOZ_ENABLE_WAYLAND = 1;
+        GDK_BACKEND = "wayland";
+        QT_QPA_PLATFORM = "wayland";
+        SDL_VIDEODRIVER = "wayland";
+        ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+        XDG_CURRENT_DESKTOP = "niri";
+      };
+      services = {
+        upower.enable = true;
+        gnome.evolution-data-server.enable = true;
+        power-profiles-daemon.enable = true;
+      };
     };
   };
 
@@ -28,6 +42,17 @@ let
     };
     environment.systemPackages = with pkgs; [ hyprpolkitagent ];
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  };
+
+  niriEnv = {
+    environment.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+    };
+    environment.systemPackages = with pkgs; [
+      xwayland-satellite
+      fuzzel
+    ];
+    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
   nvidiaEnv = {
@@ -84,7 +109,7 @@ in
     compositor = {
       enable = mkEnableOption "Enable compositor configuration";
       type = mkOption {
-        type = types.enum [ "hyprland" "cosmic" ];
+        type = types.enum [ "hyprland" "niri" ];
         default = "hyprland";
         description = "The compositor / desktop environment to use.";
       };
@@ -103,7 +128,13 @@ in
         (mkIf (nvidia-cfg.driver.enable && !nvidia-cfg.optimus.enable) nvidiaEnv)
       ]
     ))
-    (mkIf (cfg.enable && cfg.compositor.enable && cfg.compositor.type == "cosmic") compositorSettings.cosmic)
+    (mkIf (cfg.enable && cfg.compositor.enable && cfg.compositor.type == "niri") (
+      mkMerge [
+        compositorSettings.niri
+        niriEnv
+        (mkIf (nvidia-cfg.driver.enable && !nvidia-cfg.optimus.enable) nvidiaEnv)
+      ]
+    ))
     {
       assertions = [
         {
@@ -113,6 +144,10 @@ in
         {
           assertion = (cfg.compositor.enable && cfg.compositor.type == "hyprland") -> (config.nvidiaManagement or {} ? driver && config.nvidiaManagement or {} ? optimus);
           message = "nvidiaManagement must be defined when using Hyprland with NVIDIA settings.";
+        }
+        {
+          assertion = (cfg.compositor.enable && cfg.compositor.type == "niri") -> (config.nvidiaManagement or {} ? driver && config.nvidiaManagement or {} ? optimus);
+          message = "nvidiaManagement must be defined when using Niri with NVIDIA settings.";
         }
       ];
     }

@@ -8,7 +8,12 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs color-scheme;};
-    users.kruppenfield = import ../../home-manager/perun.nix;
+    users.kruppenfield = {
+    imports = [
+        ../../home-manager/perun.nix
+        inputs.noctalia.homeModules.default
+      ];
+    };
   };
 
   users.users.kruppenfield = {
@@ -38,7 +43,7 @@
       enable = true;
       compositor = {
         enable = true;
-        type = "hyprland";
+        type = "niri";
       };
   };
   monitors = [
@@ -49,7 +54,7 @@
       x = 0;
       workspace = "1";
       scale = 1.0;
-      refreshRate = 165; 
+      refreshRate = 164.999; 
       enabled = true;
       primary = true;
     }

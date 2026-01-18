@@ -30,7 +30,7 @@
       enable = true;
       compositor = {
         enable = true;
-        type = "hyprland";
+        type = "niri";
       };
   };
   monitors = [

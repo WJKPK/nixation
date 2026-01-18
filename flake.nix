@@ -16,6 +16,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lavix.url = "github:WJKPK/lavix";
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    noctalia.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, nix-colors, ... }@inputs:

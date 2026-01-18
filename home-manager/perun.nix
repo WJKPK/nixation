@@ -13,11 +13,12 @@
     ./programs/yazi
     ./programs/btop
     ./programs/openscad
-    ./programs/dunst
-    ./programs/hyprland
-    ./programs/waybar
-    ./programs/hyprlock
-    ./programs/hyprshade
+    #./programs/dunst
+    #./programs/hyprland
+    ./programs/niri
+    #./programs/waybar
+    #./programs/hyprlock
+    #./programs/hyprshade
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
 #    ./programs/prusa-slicer
@@ -35,7 +36,7 @@
     userName = "WJKPK";
   };
 
-  desktop.addons.waybar.enable = true;
+  #desktop.addons.waybar.enable = true;
   home.packages = with pkgs; [
     nvtopPackages.full
     stm32cubemx

@@ -14,16 +14,17 @@
     ./programs/yazi
     ./programs/btop
     ./programs/openscad
-    ./programs/dunst
-    ./programs/hyprland
-    ./programs/waybar
-    ./programs/hyprlock
+    #./programs/dunst
+    #./programs/hyprland
+    ./programs/niri
+    #./programs/waybar
+    #./programs/hyprlock
+    #./programs/hyprshade
     ./programs/librewolf
-    ./programs/hyprshade
     ./programs/keepassxc
   ];
 
-  desktop.addons.waybar.enable = true;
+  #desktop.addons.waybar.enable = true;
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
@@ -35,16 +36,8 @@
   };
   home.packages = with pkgs; [
     nvtopPackages.full
-    arc-theme
     stm32cubemx
     saleae-logic-2
-    xfce.thunar
-    xfce.xfce4-appfinder
-    xfce.xfce4-settings
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
-    xfce.ristretto
-    xfce.tumbler
     nrfutil
     nrf-command-line-tools
     segger-jlink

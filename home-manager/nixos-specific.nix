@@ -1,16 +1,15 @@
 { pkgs, lib, osConfig, ... }: let
   monitors = osConfig.monitors;
   guiApps = with pkgs; [
-    pavucontrol
-    pwvucontrol
+    #pavucontrol
+    #pwvucontrol
     transmission_4-gtk
     openscad
-    satty
-    hyprshot
-    grim
-    slurp
+    #satty
+    #hyprshot
+    #grim
+    #slurp
     #wl-clipboard
-    arc-theme
     saleae-logic-2
     pulseview
     thunar
@@ -23,11 +22,11 @@
   ];
 
   nonGuiApps = with pkgs; [
-    brightnessctl
-    pamixer
+    #brightnessctl
+    #pamixer
     unzip
     distrobox
-    procps
+    #procps
   ];
 in {
   services.syncthing.enable = true;
