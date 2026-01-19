@@ -2,6 +2,9 @@
   wallpaperDir = builtins.path {
     path = ../../wallpapers;
   };
+  tortoise = builtins.path {
+    path = ../../wallpapers/tortoise.jpg;
+  };
 
   monitors = if osConfig ? monitors then osConfig.monitors else [];
   activeBorder = lib.strings.removePrefix "#" color-scheme.palette.base0D;
@@ -92,7 +95,7 @@ in {
     }
     
     window-rule {
-        geometry-corner-radius 4
+        geometry-corner-radius 6
         clip-to-geometry true
     }
     
@@ -229,7 +232,7 @@ in {
     }
     cursor {
         xcursor-theme "Bibata-Modern-Ice"
-        xcursor-size 24
+        xcursor-size 20
         hide-when-typing
         hide-after-inactive-ms 10000
     } 
@@ -272,7 +275,7 @@ in {
         fontFixed = "JetBrainsMono Nerd Font Mono";
       }; 
       location = {
-        name = "Wroclaw";
+        name = "Wroclaw, Poland";
       };
       colorSchemes = {
         predefinedScheme = "GruvboxAlt";  
@@ -293,6 +296,7 @@ in {
         iRadiusRatio = 0.5;
         boxRadiusRatio = 0.5;
         screenRadiusRatio = 0.5;
+        avatarImage = tortoise;
       };
       bar = {
         marginHorizontal = 5;
@@ -300,6 +304,8 @@ in {
         outerCorners = false;
         showOutline = false;
         density = "comfortable";
+        useSeparateOpacity = true;
+        backgroundOpacity = 0.2;
     
         widgets = {
           center = [
@@ -326,7 +332,6 @@ in {
               formatHorizontal = "HH:mm ddd, MMM dd";
               useCustomFont = false;
             }
-    
             {
               id = "SystemMonitor";
               compactMode = false;
@@ -341,6 +346,9 @@ in {
               showNetworkStats = false;
               useMonospaceFont = true;
               usePrimaryColor = false;
+            }
+            {
+              id = "AudioVisualizer";
             }
           ];
     
