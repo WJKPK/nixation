@@ -1,4 +1,11 @@
-{ pkgs, lib, inputs, outputs, color-scheme, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  color-scheme,
+  ...
+}: {
   imports = [
     ../common
     ./virtualization
@@ -7,9 +14,9 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs color-scheme;};
+    extraSpecialArgs = {inherit inputs outputs color-scheme;};
     users.kruppenfield = {
-    imports = [
+      imports = [
         ../../home-manager/perun.nix
         inputs.noctalia.homeModules.default
       ];
@@ -17,20 +24,20 @@
   };
 
   users.users.kruppenfield = {
-    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = ["docker" "networkmanager" "wheel" "libvirtd"];
   };
 
   networking = {
     hostName = "perun";
-    dhcpcd.denyInterfaces = [ "macvtap*" ];
-    firewall.allowedTCPPorts = [ 22 ];
+    dhcpcd.denyInterfaces = ["macvtap*"];
+    firewall.allowedTCPPorts = [22];
   };
 
   boot.kernelPackages = pkgs.linuxPackages_6_18;
 
   nvidiaManagement = {
-      driver.enable = true;
-      vfio = {
+    driver.enable = true;
+    vfio = {
       enable = true;
       gpuIDs = [
         "10de:1b81" # GTX 1070 Graphics
@@ -40,11 +47,11 @@
   };
   nvidia-undervolt.enable = true;
   graphicalEnvironment = {
+    enable = true;
+    compositor = {
       enable = true;
-      compositor = {
-        enable = true;
-        type = "niri";
-      };
+      type = "niri";
+    };
   };
   monitors = [
     {
@@ -54,7 +61,7 @@
       x = 0;
       workspace = "1";
       scale = 1.0;
-      refreshRate = 164.999; 
+      refreshRate = 164.999;
       enabled = true;
       primary = true;
     }
@@ -65,7 +72,7 @@
   };
 
   specialisation."ML-spec".configuration = {
-    system.nixos.tags = [ "ML-spec" ];
+    system.nixos.tags = ["ML-spec"];
     nvidiaManagement.vfio.enable = lib.mkForce false;
     nvidia-undervolt.enable = lib.mkForce true;
   };
@@ -78,7 +85,7 @@
 
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
-    docker-compose  
+    docker-compose
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

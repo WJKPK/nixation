@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{pkgs, ...}: {
   imports = [
     ./common.nix
     ./nixos-specific.nix
@@ -14,25 +14,45 @@
     ./programs/yazi
     ./programs/btop
     ./programs/openscad
-    #./programs/dunst
-    #./programs/hyprland
+    ./programs/dunst
+    ./programs/hyprland
     ./programs/niri
-    #./programs/waybar
-    #./programs/hyprlock
-    #./programs/hyprshade
+    ./programs/waybar
+    ./programs/hyprlock
+    ./programs/hyprshade
     ./programs/librewolf
     ./programs/keepassxc
   ];
 
-  #desktop.addons.waybar.enable = true;
+  utilities.zsh.enable = true;
+  utilities.git.enable = true;
+  utilities.kitty.enable = true;
+  utilities.direnv.enable = true;
+  utilities.tmuxSessionizer.enable = true;
+  utilities.yazi.enable = true;
+  utilities.btop.enable = true;
+  utilities.openscad.enable = true;
+  desktop.addons.rofi.enable = true;
+  desktop.environment.niri.enable = true;
+  utilities.librewolf.enable = true;
+  utilities.keepassxc.enable = true;
+  utilities.kicad.enable = true;
+  desktop.addons.waybar.enable = false;
+  desktop.addons.hyprlock.enable = false;
+  desktop.addons.hyprshade.enable = false;
+  desktop.environment.hyprland.enable = false;
+  desktop.addons.dunst.enable = false;
+
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
   };
   programs.git = {
     enable = true;
-    userEmail = "krupskiwojciech@gmail.com";
-    userName = "WJKPK";
+    settings.user = {
+      email = "krupskiwojciech@gmail.com";
+      name = "WJKPK";
+    };
   };
   home.packages = with pkgs; [
     nvtopPackages.full

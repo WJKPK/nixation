@@ -1,7 +1,6 @@
-{ ... }: {
-  imports = [ 
+{...}: {
+  imports = [
     ./docker.nix
     ./virt-manager.nix
   ];
 }
-

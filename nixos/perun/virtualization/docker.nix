@@ -1,8 +1,8 @@
-{ ... }: {
+{...}: {
   hardware.nvidia-container-toolkit.enable = true;
   virtualisation = {
     podman = {
-        enable = true;
+      enable = true;
     };
     docker = {
       enable = true;

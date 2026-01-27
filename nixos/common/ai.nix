@@ -1,5 +1,9 @@
-{ lib, pkgs, config, ... }:
-let
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   aiServices = {
     services = {
@@ -18,8 +22,7 @@ let
       };
     };
   };
-in
-{
+in {
   options.aiLocal = {
     enable = mkEnableOption "Enable AI services";
   };

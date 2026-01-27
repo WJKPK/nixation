@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   fonts.enableDefaultPackages = true;
   fonts.fontDir.enable = true;
 
@@ -7,10 +7,10 @@
     includeUserConf = true;
 
     defaultFonts = {
-      monospace = [ "Jetbrains Mono Nerd Fonts" "Iosevka" "Source Code Pro" ];
-      sansSerif = [ "Source Sans Pro" "Noto Sans" ];
-      serif = [ "Source Serif Pro" "Noto Serif" ];
-      emoji = [ "Noto Color Emoji" ];
+      monospace = ["Jetbrains Mono Nerd Fonts" "Iosevka" "Source Code Pro"];
+      sansSerif = ["Source Sans Pro" "Noto Sans"];
+      serif = ["Source Serif Pro" "Noto Serif"];
+      emoji = ["Noto Color Emoji"];
     };
   };
 
@@ -40,4 +40,3 @@
     xits-math
   ];
 }
-

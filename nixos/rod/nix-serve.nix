@@ -4,9 +4,12 @@
 # nix-store --generate-binary-cache-key $(hostname).$(hostname -d) cache-priv-key.pem cache-pub-key.pem
 #
 # curl localhost:5050/nix-cache-info
-{ pkgs, config, ...}:
-let
-    serve_port = 5050;
+{
+  pkgs,
+  config,
+  ...
+}: let
+  serve_port = 5050;
 in {
   services = {
     nix-serve = {
@@ -26,7 +29,6 @@ in {
   };
 
   networking.firewall = {
-    allowedTCPPorts = [ config.services.nginx.defaultHTTPListenPort ];
+    allowedTCPPorts = [config.services.nginx.defaultHTTPListenPort];
   };
 }
-

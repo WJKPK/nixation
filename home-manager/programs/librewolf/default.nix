@@ -1,21 +1,44 @@
-{ pkgs, ...}: {
-  programs.librewolf = {
-    enable = true;
-    package = pkgs.librewolf.override {
-      nativeMessagingHosts = with pkgs; [
-        keepassxc
-      ];
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.utilities.librewolf;
+in {
+  options.utilities.librewolf = with types; {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable Librewolf.";
     };
-    policies = {
-      DisableFirefoxStudies = true;
-      DisablePocket = true;
-      DisableTelemetry = true;
-      DisableFirefoxAccounts = true;
-      FirefoxHome = { Pocket = false; Snippets = false; };
-      OfferToSaveLogins = false;
-      UserMessaging = { SkipOnboarding = true; ExtensionRecommendations = false; };
-    };
-    profiles.default = {
+  };
+
+  config = mkIf cfg.enable {
+    programs.librewolf = {
+      enable = true;
+      package = pkgs.librewolf.override {
+        nativeMessagingHosts = with pkgs; [
+          keepassxc
+        ];
+      };
+      policies = {
+        DisableFirefoxStudies = true;
+        DisablePocket = true;
+        DisableTelemetry = true;
+        DisableFirefoxAccounts = true;
+        FirefoxHome = {
+          Pocket = false;
+          Snippets = false;
+        };
+        OfferToSaveLogins = false;
+        UserMessaging = {
+          SkipOnboarding = true;
+          ExtensionRecommendations = false;
+        };
+      };
+      profiles.default = {
         extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
           darkreader
           don-t-fuck-with-paste
@@ -46,6 +69,6 @@
           "security.identityblock.show_extended_validation" = true;
         };
       };
+    };
   };
 }
-

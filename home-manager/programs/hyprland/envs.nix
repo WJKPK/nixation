@@ -4,7 +4,7 @@
   ...
 }: let
   monitors = osConfig.monitors;
-  primaryScale = (lib.findFirst (m: m.primary) { scale = 1.0; } monitors).scale;
+  primaryScale = (lib.findFirst (m: m.primary) {scale = 1.0;} monitors).scale;
   hasNvidiaDrivers = osConfig.nvidiaManagement.driver.enable;
   nvidiaEnv = [
     "NVD_BACKEND,direct"
@@ -29,7 +29,7 @@ in {
         "OZONE_PLATFORM,wayland"
         "XDG_CURRENT_DESKTOP,Hyprland"
 
-        # Make .desktop files available for rofi 
+        # Make .desktop files available for rofi
         "XDG_DATA_DIRS,$XDG_DATA_DIRS:$HOME/.nix-profile/share:/nix/var/nix/profiles/default/share"
 
         "EDITOR,nvim"

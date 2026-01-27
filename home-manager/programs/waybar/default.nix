@@ -4,12 +4,10 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.desktop.addons.waybar;
   cycle-sink = pkgs.writeShellScriptBin "cycle-sink" (builtins.readFile ./cycle-sink.sh);
-in
-{
+in {
   options.desktop.addons.waybar = with types; {
     enable = mkOption {
       type = types.bool;
@@ -28,158 +26,158 @@ in
     };
     home.file.".config/waybar/config.jsonc" = {
       text = ''
-      {
-        "layer": "top",
-        "position": "top",
-        "mod": "dock",
-        "exclusive": true,
-        "passtrough": false,
-        "gtk-layer-shell": true,
-        "height": 48,
+        {
+          "layer": "top",
+          "position": "top",
+          "mod": "dock",
+          "exclusive": true,
+          "passtrough": false,
+          "gtk-layer-shell": true,
+          "height": 48,
 
-        "modules-left": [
-            "hyprland/workspaces",
-        ],
+          "modules-left": [
+              "hyprland/workspaces",
+          ],
 
-        "modules-center": [],
+          "modules-center": [],
 
-        "modules-right": [
-        	"tray",
-            "wireplumber",
-            "temperature",
-            "custom/gpu",
-            "memory",
-            "disk",
-            "network",
-            "battery",
-            "clock",
-            "custom/powermenu"
-        ],
+          "modules-right": [
+          	"tray",
+              "wireplumber",
+              "temperature",
+              "custom/gpu",
+              "memory",
+              "disk",
+              "network",
+              "battery",
+              "clock",
+              "custom/powermenu"
+          ],
 
-        "hyprland/window": {
-            "format": "{}"
-        },
-        "memory": {
-          "interval": 2,
-          "format": " {}%",
-          "tooltip": true,
-          "tooltip-format": "{used:0.1f}GiB used\n{avail:0.1f}GiB available",
-          "max-length": 10,
-        },
-        "disk": {
-            "interval": 60,
-            "format": "󰋊 <span foreground=\"#e5e1e9\">{percentage_used}%</span>",
+          "hyprland/window": {
+              "format": "{}"
+          },
+          "memory": {
+            "interval": 2,
+            "format": " {}%",
             "tooltip": true,
-            "tooltip-format": "Free: {free} ({percentage_free}%)\nTotal: {total}",
-            "path": "/",
-        },
-        "hyprland/workspaces": {
-            "on-scroll-up": "hyprctl dispatch workspace e+1",
-            "on-scroll-down": "hyprctl dispatch workspace e-1",
-            "all-outputs": true,
-            "on-click": "activate",
-            "format": "{icon}",
-            "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "8",
-            "9": "9",
-            "10": "10"
-            }
-        },
+            "tooltip-format": "{used:0.1f}GiB used\n{avail:0.1f}GiB available",
+            "max-length": 10,
+          },
+          "disk": {
+              "interval": 60,
+              "format": "󰋊 <span foreground=\"#e5e1e9\">{percentage_used}%</span>",
+              "tooltip": true,
+              "tooltip-format": "Free: {free} ({percentage_free}%)\nTotal: {total}",
+              "path": "/",
+          },
+          "hyprland/workspaces": {
+              "on-scroll-up": "hyprctl dispatch workspace e+1",
+              "on-scroll-down": "hyprctl dispatch workspace e-1",
+              "all-outputs": true,
+              "on-click": "activate",
+              "format": "{icon}",
+              "format-icons": {
+              "1": "1",
+              "2": "2",
+              "3": "3",
+              "4": "4",
+              "5": "5",
+              "6": "6",
+              "7": "7",
+              "8": "8",
+              "9": "9",
+              "10": "10"
+              }
+          },
 
-        "tray": {
-            "icon-size": 12,
-            "tooltip": false,
-            "spacing": 10
-        },
+          "tray": {
+              "icon-size": 12,
+              "tooltip": false,
+              "spacing": 10
+          },
 
-        "clock": {
-            "format": "{:%H:%M}",
-            "format-alt": "{:%A, %B %d, %Y (%R)} 󱄅",
-            "tooltip-format": "<tt><small>{calendar}</small></tt>",
-            "calendar": {
-            	"mode"          : "year",
-            	"mode-mon-col"  : 3,
-            	"weeks-pos"     : "right",
-            	"on-scroll"     : 1,
-            	"on-click-right": "mode",
-            	"format": {
-            		"months":     "<span color='#${config.colorScheme.palette.base0B}'><b>{}</b></span>",
-            		"days":       "<span color='#${config.colorScheme.palette.base0F}'><b>{}</b></span>",
-            		"weeks":      "<span color='#${config.colorScheme.palette.base0E}'><b>W{}</b></span>",
-            		"weekdays":   "<span color='#${config.colorScheme.palette.base0A}'><b>{}</b></span>",
-            		"today":      "<span color='#${config.colorScheme.palette.base08}'><b><u>{}</u></b></span>"
-            	}
-            },
-            "actions": {
-            	"on-click-right": "mode",
-            	"on-click-forward": "tz_up",
-            	"on-click-backward": "tz_down",
-            	"on-scroll-up": "shift_up",
-            	"on-scroll-down": "shift_down"
-            }
-        },
-        "wireplumber": {
-            "format": "{node_name} - {volume}% {icon}",
-            "format-muted": "",
-            "format-icons": ["", "", ""],
-            "on-click": "${lib.getExe cycle-sink} -q",
-            "on-click-right": "${lib.getExe pkgs.pavucontrol}",
-            "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
-            "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
-        },
-        "network": {
-            "format-disconnected": "󰈂",
-            "format-ethernet" : "󰒢",
-            "format-linked" : "󰖪 {essid} (No IP)",
-            "format-wifi" : "󰖩 {essid} {signalStrength}%",
-            "interval" : 1,
-            "tooltip" : false,
-            "on-click" : "kitty --class nmwui nmtui"
-        },
+          "clock": {
+              "format": "{:%H:%M}",
+              "format-alt": "{:%A, %B %d, %Y (%R)} 󱄅",
+              "tooltip-format": "<tt><small>{calendar}</small></tt>",
+              "calendar": {
+              	"mode"          : "year",
+              	"mode-mon-col"  : 3,
+              	"weeks-pos"     : "right",
+              	"on-scroll"     : 1,
+              	"on-click-right": "mode",
+              	"format": {
+              		"months":     "<span color='#${config.colorScheme.palette.base0B}'><b>{}</b></span>",
+              		"days":       "<span color='#${config.colorScheme.palette.base0F}'><b>{}</b></span>",
+              		"weeks":      "<span color='#${config.colorScheme.palette.base0E}'><b>W{}</b></span>",
+              		"weekdays":   "<span color='#${config.colorScheme.palette.base0A}'><b>{}</b></span>",
+              		"today":      "<span color='#${config.colorScheme.palette.base08}'><b><u>{}</u></b></span>"
+              	}
+              },
+              "actions": {
+              	"on-click-right": "mode",
+              	"on-click-forward": "tz_up",
+              	"on-click-backward": "tz_down",
+              	"on-scroll-up": "shift_up",
+              	"on-scroll-down": "shift_down"
+              }
+          },
+          "wireplumber": {
+              "format": "{node_name} - {volume}% {icon}",
+              "format-muted": "",
+              "format-icons": ["", "", ""],
+              "on-click": "${lib.getExe cycle-sink} -q",
+              "on-click-right": "${lib.getExe pkgs.pavucontrol}",
+              "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+              "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+          },
+          "network": {
+              "format-disconnected": "󰈂",
+              "format-ethernet" : "󰒢",
+              "format-linked" : "󰖪 {essid} (No IP)",
+              "format-wifi" : "󰖩 {essid} {signalStrength}%",
+              "interval" : 1,
+              "tooltip" : false,
+              "on-click" : "kitty --class nmwui nmtui"
+          },
 
-        "custom/powermenu" : {
-            "format" : "",
-            "on-click" : "bash ~/.config/rofi/power.sh",
-            "tooltip" : false
-        },
+          "custom/powermenu" : {
+              "format" : "",
+              "on-click" : "bash ~/.config/rofi/power.sh",
+              "tooltip" : false
+          },
 
-        "battery": {
-            "states": {
-                "warning": 20,
-                "critical": 15
-            },
-            "format": "󰁹 {capacity}%",
-            "format-charging": "󰂄 {capacity}%",
-            "format-plugged": "󰂄 {capacity}%"
-        },
+          "battery": {
+              "states": {
+                  "warning": 20,
+                  "critical": 15
+              },
+              "format": "󰁹 {capacity}%",
+              "format-charging": "󰂄 {capacity}%",
+              "format-plugged": "󰂄 {capacity}%"
+          },
 
-        "temperature" : {
-            "critical-threshold" : 90,
-            "on-click" : "kitty --class center-float-large btop",
-            "hwmon-path" : "/sys/class/hwmon/hwmon1/temp1_input",
-            "format-critical" : "{icon} {temperatureC}°C",
-            "format" : "{icon} {temperatureC}°C",
-            "format-icons" :  ["", "", ""],
-            "tooltip" : true,
-            "interval" : 3
-        },
+          "temperature" : {
+              "critical-threshold" : 90,
+              "on-click" : "kitty --class center-float-large btop",
+              "hwmon-path" : "/sys/class/hwmon/hwmon1/temp1_input",
+              "format-critical" : "{icon} {temperatureC}°C",
+              "format" : "{icon} {temperatureC}°C",
+              "format-icons" :  ["", "", ""],
+              "tooltip" : true,
+              "interval" : 3
+          },
 
-        "custom/gpu" : {
-            "exec" : "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
-            "on-click" : "kitty --class center-float-large nvtop",
-            "critical-threshold" : 90,
-            "format" : "󰢮 {}°C",
-            "tooltip" : true,
-            "interval" : 3
+          "custom/gpu" : {
+              "exec" : "nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader",
+              "on-click" : "kitty --class center-float-large nvtop",
+              "critical-threshold" : 90,
+              "format" : "󰢮 {}°C",
+              "tooltip" : true,
+              "interval" : 3
+          }
         }
-      }
       '';
       onChange = ''
         ${pkgs.busybox}/bin/pkill -SIGUSR2 waybar
@@ -355,4 +353,3 @@ in
     };
   };
 }
-

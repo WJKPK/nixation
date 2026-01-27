@@ -1,4 +1,21 @@
-{ pkgs, ... } : {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.utilities.keepassxc;
+in {
+  options.utilities.keepassxc = with types; {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable KeePassXC.";
+    };
+  };
+
+  config = mkIf cfg.enable {
     home.packages = with pkgs; [
       keepassxc
     ];
@@ -6,8 +23,8 @@
     systemd.user.services.keepassxc = {
       Unit = {
         Description = "KeePassXC password manager";
-        After = [ "graphical-session-pre.target" ];
-        PartOf = [ "graphical-session.target" ];
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target"];
       };
 
       Service = {
@@ -15,12 +32,11 @@
         ExecStart = "${pkgs.keepassxc}/bin/keepassxc";
         Restart = "on-failure";
         RestartSec = 3;
-    };
+      };
 
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
     };
   };
-
 }
-

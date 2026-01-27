@@ -1,4 +1,4 @@
-{...}: {
+{lib, ...}: {
   imports = [
     ./common.nix
     ./nixos-specific.nix
@@ -11,6 +11,14 @@
     ./programs/btop
   ];
 
+  utilities.zsh.enable = true;
+  utilities.git.enable = true;
+  utilities.kitty.enable = true;
+  utilities.direnv.enable = true;
+  utilities.tmuxSessionizer.enable = true;
+  utilities.yazi.enable = true;
+  utilities.btop.enable = true;
+
   home = {
     username = "kruppenfield";
     homeDirectory = "/home/kruppenfield";
@@ -20,8 +28,10 @@
 
   programs.git = {
     enable = true;
-    userEmail = "krupskiwojciech@gmail.com";
-    userName = "WJKPK";
+    settings.user = {
+      email = "krupskiwojciech@gmail.com";
+      name = "WJKPK";
+    };
   };
   home.stateVersion = "24.11";
 }

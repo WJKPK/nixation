@@ -1,6 +1,4 @@
-{
-  ...
-}: {
+{...}: {
   wayland.windowManager.hyprland.settings = {
     windowrule = [
       # Suppress maximize events globally

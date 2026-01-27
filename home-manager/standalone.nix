@@ -1,4 +1,11 @@
-{ pkgs, outputs, inputs, specialArgs, osConfig ? null, ... }: {
+{
+  pkgs,
+  outputs,
+  inputs,
+  specialArgs,
+  osConfig ? null,
+  ...
+}: {
   targets.genericLinux.enable = builtins.isNull osConfig;
   imports = [
     ./programs/kitty
@@ -25,14 +32,29 @@
     ];
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = ["nix-command" "flakes"];
   };
+
+  utilities.kitty.enable = true;
+  utilities.zsh.enable = true;
+  utilities.git.enable = true;
+  utilities.direnv.enable = true;
+  utilities.tmuxSessionizer.enable = true;
+  utilities.yazi.enable = true;
+  utilities.btop.enable = true;
+  desktop.addons.rofi.enable = true;
+  utilities.librewolf.enable = true;
+  utilities.devcontainersWorkflow.enable = true;
+  utilities.keepassxc.enable = true;
+  utilities.television.enable = true;
+  utilities.kicad.enable = true;
+
   application.wrap-gl = true;
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [

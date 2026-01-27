@@ -1,29 +1,45 @@
-{ config, ...}: let
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.desktop.addons.hyprlock;
   wallpaper = builtins.path {
     path = ../../wallpapers/mountain.jpg;
   };
 in {
+  options.desktop.addons.hyprlock = with types; {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable hyprlock.";
+    };
+  };
+
   imports = [
     ./hypridle.nix
   ];
-  programs.hyprlock = {
-    enable = true;
-    settings = {
-      background = [
-        {
-          monitor = "";
-          path = "${wallpaper}";
-          blur_passes = 4; # 0 disables blurring
-          blur_size = 2;
-          noise = 0.0117;
-          contrast = 0.8916;
-          brightness = 0.8172;
-          vibrancy = 0.1696;
-          vibrancy_darkness = 0.0;
-        }
-      ];
-      input-field = [
-        {
+
+  config = mkIf cfg.enable {
+    programs.hyprlock = {
+      enable = true;
+      settings = {
+        background = [
+          {
+            monitor = "";
+            path = "${wallpaper}";
+            blur_passes = 4; # 0 disables blurring
+            blur_size = 2;
+            noise = 0.0117;
+            contrast = 0.8916;
+            brightness = 0.8172;
+            vibrancy = 0.1696;
+            vibrancy_darkness = 0.0;
+          }
+        ];
+        input-field = [
+          {
             monitor = "";
             size = "350, 50";
             outline_thickness = 3;
@@ -37,9 +53,9 @@ in {
             halign = "center";
             valign = "center";
             rounding = 0;
-        }
-      ];
-      label = [
+          }
+        ];
+        label = [
           {
             monitor = "";
             text = "$TIME";
@@ -73,6 +89,7 @@ in {
             valign = "center";
           }
         ];
+      };
     };
   };
 }

@@ -1,5 +1,12 @@
-{ inputs, outputs, pkgs, lib, color-scheme, ... }: 
-let inherit (lib) mkOption types;
+{
+  inputs,
+  outputs,
+  pkgs,
+  lib,
+  color-scheme,
+  ...
+}: let
+  inherit (lib) mkOption types;
 in {
   options.application = {
     wrap-gl = pkgs.lib.mkOption {
@@ -15,7 +22,6 @@ in {
       };
     };
   };
-
 
   imports = [
     inputs.nix-colors.homeManagerModules.default

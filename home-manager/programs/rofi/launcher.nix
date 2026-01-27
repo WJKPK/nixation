@@ -1,30 +1,34 @@
-{ pkgs, config, ... }:
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.desktop.addons.rofi;
   wallpaper = builtins.path {
     path = ../../wallpapers/colorful-planets-small.jpg;
   };
-in
-{
-  programs = {
-    rofi = {
-      enable = true;
-      package = pkgs.rofi;
-      extraConfig = {
-        modi = "drun,filebrowser,run,combi";
-        show-icons = true;
-        icon-theme = "Papirus";
-        location = 0;
-        font = "JetBrainsMono Nerd Font 12";
-        drun-display-format = "{icon} {name}";
-        display-drun = " Apps";
-        display-run = " Run";
-        display-filebrowser = " File";
-      };
-      theme =
-        let
+in {
+  config = mkIf cfg.enable {
+    programs = {
+      rofi = {
+        enable = true;
+        package = pkgs.rofi;
+        extraConfig = {
+          modi = "drun,filebrowser,run,combi";
+          show-icons = true;
+          icon-theme = "Papirus";
+          location = 0;
+          font = "JetBrainsMono Nerd Font 12";
+          drun-display-format = "{icon} {name}";
+          display-drun = " Apps";
+          display-run = " Run";
+          display-filebrowser = " File";
+        };
+        theme = let
           inherit (config.lib.formats.rasi) mkLiteral;
-        in
-        {
+        in {
           "*" = {
             background = mkLiteral "#${config.colorScheme.palette.base00}";
             background-alt = mkLiteral "#${config.colorScheme.palette.base06}";
@@ -213,7 +217,7 @@ in
             text-color = mkLiteral "@background";
           };
         };
+      };
     };
   };
 }
-

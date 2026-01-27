@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  inherit (lib) mkOption types;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib) mkOption types;
+in {
   options.monitors = mkOption {
     type = types.listOf (types.submodule {
       options = {
@@ -24,7 +26,7 @@ in
         };
         refreshRate = mkOption {
           type = types.float;
-          default = 60;
+          default = 60.0;
         };
         scale = mkOption {
           type = types.float;
@@ -48,13 +50,16 @@ in
         };
       };
     });
-    default = [ ];
+    default = [];
   };
   config = {
-    assertions = [{
-      assertion = ((lib.length config.monitors) != 0) ->
-        ((lib.length (lib.filter (m: m.primary) config.monitors)) == 1);
-      message = "Exactly one monitor must be set to primary.";
-    }];
+    assertions = [
+      {
+        assertion =
+          ((lib.length config.monitors) != 0)
+          -> ((lib.length (lib.filter (m: m.primary) config.monitors)) == 1);
+        message = "Exactly one monitor must be set to primary.";
+      }
+    ];
   };
 }

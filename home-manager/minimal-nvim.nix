@@ -1,10 +1,18 @@
-{ pkgs, outputs, inputs, osConfig ? null, ... }: {
+{
+  pkgs,
+  outputs,
+  inputs,
+  osConfig ? null,
+  ...
+}: {
   targets.genericLinux.enable = builtins.isNull osConfig;
-  imports = [
-    ./programs/yazi
-    ./programs/tmux-sessionizer
-    ./programs/zsh
-  ] ++ (builtins.attrValues outputs.homeManagerModules);
+  imports =
+    [
+      ./programs/yazi
+      ./programs/tmux-sessionizer
+      ./programs/zsh
+    ]
+    ++ (builtins.attrValues outputs.homeManagerModules);
 
   nixpkgs = {
     overlays = [
@@ -15,8 +23,12 @@
 
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = ["nix-command" "flakes"];
   };
+
+  utilities.yazi.enable = true;
+  utilities.tmuxSessionizer.enable = true;
+  utilities.zsh.enable = true;
 
   application.minimalTerminal.enable = true;
 

@@ -1,4 +1,10 @@
-{ pkgs, inputs, outputs, color-scheme, ... }: {
+{
+  pkgs,
+  inputs,
+  outputs,
+  color-scheme,
+  ...
+}: {
   imports = [
     ../common
     ./hardware-configuration.nix
@@ -11,27 +17,27 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs color-scheme; };
+    extraSpecialArgs = {inherit inputs outputs color-scheme;};
     users.kruppenfield = import ../../home-manager/rod.nix;
   };
 
   users.groups.admin = {};
   users.users.kruppenfield = {
     isNormalUser = true;
-    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = ["docker" "networkmanager" "wheel" "libvirtd"];
     group = "admin";
   };
 
   networking = {
     hostName = "rod";
-    firewall.allowedTCPPorts = [ 22 ];
-  }; 
+    firewall.allowedTCPPorts = [22];
+  };
 
   graphicalEnvironment = {
-      enable = false;
+    enable = false;
   };
   nvidiaManagement = {
-      driver.enable = false;
+    driver.enable = false;
   };
 
   hardware.graphics = {
@@ -44,14 +50,14 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_6_12;
     swraid.enable = true;
-    initrd.supportedFilesystems = [ "xfs" ];
+    initrd.supportedFilesystems = ["xfs"];
   };
 
   environment = {
-    sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
+    sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
     systemPackages = with pkgs; [
       mdadm
-      docker-compose  
+      docker-compose
     ];
   };
 

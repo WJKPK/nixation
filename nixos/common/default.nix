@@ -1,6 +1,13 @@
-{pkgs, inputs, outputs, lib, config, color-scheme, ...} :
-let
-  udevRules = pkgs.callPackage ./udev.nix { inherit pkgs; };
+{
+  pkgs,
+  inputs,
+  outputs,
+  lib,
+  config,
+  color-scheme,
+  ...
+}: let
+  udevRules = pkgs.callPackage ./udev.nix {inherit pkgs;};
 in {
   imports = [
     ./nvidia-management.nix
@@ -19,11 +26,12 @@ in {
     ];
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
       permittedInsecurePackages = [
         "segger-jlink-qt4-796s"
         "segger-jlink-qt4-810"
         "segger-jlink-qt4-824"
+        "segger-jlink-qt4-874"
       ];
       segger-jlink.acceptLicense = true;
     };
@@ -32,7 +40,7 @@ in {
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
@@ -42,10 +50,11 @@ in {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
       trusted-users = [
-        "root" "kruppenfield"
+        "root"
+        "kruppenfield"
       ];
-      trusted-substituters = [ "http://rod" ];
-      substituters = [ 
+      trusted-substituters = ["http://rod"];
+      substituters = [
         "https://cuda-maintainers.cachix.org"
       ];
       trusted-public-keys = [
@@ -62,29 +71,29 @@ in {
 
   users = {
     groups = {
-      plugdev = { };
-      spice = { };
+      plugdev = {};
+      spice = {};
     };
     users.kruppenfield = {
       isNormalUser = true;
       shell = pkgs.zsh;
       description = "kruppenfield";
-      extraGroups = [ "networkmanager" "wheel" "dialout" "plugdev" "spice" ];
+      extraGroups = ["networkmanager" "wheel" "dialout" "plugdev" "spice"];
     };
   };
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    backupFileExtension = "backup";
+    backupFileExtension = ".bak";
   };
 
   boot = {
     loader = {
-        systemd-boot.enable = true;
-        efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
-    kernel.sysctl = { "vm.swappiness" = 5;};
+    kernel.sysctl = {"vm.swappiness" = 5;};
   };
 
   environment.systemPackages = with pkgs; [
@@ -115,7 +124,7 @@ in {
   };
 
   hardware.graphics = {
-    enable = true;  
+    enable = true;
     enable32Bit = true;
   };
 
@@ -125,7 +134,7 @@ in {
   };
 
   services = {
-    udev.packages = [ udevRules ];
+    udev.packages = [udevRules];
     printing.enable = true;
     pulseaudio.enable = false;
     pipewire = {

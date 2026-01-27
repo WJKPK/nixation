@@ -1,6 +1,8 @@
-{ ... }: {
+{...}: {
   networking.firewall.allowedTCPPorts = [
-    80 443 3002
+    80
+    443
+    3002
   ];
 
   networking.firewall.allowedUDPPorts = [
@@ -16,7 +18,7 @@
       schema_version = 20;
       dns = {
         ratelimit = 0;
-        bind_hosts = [ "0.0.0.0" ];
+        bind_hosts = ["0.0.0.0"];
         bootstrap_dns = [
           "9.9.9.10"
           "149.112.112.10"
@@ -40,10 +42,14 @@
           enabled = false;
         };
       };
-      filters = map(url: { enabled = true; url = url; }) [
-        "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"
-        "https://big.oisd.nl"
-      ];
+      filters =
+        map (url: {
+          enabled = true;
+          url = url;
+        }) [
+          "https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt"
+          "https://big.oisd.nl"
+        ];
     };
   };
 }

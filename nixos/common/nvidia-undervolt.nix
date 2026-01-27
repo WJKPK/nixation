@@ -1,8 +1,12 @@
-{ config, pkgs, lib, ... }:
-with lib;
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.nvidia-undervolt;
-  pythonEnv = pkgs.python3.withPackages (ps: [ ps.nvidia-ml-py ]);
+  pythonEnv = pkgs.python3.withPackages (ps: [ps.nvidia-ml-py]);
   undervoltScript = pkgs.writeScriptBin "nvidia-undervolt" ''
     #!${pythonEnv}/bin/python
 
@@ -47,8 +51,8 @@ in {
   config = mkIf cfg.enable {
     systemd.services.nvidia-undervolt = {
       description = "NVIDIA GPU Undervolt Service";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "display-manager.service" ];
+      wantedBy = ["multi-user.target"];
+      after = ["display-manager.service"];
 
       serviceConfig = {
         Type = "oneshot";

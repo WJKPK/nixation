@@ -1,5 +1,11 @@
-{ pkgs, inputs, outputs, lib, color-scheme, ... }:
-  {
+{
+  pkgs,
+  inputs,
+  outputs,
+  lib,
+  color-scheme,
+  ...
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
     ../common
@@ -8,30 +14,33 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs color-scheme;};
-    users.kruppenfield = import ../../home-manager/veles.nix;
+    extraSpecialArgs = {inherit inputs outputs color-scheme;};
+    users.kruppenfield.imports = [
+      ../../home-manager/veles.nix
+      inputs.noctalia.homeModules.default
+    ];
   };
 
   nvidiaManagement.driver.enable = false;
   boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   specialisation."GPU-enable".configuration = {
-    system.nixos.tags = [ "GPU-enable" ];
+    system.nixos.tags = ["GPU-enable"];
     nvidiaManagement = {
-        driver.enable = lib.mkForce true;
-        optimus = {
-          enable = true;
-          intelBusId = "PCI:0:2:0";
-          nvidiaBusId = "PCI:1:0:0";
-        };
+      driver.enable = lib.mkForce true;
+      optimus = {
+        enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
   };
   graphicalEnvironment = {
+    enable = true;
+    compositor = {
       enable = true;
-      compositor = {
-        enable = true;
-        type = "niri";
-      };
+      type = "niri";
+    };
   };
   monitors = [
     {
@@ -60,12 +69,13 @@
       configFile = "/etc/wireguard/veles.conf";
     };
     firewall = {
-        allowedUDPPorts = [ 51820 52810 ];
-        checkReversePath = false;
+      allowedUDPPorts = [51820 52810];
+      checkReversePath = false;
     };
   };
 
   services = {
+    power-profiles-daemon.enable = lib.mkForce false;
     libinput = {
       enable = true;
       touchpad = {
@@ -83,9 +93,9 @@
     tlp = {
       enable = true;
       settings = {
-        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE="bluetooth";
-        DEVICES_TO_DISABLE_ON_LAN_CONNECT="wifi wwan";
-        DEVICES_TO_DISABLE_ON_WIFI_CONNECT="wwan";
+        DEVICES_TO_DISABLE_ON_BAT_NOT_IN_USE = "bluetooth";
+        DEVICES_TO_DISABLE_ON_LAN_CONNECT = "wifi wwan";
+        DEVICES_TO_DISABLE_ON_WIFI_CONNECT = "wwan";
 
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -94,10 +104,10 @@
         PLATFORM_PROFILE_ON_AC = "balanced";
         PLATFORM_PROFILE_ON_BAT = "low-power";
 
-        CPU_BOOST_ON_AC=1;
-        CPU_BOOST_ON_BAT=0;
-        CPU_HWP_DYN_BOOST_ON_AC=1;
-        CPU_HWP_DYN_BOOST_ON_BAT=0;
+        CPU_BOOST_ON_AC = 1;
+        CPU_BOOST_ON_BAT = 0;
+        CPU_HWP_DYN_BOOST_ON_AC = 1;
+        CPU_HWP_DYN_BOOST_ON_BAT = 0;
       };
     };
   };

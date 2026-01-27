@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
   services = {
     syncthing = {
       enable = true;
@@ -16,10 +16,9 @@
           path = "/md0/photos/photos/Telefon_Wojtek";
           type = "receiveonly";
         };
-
       };
     };
   };
-  networking.firewall.allowedTCPPorts = [ 8384 22000 ];
-  networking.firewall.allowedUDPPorts = [ 22000 21027 ];
+  networking.firewall.allowedTCPPorts = [8384 22000];
+  networking.firewall.allowedUDPPorts = [22000 21027];
 }

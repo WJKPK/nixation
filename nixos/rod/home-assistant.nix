@@ -1,6 +1,10 @@
-{ pkgs, config, ... }:
-let 
-    mqtt_port = 1883;
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  mqtt_port = 1883;
 in {
   services.home-assistant = {
     enable = true;
@@ -16,24 +20,24 @@ in {
       "zha" #just to avoid python traceback in journal
     ];
     config = {
-      default_config = { };
+      default_config = {};
       "automation ui" = "!include automations.yaml";
     };
     customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
-       apexcharts-card
+      apexcharts-card
     ];
   };
   services.zigbee2mqtt = {
     enable = true;
     settings = {
-      homeassistant = config.services.home-assistant.enable;
+      homeassistant = lib.mkOverride 1000 config.services.home-assistant.enable;
       serial = {
         adapter = "ember"; # Silabs adapter
         port = "/dev/ttyUSB0";
       };
       mqtt = {
         server = "mqtt://localhost:1883";
-        user = "zigbee2mqtt"; 
+        user = "zigbee2mqtt";
         password = "!/etc/systemd/zigbee2mqtt.yaml password";
       };
       frontend = {
@@ -46,8 +50,8 @@ in {
       };
     };
   };
-  systemd.services."zigbee2mqtt.service".requires = [ "mosquitto.service" ];
-  systemd.services."zigbee2mqtt.service".after = [ "mosquitto.service" ];
+  systemd.services."zigbee2mqtt.service".requires = ["mosquitto.service"];
+  systemd.services."zigbee2mqtt.service".after = ["mosquitto.service"];
 
   services.mosquitto = {
     enable = true;
@@ -72,7 +76,7 @@ in {
       }
     ];
   };
-   networking.firewall = {
-     allowedTCPPorts = [ 8072 mqtt_port 8123 ];
-   };
+  networking.firewall = {
+    allowedTCPPorts = [8072 mqtt_port 8123];
+  };
 }

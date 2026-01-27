@@ -1,5 +1,8 @@
-{ pkgs, lib,... }:
-let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   wallpaper = builtins.path {
     path = ./mountain.jpg;
   };

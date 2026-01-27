@@ -10,18 +10,22 @@
   inactiveBorder = hexToRgba color-scheme.palette.base09 "aa";
   activeBorder = hexToRgba color-scheme.palette.base0D "aa";
   monitors = osConfig.monitors;
-  monitor = lib.concatStrings (map (m: let
+  monitor = lib.concatStrings (map (
+      m: let
         resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
         position = "${toString m.x}x${toString m.y}";
         scale = "${toString m.scale}";
-      in
-        "monitor = ${m.name},${if m.enabled then "${resolution},${position},${scale}" else "disable"}\n"
-      ) monitors);
+      in "monitor = ${m.name},${
+        if m.enabled
+        then "${resolution},${position},${scale}"
+        else "disable"
+      }\n"
+    )
+    monitors);
 
-    workspace = lib.concatStrings ( map (m:
-        "\nworkspace = ${m.name},${m.workspace}"
-      ) (lib.filter (m: m.enabled && m.workspace != null) monitors));
-
+  workspace = lib.concatStrings (map (
+    m: "\nworkspace = ${m.name},${m.workspace}"
+  ) (lib.filter (m: m.enabled && m.workspace != null) monitors));
 in {
   wayland.windowManager.hyprland = {
     settings = {
