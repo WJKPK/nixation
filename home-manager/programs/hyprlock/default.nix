@@ -17,10 +17,6 @@ in {
     };
   };
 
-  imports = [
-    ./hypridle.nix
-  ];
-
   config = mkIf cfg.enable {
     programs.hyprlock = {
       enable = true;

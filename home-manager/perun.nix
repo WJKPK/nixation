@@ -23,6 +23,7 @@
     ./programs/waybar
     ./programs/hyprlock
     ./programs/hyprshade
+    ./programs/idle
     ./programs/librewolf
     ./programs/devcontainers-workflow.nix
     #./programs/prusa-slicer
@@ -51,6 +52,13 @@
   desktop.addons.hyprshade.enable = false;
   desktop.environment.hyprland.enable = false;
   desktop.addons.dunst.enable = false;
+
+  # Idle management with niri + noctalia
+  desktop.addons.idle = {
+    enable = true;
+    manager = "swayidle";
+    lockScreen = "noctalia";
+  };
 
   home = {
     username = "kruppenfield";

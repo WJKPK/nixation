@@ -20,6 +20,7 @@
     ./programs/waybar
     ./programs/hyprlock
     ./programs/hyprshade
+    ./programs/idle
     ./programs/librewolf
     ./programs/keepassxc
   ];
@@ -33,15 +34,21 @@
   utilities.btop.enable = true;
   utilities.openscad.enable = true;
   desktop.addons.rofi.enable = true;
-  desktop.environment.niri.enable = true;
+  desktop.environment.niri.enable = false;
   utilities.librewolf.enable = true;
   utilities.keepassxc.enable = true;
   utilities.kicad.enable = true;
-  desktop.addons.waybar.enable = false;
-  desktop.addons.hyprlock.enable = false;
+  desktop.addons.waybar.enable = true;
   desktop.addons.hyprshade.enable = false;
-  desktop.environment.hyprland.enable = false;
+  desktop.environment.hyprland.enable = true;
   desktop.addons.dunst.enable = false;
+
+  # Idle management with hyprland + hyprlock
+  desktop.addons.idle = {
+    enable = true;
+    manager = "hypridle";
+    lockScreen = "hyprlock";
+  };
 
   home = {
     username = "kruppenfield";
