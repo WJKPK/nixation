@@ -2,30 +2,31 @@
   pkgs,
   config,
   lib,
-  inputs,
   ...
 }:
 with lib; let
   cfg = config.desktop.addons.idle;
 
-  # Determine lock command based on lock screen choice
+  # Determine lock screen based on idle manager
+  # hypridle -> hyprlock (Hyprland)
+  # swayidle -> noctalia (Niri)
+  isHyprlock = cfg.manager == "hypridle";
+  
+  # Lock command
   lockCommand =
-    if cfg.lockScreen == "hyprlock"
+    if isHyprlock
     then "${config.home.profileDirectory}/bin/hyprlock"
     else let
-      noctalia = inputs.noctalia.packages.${pkgs.system}.default;
-      noctaliaIPC = "${noctalia}/bin/noctalia-shell ipc call";
-    in "${noctaliaIPC} lockScreen lock";
+    in "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock";
 
-  # Determine display power commands based on lock screen choice
-  # hyprlock = Hyprland, noctalia = Niri
+  # Display power commands based on manager/compositor
   displayOffCommand =
-    if cfg.lockScreen == "hyprlock"
+    if isHyprlock
     then "hyprctl dispatch dpms off"
     else "niri msg action power-off-monitors";
 
   displayOnCommand =
-    if cfg.lockScreen == "hyprlock"
+    if isHyprlock
     then "hyprctl dispatch dpms on"
     else "niri msg action power-on-monitors";
 
@@ -50,16 +51,16 @@ in {
     manager = mkOption {
       type = enum ["none" "hypridle" "swayidle"];
       default = "none";
-      description = "Idle manager to use.";
-    };
-
-    lockScreen = mkOption {
-      type = enum ["hyprlock" "noctalia"];
-      default = "hyprlock";
-      description = "Lock screen implementation. hyprlock assumes Hyprland, noctalia assumes Niri.";
+      description = "Idle manager to use. hypridle uses hyprlock (Hyprland), swayidle uses noctalia (Niri).";
     };
 
     timeouts = {
+      lock = mkOption {
+        type = int;
+        default = 180;
+        description = "Seconds before locking screen (only used with swayidle/noctalia).";
+      };
+
       displayOff = mkOption {
         type = int;
         default = 300;
@@ -86,8 +87,8 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    # Ensure hyprlock is enabled when using hyprlock lock screen
-    desktop.addons.hyprlock.enable = mkIf (cfg.lockScreen == "hyprlock") true;
+    # Ensure hyprlock is enabled when using hypridle
+    desktop.addons.hyprlock.enable = mkIf isHyprlock true;
 
     # Make commands available to child modules
     _module.args = {

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  lockCommand,
   displayOffCommand,
   displayOnCommand,
   suspendCommand,
@@ -14,6 +15,10 @@ in {
       enable = true;
       timeouts = [
         {
+          timeout = cfg.timeouts.lock;
+          command = lockCommand;
+        }
+        {
           timeout = cfg.timeouts.displayOff;
           command = displayOffCommand;
         }
@@ -23,7 +28,7 @@ in {
         }
       ];
       events = {
-        before-sleep = "loginctl lock-session";
+        before-sleep = lockCommand;
         after-resume = displayOnCommand;
       };
     };

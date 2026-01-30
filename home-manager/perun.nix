@@ -53,11 +53,11 @@
   desktop.environment.hyprland.enable = false;
   desktop.addons.dunst.enable = false;
 
-  # Idle management with niri + noctalia
+  # Idle management with niri + noctalia (swayidle auto-uses noctalia)
   desktop.addons.idle = {
     enable = true;
     manager = "swayidle";
-    lockScreen = "noctalia";
+    timeouts.lock = 60;
   };
 
   home = {

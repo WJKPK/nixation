@@ -29,9 +29,9 @@
         ELECTRON_OZONE_PLATFORM_HINT = "wayland";
         XDG_CURRENT_DESKTOP = "niri";
       };
+      security.pam.services.swaylock = {};
       services = {
         upower.enable = true;
-        gnome.evolution-data-server.enable = true;
         power-profiles-daemon.enable = true;
       };
     };

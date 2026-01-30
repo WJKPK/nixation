@@ -275,7 +275,7 @@ in {
     '';
     programs.noctalia-shell = {
       enable = true;
-      package = pkgs.noctalia-shell.override {calendarSupport = true;};
+      package = pkgs.noctalia-shell;
       systemd.enable = true;
       plugins = {
         sources = [
@@ -317,6 +317,7 @@ in {
           boxRadiusRatio = 0.5;
           screenRadiusRatio = 0.5;
           avatarImage = tortoise;
+          lockOnSuspend = true;
         };
         bar = {
           marginHorizontal = 5;

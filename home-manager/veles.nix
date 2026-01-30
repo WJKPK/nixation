@@ -43,11 +43,10 @@
   desktop.environment.hyprland.enable = true;
   desktop.addons.dunst.enable = false;
 
-  # Idle management with hyprland + hyprlock
+  # Idle management with hyprland + hyprlock (hypridle auto-uses hyprlock)
   desktop.addons.idle = {
     enable = true;
     manager = "hypridle";
-    lockScreen = "hyprlock";
   };
 
   home = {
