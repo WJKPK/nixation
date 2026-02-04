@@ -57,7 +57,6 @@
   desktop.addons.idle = {
     enable = true;
     manager = "swayidle";
-    timeouts.lock = 60;
   };
 
   home = {

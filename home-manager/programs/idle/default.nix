@@ -11,15 +11,13 @@ with lib; let
   # hypridle -> hyprlock (Hyprland)
   # swayidle -> noctalia (Niri)
   isHyprlock = cfg.manager == "hypridle";
-  
-  # Lock command
+
   lockCommand =
     if isHyprlock
     then "${config.home.profileDirectory}/bin/hyprlock"
     else let
     in "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call lockScreen lock";
 
-  # Display power commands based on manager/compositor
   displayOffCommand =
     if isHyprlock
     then "hyprctl dispatch dpms off"
@@ -30,10 +28,18 @@ with lib; let
     then "hyprctl dispatch dpms on"
     else "niri msg action power-on-monitors";
 
-  # Suspend script that skips suspend if VMs are running
-  suspendScript = pkgs.writeShellScript "suspend-script" ''
-    ${pkgs.procps}/bin/pgrep qemu || ${pkgs.systemd}/bin/systemctl suspend
-  '';
+    suspendScript = pkgs.writeShellScript "suspend-script" ''
+      if ${pkgs.systemd}/bin/busctl call org.freedesktop.login1 \
+           /org/freedesktop/login1 \
+           org.freedesktop.login1.Manager \
+           ListInhibitors \
+         | grep '"idle"' \
+         | grep '"sleep infinity"' >/dev/null; then
+        exit 0
+      fi
+
+      ${pkgs.procps}/bin/pgrep qemu || ${pkgs.systemd}/bin/systemctl suspend
+    '';
 
   # Actual suspend command based on VM check setting
   suspendCommand =
@@ -57,19 +63,19 @@ in {
     timeouts = {
       lock = mkOption {
         type = int;
-        default = 180;
+        default = 360;
         description = "Seconds before locking screen (only used with swayidle/noctalia).";
       };
 
       displayOff = mkOption {
         type = int;
-        default = 300;
+        default = 400;
         description = "Seconds before turning off display.";
       };
 
       suspend = mkOption {
         type = int;
-        default = 330;
+        default = 430;
         description = "Seconds before system suspend.";
       };
     };
