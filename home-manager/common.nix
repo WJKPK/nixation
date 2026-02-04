@@ -7,6 +7,17 @@
   ...
 }: let
   inherit (lib) mkOption types;
+    nrfconnectXwayland = pkgs.symlinkJoin {
+      name = "nrfconnect-xwayland";
+      paths = [ pkgs.nrfconnect ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/nrfconnect \
+          --set QT_QPA_PLATFORM xcb \
+          --set ELECTRON_OZONE_PLATFORM_HINT x11 \
+          --set __GLX_VENDOR_LIBRARY_NAME nvidia
+      '';
+    };
 in {
   options.application = {
     wrap-gl = pkgs.lib.mkOption {
@@ -42,6 +53,7 @@ in {
       element-desktop
       xournalpp
       jq
+      nrfconnectXwayland
     ];
     # Nicely reload system units when changing configs
     systemd.user.startServices = "sd-switch";
