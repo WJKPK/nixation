@@ -34,20 +34,9 @@
   utilities.btop.enable = true;
   utilities.openscad.enable = true;
   desktop.addons.rofi.enable = true;
-  desktop.environment.niri.enable = false;
   utilities.librewolf.enable = true;
   utilities.keepassxc.enable = true;
   utilities.kicad.enable = true;
-  desktop.addons.waybar.enable = true;
-  desktop.addons.hyprshade.enable = false;
-  desktop.environment.hyprland.enable = true;
-  desktop.addons.dunst.enable = false;
-
-  # Idle management with hyprland + hyprlock (hypridle auto-uses hyprlock)
-  desktop.addons.idle = {
-    enable = true;
-    manager = "hypridle";
-  };
 
   home = {
     username = "kruppenfield";

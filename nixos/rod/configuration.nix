@@ -40,6 +40,17 @@
     driver.enable = false;
   };
 
+  rod = {
+    services = {
+      adguard.enable = true;
+      homeAssistant.enable = true;
+      immich.enable = true;
+      syncthing.enable = true;
+      nixServe.enable = true;
+    };
+    distributedBuilds.enable = true;
+  };
+
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [

@@ -40,24 +40,11 @@
   utilities.btop.enable = true;
   utilities.openscad.enable = true;
   desktop.addons.rofi.enable = true;
-  desktop.environment.niri.enable = true;
   utilities.librewolf.enable = true;
   utilities.devcontainersWorkflow.enable = true;
   utilities.television.enable = true;
   utilities.keepassxc.enable = true;
   utilities.kicad.enable = true;
-
-  desktop.addons.waybar.enable = false;
-  desktop.addons.hyprlock.enable = false;
-  desktop.addons.hyprshade.enable = false;
-  desktop.environment.hyprland.enable = false;
-  desktop.addons.dunst.enable = false;
-
-  # Idle management with niri + noctalia (swayidle auto-uses noctalia)
-  desktop.addons.idle = {
-    enable = true;
-    manager = "swayidle";
-  };
 
   home = {
     username = "kruppenfield";

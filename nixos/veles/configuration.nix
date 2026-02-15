@@ -42,6 +42,8 @@
       type = "niri";
     };
   };
+
+  veles.distributedBuilds.enable = true;
   monitors = [
     {
       name = "eDP-1";

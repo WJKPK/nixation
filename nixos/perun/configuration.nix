@@ -53,6 +53,14 @@
       type = "niri";
     };
   };
+
+  perun = {
+    virtualization = {
+      docker.enable = true;
+      virtManager.enable = true;
+    };
+    remoteBuild.enable = true;
+  };
   monitors = [
     {
       name = "DP-1";

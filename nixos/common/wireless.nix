@@ -6,8 +6,8 @@
   inherit (lib) mkEnableOption mkIf;
 in {
   options.wirelessSettings = {
-    bluetooth.enable = mkEnableOption "Enable graphical environment configuration";
-    subGhzAdapter.enable = mkEnableOption "Enable graphical environment configuration";
+    bluetooth.enable = mkEnableOption "Enable bluetooth";
+    subGhzAdapter.enable = mkEnableOption "Enable support for SDR";
   };
 
   config = let

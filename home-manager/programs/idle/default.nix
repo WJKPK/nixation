@@ -28,18 +28,18 @@ with lib; let
     then "hyprctl dispatch dpms on"
     else "niri msg action power-on-monitors";
 
-    suspendScript = pkgs.writeShellScript "suspend-script" ''
-      if ${pkgs.systemd}/bin/busctl call org.freedesktop.login1 \
-           /org/freedesktop/login1 \
-           org.freedesktop.login1.Manager \
-           ListInhibitors \
-         | grep '"idle"' \
-         | grep '"sleep infinity"' >/dev/null; then
-        exit 0
-      fi
+  suspendScript = pkgs.writeShellScript "suspend-script" ''
+    if ${pkgs.systemd}/bin/busctl call org.freedesktop.login1 \
+         /org/freedesktop/login1 \
+         org.freedesktop.login1.Manager \
+         ListInhibitors \
+       | grep '"idle"' \
+       | grep '"sleep infinity"' >/dev/null; then
+      exit 0
+    fi
 
-      ${pkgs.procps}/bin/pgrep qemu || ${pkgs.systemd}/bin/systemctl suspend
-    '';
+    ${pkgs.procps}/bin/pgrep qemu || ${pkgs.systemd}/bin/systemctl suspend
+  '';
 
   # Actual suspend command based on VM check setting
   suspendCommand =

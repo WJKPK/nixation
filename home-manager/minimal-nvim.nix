@@ -5,7 +5,7 @@
   osConfig ? null,
   ...
 }: {
-  targets.genericLinux.enable = builtins.isNull osConfig;
+  targets.genericLinux.enable = isNull osConfig;
   imports =
     [
       ./programs/yazi
