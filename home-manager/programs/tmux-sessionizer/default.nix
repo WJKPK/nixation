@@ -39,29 +39,12 @@ in {
             set -g @tmux-gruvbox 'dark'
           '';
         }
-        {
-          plugin = resurrect; # Used by tmux-continuum
-          # Use XDG data directory
-          # https://github.com/tmux-plugins/tmux-resurrect/issues/348
-          extraConfig = ''
-            set -g @resurrect-dir '$HOME/.cache/tmux/resurrect'
-            set -g @resurrect-capture-pane-contents 'on'
-            set -g @resurrect-pane-contents-area 'visible'
-          '';
-        }
-        {
-          plugin = continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '5' # minutes
-          '';
-        }
       ];
 
       extraConfig = ''
         bind | split-window -h
         bind _ split-window -v
-        bind t display-popup -E "tms switch"
+        bind t display-popup -E "tms"
 
         # yazi releated
         set -g allow-passthrough on
