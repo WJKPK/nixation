@@ -17,7 +17,7 @@ with lib; let
     if isHyprlock
     then "${config.home.profileDirectory}/bin/hyprlock"
     else let
-    in "${inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/noctalia-shell ipc call lockScreen lock";
+    in "${config.programs.noctalia-shell.package}/bin/noctalia-shell ipc call lockScreen lock";
 
   displayOffCommand =
     if isHyprlock

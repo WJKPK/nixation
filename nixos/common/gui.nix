@@ -20,6 +20,8 @@
     niri = {
       programs.niri.enable = true;
       programs.niri.package = pkgs.niri;
+      programs.gpu-screen-recorder.enable = true;
+      services.gnome.evolution-data-server.enable = true;
       environment.sessionVariables = {
         NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = 1;
@@ -55,6 +57,7 @@
     environment.systemPackages = with pkgs; [
       xwayland-satellite
       fuzzel
+      gpu-screen-recorder
     ];
     xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
   };

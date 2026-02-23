@@ -276,7 +276,7 @@ in {
     '';
     programs.noctalia-shell = {
       enable = true;
-      package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override {calendarSupport = true;};
       systemd.enable = true;
       plugins = {
         sources = [
@@ -286,6 +286,34 @@ in {
             url = "https://github.com/noctalia-dev/noctalia-plugins";
           }
         ];
+        states = lib.listToAttrs (map (plugin:
+            lib.nameValuePair plugin {
+              enabled = true;
+              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+            })
+          [
+            "screen-recorder"
+            "privacy-indicator"
+            "weekly-calendar"
+          ]);
+      };
+      pluginSettings = {
+        privacy-indicator = {
+          hideInactive = false;
+        };
+        screen-recorder = {
+          hideInactive = false;
+          filenamePattern = "recording_yyyyMMdd_HHmmss";
+          frameRate = "60";
+          audioCodec = "opus";
+          videoCodec = "h264";
+          quality = "very_high";
+          showCursor = true;
+          copyToClipboard = true;
+          audioSource = "default_output";
+          videoSource = "portal";
+          resolution = "original";
+        };
       };
       settings = {
         audio = {
@@ -355,6 +383,9 @@ in {
                 useCustomFont = false;
               }
               {
+                id = "plugin:weekly-calendar";
+              }
+              {
                 id = "SystemMonitor";
                 compactMode = false;
                 diskPath = "/";
@@ -384,7 +415,12 @@ in {
                 showIcon = true;
                 useFixedWidth = false;
               }
-
+              {
+                id = "plugin:privacy-indicator";
+              }
+              {
+                id = "plugin:screen-recorder";
+              }
               {
                 id = "Network";
                 displayMode = "alwaysShow";
@@ -393,12 +429,10 @@ in {
                 id = "Bluetooth";
                 displayMode = "alwaysShow";
               }
-
               {
                 id = "Volume";
                 displayMode = "alwaysShow";
               }
-
               {
                 id = "Battery";
                 displayMode = "alwaysShow";
@@ -407,7 +441,6 @@ in {
                 showPowerProfiles = true;
                 warningThreshold = 30;
               }
-
               {
                 id = "ControlCenter";
                 colorizeDistroLogo = false;
