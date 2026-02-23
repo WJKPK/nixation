@@ -4,6 +4,7 @@
   color-scheme,
   osConfig,
   config,
+  inputs,
   ...
 }:
 with lib; let
@@ -275,7 +276,7 @@ in {
     '';
     programs.noctalia-shell = {
       enable = true;
-      package = pkgs.noctalia-shell;
+      package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
       systemd.enable = true;
       plugins = {
         sources = [
