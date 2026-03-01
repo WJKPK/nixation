@@ -67,7 +67,7 @@ in {
     home.packages = [
       devc-nix-infect
       devc-shell
-      pkgs.devcontainer
+      pkgs.stable.devcontainer
     ];
   };
 }

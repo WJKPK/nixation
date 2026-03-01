@@ -11,7 +11,7 @@
     transmission_4-gtk
     openscad
     saleae-logic-2
-    pulseview
+    stable.pulseview
     thunar
     xfce4-appfinder
     xfce4-settings
@@ -58,6 +58,7 @@ in
   }
   // optionalAttrs compositorEnabled {
     desktop.environment.niri.enable = mkDefault isNiri;
+    desktop.environment.noctalia.enable = mkDefault isNiri;
     desktop.environment.hyprland.enable = mkDefault isHyprland;
 
     desktop.addons.waybar.enable = mkDefault isHyprland;

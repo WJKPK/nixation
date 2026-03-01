@@ -20,6 +20,7 @@
     ./programs/dunst
     ./programs/hyprland
     ./programs/niri
+    ./programs/noctalia
     ./programs/waybar
     ./programs/hyprlock
     ./programs/hyprshade

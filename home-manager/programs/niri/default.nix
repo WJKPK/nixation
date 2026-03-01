@@ -1,21 +1,12 @@
 {
-  pkgs,
   lib,
   color-scheme,
   osConfig,
   config,
-  inputs,
   ...
 }:
 with lib; let
   cfg = config.desktop.environment.niri;
-  wallpaperDir = builtins.path {
-    path = ../../wallpapers;
-  };
-  tortoise = builtins.path {
-    path = ../../wallpapers/tortoise.jpg;
-  };
-
   monitors =
     if osConfig ? monitors
     then osConfig.monitors
@@ -60,9 +51,6 @@ in {
               disabled-on-external-mouse
           }
 
-          mouse {
-          }
-
           trackpoint {
               accel-speed 0.25
               accel-profile "adaptive"
@@ -75,12 +63,6 @@ in {
       layout {
           background-color "transparent"
           gaps 5
-          center-focused-column "never"
-          preset-column-widths {
-              proportion 0.33333
-              proportion 0.5
-              proportion 0.66667
-          }
 
           focus-ring {
               width 2
@@ -98,11 +80,6 @@ in {
       }
 
       prefer-no-csd
-
-      screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-
-      animations {
-      }
 
       window-rule {
           match app-id=r#"librewolf$"#
@@ -250,6 +227,9 @@ in {
 
           Mod+Shift+P { power-off-monitors; }
       }
+
+      spawn-at-startup "${config.programs.noctalia-shell.package}/bin/noctalia-shell"
+
       cursor {
           xcursor-theme "Bibata-Modern-Ice"
           xcursor-size 20
@@ -274,184 +254,5 @@ in {
         honor-xdg-activation-with-invalid-serial
       }
     '';
-    programs.noctalia-shell = {
-      enable = true;
-      package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.override {calendarSupport = true;};
-      systemd.enable = true;
-      plugins = {
-        sources = [
-          {
-            enabled = true;
-            name = "Official Noctalia Plugins";
-            url = "https://github.com/noctalia-dev/noctalia-plugins";
-          }
-        ];
-        states = lib.listToAttrs (map (plugin:
-            lib.nameValuePair plugin {
-              enabled = true;
-              sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
-            })
-          [
-            "screen-recorder"
-            "privacy-indicator"
-            "weekly-calendar"
-          ]);
-      };
-      pluginSettings = {
-        privacy-indicator = {
-          hideInactive = false;
-        };
-        screen-recorder = {
-          hideInactive = false;
-          filenamePattern = "recording_yyyyMMdd_HHmmss";
-          frameRate = "60";
-          audioCodec = "opus";
-          videoCodec = "h264";
-          quality = "very_high";
-          showCursor = true;
-          copyToClipboard = true;
-          audioSource = "default_output";
-          videoSource = "portal";
-          resolution = "original";
-        };
-      };
-      settings = {
-        audio = {
-          preferredPlayer = "kew";
-        };
-        ui = {
-          fontDefault = "JetBrainsMono Nerd Font Mono";
-          fontFixed = "JetBrainsMono Nerd Font Mono";
-        };
-        location = {
-          name = "Wroclaw, Poland";
-        };
-        colorSchemes = {
-          predefinedScheme = "GruvboxAlt";
-        };
-        wallpaper = {
-          enabled = true;
-          directory = wallpaperDir;
-        };
-        nightLight = {
-          enabled = true;
-          nightTemp = "4000";
-          dayTemp = "6500";
-          manualSunrise = "07:00";
-          manualSunset = "19:45";
-        };
-        general = {
-          radiusRatio = 0.5;
-          iRadiusRatio = 0.5;
-          boxRadiusRatio = 0.5;
-          screenRadiusRatio = 0.5;
-          avatarImage = tortoise;
-          lockOnSuspend = true;
-        };
-        bar = {
-          marginHorizontal = 5;
-          marginVertical = 5;
-          outerCorners = false;
-          showOutline = false;
-          density = "comfortable";
-          useSeparateOpacity = true;
-          backgroundOpacity = 0.2;
-
-          widgets = {
-            center = [
-              {
-                id = "Workspace";
-                characterCount = 16;
-                colorizeIcons = false;
-                enableScrollWheel = true;
-                followFocusedScreen = false;
-                groupedBorderOpacity = 1;
-                hideUnoccupied = false;
-                iconScale = 0.8;
-                labelMode = "name";
-                showApplications = true;
-                showLabelsOnlyWhenOccupied = false;
-                unfocusedIconsOpacity = 1;
-              }
-            ];
-
-            left = [
-              {
-                id = "Clock";
-                customFont = "";
-                formatHorizontal = "HH:mm ddd, MMM dd";
-                useCustomFont = false;
-              }
-              {
-                id = "plugin:weekly-calendar";
-              }
-              {
-                id = "SystemMonitor";
-                compactMode = false;
-                diskPath = "/";
-                showCpuTemp = true;
-                showCpuUsage = true;
-                showDiskUsage = true;
-                showGpuTemp = false;
-                showLoadAverage = false;
-                showMemoryAsPercent = false;
-                showMemoryUsage = true;
-                showNetworkStats = false;
-                useMonospaceFont = true;
-                usePrimaryColor = false;
-              }
-              {
-                id = "AudioVisualizer";
-              }
-            ];
-
-            right = [
-              {
-                id = "ActiveWindow";
-                colorizeIcons = false;
-                hideMode = "hidden";
-                maxWidth = 145;
-                scrollingMode = "hover";
-                showIcon = true;
-                useFixedWidth = false;
-              }
-              {
-                id = "plugin:privacy-indicator";
-              }
-              {
-                id = "plugin:screen-recorder";
-              }
-              {
-                id = "Network";
-                displayMode = "alwaysShow";
-              }
-              {
-                id = "Bluetooth";
-                displayMode = "alwaysShow";
-              }
-              {
-                id = "Volume";
-                displayMode = "alwaysShow";
-              }
-              {
-                id = "Battery";
-                displayMode = "alwaysShow";
-                hideIfNotDetected = true;
-                showNoctaliaPerformance = false;
-                showPowerProfiles = true;
-                warningThreshold = 30;
-              }
-              {
-                id = "ControlCenter";
-                colorizeDistroLogo = false;
-                colorizeSystemIcon = "none";
-                enableColorization = true;
-                useDistroLogo = true;
-              }
-            ];
-          };
-        };
-      };
-    };
   };
 }
