@@ -1,14 +1,6 @@
 {lib, ...}: {
   imports = [
-    ./common.nix
     ./nixos-specific.nix
-    ./programs/kitty
-    ./programs/zsh
-    ./programs/git
-    ./programs/direnv
-    ./programs/tmux-sessionizer
-    ./programs/yazi
-    ./programs/btop
   ];
 
   utilities.zsh.enable = true;

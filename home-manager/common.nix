@@ -42,7 +42,7 @@ in {
     colorScheme = color-scheme;
     programs.home-manager.enable = true;
     home.packages = with pkgs; [
-      inputs.lavix.packages.${pkgs.system}.default
+      inputs.lavix.packages.${pkgs.stdenv.hostPlatform.system}.default
       killall
       htop
       btop

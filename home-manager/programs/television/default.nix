@@ -71,7 +71,7 @@ in {
           actions = {
             edit = {
               description = "Opens the selected entries with the default editor (falls back to vim)";
-              command = "${inputs.lavix.packages.${pkgs.system}.default}/bin/nvim {}";
+              command = "${inputs.lavix.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/nvim {}";
               mode = "execute";
             };
           };

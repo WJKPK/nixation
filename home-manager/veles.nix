@@ -1,29 +1,7 @@
 {pkgs, ...}: {
   imports = [
-    ./common.nix
     ./nixos-specific.nix
     ./wallpapers
-
-    ./programs/kitty
-    ./programs/zsh
-    ./programs/git
-    ./programs/direnv
-    ./programs/rofi
-    ./programs/kicad
-    ./programs/tmux-sessionizer
-    ./programs/yazi
-    ./programs/btop
-    ./programs/openscad
-    ./programs/dunst
-    ./programs/hyprland
-    ./programs/niri
-    ./programs/noctalia
-    ./programs/waybar
-    ./programs/hyprlock
-    ./programs/hyprshade
-    ./programs/idle
-    ./programs/librewolf
-    ./programs/keepassxc
   ];
 
   utilities.zsh.enable = true;

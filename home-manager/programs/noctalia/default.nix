@@ -13,7 +13,7 @@ with lib; let
   tortoise = builtins.path {
     path = ../../wallpapers/tortoise.jpg;
   };
-  in {
+in {
   options.desktop.environment.noctalia = with types; {
     enable = mkOption {
       type = types.bool;

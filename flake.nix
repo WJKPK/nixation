@@ -75,13 +75,6 @@
           ./home-manager/standalone.nix
         ];
       };
-      "minimal-nvim" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs color-scheme;};
-        modules = [
-          ./home-manager/minimal-nvim.nix
-        ];
-      };
     };
   };
 }

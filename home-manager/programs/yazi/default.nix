@@ -19,6 +19,7 @@ in {
       enable = true;
       # Prevent Home Manager from installing yazi, it comes from lavix
       package = null;
+      shellWrapperName = "yy";
 
       enableZshIntegration = true;
 
