@@ -26,7 +26,7 @@ pkg.overrideAttrs (old: {
     shopt -s nullglob # Prevent loop from running if no files
     for file in ${pkg.out}/bin/*; do
       echo "#!${lib.getExe pkgs.bash}" > "$out/bin/$(basename $file)"
-      echo "exec -a \"\$0\" ${lib.getExe pkgs.nixgl.nixGLIntel} $file \"\$@\"" >> "$out/bin/$(basename $file)"
+      echo "exec -a \"\$0\" ${lib.getExe pkgs.nixgl.auto.nixGLDefault} $file \"\$@\"" >> "$out/bin/$(basename $file)"
       chmod +x "$out/bin/$(basename $file)"
     done
     shopt -u nullglob # Revert nullglob back to its normal default state
