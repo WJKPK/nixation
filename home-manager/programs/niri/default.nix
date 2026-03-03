@@ -1,14 +1,16 @@
 {
+  pkgs,
   lib,
   color-scheme,
-  osConfig,
+  osConfig ? null,
   config,
   ...
 }:
 with lib; let
   cfg = config.desktop.environment.niri;
+  hasOsConfig = builtins.isAttrs osConfig;
   monitors =
-    if osConfig ? monitors
+    if hasOsConfig && osConfig ? monitors
     then osConfig.monitors
     else [];
   activeBorder = lib.strings.removePrefix "#" color-scheme.palette.base0D;
@@ -26,9 +28,25 @@ in {
       default = false;
       description = "Enable Niri.";
     };
+    exportSessionDesktopEntry = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Install a user-local niri wayland session desktop file.";
+    };
   };
 
   config = mkIf cfg.enable {
+    home.packages = [pkgs.niri];
+    home.file = mkIf cfg.exportSessionDesktopEntry {
+      ".local/share/wayland-sessions/niri.desktop".text = ''
+        [Desktop Entry]
+        Name=Niri
+        Comment=Scrollable-tiling Wayland compositor
+        Exec=${lib.getExe' pkgs.niri "niri-session"}
+        Type=Application
+        DesktopNames=niri
+      '';
+    };
     xdg.configFile."niri/config.kdl".text = ''
       ${outputs}
 

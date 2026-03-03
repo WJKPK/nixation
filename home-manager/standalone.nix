@@ -8,6 +8,7 @@
 }: {
   targets.genericLinux.enable = builtins.isNull osConfig;
   imports = [
+    inputs.noctalia.homeModules.default
     ./programs/kitty
     ./programs/zsh
     ./programs/git
@@ -18,6 +19,8 @@
     ./programs/btop
     ./programs/kicad
     ./programs/librewolf
+    ./programs/niri
+    ./programs/noctalia
     ./programs/devcontainers-workflow.nix
     ./programs/keepassxc
     ./programs/television
@@ -54,6 +57,11 @@
   utilities.keepassxc.enable = true;
   utilities.television.enable = true;
   utilities.kicad.enable = true;
+  desktop.environment.niri = {
+    enable = true;
+    exportSessionDesktopEntry = true;
+  };
+  desktop.environment.noctalia.enable = true;
 
   application.wrap-gl = true;
   fonts.fontconfig.enable = true;
