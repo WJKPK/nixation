@@ -74,7 +74,15 @@ in {
           name = "Wroclaw, Poland";
         };
         colorSchemes = {
-          predefinedScheme = "GruvboxAlt";
+          useWallpaperColors = true;
+          generationMethod = "muted";
+        };
+        templates = {
+          activeTemplates = [
+            "gtk"
+            "qt6ct"
+            "niri"
+          ];
         };
         wallpaper = {
           enabled = true;
@@ -86,6 +94,20 @@ in {
           dayTemp = "6500";
           manualSunrise = "07:00";
           manualSunset = "19:45";
+        };
+        dock = {
+          enabled = false;
+        };
+        idle = {
+          enabled = false; #currently swayidle is more reliable
+          lockTimeout = 10;
+          screenOffTimeout = 15;
+          suspendTimeout = 20;
+          fadeDuration = 2;
+          suspendCommand = ''
+            ${pkgs.procps}/bin/pgrep qemu ||
+            noctalia-shell ipc call sessionMenu lockAndSuspend
+          '';
         };
         general = {
           radiusRatio = 0.5;

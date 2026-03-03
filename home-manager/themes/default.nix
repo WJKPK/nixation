@@ -1,12 +1,4 @@
 {pkgs, ...}: {
-  dconf = {
-    settings = {
-      "org/gnome/desktop/interface" = {
-        gtk-theme = "gruvbox-dark";
-        color-scheme = "prefer-dark";
-      };
-    };
-  };
   qt = {
     enable = true;
     platformTheme.name = "gtk";
@@ -25,10 +17,6 @@
         accent = "maroon";
       };
       name = "Papirus-Dark";
-    };
-    theme = {
-      package = pkgs.gruvbox-dark-gtk;
-      name = "gruvbox-dark";
     };
     colorScheme = "dark";
     gtk2.extraConfig = ''

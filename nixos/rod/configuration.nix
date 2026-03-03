@@ -18,7 +18,10 @@
 
   home-manager = {
     extraSpecialArgs = {inherit inputs outputs color-scheme;};
-    users.kruppenfield = import ../../home-manager/rod.nix;
+    users.kruppenfield.imports = [
+      ../../home-manager/rod.nix
+      inputs.noctalia.homeModules.default
+    ];
   };
 
   users.groups.admin = {};

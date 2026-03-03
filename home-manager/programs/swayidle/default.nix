@@ -6,29 +6,10 @@
   ...
 }:
 with lib; let
-  cfg = config.desktop.addons.idle;
-
-  # Determine lock screen based on idle manager
-  # hypridle -> hyprlock (Hyprland)
-  # swayidle -> noctalia (Niri)
-  isHyprlock = cfg.manager == "hypridle";
-
-  lockCommand =
-    if isHyprlock
-    then "${config.home.profileDirectory}/bin/hyprlock"
-    else let
-    in "${config.programs.noctalia-shell.package}/bin/noctalia-shell ipc call lockScreen lock";
-
-  displayOffCommand =
-    if isHyprlock
-    then "hyprctl dispatch dpms off"
-    else "niri msg action power-off-monitors";
-
-  displayOnCommand =
-    if isHyprlock
-    then "hyprctl dispatch dpms on"
-    else "niri msg action power-on-monitors";
-
+  cfg = config.desktop.addons.swayidle;
+  lockCommand = "${config.programs.noctalia-shell.package}/bin/noctalia-shell ipc call lockScreen lock";
+  displayOffCommand = "niri msg action power-off-monitors";
+  displayOnCommand = "niri msg action power-on-monitors";
   suspendScript = pkgs.writeShellScript "suspend-script" ''
     if ${pkgs.systemd}/bin/busctl call org.freedesktop.login1 \
          /org/freedesktop/login1 \
@@ -48,17 +29,11 @@ with lib; let
     then suspendScript.outPath
     else "${pkgs.systemd}/bin/systemctl suspend";
 in {
-  options.desktop.addons.idle = with types; {
+  options.desktop.addons.swayidle = with types; {
     enable = mkOption {
       type = bool;
       default = false;
       description = "Enable idle management.";
-    };
-
-    manager = mkOption {
-      type = enum ["none" "hypridle" "swayidle"];
-      default = "none";
-      description = "Idle manager to use. hypridle uses hyprlock (Hyprland), swayidle uses noctalia (Niri).";
     };
 
     timeouts = {
@@ -87,19 +62,27 @@ in {
       description = "Skip suspend when QEMU VMs are running.";
     };
   };
-
-  imports = [
-    ./hypridle.nix
-    ./swayidle.nix
-  ];
-
-  config = mkIf cfg.enable {
-    # Ensure hyprlock is enabled when using hypridle
-    desktop.addons.hyprlock.enable = mkIf isHyprlock true;
-
-    # Make commands available to child modules
-    _module.args = {
-      inherit lockCommand displayOffCommand displayOnCommand suspendCommand;
+  config = mkIf (cfg.enable) {
+    services.swayidle = {
+      enable = true;
+      timeouts = [
+        {
+          timeout = cfg.timeouts.lock;
+          command = lockCommand;
+        }
+        {
+          timeout = cfg.timeouts.displayOff;
+          command = displayOffCommand;
+        }
+        {
+          timeout = cfg.timeouts.suspend;
+          command = suspendCommand;
+        }
+      ];
+      events = {
+        before-sleep = lockCommand;
+        after-resume = displayOnCommand;
+      };
     };
   };
 }

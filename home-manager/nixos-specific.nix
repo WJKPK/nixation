@@ -42,11 +42,6 @@
 
   compositorEnabled = compositorType != null;
   isNiri = compositorType == "niri";
-  isHyprland = compositorType == "hyprland";
-  idleManagerDefault =
-    if isNiri
-    then "swayidle"
-    else "hypridle";
 in
   {
     imports = [
@@ -62,14 +57,9 @@ in
       ./programs/yazi
       ./programs/btop
       ./programs/openscad
-      ./programs/dunst
-      ./programs/hyprland
       ./programs/niri
       ./programs/noctalia
-      ./programs/waybar
-      ./programs/hyprlock
-      ./programs/hyprshade
-      ./programs/idle
+      ./programs/swayidle
       ./programs/librewolf
       ./programs/devcontainers-workflow.nix
       ./programs/television
@@ -86,15 +76,5 @@ in
   // optionalAttrs compositorEnabled {
     desktop.environment.niri.enable = mkDefault isNiri;
     desktop.environment.noctalia.enable = mkDefault isNiri;
-    desktop.environment.hyprland.enable = mkDefault isHyprland;
-
-    desktop.addons.waybar.enable = mkDefault isHyprland;
-    desktop.addons.hyprlock.enable = mkDefault isHyprland;
-    desktop.addons.hyprshade.enable = mkDefault isHyprland;
-    desktop.addons.dunst.enable = mkDefault isHyprland;
-
-    desktop.addons.idle = {
-      enable = mkDefault true;
-      manager = mkDefault idleManagerDefault;
-    };
+    desktop.addons.swayidle.enable = mkDefault isNiri;
   }
