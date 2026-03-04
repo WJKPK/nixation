@@ -99,10 +99,10 @@ in {
           enabled = false;
         };
         idle = {
-          enabled = false; #currently swayidle is more reliable
-          lockTimeout = 10;
-          screenOffTimeout = 15;
-          suspendTimeout = 20;
+          enabled = true; #currently swayidle is more reliable
+          lockTimeout = 360;
+          screenOffTimeout = 380;
+          suspendTimeout = 400;
           fadeDuration = 2;
           suspendCommand = ''
             ${pkgs.procps}/bin/pgrep qemu ||

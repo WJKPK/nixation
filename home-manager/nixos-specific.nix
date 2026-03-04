@@ -76,5 +76,4 @@ in
   // optionalAttrs compositorEnabled {
     desktop.environment.niri.enable = mkDefault isNiri;
     desktop.environment.noctalia.enable = mkDefault isNiri;
-    desktop.addons.swayidle.enable = mkDefault isNiri;
   }
