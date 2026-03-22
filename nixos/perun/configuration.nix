@@ -94,8 +94,14 @@
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     docker-compose
+    onlyoffice-desktopeditors
   ];
-
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "corefonts" ];
+  
+  fonts.fonts = with pkgs; [
+    corefonts
+  ];
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";
 }

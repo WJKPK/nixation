@@ -19,7 +19,7 @@
   desktop.addons.rofi.enable = true;
   utilities.librewolf.enable = true;
   utilities.devcontainersWorkflow.enable = true;
-  utilities.television.enable = true;
+  utilities.fzf.enable = true;
   utilities.keepassxc.enable = true;
   utilities.kicad.enable = true;
 

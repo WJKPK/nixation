@@ -23,7 +23,7 @@
     ./programs/noctalia
     ./programs/devcontainers-workflow.nix
     ./programs/keepassxc
-    ./programs/television
+    ./programs/fzf
     ./common.nix
   ];
 
@@ -55,7 +55,7 @@
   utilities.librewolf.enable = true;
   utilities.devcontainersWorkflow.enable = true;
   utilities.keepassxc.enable = true;
-  utilities.television.enable = true;
+  utilities.fzf.enable = true;
   utilities.kicad.enable = true;
   desktop.environment.niri = {
     enable = true;

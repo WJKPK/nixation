@@ -62,7 +62,7 @@ in
       ./programs/swayidle
       ./programs/librewolf
       ./programs/devcontainers-workflow.nix
-      ./programs/television
+      ./programs/fzf
       ./programs/keepassxc
     ];
 
