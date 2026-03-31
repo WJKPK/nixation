@@ -42,6 +42,7 @@ in {
             "screen-recorder"
             "privacy-indicator"
             "weekly-calendar"
+            "network-manager-vpn"
           ]);
       };
       pluginSettings = {
@@ -193,6 +194,9 @@ in {
               {
                 id = "Network";
                 displayMode = "alwaysShow";
+              }
+              {
+                id = "plugin:network-manager-vpn";
               }
               {
                 id = "Bluetooth";
